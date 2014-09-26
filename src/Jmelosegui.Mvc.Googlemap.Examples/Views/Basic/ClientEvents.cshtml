@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Client Events";
+    Layout = "~/Views/Shared/_LayoutExamples.cshtml";
+}
+<style>
+    .event {
+        transition: background-color 0.5s ease-out;
+        padding-bottom: 2px;
+    }
+
+    .event.active {
+        background-color: #99CCFF;
+    }
+
+     .event.inactive {
+        background-color: transparent;
+    }
+</style>
+
+
+
+<div id="main" class="row">
+    <div class="col-md-10">
+        @(Html.GoogleMap()
+            .Name("map")
+            .Height(420)
+            .ClientEvents(events => events
+                .OnMapBoundChanged("highlightEvent")
+                .OnMapCenterChanged("highlightEvent")
+                .OnMapClick("highlightEvent")
+                .OnMapDobleClick("highlightEvent")
+                .OnMapRightClick("highlightEvent")
+                .OnMapDrag("highlightEvent")
+                .OnMapDragEnd("highlightEvent")
+                .OnMapDragStart("highlightEvent")
+                .OnMapHeadingChanged("highlightEvent")
+                .OnMapIdle("highlightEvent")
+                .OnMapTypeIdChanged("highlightEvent")
+                .OnMouseMove("highlightEvent")
+                .OnMouseOut("highlightEvent")
+                .OnMouseOver("highlightEvent")
+                .OnMapProjectionChanged("highlightEvent")
+                .OnResize("highlightEvent")
+                .OnTilesLoaded("highlightEvent")
+                .OnTiltChanged("highlightEvent")
+                .OnZoomChanged("highlightEvent")
+            ))
+    </div>
+    <div id="events" class="col-md-2">
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var events = [
+                'bounds_changed', 'center_changed', 'click',
+                'dblclick', 'drag', 'dragend',
+                'dragstart', 'heading_changed', 'idle',
+                'maptypeid_changed', 'mousemove', 'mouseout',
+                'mouseover', 'projection_changed', 'resize',
+                'rightclick', 'tilesloaded', 'tilt_changed',
+                'zoom_changed'
+            ];
+
+            // Dynamically create the table of events from the defined hashmap
+            function populateTable() {
+                var eventsTable = document.getElementById('events');
+                var content = '';
+                for (var i = 0; i < events.length; i++) {
+                    content += '<div class="event" id="' + events[i] + '">' + events[i] + '</div>';
+                }
+                eventsTable.innerHTML = content;
+            }
+
+            populateTable();
+        });
+
+
+        function highlightEvent(args) {
+            var timeout;
+            var eventRow = document.getElementById(args.eventName);
+            eventRow.className = 'event active';
+            clearTimeout(timeout);
+            var timeout = setTimeout(function () {
+                eventRow.className = 'event inactive';
+            }, 1000);
+        }
+    </script>
+}

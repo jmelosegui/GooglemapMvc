@@ -1,0 +1,50 @@
+﻿<p>
+    This example shows how to databind Googlemap Control for ASP.NET MVC.
+</p>
+
+<p>
+    The required steps are:
+</p>
+<ol>
+    <li>Pass an <strong>IEnumerable&lt;T&gt;</strong> to the view:
+        <br />
+        <br />
+    <pre class="prettyprint">
+public ActionResult DataBindingToModel()
+{
+    IEnumerable&lt;MarkerData&gt; data = DataContext.GetRegions();
+    return View(data);
+}
+    </pre>
+    </li>
+    <li>
+        Pass the collection as the first parameter of the <strong>BindTo</strong> method. The second parameter is an
+        <strong>Action&lt;OverlayBindingFactory&lt;Marker&gt;&gt;</strong> which is used to define mappings 
+        between objects and <strong>Google Markers</strong>.<br />
+        The <em>For&lt;T&gt;</em> method is used to configure the binding.
+        The <em>ItemDataBound</em> method maps properties of <strong>T</strong> to <strong>Marker</strong>.        
+        <br />
+        <br />
+        Here is a Googlemap declaration showing how to bind the component to IEnumerable&lt;Marker&gt;
+        <br />
+        <br />
+        <pre class="prettyprint">
+@( Html.Googlemap()
+        .Name("map")
+        <em>.BindTo&lt;DataContext.MarkerData, Marker&gt;
+        (Model, mappings => 
+        {
+            mappings.For&lt;DataContext.MarkerData&gt;(binding => binding
+                    .ItemDataBound(marker, obj) =>
+                    {
+                        marker.Latitude = obj.Latitude;
+                        marker.Longitude = obj.Longitude;
+                        marker.Title = obj.Title;
+                        marker.zIndex = obj.zIndex;
+                    })
+            );
+        })</em>
+)
+        </pre>
+    </li>
+</ol>

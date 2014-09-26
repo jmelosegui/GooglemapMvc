@@ -1,0 +1,24 @@
+﻿@using System.Drawing
+
+@{
+    ViewBag.Title = "Polygon Basic";
+}
+
+@(
+ Html.GoogleMap()
+        .Name("map")
+        .Height(500)
+        .Latitude(24.886436490787712)
+        .Longitude(-70.2685546875)
+        .Zoom(5)
+        .Polygons(pf => pf.Add()
+                        .Points(ptn =>
+                                    {
+                                        ptn.Add(25.774252, -80.190262);
+                                        ptn.Add(18.466465, -66.118292);
+                                        ptn.Add(32.321384, -64.75737);
+                                    })
+                        .FillColor(Color.Blue)
+                        .StrokeColor(Color.DarkBlue))
+
+)

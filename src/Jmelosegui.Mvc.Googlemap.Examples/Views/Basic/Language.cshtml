@@ -1,0 +1,38 @@
+﻿@using System.Globalization
+@model String
+
+@{
+    ViewBag.Title = "Language";
+}
+
+
+@(Html.GoogleMap()
+            .Name("map")
+            .Culture(CultureInfo.GetCultureInfo(Model))
+)
+
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Google Map Settings</h4>
+    <div class="form-group">
+        <label for="mapLanguage" class="col-sm-2 control-label" style="white-space: nowrap;">Map Language</label>
+        <div class="col-sm-5">
+            @Html.DropDownList("mapLanguage", 
+                                CultureInfo.GetCultures(CultureTypes.NeutralCultures)
+                                            .Select(ci => new SelectListItem
+                                             {
+                                                 Text = ci.EnglishName,
+                                                 Value = ci.Name,
+                                                 Selected = ci.EnglishName.Contains("Russian")
+                                             })
+                                             .OrderBy(li => li.Text), 
+                                new { @class = "form-control", id = "mapLanguages" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

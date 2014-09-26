@@ -1,0 +1,18 @@
+﻿
+<p>This sample show a how to render circles to the map.</p>
+
+<pre class="prettyprint">
+@(
+    Html.Googlemap()
+            .Name("map")
+            .Circles(
+                    c => c.Add()
+                        .Center(new Location(52.140971656573335, -2.39435493946075))
+                        .Radius(70000)
+                        .FillColor(Color.Blue)
+                        .StrokeColor(Color.DarkBlue)
+                        .StrokeWeight(4)
+                    ) 
+
+)
+</pre>

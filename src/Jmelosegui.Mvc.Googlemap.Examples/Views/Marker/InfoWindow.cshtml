@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Info Window";
+}
+
+@{ Html.GoogleMap()
+       .Name("map")
+       .Height(500)
+       .Latitude(23)
+       .Longitude(-82)
+       .Markers(marker => marker.Add()
+                                .Title("Click to Open an InfoWindow")
+                                .Latitude(23.140971656573335)
+                                .Longitude(-82.39435493946075)
+                                .Window(window => window.Add()
+                                                        .MaxWidth(200)
+                                                        .zIndex(3)
+                                                        .DisableAutoPan(false)
+                                                        .Content(
+@<text>
+        <div id="content">
+            <h2>La Havana</h2>
+            <div id="bodyContent">
+                <p>
+                    <b>Havana</b> (<a href="http://en.wikipedia.org/wiki/Spanish_language" title="Spanish language">Spanish</a>:
+                    <i><b>La Habana</b></i> officially <i>Ciudad deLa Habana</i>,
+                    <sup>
+                        <a href="http://en.wikipedia.org/wiki/La_Habana#cite_note-2"><span>[</span>3<span>]</span></a>
+                    </sup>) is the <a href="http://en.wikipedia.org/wiki/Capital_city" title="Capital city">capital city</a>, major port, and leading commercial
+                    centre of <a href="http://en.wikipedia.org/wiki/Cuba" title="Cuba">Cuba</a>. 
+                    The city is one of the 14 <a href="http://en.wikipedia.org/wiki/Provinces_of_Cuba" title="Provinces of Cuba"> Cuban provinces</a>. 
+                    The city/province has 2.1 million inhabitants, the largest city in Cuba and the second largest in the 
+                    <a href="http://en.wikipedia.org/wiki/Caribbean" title="Caribbean">Caribbean region</a>.
+                    <sup><a href="http://en.wikipedia.org/wiki/La_Habana#cite_note-3"><span>[</span>4<span>]</span></a></sup>
+                    The city extends mostly westward and southward from the bay, which is entered through
+                    a narrow inlet and which divides into three main harbours: Marimelena, Guanabacoa,
+                    and Atarés. The sluggish <a href="http://en.wikipedia.org/wiki/Almendares_River" title="Almendares River">Almendares River</a> traverses the city from south
+                    to north, entering the <a href="http://en.wikipedia.org/wiki/Straits_of_Florida" title="Straits of Florida">Straits of Florida</a> a few miles west of the bay.
+                </p>
+            </div>
+        </div>
+</text>
+                                                         )
+                                                                    
+                                        )
+        ).Render();
+}

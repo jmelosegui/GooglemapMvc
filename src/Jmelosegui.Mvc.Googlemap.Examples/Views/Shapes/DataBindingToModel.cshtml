@@ -1,0 +1,28 @@
+﻿@using Jmelosegui.Mvc.Googlemap.Examples.App_Data
+@using Jmelosegui.Mvc.Googlemap.Overlays
+@model IEnumerable<RegionInfo>
+           
+@{
+    ViewBag.Title = "DataBinding To Model";
+}
+
+@{ Html.GoogleMap()
+                .Name("map")
+                .Width(880)
+                .Height(600)
+                .Latitude(40)
+                .Longitude(-3)
+                .BindTo<RegionInfo, Circle>
+                (Model, mappings => mappings.For<RegionInfo>
+                        (
+                            binding => binding.ItemDataBound
+                            (
+                                (circle, obj) =>
+                                {
+                                    circle.Center = new Location(obj.Latitude, obj.Longitude);
+                                    circle.Radius = (int)obj.population / 50;
+
+                                }
+                            )
+                        )
+                ).Render();}

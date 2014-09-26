@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5476DBD6-F0EC-4B7A-A616-DB42A7EF7E1B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jmelosegui.Mvc.Googlemap</RootNamespace>
+    <AssemblyName>Jmelosegui.Mvc.Googlemap</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\ControlPosition.cs" />
+    <Compile Include="Enums\MapType.cs" />
+    <Compile Include="Enums\MapTypeControlStyle.cs" />
+    <Compile Include="Enums\ZoomControlStyle.cs" />
+    <Compile Include="Events\ClientEvent.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\ViewComponentFactoryExtension.cs" />
+    <Compile Include="GoogleMapBuilder.cs" />
+    <Compile Include="Events\GooglemapClientEventsBuilder.cs" />
+    <Compile Include="Events\GooglemapClientEvents.cs" />
+    <Compile Include="Helpers\ClientSideObjectWriter.cs" />
+    <Compile Include="Helpers\FluentDictionary.cs" />
+    <Compile Include="Helpers\ClientSideEnumValueAttribute.cs" />
+    <Compile Include="Helpers\LiteralNode.cs" />
+    <Compile Include="Helpers\HtmlElement.cs" />
+    <Compile Include="Helpers\IHtmlNode.cs" />
+    <Compile Include="Helpers\IHideObjectMembers.cs" />
+    <Compile Include="Helpers\UrlHelperExtension.cs" />
+    <Compile Include="HtmlTemplate.cs" />
+    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
+    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStyles.cs" />
+    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptions.cs" />
+    <Compile Include="Overlays\InfoWindow\InfoWindow.cs" />
+    <Compile Include="Overlays\InfoWindow\InfoWindowBuilder.cs" />
+    <Compile Include="Overlays\InfoWindow\InfoWindowFactory.cs" />
+    <Compile Include="Overlays\IOverlaySerializer.cs" />
+    <Compile Include="Overlays\Location.cs" />
+    <Compile Include="Overlays\LocationFactory.cs" />
+    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
+    <Compile Include="Overlays\Markers\MarkerImage.cs" />
+    <Compile Include="GoogleMap.cs" />
+    <Compile Include="Overlays\Markers\MarkerSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Overlays\OverlayBindingBuilder.cs" />
+    <Compile Include="Overlays\OverlayBindingFactory.cs" />
+    <Compile Include="Overlays\IOverlayBinding.cs" />
+    <Compile Include="Overlays\Markers\Marker.cs" />
+    <Compile Include="Overlays\Markers\MarkerBuilder.cs" />
+    <Compile Include="Overlays\Markers\MarkerFactory.cs" />
+    <Compile Include="Overlays\Overlay.cs" />
+    <Compile Include="Overlays\Shapes\Circle\Circle.cs" />
+    <Compile Include="Overlays\Shapes\Circle\CircleBuilder.cs" />
+    <Compile Include="Overlays\Shapes\Circle\CircleFactory.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Overlays\Shapes\Circle\CircleSerializer.cs" />
+    <Compile Include="Overlays\Shapes\Polygons\PolygonBuilder.cs" />
+    <Compile Include="Overlays\Shapes\Polygons\Polygon.cs" />
+    <Compile Include="Overlays\Shapes\Polygons\PolygonFactory.cs" />
+    <Compile Include="Overlays\Shapes\Polygons\PolygonSerializer.cs" />
+    <Compile Include="Overlays\Shapes\ShapeSerializer.cs" />
+    <Compile Include="Overlays\Shapes\Shape.cs" />
+    <Compile Include="Overlays\Shapes\ShapeBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptRegistrar.cs" />
+    <Compile Include="ScriptRegistrarBuilder.cs" />
+    <Content Include="Scripts\markerclusterer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jmelosegui.googlemap.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".nuget\Jmelosegui.Mvc.Googlemap.nuspec" />
+    <None Include=".nuget\NuGet.targets" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(ProjectDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>  
+  -->
+  <Target Name="AfterBuild">
+    <Message Importance="high" Text="Configuration $(Configuration)|$(Platform)" />
+    <Message Importance="high" Text="Copying JavaScript files to $(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\Scripts\..." />
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\Scripts\" Condition="'%(Extension)'=='.js'">
+      <Output TaskParameter="DestinationFiles" ItemName="Resources" />
+    </Copy>
+    <ItemGroup>
+      <!-- FileWrites is the list of files to delete when performing a Clean -->
+      <FileWrites Include="@(Resources)" />
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

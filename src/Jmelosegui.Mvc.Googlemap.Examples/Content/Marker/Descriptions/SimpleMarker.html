@@ -1,0 +1,12 @@
+﻿
+<p>This sample show a simple marker.</p>
+
+<p>Note if no point (latitude and longitude) specified marker is placed in the center of the map</p>
+
+<pre class="prettyprint">
+@(
+    Html.Googlemap()
+        .Name("map")
+        .Markers(m => m.Add().Title("Hello World!")) 
+ )
+</pre>

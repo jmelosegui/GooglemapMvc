@@ -1,0 +1,36 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "First Look";
+}
+
+
+@(Html.GoogleMap()
+    .Name("map")
+    .Width((int)ViewData["width"])
+    .Height((int)ViewData["height"]))
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Google Map Settings</h4>
+
+    <div class="form-group">
+        <label for="mapWidth" class="col-sm-1 control-label">Width</label>
+        <div class="col-sm-5">
+            @Html.TextBox("width", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number" })
+            <label>0 for automatic with</label>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="mapHeight" class="col-sm-1 control-label">Height</label>
+        <div class="col-sm-5">
+            @Html.TextBox("height", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

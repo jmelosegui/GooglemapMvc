@@ -1,0 +1,56 @@
+﻿@using System.Drawing
+@using Jmelosegui.Mvc.Googlemap.Overlays
+
+@{
+    ViewBag.Title = "Circle Basic";
+}
+
+@(
+ Html.GoogleMap()
+            .Name("map")
+            .Latitude(51.73440735163458)
+            .Longitude(0.263671875)
+            .Zoom(6)
+            .Circles(cf =>
+                         {
+                             cf.Add()
+                                 .Center(new Location(52.140971656573335, -2.39435493946075))
+                                 .Radius(70000)
+                                 .FillColor(Color.Blue)
+                                 .StrokeColor(Color.DarkBlue)
+                                 .StrokeWeight(4);
+
+                             cf.Add()
+                                .Center(new Location(51.340971656573335, -1.19435493946075))
+                                .Radius(70000)
+                                .FillColor(Color.Yellow)
+                                .StrokeColor(Color.DarkSalmon)
+                                .StrokeWeight(4);
+
+                             cf.Add()
+                               .Center(new Location(51.340971656573335, 1.2))
+                               .Radius(70000)
+                               .FillColor(Color.Green)
+                               .StrokeColor(Color.DarkGreen)
+                               .StrokeWeight(4);
+
+                             cf.Add()
+                               .Center(new Location(52.140971656573335, 0))
+                               .Radius(70000)
+                               .FillColor(Color.Gray)
+                               .StrokeColor(Color.Black)
+                               .StrokeWeight(4);
+
+                             cf.Add()
+                               .Center(new Location(52.140971656573335, 2.39435493946075))
+                               .Radius(70000)
+                               .FillColor(Color.Red)
+                               .StrokeColor(Color.DarkRed)
+                               .StrokeWeight(4);
+                         }
+
+            )
+
+
+
+)

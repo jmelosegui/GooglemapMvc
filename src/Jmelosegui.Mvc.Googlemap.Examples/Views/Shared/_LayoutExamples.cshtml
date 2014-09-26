@@ -1,0 +1,43 @@
+﻿@using Jmelosegui.Mvc.Googlemap
+@{
+    ViewBag.PageTitle = ViewContext.RouteData.Values["controller"] + ": " + @ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>@ViewBag.Title</h3>
+<div class="example">
+    @RenderBody()
+    @(Html.Partial("_CodeViewer"))
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/prettyprint")
+
+    @(Html.GoogleMap().ScriptRegistrar())
+
+    <script type='text/javascript'>
+
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            if (e.target.hash !== '#description') {
+                $.ajax({
+                    url: e.target.dataset.url,
+                    type: "Get",
+                    datatype: "html",
+                    success: function (data) {
+                        $(e.target.hash).html(data);
+                        prettyPrint();
+                    }
+                });
+            }
+        });
+
+        prettyPrint();
+    </script>
+    
+    @RenderSection("scripts", required: false)
+}

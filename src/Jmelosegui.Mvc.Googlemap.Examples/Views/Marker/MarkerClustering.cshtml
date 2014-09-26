@@ -1,0 +1,100 @@
+﻿@using System.Drawing
+@using Jmelosegui.Mvc.Googlemap.Examples.App_Data
+@using Jmelosegui.Mvc.Googlemap.Overlays
+@model IEnumerable<RegionInfo>
+           
+@{
+    ViewBag.Title = "Markers Clustering";
+}
+
+@{ Html.GoogleMap()
+                .Name("map")
+                .Height(600)
+                .Latitude(40)
+                .Longitude(-3)
+                .EnableMarkersClustering(options =>
+                {
+                    options.MaxZoom = (int)ViewData["MaxZoom"];
+                    options.GridSize = (int)ViewData["GridSize"];
+                    options.AverageCenter = (bool)ViewData["AverageCenter"];
+                    options.ZoomOnClick = (bool)ViewData["ZoomOnClick"];
+                    options.HideSingleGroupMarker = (bool)ViewData["HideSingleGroupMarker"];
+                    if ((string)ViewData["CustomStyles"] == "StackOverflow")
+                    {
+                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster1.png", Height = 35, Width = 35, TextSize = 12, TextColor = Color.White });
+                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster2.png", Height = 45, Width = 45, TextSize = 12, TextColor = Color.White });
+                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster3.png", Height = 60, Width = 60, TextSize = 12, TextColor = Color.White });
+                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster3.png", Height = 60, Width = 60, TextSize = 12, TextColor = Color.White });
+                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster3.png", Height = 60, Width = 60, TextSize = 12, TextColor = Color.White });
+                    }
+                })
+                .BindTo<RegionInfo, Marker>
+                (Model, mappings => mappings.For<RegionInfo>
+                        (
+                            binding => binding.ItemDataBound
+                            (
+                                (marker, obj) =>
+                                {
+                                    marker.Latitude = obj.Latitude;
+                                    marker.Longitude = obj.Longitude;
+                                }
+                            )
+                        )
+                ).Render();
+}
+<br />
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal" role="form">
+            <h4> Google Map Settings</h4>
+            
+            <div class="form-group">
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label style="display:inline;">
+                            @Html.CheckBox("AverageCenter", new { id = "mapAverageCenter" })
+                            Average center
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label style="display:inline;">
+                            @Html.CheckBox("ZoomOnClick", new { id = "mapZoomOnClick" })
+                            Zoom on click
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label style="display:inline;">
+                            @Html.CheckBox("HideSingleGroupMarker", new { id = "mapHideSingleGroupMarker" })
+                            Hide single group marker 
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="mapMaxZoom" class="control-label" style="white-space: nowrap;">Max Zoom </label>
+                    @Html.DropDownList("MaxZoom", new SelectList(new[] { 7, 8, 9, 10, 11, 12 }), new { @class = "form-control", id = "mapMaxZoom" })
+                </div>
+                <div class="col-md-4">
+                    <label for="mapGridSize" class="control-label" style="white-space: nowrap;">Grid Size</label>
+                    @Html.DropDownList("GridSize", new SelectList(new[] { 5, 10, 20, 30, 40, 50, 60, 70, 80 }), new { @class = "form-control", id = "mapGridSize" })
+                </div>
+                <div class="col-md-4">
+                    <label for="mapCustomStyles" class="control-label" style="white-space: nowrap;">Custom Styles</label>
+                    @Html.DropDownList("CustomStyles", new SelectList(new[] { "Default", "StackOverflow" }), new { @class = "form-control", id = "mapCustomStyles" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-default">Apply</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

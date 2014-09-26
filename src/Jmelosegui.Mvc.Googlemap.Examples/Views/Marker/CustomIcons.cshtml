@@ -1,0 +1,17 @@
+﻿@using System.Drawing
+
+@{
+    ViewBag.Title = "Custom Icons";
+}
+
+@{
+    Html.GoogleMap()
+        .Name("map")
+        .Markers(marker => marker.Add()
+                                .Latitude(23.140971656573335)
+                                .Longitude(-82.39435493946075)
+                                .Title("Hello World!")
+                                .Icon("~/Images/beachflag.png", new Size(20, 32), new Point(0, 0), new Point(0, 32))
+                                .Draggable(true))
+        .Render();
+}

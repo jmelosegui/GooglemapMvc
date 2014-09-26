@@ -1,0 +1,47 @@
+﻿<p>
+    This example shows how to add an info windows to a marker. The windows will open when you click on the marker
+</p>
+
+<pre class="prettyprint">
+@{ Html.GoogleMap()
+    .Name(&quot;map&quot;)
+    .Latitude(23)
+    .Longitude(-82)
+    .Markers(marker =&gt; marker.Add()
+                            .Title(&quot;Click to Open an InfoWindow&quot;)
+                            .Latitude(23.140971656573335)
+                            .Longitude(-82.39435493946075)
+                            .Window(window =&gt; window.Add()
+                                                    .MaxWidth(200)
+                                                    .zIndex(3)
+                                                    .DisableAutoPan(false)
+                                                    .Content(
+@&lt;text&gt;
+    &lt;div&gt;
+        &lt;h1&gt;La Havana&lt;/h1&gt;
+        &lt;div id=&quot;bodyContent&quot;&gt;
+            &lt;p&gt;
+                &lt;b&gt;Havana&lt;/b&gt; (&lt;a href=&quot;http://en.wikipedia.org/wiki/Spanish_language&quot; title=&quot;Spanish language&quot;&gt;Spanish&lt;/a&gt;:
+                &lt;i&gt;&lt;b&gt;La Habana&lt;/b&gt;&lt;/i&gt; officially &lt;i&gt;Ciudad deLa Habana&lt;/i&gt;,
+                &lt;sup&gt;
+                    &lt;a href=&quot;http://en.wikipedia.org/wiki/La_Habana#cite_note-2&quot;&gt;&lt;span&gt;[&lt;/span&gt;3&lt;span&gt;]&lt;/span&gt;&lt;/a&gt;
+                &lt;/sup&gt;) is the &lt;a href=&quot;http://en.wikipedia.org/wiki/Capital_city&quot; title=&quot;Capital city&quot;&gt;capital city&lt;/a&gt;, major port, and leading commercial
+                centre of &lt;a href=&quot;http://en.wikipedia.org/wiki/Cuba&quot; title=&quot;Cuba&quot;&gt;Cuba&lt;/a&gt;. 
+                The city is one of the 14 &lt;a href=&quot;http://en.wikipedia.org/wiki/Provinces_of_Cuba&quot; title=&quot;Provinces of Cuba&quot;&gt; Cuban provinces&lt;/a&gt;. 
+                The city/province has 2.1 million inhabitants, the largest city in Cuba and the second largest in the 
+                &lt;a href=&quot;http://en.wikipedia.org/wiki/Caribbean&quot; title=&quot;Caribbean&quot;&gt;Caribbean region&lt;/a&gt;.
+                &lt;sup&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/La_Habana#cite_note-3&quot;&gt;&lt;span&gt;[&lt;/span&gt;4&lt;span&gt;]&lt;/span&gt;&lt;/a&gt;&lt;/sup&gt;
+                The city extends mostly westward and southward from the bay, which is entered through
+                a narrow inlet and which divides into three main harbours: Marimelena, Guanabacoa,
+                and Atar&#233;s. The sluggish &lt;a href=&quot;http://en.wikipedia.org/wiki/Almendares_River&quot; title=&quot;Almendares River&quot;&gt;Almendares River&lt;/a&gt; traverses the city from south
+                to north, entering the &lt;a href=&quot;http://en.wikipedia.org/wiki/Straits_of_Florida&quot; title=&quot;Straits of Florida&quot;&gt;Straits of Florida&lt;/a&gt; a few miles west of the bay.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/text&gt;
+                                                        )
+                                                                    
+                                    )
+    ).Render();
+}
+</pre>

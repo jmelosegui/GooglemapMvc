@@ -1,0 +1,32 @@
+﻿<p>
+    This example show how to add a custom icon to the map.
+</p>
+
+<p>
+  Marker sizes are expressed as a Size of X,Y where the origin of the image (0,0) is located in the top left of the image.<br />
+  Origins, anchor positions and coordinates of the marker increase in the X direction to the right and in the Y direction down.
+</p>
+
+<pre class="prettyprint">
+@{
+    // This marker is 20 pixels wide by 32 pixels tall.
+    var size = new Size(20, 32);
+    // The origin for this image is 0,0.
+    var origin = new Point(0, 0);
+    // The anchor for this image is the base of the flagpole at 0,32.
+    var anchor = new Point(0, 32);
+
+    Html.Googlemap()
+        .Name("map")
+        .Markers(marker =&gt;
+        {
+            marker.Add()
+                .Latitude(23d)
+                .Longitude(-82.3d)
+                .Title("Hello World!")
+                .Icon("~/Images/beachflag.png", size , origin, anchor)
+                .Draggable(true);
+        })
+        .Render();
+}
+</pre>

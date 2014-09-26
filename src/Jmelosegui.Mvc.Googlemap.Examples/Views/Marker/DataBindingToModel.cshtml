@@ -1,0 +1,42 @@
+﻿@using System.Drawing
+@using Jmelosegui.Mvc.Googlemap.Examples.App_Data
+@using Jmelosegui.Mvc.Googlemap.Overlays
+@model IEnumerable<RegionInfo>
+           
+@{
+    ViewBag.Title = "Binding To Model";
+}
+
+@{ Html.GoogleMap()
+                .Name("map")
+                .Height(600)
+                .Latitude(40)
+                .Longitude(-3)
+                .BindTo<RegionInfo, Marker>
+                (Model, mappings => mappings.For<RegionInfo>
+                        (
+                            binding => binding.ItemDataBound
+                            (
+                                (marker, regionInfo) =>
+                                {
+                                    marker.Latitude = regionInfo.Latitude;
+                                    marker.Longitude = regionInfo.Longitude;
+                                    marker.Title = regionInfo.Title;
+                                    marker.zIndex = regionInfo.zIndex;
+                                    marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}",regionInfo.ImagePath)
+                                                                    , new Size(18, 12)
+                                                                    , new Point(0, 0)
+                                                                    , new Point(0, 12));
+
+                                    marker.Window = new InfoWindow(marker)
+                                                    {
+                                                        Template =
+                                                        {
+                                                            Content = () => ViewContext.Writer.Write(regionInfo.InfoWindowContent)
+                                                        }
+                                                    };
+                                }
+                            )
+                        )
+                ).Render();
+}
