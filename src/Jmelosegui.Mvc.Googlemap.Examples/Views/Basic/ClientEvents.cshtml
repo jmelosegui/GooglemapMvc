@@ -54,7 +54,7 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             var events = [
                 'bounds_changed', 'center_changed', 'click',
@@ -85,9 +85,20 @@
             var eventRow = document.getElementById(args.eventName);
             eventRow.className = 'event active';
             clearTimeout(timeout);
-            var timeout = setTimeout(function () {
+            var timeout = setTimeout(function() {
                 eventRow.className = 'event inactive';
             }, 1000);
+            if (args.eventName === 'click') {
+                placeMarker(args.latLng, args.map);
+            }
+        }
+
+        function placeMarker(position, map) {
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+            map.panTo(position);
         }
     </script>
 }

@@ -305,7 +305,7 @@
             this.Events.push({ 'tilt_changed': options.tilt_changed });
         }
         if (options.zoom_changed !== undefined) {
-            this.Events.push({ 'zoom_changed': options.zoom_changed});
+            this.Events.push({ 'zoom_changed': options.zoom_changed });
         }
 
         $jmelosegui.bind(this, {
@@ -462,13 +462,18 @@
         attachMapEvents: function () {
             for (var i = 0; i < this.Events.length; i++) {
                 var eventName = Object.getOwnPropertyNames(this.Events[i])[0];
-                google.maps.event.addListener(this.GMap, eventName, this.mapEventsCallBack(this.Events[i][eventName], { 'eventName': eventName }));
+                this.mapEventsCallBack(this.GMap, this.Events[i][eventName], eventName);
             }
         },
-        mapEventsCallBack: function (func, args) {
-            return function () {
-                func(args);
-            }
+        mapEventsCallBack: function (map, eventHandler, eventName) {
+            google.maps.event.addListener(map, eventName, function (e) {
+                var args = {
+                    'eventName': eventName,
+                    map: map
+                };
+                $.extend(args, e);
+                eventHandler(args);
+            });
         },
         render: function () {
             // markers
