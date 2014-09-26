@@ -8,8 +8,9 @@ Click [here](https://github.com/jmelosegui/GooglemapMvc/wiki/Installation) for s
 
 - [Nuget Package](https://www.nuget.org/packages/Jmelosegui.Mvc.Googlemap/) - for easy setup
 - UI Controls
+- Client Events
 - Map Types
-- Languages (new)
+- Languages
 - Markers
 - Custom Icons
 - Info Windows
