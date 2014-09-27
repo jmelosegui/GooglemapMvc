@@ -10,15 +10,14 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
 - Map Types
 - Languages
 - Markers
-- Custom Icons
-- Info Windows
-- Clustering 
-- Databinding
+  - Custom Icons
+  - Info Windows
+  - Clustering
+  - Databinding
 - Shapes
-- Polygons
-- Circles
-- Databinding
-- Links
+  - Polygons
+  - Circles
+  - Databinding
 
 ## Links
 
