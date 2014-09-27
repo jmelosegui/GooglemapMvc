@@ -465,14 +465,11 @@
                 this.mapEventsCallBack(this.GMap, this.Events[i][eventName], eventName);
             }
         },
-        mapEventsCallBack: function (map, eventHandler, eventName) {
+        mapEventsCallBack: function (map, handler, eventName) {
             google.maps.event.addListener(map, eventName, function (e) {
-                var args = {
-                    'eventName': eventName,
-                    map: map
-                };
+                var args = { 'map': map, 'eventName': eventName };
                 $.extend(args, e);
-                eventHandler(args);
+                handler(args);
             });
         },
         render: function () {
