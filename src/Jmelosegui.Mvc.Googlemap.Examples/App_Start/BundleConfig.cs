@@ -25,7 +25,8 @@ namespace Jmelosegui.Mvc.Googlemap.Examples
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Scripts/google-code-prettify/prettify.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/font-awesome.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/prettyprint").Include(
                 "~/Scripts/google-code-prettify/prettify.js"));

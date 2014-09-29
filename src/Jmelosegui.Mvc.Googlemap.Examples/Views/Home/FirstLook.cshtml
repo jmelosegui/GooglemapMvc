@@ -4,11 +4,9 @@
 }
 
 <div class="row">
-    <div class="col-md-3">
-        <img src="~/Images/logo.jpg" alt="Alternate Text" />
-    </div>
-    <div class="col-md-9">
-        <p style="margin-top: 30px">
+    <div class="col-md-12">
+        <img src="~/Images/logo.jpg" alt="Alternate Text" class="pull-left hidden-xs" style="margin-right: 30px" />
+        <p style="margin-top: 30px;">
             The control wraps Google maps API simplifying the use of Google maps in ASP.NET
             MVC applications.<br />
         </p>
@@ -27,12 +25,14 @@
         </li>
         <li>
             <h3>Nuget Package Available</h3>
-            <div class="nuget">
+            <div class="col-lg-9 col-xs-12 nuget">
                 PM> Install-Package Jmelosegui.Mvc.Googlemap
             </div>
+            <div class="clearfix"></div>
             <p>
                 See the <a href="https://github.com/jmelosegui/GooglemapMvc/wiki/Installation">Installation</a> page on github
             </p>
+
         </li>
     </ul>
 </div>

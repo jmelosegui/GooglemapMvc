@@ -146,6 +146,9 @@
     <Content Include="Content\Basic\Descriptions\UIControls.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Marker\Descriptions\CustomIcons.html" />
     <Content Include="Content\Marker\Descriptions\DataBindingToModel.html" />
     <Content Include="Content\Marker\Descriptions\InfoWindow.html" />
@@ -187,6 +190,10 @@
     <Content Include="Images\sprites.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\google-code-prettify\lang-apollo.js" />
     <Content Include="Scripts\google-code-prettify\lang-basic.js" />
