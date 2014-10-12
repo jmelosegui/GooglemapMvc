@@ -31,7 +31,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
             OverviewMapControlOpened = true;
 
             ShowMapType = true;
-            MapTypeControl = MapType.Roadmap;
+            MapTypeControl = MapTypes.Roadmap;
             MapTypeControlStyle = MapTypeControlStyle.Default;
             MapTypeControlPosition = ControlPosition.TopRight;
         }
@@ -41,7 +41,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
         public ControlPosition PanControlPosition { get; set; }
 
         public bool ShowMapType { get; set; }
-        public MapType MapTypeControl { get; set; }
+        public MapTypes MapTypeControl { get; set; }
         public MapTypeControlStyle MapTypeControlStyle { get; set; }
         public ControlPosition MapTypeControlPosition { get; set; }
         public bool ShowZoomControl { get; set; }

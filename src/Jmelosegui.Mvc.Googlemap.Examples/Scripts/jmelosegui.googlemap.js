@@ -1,4 +1,5 @@
-﻿(function ($) {
+﻿(function ($) { 
+    "use strict";
 
     var $jmelosegui = $.jmelosegui = {
 
@@ -204,6 +205,75 @@
         }
     };
 
+    //Map Types
+    $jmelosegui.ImageMapType = function(map, config) {
+
+        this.map = map;
+        this.gImageMapType = null;
+        this.name = config.name;
+        this.alt = config.altName;
+        this.tileSize = new google.maps.Size(config.tileSize.Width, config.tileSize.Height);
+        this.maxZoom = config.maxZoom;
+        this.minZoom = config.minZoom;
+        this.radius = config.Radius;
+        this.repeatHorizontally = config.repeatHorizontally;
+        this.repeatVertically = config.repeatVertically;
+        this.opacity = config.opacity;
+        this.tileUrlPattern = config.tileUrlPattern;
+    }
+
+    $jmelosegui.ImageMapType.prototype = {
+        getTileUrl: function(coord, zoom) {
+            var normalizedCoord = this.getNormalizedCoord(coord, zoom);
+
+            if (!normalizedCoord) {
+                return null;
+            }
+
+            var imageUrl = this.format(this.tileUrlPattern, coord.x, coord.y, zoom, this.tileSize.width, this.tileSize.height);
+            console.log(imageUrl);
+            return imageUrl;
+
+        },
+        
+        getNormalizedCoord: function getNormalizedCoord(coord, zoom) {
+            var y = coord.y;
+            var x = coord.x;
+            var tileRange = 1 << zoom;
+
+            if (y < 0 || y >= tileRange) {
+                if (this.repeatVertically) {
+                    y = (y % tileRange + tileRange) % tileRange;
+                } else {
+                    return null;
+                }
+            }
+
+            if (x < 0 || x >= tileRange) {
+                if (this.repeatHorizontally) {
+                    x = (x % tileRange + tileRange) % tileRange;
+                } else {
+                    return null;
+                }
+            }
+
+            return {
+                x: x,
+                y: y
+            };
+        },
+
+        format: function(value) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return value.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] != 'undefined'
+                  ? args[number] 
+                  : match
+                ;
+            });
+        }
+    }
+
     $jmelosegui.map = function (element, options) {
 
         this.element = element;
@@ -219,11 +289,13 @@
         this.Latitude = options.Latitude;
         this.Longitude = options.Longitude;
         this.Zoom = (options.Zoom !== undefined) ? options.Zoom : 6;
-        this.MapType = options.MapType;
+        this.MaxZoom = (options.MaxZoom !== undefined) ? options.MaxZoom : null;
+        this.MinZoom = (options.MinZoom !== undefined) ? options.MinZoom : null;
+        this.MapTypeId = options.MapTypeId;
         this.MapTypeControlPosition = (options.MapTypeControlPosition !== undefined) ? options.MapTypeControlPosition : 'TOP_RIGHT';
         this.MapTypeControlStyle = options.MapTypeControlStyle;
         this.MapTypeControlVisible = (options.MapTypeControlVisible !== undefined) ? options.MapTypeControlVisible : true;
-
+        
         this.PanControlVisible = (options.PanControlVisible !== undefined) ? options.PanControlVisible : true;
         this.PanControlPosition = (options.PanControlPosition !== undefined) ? options.PanControlPosition : 'TOP_LEFT';
 
@@ -246,7 +318,9 @@
         this.GMap = null;
 
         this.Markers = eval(options.Markers);
+        this.Circles = eval(options.Circles);
         this.Polygons = eval(options.Polygons);
+        this.MapTypes = eval(options.MapTypes);
 
         this.Events = [];
 
@@ -305,7 +379,7 @@
             this.Events.push({ 'tilt_changed': options.tilt_changed });
         }
         if (options.zoom_changed !== undefined) {
-            this.Events.push({ 'zoom_changed': options.zoom_changed});
+            this.Events.push({ 'zoom_changed': options.zoom_changed });
         }
 
         $jmelosegui.bind(this, {
@@ -316,58 +390,18 @@
     $jmelosegui.map.prototype = {
         initialize: function () {
 
-            var mapType;
-            switch (this.MapType) {
-                case 'HYBRID':
-                    mapType = google.maps.MapTypeId.HYBRID;
-                    break;
-                case 'SATELLITE':
-                    mapType = google.maps.MapTypeId.SATELLITE;
-                    break;
-                case 'TERRAIN':
-                    mapType = google.maps.MapTypeId.TERRAIN;
-                    break;
-                default:
-                    mapType = google.maps.MapTypeId.ROADMAP;
-                    break;
-            }
-
-            var mapTypeControlStyle;
-            switch (this.MapTypeControlStyle) {
-                case 'DROPDOWN_MENU':
-                    mapTypeControlStyle = google.maps.MapTypeControlStyle.DROPDOWN_MENU;
-                    break;
-                case 'HORIZONTAL_BAR':
-                    mapTypeControlStyle = google.maps.MapTypeControlStyle.HORIZONTAL_BAR;
-                    break;
-                default:
-                    mapTypeControlStyle = google.maps.MapTypeControlStyle.DEFAULT;
-                    break;
-            }
-
-            var zoomControlStyle;
-            switch (this.ZoomControlStyle) {
-                case 'LARGE':
-                    zoomControlStyle = google.maps.ZoomControlStyle.LARGE;
-                    break;
-                case 'SMALL':
-                    zoomControlStyle = google.maps.ZoomControlStyle.SMALL;
-                    break;
-                default:
-                    zoomControlStyle = google.maps.ZoomControlStyle.DEFAULT;
-                    break;
-            }
-
             var innerOptions = {
                 zoom: this.Zoom,
+                minZoom: this.MinZoom,
+                maxZoom: this.MaxZoom,
                 center: new google.maps.LatLng(this.Latitude, this.Longitude),
                 disableDoubleClickZoom: this.DisableDoubleClickZoom,
                 draggable: this.Draggable,
-                mapTypeId: mapType,
+                mapTypeId: this.getMapTypeId(),
                 mapTypeControl: this.MapTypeControlVisible,
                 mapTypeControlOptions: {
-                    style: mapTypeControlStyle,
-                    position: this.getControlPosition(this.MapTypeControlPosition)
+                    style: this.getMapTypeControlStyle(),
+                    position: this.getControlPosition(this.MapTypeControlPosition),
                 },
                 panControl: this.PanControlVisible,
                 panControlOptions: {
@@ -376,7 +410,7 @@
                 zoomControl: this.ZoomControlVisible,
                 zoomControlOptions: {
                     position: this.getControlPosition(this.ZoomControlPosition),
-                    style: zoomControlStyle
+                    style: this.getZoomControlStyle()
                 },
                 overviewMapControl: this.OverviewMapControlVisible,
                 overviewMapControlOptions: {
@@ -388,7 +422,49 @@
                 },
                 scaleControl: this.ScaleControlVisible
             };
+
+            if (this.MapTypes) {
+                innerOptions.mapTypeControlOptions.mapTypeIds = [];
+                for (var i = 0; i < this.MapTypes.length; i++) {
+                    innerOptions.mapTypeControlOptions.mapTypeIds.push(this.MapTypes[i].name);
+                }
+            }
+
             this.GMap = new google.maps.Map(this.getElement(), innerOptions);
+        },
+        getZoomControlStyle: function () {
+            switch (this.ZoomControlStyle) {
+                case 'LARGE':
+                    return google.maps.ZoomControlStyle.LARGE;
+                case 'SMALL':
+                    return google.maps.ZoomControlStyle.SMALL;
+                default:
+                    return google.maps.ZoomControlStyle.DEFAULT;
+            }
+        },
+        getMapTypeControlStyle: function () {
+            switch (this.MapTypeControlStyle) {
+                case 'DROPDOWN_MENU':
+                    return google.maps.MapTypeControlStyle.DROPDOWN_MENU;
+                case 'HORIZONTAL_BAR':
+                    return google.maps.MapTypeControlStyle.HORIZONTAL_BAR;
+                default:
+                    return google.maps.MapTypeControlStyle.DEFAULT;
+            }
+        },
+        getMapTypeId: function () {
+            switch (this.MapTypeId) {
+                case 'HYBRID':
+                    return google.maps.MapTypeId.HYBRID;
+                case 'SATELLITE':
+                    return google.maps.MapTypeId.SATELLITE;
+                case 'TERRAIN':
+                    return google.maps.MapTypeId.TERRAIN;
+                case 'ROADMAP':
+                    return google.maps.MapTypeId.ROADMAP;
+                default:
+                    return this.MapTypeId;
+            }
         },
         getElement: function () {
             return document.getElementById(this.ClientID);
@@ -421,9 +497,6 @@
                     return google.maps.ControlPosition.RIGHT_TOP;
             }
         },
-        renderCircle: function (c) {
-            c.load();
-        },
         refreshMap: function () {
             var options = {
                 maxZoom: this.MarkerClusteringOptions.MaxZoom,
@@ -434,6 +507,9 @@
                 styles: this.MarkerClusteringOptions.CustomStyles
             };
             new MarkerClusterer(this.GMap, markersCluster, options);
+        },
+        renderCircle: function (c) {
+            c.load();
         },
         renderMarker: function (m) {
 
@@ -455,25 +531,28 @@
                 this.attachMapEvents();
             }
             else {
-                if ((this.Latitude != 0) && (this.Longitude != 0))
+                if ((this.Latitude !== undefined) && (this.Longitude !== undefined))
                     this.load(new google.maps.LatLng(this.Latitude, this.Longitude));
             }
         },
         attachMapEvents: function () {
             for (var i = 0; i < this.Events.length; i++) {
                 var eventName = Object.getOwnPropertyNames(this.Events[i])[0];
-                google.maps.event.addListener(this.GMap, eventName, this.mapEventsCallBack(this.Events[i][eventName], { 'eventName': eventName }));
+                this.mapEventsCallBack(this.GMap, this.Events[i][eventName], eventName);
             }
         },
-        mapEventsCallBack: function (func, args) {
-            return function () {
-                func(args);
-            }
+        mapEventsCallBack: function (map, handler, eventName) {
+            google.maps.event.addListener(map, eventName, function (e) {
+                var args = { 'map': map, 'eventName': eventName };
+                $.extend(args, e);
+                handler(args);
+            });
         },
         render: function () {
             // markers
+            var i;
             if (this.Markers) {
-                for (var i = 0; i < this.Markers.length; i++) {
+                for (i = 0; i < this.Markers.length; i++) {
                     var config = this.Markers[i];
                     config.EnableMarkersClustering = this.EnableMarkersClustering;
                     var marker = new $jmelosegui.GoogleMarker(this.GMap, i, config);
@@ -485,17 +564,24 @@
             }
             // polygons
             if (this.Polygons) {
-                for (var i = 0; i < this.Polygons.length; i++) {
+                for (i = 0; i < this.Polygons.length; i++) {
                     var polygon = new $jmelosegui.GooglePolygon(this.GMap, this.Polygons[i]);
                     this.renderPolygon(polygon);
                 }
             }
             // circles
             if (this.Circles) {
-                for (var i = 0; i < this.Circles.length; i++) {
+                for (i = 0; i < this.Circles.length; i++) {
                     var circle = new $jmelosegui.GoogleCircle(this.GMap, this.Circles[i]);
                     this.renderPolygon(circle);
                 }
+            }
+            if (this.MapTypes) {
+                for (i = 0; i < this.MapTypes.length; i++) {
+                    var mapType = new $jmelosegui.ImageMapType(this.GMap, this.MapTypes[i]);
+                    this.addMapType(this.GMap, mapType);
+                }
+                this.GMap.setMapTypeId(this.getMapTypeId());
             }
         },
         // Items --------------------------------------------------------------------------------------
@@ -505,6 +591,11 @@
             var marker = new $jmelosegui.GoogleMarker(this, this.Markers.length, config);
             this.Markers.push(marker);
             if (render) this.renderMarker(marker);
+        },
+        // MapTypes
+        addMapType: function (map, mapType) {
+            var gImageMapType = new google.maps.ImageMapType(mapType);
+            map.mapTypes.set(mapType.name, gImageMapType);
         }
     };
 

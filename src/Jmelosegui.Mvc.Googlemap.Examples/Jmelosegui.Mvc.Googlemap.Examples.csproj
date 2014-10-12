@@ -120,6 +120,8 @@
     <Compile Include="Controllers\Basic\UIControlsController.cs" />
     <Compile Include="Controllers\Basic\FirstLookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapTypeController.cs" />
+    <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
     <Compile Include="Controllers\MarkerController.cs" />
     <Compile Include="Controllers\Marker\CustomIconsController.cs" />
     <Compile Include="Controllers\Marker\DataBindingToModelController.cs" />
@@ -148,6 +150,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\MapType\Descriptions\ImageMapType.html" />
+    <Content Include="Content\MapType\map_natural.jpg" />
+    <Content Include="Content\MapType\speculative_map.jpg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Marker\Descriptions\CustomIcons.html" />
     <Content Include="Content\Marker\Descriptions\DataBindingToModel.html" />
@@ -271,6 +276,7 @@
     <Content Include="Views\Shapes\DataBindingToModel.cshtml" />
     <Content Include="Views\Shapes\PolygonBasic.cshtml" />
     <Content Include="Views\Basic\ClientEvents.cshtml" />
+    <Content Include="Views\MapType\ImageMapType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
