@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class MarkerClusteringOptions : IOverlaySerializer
+    public class MarkerClusteringOptions : ISerializer
     {
         private readonly List<MarkerClusteringStyles> customStyles;
 

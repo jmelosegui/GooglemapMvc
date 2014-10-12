@@ -34,7 +34,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public double Longitude { get; set; }
 
-        public MapType MapType { get; set; }
+        public string MapTypeId { get; set; }
 
         public MapTypeControlStyle MapTypeControlStyle { get; set; }
 
@@ -42,9 +42,15 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public bool MapTypeControlVisible { get; set; }
 
+        public IList<MapType> MapTypes { get; private set; }
+
         public IList<Marker> Markers { get; private set; }
 
         public MarkerClusteringOptions MarkerClusteringOptions { get; private set; }
+
+        public int MaxZoom { get; set; }
+
+        public int MinZoom { get; set; }
 
         public ControlPosition PanControlPosition { get; set; }
 
@@ -59,6 +65,8 @@ namespace Jmelosegui.Mvc.Googlemap
         public IList<Circle> Circles { get; private set; }
 
         public bool ScaleControlVisible { get; set; }
+
+        public List<string> ScriptFileNames { get; private set; }
 
         public bool StreetViewControlVisible { get; set; }
 
@@ -100,7 +108,6 @@ namespace Jmelosegui.Mvc.Googlemap
             Initialize();
         }
 
-        public List<string> ScriptFileNames { get; private set; }
 
         private void Initialize()
         {
@@ -110,9 +117,10 @@ namespace Jmelosegui.Mvc.Googlemap
             EnableMarkersClustering = false;
             Latitude = 23;
             Longitude = -82;
-            MapType = MapType.Roadmap;
+            MapTypeId = Googlemap.MapTypes.Roadmap.ToClientSideString();
             MapTypeControlPosition = ControlPosition.TopRight;
             MapTypeControlVisible = true;
+            MapTypes = new List<MapType>();
             Markers = new List<Marker>();
             MarkerClusteringOptions = new MarkerClusteringOptions();
             Polygons = new List<Polygon>();
@@ -128,12 +136,12 @@ namespace Jmelosegui.Mvc.Googlemap
             ZoomControlStyle = ZoomControlStyle.Default;
             ScaleControlVisible = false;
             Height = 300;
-            Width = 0;            
+            Width = 0;
         }
 
         #endregion
 
-        #region Override Methods
+        #region Virtual Methods
 
         public virtual void WriteInitializationScript(TextWriter writer)
         {
@@ -151,10 +159,28 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("Height", Height);
             objectWriter.Append("Latitude", Latitude);
             objectWriter.Append("Longitude", Longitude);
-            objectWriter.Append("MapType", MapType, MapType.Roadmap);
+            objectWriter.Append("MapTypeId", MapTypeId);
             objectWriter.Append("MapTypeControlPosition", MapTypeControlPosition, ControlPosition.TopRight);
             objectWriter.Append("MapTypeControlVisible", MapTypeControlVisible, true);
             objectWriter.Append("MapTypeControlStyle", MapTypeControlStyle, MapTypeControlStyle.Default);
+
+            if (MapTypes.Any())
+            {
+                if (!MapTypes.Select(mt => mt.MapTypeName).Contains(MapTypeId))
+                {
+                    throw new Exception("Cannot find the MapTypeId in the MapTypes collection");
+                }
+
+                var mapTypes = new List<IDictionary<string, object>>();
+
+                MapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
+
+                if (mapTypes.Any())
+                {
+                    objectWriter.AppendCollection("MapTypes", mapTypes);
+                }
+            }
+
             objectWriter.Append("PanControlPosition", PanControlPosition, ControlPosition.TopLeft);
             objectWriter.Append("PanControlVisible", PanControlVisible, true);
 
@@ -172,6 +198,8 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("ScaleControlVisible", ScaleControlVisible, false);
             objectWriter.Append("Width", Width, 0);
             objectWriter.Append("Zoom", (Zoom == 0) ? 6 : Zoom, 6);
+            objectWriter.Append("MinZoom", MinZoom, 0);
+            objectWriter.Append("MaxZoom", MaxZoom, 0);
 
             if (EnableMarkersClustering)
             {
@@ -231,7 +259,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
             var languaje = (Culture != null) ? "&language=" + Culture.TwoLetterISOLanguageName : String.Empty;
             var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
-            
+
             var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?v=3.exp{0}{1}", key, languaje);
             ScriptFileNames.Add(mainJs);
 
@@ -250,7 +278,7 @@ namespace Jmelosegui.Mvc.Googlemap
                     IHtmlNode markerInfoWindows = new HtmlElement("div")
                         .Attribute("id", String.Format("{0}Marker{1}", Id, m.Index))
                         .AddClass("content");
-                    
+
                     m.Window.Template.Apply(markerInfoWindows);
                     infoWindowsRootTag.Children.Add(markerInfoWindows);
                 });
@@ -258,14 +286,12 @@ namespace Jmelosegui.Mvc.Googlemap
                 infoWindowsRootTag.WriteTo(writer);
             }
         }
-
-        #endregion
-
+        
         public virtual void BindTo<TGoogleMapOverlay, TDataItem>(IEnumerable<TDataItem> dataSource, Action<OverlayBindingFactory<TGoogleMapOverlay>> action)
             where TGoogleMapOverlay : Overlay
         {
             if (action == null) throw new ArgumentNullException("action");
-            
+
             var factory = new OverlayBindingFactory<TGoogleMapOverlay>();
             action(factory);
 
@@ -277,15 +303,15 @@ namespace Jmelosegui.Mvc.Googlemap
                 {
                     case "Jmelosegui.Mvc.Googlemap.Overlays.Marker":
                         overlay = new Marker(this);
-                        Markers.Add((Marker) overlay);
+                        Markers.Add((Marker)overlay);
                         break;
                     case "Jmelosegui.Mvc.Googlemap.Overlays.Circle":
                         overlay = new Circle(this);
-                        Circles.Add((Circle) overlay);
+                        Circles.Add((Circle)overlay);
                         break;
                     case "Jmelosegui.Mvc.Googlemap.Overlays.Polygon":
                         overlay = new Polygon(this);
-                        Polygons.Add((Polygon) overlay);
+                        Polygons.Add((Polygon)overlay);
                         break;
                 }
 
@@ -293,6 +319,7 @@ namespace Jmelosegui.Mvc.Googlemap
             }
         }
 
+        #endregion
         public void Render()
         {
             TextWriter writer = ViewContext.Writer;
@@ -313,5 +340,4 @@ namespace Jmelosegui.Mvc.Googlemap
             return result;
         }
     }
-
 }

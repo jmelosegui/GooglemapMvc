@@ -13,7 +13,9 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         public override IDictionary<string, object> Serialize()
         {
             IDictionary<string, object> result = base.Serialize();
+
             result.Add("Points", polygon.Points);
+
             return result;
         }
     }

@@ -11,7 +11,7 @@
 
         public int Radius { get; set; }
 
-        public override IOverlaySerializer CreateSerializer()
+        public override ISerializer CreateSerializer()
         {
             return new CircleSerializer(this);
         }

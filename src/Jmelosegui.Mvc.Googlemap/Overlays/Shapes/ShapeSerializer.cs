@@ -2,7 +2,7 @@
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class ShapeSerializer<TShape>: IOverlaySerializer where TShape : Shape
+    public class ShapeSerializer<TShape>: ISerializer where TShape : Shape
     {
         private readonly TShape shape;
 

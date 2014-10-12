@@ -31,7 +31,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             points.Add(point);
         }
 
-        public override IOverlaySerializer CreateSerializer()
+        public override ISerializer CreateSerializer()
         {
             return new PolygonSerializer(this);
         }

@@ -50,6 +50,6 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
         public int zIndex { get; set; }
 
-        public abstract IOverlaySerializer CreateSerializer();
+        public abstract ISerializer CreateSerializer();
     }
 }

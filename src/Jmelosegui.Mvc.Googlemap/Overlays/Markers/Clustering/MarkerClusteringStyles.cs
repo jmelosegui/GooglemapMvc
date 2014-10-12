@@ -9,7 +9,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         public string Url
         {
             get { return url; }
-            set { url = System.Web.VirtualPathUtility.ToAbsolute(value); ; }
+            set { url = System.Web.VirtualPathUtility.ToAbsolute(value); }
         }
 
         public int Height { get; set; }
@@ -17,7 +17,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         public int TextSize { get; set; }
         public Color TextColor { get; set; }
 
-        public IOverlaySerializer CreateSerializer()
+        public ISerializer CreateSerializer()
         {
             return new MarkerClusteringStylesSerializer(this);
         }

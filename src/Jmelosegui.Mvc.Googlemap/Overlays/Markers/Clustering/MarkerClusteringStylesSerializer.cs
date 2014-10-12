@@ -2,7 +2,7 @@
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class MarkerClusteringStylesSerializer : IOverlaySerializer
+    public class MarkerClusteringStylesSerializer : ISerializer
     {
         private readonly MarkerClusteringStyles style;
 
@@ -11,7 +11,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             this.style = style;
         }
 
-        #region IOverlaySerializer Members
+        #region ISerializer Members
 
         public IDictionary<string, object> Serialize()
         {

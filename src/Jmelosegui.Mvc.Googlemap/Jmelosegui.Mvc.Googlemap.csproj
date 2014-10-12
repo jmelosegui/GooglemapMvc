@@ -71,11 +71,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\ControlPosition.cs" />
-    <Compile Include="Enums\MapType.cs" />
-    <Compile Include="Enums\MapTypeControlStyle.cs" />
-    <Compile Include="Enums\ZoomControlStyle.cs" />
+    <Compile Include="ControlPosition.cs" />
+    <Compile Include="MapType\MapTypes.cs" />
+    <Compile Include="MapType\MapTypeControlStyle.cs" />
+    <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
+    <Compile Include="Extensions\EnumExtentions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ViewComponentFactoryExtension.cs" />
@@ -91,13 +92,24 @@
     <Compile Include="Helpers\IHideObjectMembers.cs" />
     <Compile Include="Helpers\UrlHelperExtension.cs" />
     <Compile Include="HtmlTemplate.cs" />
+    <Compile Include="MapType\MapType.cs" />
+    <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
+    <Compile Include="MapType\ImageMapType\ImageMapTypeBuilder.cs" />
+    <Compile Include="MapType\MapTypeBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapType\ImageMapType\ImageMapTypeSerializer.cs" />
+    <Compile Include="MapType\MapTypeSerializer.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStyles.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptions.cs" />
     <Compile Include="Overlays\InfoWindow\InfoWindow.cs" />
     <Compile Include="Overlays\InfoWindow\InfoWindowBuilder.cs" />
     <Compile Include="Overlays\InfoWindow\InfoWindowFactory.cs" />
-    <Compile Include="Overlays\IOverlaySerializer.cs" />
+    <Compile Include="ISerializer.cs" />
     <Compile Include="Overlays\Location.cs" />
     <Compile Include="Overlays\LocationFactory.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace Jmelosegui.Mvc.Googlemap
 {
-    public enum MapType
+    public enum MapTypes
     {
         [ClientSideEnumValue("'HYBRID'")]
         Hybrid,

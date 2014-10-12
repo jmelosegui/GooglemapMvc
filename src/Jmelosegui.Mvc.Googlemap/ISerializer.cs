@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap.Overlays
+namespace Jmelosegui.Mvc.Googlemap
 {
-    public interface IOverlaySerializer
+    public interface ISerializer
     {
         IDictionary<string, object> Serialize();
     }

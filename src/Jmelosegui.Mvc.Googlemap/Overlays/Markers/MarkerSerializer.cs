@@ -2,7 +2,7 @@
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class MarkerSerializer : IOverlaySerializer
+    public class MarkerSerializer : ISerializer
     {
         private readonly Marker marker;
 
@@ -28,7 +28,6 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
                 result["Icon"] = marker.Icon;
             if (marker.Window != null)
                 result["Window"] = marker.Window;
-                
 
             return result;
         }

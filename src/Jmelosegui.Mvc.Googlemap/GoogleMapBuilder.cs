@@ -48,15 +48,6 @@ namespace Jmelosegui.Mvc.Googlemap
             return content;
         }
 
-        //TODO: Implementar
-        //public GoogleMapBuilder ClientEvents(Action<GoogleMapClientEventsBuilder> clientEventsAction)
-        //{
-        //    if (clientEventsAction == null) throw new ArgumentNullException("clientEventsAction");
-            
-        //    clientEventsAction(new GoogleMapClientEventsBuilder(Component.ClientEvents));
-        //    return this;
-        //}
-
         public GoogleMapBuilder Circles(Action<CircleFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
@@ -117,9 +108,23 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder MapType(MapType value)
+        public GoogleMapBuilder MapTypeId(MapTypes value)
         {
-            Component.MapType = value;
+            Component.MapTypeId = value.ToClientSideString();
+            return this;
+        }
+
+        public GoogleMapBuilder MapTypeId(string value)
+        {
+            Component.MapTypeId = value;
+            return this;
+        }
+
+        public GoogleMapBuilder ImageMapTypes(Action<ImageMapTypeFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new ImageMapTypeFactory(Component);
+            action(factory);
             return this;
         }
 
@@ -146,6 +151,18 @@ namespace Jmelosegui.Mvc.Googlemap
             if (action == null) throw new ArgumentNullException("action");
             var factory = new MarkerFactory(Component);
             action(factory);
+            return this;
+        }
+
+        public GoogleMapBuilder MaxZoom(int value)
+        {
+            Component.MaxZoom = value;
+            return this;
+        }
+
+        public GoogleMapBuilder MinZoom(int value)
+        {
+            Component.MinZoom = value;
             return this;
         }
 

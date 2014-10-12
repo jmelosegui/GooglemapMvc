@@ -28,7 +28,7 @@
 
         public InfoWindow Window { get; set; }
 
-        public virtual IOverlaySerializer CreateSerializer()
+        public virtual ISerializer CreateSerializer()
         {
             return new MarkerSerializer(this);
         }
