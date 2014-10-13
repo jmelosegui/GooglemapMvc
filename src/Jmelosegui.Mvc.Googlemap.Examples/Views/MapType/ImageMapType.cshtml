@@ -15,7 +15,7 @@
         .ImageMapTypes(map =>
         {
             map.Add()
-                .TileUrlPattern("~/maptype/GetLabeledTile?x={0}&y={1}&zoom={2}&tileWith={3}&tileHeigth={4}")
+                .TileUrlPattern("http://inmediati.blob.core.windows.net/map/speculative/{2}/tile_{2}_{0}-{1}.png")
                 .TileSize(new Size(256, 256))
                 .RepeatHorizontally(false)
                 .RepeatVertically(false)
@@ -23,10 +23,10 @@
                 .MinZoom(1)
                 .MapTypeName("Labels")
                 .MapTypeAltName("Game of Thrones Labeled");
-            
+
 
             map.Add()
-                .TileUrlPattern("~/maptype/GetNaturalTile?x={0}&y={1}&zoom={2}&tileWith={3}&tileHeigth={4}")
+                .TileUrlPattern("http://inmediati.blob.core.windows.net/map/natural/{2}/tile_{2}_{0}-{1}.png")
                 .TileSize(new Size(256, 256))
                 .RepeatHorizontally(false)
                 .RepeatVertically(false)

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -31,7 +32,12 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public ImageMapTypeBuilder TileUrlPattern(string value)
         {
-            mapType.TileUrlPattern = System.Web.VirtualPathUtility.ToAbsolute(value);
+            if (value.IndexOf("://", StringComparison.Ordinal) == -1)
+            {
+                mapType.TileUrlPattern = System.Web.VirtualPathUtility.ToAbsolute(value);
+            }
+            mapType.TileUrlPattern = value;
+
             return this;
         }
     }
