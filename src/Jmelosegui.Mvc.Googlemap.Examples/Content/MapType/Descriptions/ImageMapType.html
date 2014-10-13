@@ -13,26 +13,25 @@
         .Longitude(0)
         .ZoomControlStyle(ZoomControlStyle.Large)
         .StreetViewControlVisible(false)
-        .MapTypes(map =&gt;
-        
+        .ImageMapTypes(map =&gt;
             map.Add()
-               .MaxZoom(5)
-               .MinZoom(1)
-               .TileSize(new Size(256, 256))
-               .MapTypeName(&quot;Labels&quot;)
-               .MapTypeAltName(&quot;Game of Thrones&quot;)
-               .RepeatHorizontally(false)
-               .RepeatVertically(false)
-               <strong>.TileUrlPattern(&quot;~/maptype/GetTile?x={0}&amp;y={1}&amp;zoom={2}&amp;tileWith={3}&amp;tileHeigth={4}&quot;)</strong>
+                <strong>.TileUrlPattern(&quot;~/maptype/GetLabeledTile?x={0}&amp;y={1}&amp;zoom={2}&amp;tileWith={3}&amp;tileHeigth={4}&quot;)</strong>
+                .TileSize(new Size(256, 256))
+                .RepeatHorizontally(false)
+                .RepeatVertically(false)
+                .MaxZoom(4)
+                .MinZoom(1)
+                .MapTypeName(&quot;Labels&quot;)
+                .MapTypeAltName(&quot;Game of Thrones Labeled&quot;)
         )
-        .MapTypeId(&quot;gameOfThrones&quot;)
+        .MapTypeId(&quot;Labels&quot;)
      
 )
 </pre>
 
 <p>
-    Notice that the TileUrlPattern could be whatever url that returns a tileImage.
-    Be aware that the TileUrlPattern value will be parsed by the control to find and replace the parameters in the following order
+    Notice that the TileUrlPattern could be whatever url that returns a tileImage.<br />
+    Be aware that the TileUrlPattern value will be parsed by the control to find and replace the string parameters in the following order
 </p>
 <ol start="0">
     <li>x</li>

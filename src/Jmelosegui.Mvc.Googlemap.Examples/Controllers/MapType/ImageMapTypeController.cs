@@ -14,19 +14,19 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
         {
             return View();
         }
-
+        
         public ActionResult GetLabeledTile(int x, int y, int zoom, int tileWith, int tileHeigth)
         {
             var image = GetTile(x, y, zoom, tileWith, tileHeigth, "speculative_map.jpg");
             return File(image, "image/jpeg");
         }
-
+        
         public ActionResult GetNaturalTile(int x, int y, int zoom, int tileWith, int tileHeigth)
         {
             var image = GetTile(x, y, zoom, tileWith, tileHeigth, "map_natural.jpg");
             return File(image, "image/jpeg");
         }
-
+        
         private byte[] GetTile(int x, int y, int zoom, int tileWith, int tileHeigth, string imageName)
         {
             string imagePath = "~/Content/MapType/" + imageName;
@@ -45,6 +45,10 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
         }
     }
 
+    /*
+     * Just an example of how to generate an image tile. 
+     * TODO: Improve preformance, add cache.     
+     */
     internal class TileGenerator
     {
         public static byte[] GenerateTile(int x, int y, int zoom, int tileWith, int tileHeigth, string imagePath)
