@@ -36,7 +36,10 @@ namespace Jmelosegui.Mvc.Googlemap
             {
                 mapType.TileUrlPattern = System.Web.VirtualPathUtility.ToAbsolute(value);
             }
-            mapType.TileUrlPattern = value;
+            else
+            {
+                mapType.TileUrlPattern = value;    
+            }
 
             return this;
         }
