@@ -8,6 +8,8 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
 - UI Controls
 - Client Events
 - Map Types
+  - Styled Map Type
+  - Image Map Type
 - Languages
 - Markers
   - Custom Icons
