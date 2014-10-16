@@ -122,6 +122,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapTypeController.cs" />
     <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
+    <Compile Include="Controllers\MapType\StyledMapTypeController.cs" />
     <Compile Include="Controllers\MarkerController.cs" />
     <Compile Include="Controllers\Marker\CustomIconsController.cs" />
     <Compile Include="Controllers\Marker\DataBindingToModelController.cs" />
@@ -151,6 +152,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\MapType\Descriptions\ImageMapType.html" />
+    <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
     <Content Include="Content\MapType\map_natural.jpg" />
     <Content Include="Content\MapType\speculative_map.jpg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -277,6 +279,7 @@
     <Content Include="Views\Shapes\PolygonBasic.cshtml" />
     <Content Include="Views\Basic\ClientEvents.cshtml" />
     <Content Include="Views\MapType\ImageMapType.cshtml" />
+    <Content Include="Views\MapType\StyledMapType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

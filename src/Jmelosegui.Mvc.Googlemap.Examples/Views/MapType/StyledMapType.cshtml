@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Styled Map Type";
+    Layout = "~/Views/Shared/_LayoutExamples.cshtml";
+}
+
+@(Html.GoogleMap()
+        .Name("map")
+        .Latitude(40.6743890)
+        .Longitude(-73.9455)
+        .Zoom(12)
+        .Height(400)
+        .StyledMapTypes(map =>
+
+            map.Add()
+               .Styles(style =>
+               {
+                   style.Add()
+                        .HueColor(Color.DarkRed)
+                        .Visibility(MapTypeStylerVisibility.Simplified)
+                        .Gamma(0.5F)
+                        .Weight(0.5F);
+                   
+
+                   style.Add()
+                       .ElementType(ElementType.Labels)
+                       .Visibility(MapTypeStylerVisibility.Off);
+                   
+
+
+                   style.Add()
+                       .FeatureType(FeatureType.Water)
+                       .Color(Color.DarkRed);
+
+               })
+               .MapTypeName("Custom Style")
+        )
+        .MapTypeId("Custom Style")
+)
+
