@@ -2,6 +2,12 @@
 {
     public abstract class MapType : IHideObjectMembers
     {
+        protected MapType()
+        {
+            Radius = 6378137;
+            Opacity = 100;
+        }
+
         public string MapTypeAltName { get; set; }
         public int MaxZoom { get; set; }
         public int MinZoom { get; set; }
@@ -10,6 +16,5 @@
         public int Radius { get; set; }
 
         public abstract ISerializer CreateSerializer();
-
     }
 }

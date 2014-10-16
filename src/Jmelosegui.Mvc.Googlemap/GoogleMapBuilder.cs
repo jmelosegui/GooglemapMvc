@@ -128,6 +128,14 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        public GoogleMapBuilder StyledMapTypes(Action<StyledMapTypeFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new StyledMapTypeFactory(Component);
+            action(factory);
+            return this;
+        }
+
         public GoogleMapBuilder MapTypeControlPosition(ControlPosition controlPosition)
         {
             Component.MapTypeControlPosition = controlPosition;

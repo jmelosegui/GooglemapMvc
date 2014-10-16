@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -15,13 +16,13 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
 
-            if (mapType.MapTypeAltName != null)
-                result["altName"] = mapType.MapTypeAltName;
-            result["name"] = mapType.MapTypeName;
-            result["maxZoom"] = mapType.MaxZoom;
-            result["minZoom"] = mapType.MinZoom;
-            result["opacity"] = (mapType.Opacity / 100F);
-            result["radius"] = mapType.Radius;
+            FluentDictionary.For(result)
+                .Add("altName", mapType.MapTypeAltName, () => !String.IsNullOrEmpty(mapType.MapTypeAltName))
+                .Add("name", mapType.MapTypeName)
+                .Add("maxZoom", mapType.MaxZoom, 0)
+                .Add("minZoom", mapType.MinZoom, 0)
+                .Add("opacity", (mapType.Opacity / 100F), 1F)
+                .Add("radius", mapType.Radius, 6378137);
 
             return result;
         }

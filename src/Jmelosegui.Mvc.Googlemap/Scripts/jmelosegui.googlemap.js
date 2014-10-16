@@ -205,20 +205,20 @@
         }
     };
 
-    //Map Types
+    //Image Map Types
     $jmelosegui.ImageMapType = function(map, config) {
 
         this.map = map;
-        this.gImageMapType = null;
         this.name = config.name;
         this.alt = config.altName;
-        this.tileSize = new google.maps.Size(config.tileSize.Width, config.tileSize.Height);
         this.maxZoom = config.maxZoom;
         this.minZoom = config.minZoom;
         this.radius = config.Radius;
+        this.opacity = config.opacity;
+
         this.repeatHorizontally = config.repeatHorizontally;
         this.repeatVertically = config.repeatVertically;
-        this.opacity = config.opacity;
+        this.tileSize = new google.maps.Size(config.tileSize.Width, config.tileSize.Height);
         this.tileUrlPattern = config.tileUrlPattern;
     }
 
@@ -274,6 +274,23 @@
         }
     }
 
+    // Styled Map Types
+    $jmelosegui.StyledMapType = function (map, config) {
+
+        this.map = map;
+        this.name = config.name;
+        this.alt = config.altName;
+        this.maxZoom = config.maxZoom;
+        this.minZoom = config.minZoom;
+        this.radius = config.Radius;
+        this.opacity = config.opacity;
+
+        this.styles = config.styles;
+
+    }
+
+    $jmelosegui.StyledMapType.prototype = {}
+
     $jmelosegui.map = function (element, options) {
 
         this.element = element;
@@ -320,7 +337,8 @@
         this.Markers = eval(options.Markers);
         this.Circles = eval(options.Circles);
         this.Polygons = eval(options.Polygons);
-        this.MapTypes = eval(options.MapTypes);
+        this.ImageMapTypes = eval(options.ImageMapTypes);
+        this.StyledMapTypes = eval(options.StyledMapTypes);
 
         this.Events = [];
 
@@ -422,11 +440,20 @@
                 },
                 scaleControl: this.ScaleControlVisible
             };
-
-            if (this.MapTypes) {
+            var i;
+            if (this.ImageMapTypes) {
                 innerOptions.mapTypeControlOptions.mapTypeIds = [];
-                for (var i = 0; i < this.MapTypes.length; i++) {
-                    innerOptions.mapTypeControlOptions.mapTypeIds.push(this.MapTypes[i].name);
+                for (i = 0; i < this.ImageMapTypes.length; i++) {
+                    innerOptions.mapTypeControlOptions.mapTypeIds.push(this.ImageMapTypes[i].name);
+                }
+            }
+
+            if (this.StyledMapTypes) {
+                if (innerOptions.mapTypeControlOptions.mapTypeIds === undefined) {
+                    innerOptions.mapTypeControlOptions.mapTypeIds = [];
+                }
+                for (i = 0; i < this.StyledMapTypes.length; i++) {
+                    innerOptions.mapTypeControlOptions.mapTypeIds.push(this.StyledMapTypes[i].name);
                 }
             }
 
@@ -576,13 +603,22 @@
                     this.renderPolygon(circle);
                 }
             }
-            if (this.MapTypes) {
-                for (i = 0; i < this.MapTypes.length; i++) {
-                    var mapType = new $jmelosegui.ImageMapType(this.GMap, this.MapTypes[i]);
-                    this.addMapType(this.GMap, mapType);
+            // mapTypes
+            var mapType;
+            if (this.ImageMapTypes) {
+                for (i = 0; i < this.ImageMapTypes.length; i++) {
+                    mapType = new $jmelosegui.ImageMapType(this.GMap, this.ImageMapTypes[i]);
+                    this.addImageMapType(this.GMap, mapType);
                 }
-                this.GMap.setMapTypeId(this.getMapTypeId());
             }
+
+            if (this.StyledMapTypes) {
+                for (i = 0; i < this.StyledMapTypes.length; i++) {
+                    mapType = new $jmelosegui.StyledMapType(this.GMap, this.StyledMapTypes[i]);
+                    this.addStyledMapType(this.GMap, mapType);
+                }
+            }
+            this.GMap.setMapTypeId(this.getMapTypeId());
         },
         // Items --------------------------------------------------------------------------------------
         // Marker
@@ -592,11 +628,16 @@
             this.Markers.push(marker);
             if (render) this.renderMarker(marker);
         },
-        // MapTypes
-        addMapType: function (map, mapType) {
+        // Image MapTypes
+        addImageMapType: function (map, mapType) {
             var gImageMapType = new google.maps.ImageMapType(mapType);
             map.mapTypes.set(mapType.name, gImageMapType);
-        }
+        },
+        // Styled MapTypes
+        addStyledMapType: function (map, mapType) {
+            var gStyledMapType = new google.maps.StyledMapType(mapType.styles, mapType);
+            map.mapTypes.set(mapType.name, gStyledMapType);
+    }
     };
 
 })(jQuery);

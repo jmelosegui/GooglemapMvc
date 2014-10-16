@@ -42,7 +42,9 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public bool MapTypeControlVisible { get; set; }
 
-        public IList<MapType> MapTypes { get; private set; }
+        public IList<ImageMapType> ImageMapTypes { get; private set; }
+
+        public IList<StyledMapType> StyledMapTypes { get; private set; }
 
         public IList<Marker> Markers { get; private set; }
 
@@ -117,10 +119,11 @@ namespace Jmelosegui.Mvc.Googlemap
             EnableMarkersClustering = false;
             Latitude = 23;
             Longitude = -82;
-            MapTypeId = Googlemap.MapTypes.Roadmap.ToClientSideString();
+            MapTypeId = MapTypes.Roadmap.ToClientSideString();
             MapTypeControlPosition = ControlPosition.TopRight;
             MapTypeControlVisible = true;
-            MapTypes = new List<MapType>();
+            ImageMapTypes = new List<ImageMapType>();
+            StyledMapTypes = new List<StyledMapType>();
             Markers = new List<Marker>();
             MarkerClusteringOptions = new MarkerClusteringOptions();
             Polygons = new List<Polygon>();
@@ -164,20 +167,32 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("MapTypeControlVisible", MapTypeControlVisible, true);
             objectWriter.Append("MapTypeControlStyle", MapTypeControlStyle, MapTypeControlStyle.Default);
 
-            if (MapTypes.Any())
+            if (ImageMapTypes.Any())
             {
-                if (!MapTypes.Select(mt => mt.MapTypeName).Contains(MapTypeId))
+                if (!ImageMapTypes.Select(mt => mt.MapTypeName).Contains(MapTypeId))
                 {
-                    throw new Exception("Cannot find the MapTypeId in the MapTypes collection");
+                    throw new Exception("Cannot find the MapTypeId in the ImageMapTypes collection");
                 }
 
                 var mapTypes = new List<IDictionary<string, object>>();
 
-                MapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
+                ImageMapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
 
                 if (mapTypes.Any())
                 {
-                    objectWriter.AppendCollection("MapTypes", mapTypes);
+                    objectWriter.AppendCollection("ImageMapTypes", mapTypes);
+                }
+            }
+
+            if (StyledMapTypes.Any())
+            {
+                var mapTypes = new List<IDictionary<string, object>>();
+
+                StyledMapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
+
+                if (mapTypes.Any())
+                {
+                    objectWriter.AppendCollection("StyledMapTypes", mapTypes);
                 }
             }
 

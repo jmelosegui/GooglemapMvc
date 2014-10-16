@@ -13,7 +13,7 @@
         {
             var maptype = new ImageMapType();
 
-            map.MapTypes.Add(maptype);
+            map.ImageMapTypes.Add(maptype);
 
             return new ImageMapTypeBuilder(maptype);
         }

@@ -72,8 +72,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlPosition.cs" />
-    <Compile Include="MapType\MapTypes.cs" />
+    <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
+    <Compile Include="MapType\ImageMapType\ImageMapTypeBuilder.cs" />
+    <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs" />
+    <Compile Include="MapType\ImageMapType\ImageMapTypeSerializer.cs" />
+    <Compile Include="MapType\MapType.cs" />
+    <Compile Include="MapType\MapTypeBuilder.cs" />
     <Compile Include="MapType\MapTypeControlStyle.cs" />
+    <Compile Include="MapType\MapTypes.cs" />
+    <Compile Include="MapType\MapTypeSerializer.cs" />
+    <Compile Include="MapType\StyledMapType\Styles\ElementType.cs" />
+    <Compile Include="MapType\StyledMapType\Styles\FeatureType.cs" />
+    <Compile Include="MapType\StyledMapType\Styles\MapTypeStyle.cs" />
+    <Compile Include="MapType\StyledMapType\Styles\MapTypeStyleBuilder.cs" />
+    <Compile Include="MapType\StyledMapType\Styles\MapTypeStyleFactory.cs" />
+    <Compile Include="MapType\StyledMapType\Styles\MapTypeStylerVisibility.cs" />
+    <Compile Include="MapType\StyledMapType\StyledMapType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapType\StyledMapType\StyledMapTypeBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapType\StyledMapType\StyledMapTypeFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapType\StyledMapType\StyledMapTypeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
     <Compile Include="Extensions\EnumExtentions.cs" />
@@ -92,17 +117,6 @@
     <Compile Include="Helpers\IHideObjectMembers.cs" />
     <Compile Include="Helpers\UrlHelperExtension.cs" />
     <Compile Include="HtmlTemplate.cs" />
-    <Compile Include="MapType\MapType.cs" />
-    <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
-    <Compile Include="MapType\ImageMapType\ImageMapTypeBuilder.cs" />
-    <Compile Include="MapType\MapTypeBuilder.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MapType\ImageMapType\ImageMapTypeSerializer.cs" />
-    <Compile Include="MapType\MapTypeSerializer.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStyles.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptions.cs" />
@@ -151,6 +165,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

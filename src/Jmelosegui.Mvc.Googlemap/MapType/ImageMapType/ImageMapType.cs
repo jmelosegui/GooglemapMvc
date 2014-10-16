@@ -6,11 +6,9 @@ namespace Jmelosegui.Mvc.Googlemap
     {
         public ImageMapType()
         {
-            Radius = 6378137;
             TileSize = new Size(256, 256);
             RepeatHorizontally = true;
             RepeatVertically = false;
-            Opacity = 100;
         }
 
         public Size TileSize { get; set; }
