@@ -144,14 +144,15 @@
         this.Map = map;
         this.index = index;
         //properties
-        this.latitude = config.latitude;
-        this.longitude = config.longitude;
+        this.latitude = config.lat;
+        this.longitude = config.lng;
         this.title = config.title;
         this.icon = config.icon;
-        this.clickable = config.clickable;
+        this.clickable = config.clickable ? config.clickable : true;
         this.draggable = config.draggable;
         this.window = config.window;
-        this.enableMarkersClustering = config.enableMarkersClustering;
+        this.zIndex = config.zIndex ? config.zIndex : 0;
+        this.enableMarkersClustering = config.enableMarkersClustering ? config.enableMarkersClustering : false;
     };
 
     var infowindow;
@@ -182,7 +183,8 @@
                 title: this.title,
                 clickable: this.clickable,
                 draggable: this.draggable,
-                icon: this.icon ? this.createImage(this.icon) : null
+                icon: this.icon ? this.createImage(this.icon) : null,
+                zIndex: this.zIndex
             };
             // create
             this.gMarker = new google.maps.Marker(markerOptions);

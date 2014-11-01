@@ -15,19 +15,15 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
 
-            if (marker.Title != null)
-                result["Title"] = marker.Title;
-            result["Latitude"] = marker.Latitude;
-            result["Longitude"] = marker.Longitude;
-            result["zIndex"] = marker.zIndex;
-            if (marker.Clickable)
-                result["Clickable"] = marker.Clickable;
-            if (marker.Draggable)
-                result["Draggable"] = marker.Draggable;
-            if (marker.Icon != null)
-                result["Icon"] = marker.Icon;
-            if (marker.Window != null)
-                result["Window"] = marker.Window;
+            FluentDictionary.For(result)
+                .Add("title", marker.Title, () => marker.Title != null)
+                .Add("lat", marker.Latitude)
+                .Add("lng", marker.Longitude)
+                .Add("zIndex", marker.zIndex, 0)
+                .Add("clickable", marker.Clickable, true)
+                .Add("draggable", marker.Draggable, false)
+                .Add("icon", marker.Icon, () => marker.Icon != null)
+                .Add("window", marker.Window, () => marker.Window != null);
 
             return result;
         }
