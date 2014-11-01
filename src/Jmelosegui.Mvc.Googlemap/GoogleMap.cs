@@ -155,17 +155,17 @@ namespace Jmelosegui.Mvc.Googlemap
 
             objectWriter.Start();
 
-            objectWriter.Append("ClientID", Id);
-            objectWriter.Append("DisableDoubleClickZoom", DisableDoubleClickZoom, false);
-            objectWriter.Append("Draggable", Draggable, true);
-            objectWriter.Append("EnableMarkersClustering", EnableMarkersClustering, false);
-            objectWriter.Append("Height", Height);
-            objectWriter.Append("Latitude", Latitude);
-            objectWriter.Append("Longitude", Longitude);
-            objectWriter.Append("MapTypeId", MapTypeId);
-            objectWriter.Append("MapTypeControlPosition", MapTypeControlPosition, ControlPosition.TopRight);
-            objectWriter.Append("MapTypeControlVisible", MapTypeControlVisible, true);
-            objectWriter.Append("MapTypeControlStyle", MapTypeControlStyle, MapTypeControlStyle.Default);
+            objectWriter.Append("clientId", Id);
+            objectWriter.Append("disableDoubleClickZoom", DisableDoubleClickZoom, false);
+            objectWriter.Append("draggable", Draggable, true);
+            objectWriter.Append("enableMarkersClustering", EnableMarkersClustering, false);
+            objectWriter.Append("height", Height);
+            objectWriter.Append("latitude", Latitude);
+            objectWriter.Append("longitude", Longitude);
+            objectWriter.Append("mapTypeId", MapTypeId);
+            objectWriter.Append("mapTypeControlPosition", MapTypeControlPosition, ControlPosition.TopRight);
+            objectWriter.Append("mapTypeControlVisible", MapTypeControlVisible, true);
+            objectWriter.Append("mapTypeControlStyle", MapTypeControlStyle, MapTypeControlStyle.Default);
 
             if (ImageMapTypes.Any())
             {
@@ -180,7 +180,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
                 if (mapTypes.Any())
                 {
-                    objectWriter.AppendCollection("ImageMapTypes", mapTypes);
+                    objectWriter.AppendCollection("imageMapTypes", mapTypes);
                 }
             }
 
@@ -192,33 +192,33 @@ namespace Jmelosegui.Mvc.Googlemap
 
                 if (mapTypes.Any())
                 {
-                    objectWriter.AppendCollection("StyledMapTypes", mapTypes);
+                    objectWriter.AppendCollection("styledMapTypes", mapTypes);
                 }
             }
 
-            objectWriter.Append("PanControlPosition", PanControlPosition, ControlPosition.TopLeft);
-            objectWriter.Append("PanControlVisible", PanControlVisible, true);
+            objectWriter.Append("panControlPosition", PanControlPosition, ControlPosition.TopLeft);
+            objectWriter.Append("panControlVisible", PanControlVisible, true);
 
-            objectWriter.Append("OverviewMapControlVisible", OverviewMapControlVisible, false);
-            objectWriter.Append("OverviewMapControlOpened", OverviewMapControlOpened, false);
+            objectWriter.Append("overviewMapControlVisible", OverviewMapControlVisible, false);
+            objectWriter.Append("overviewMapControlOpened", OverviewMapControlOpened, false);
 
-            objectWriter.Append("StreetViewControlVisible", StreetViewControlVisible, true);
-            objectWriter.Append("StreetViewControlPosition", StreetViewControlPosition, ControlPosition.TopLeft);
+            objectWriter.Append("streetViewControlVisible", StreetViewControlVisible, true);
+            objectWriter.Append("streetViewControlPosition", StreetViewControlPosition, ControlPosition.TopLeft);
 
-            objectWriter.Append("ZoomControlVisible", ZoomControlVisible, true);
-            objectWriter.Append("ZoomControlPosition", ZoomControlPosition, ControlPosition.TopLeft);
-            objectWriter.Append("ZoomControlStyle", ZoomControlStyle, ZoomControlStyle.Default);
+            objectWriter.Append("zoomControlVisible", ZoomControlVisible, true);
+            objectWriter.Append("zoomControlPosition", ZoomControlPosition, ControlPosition.TopLeft);
+            objectWriter.Append("zoomControlStyle", ZoomControlStyle, ZoomControlStyle.Default);
 
 
-            objectWriter.Append("ScaleControlVisible", ScaleControlVisible, false);
-            objectWriter.Append("Width", Width, 0);
-            objectWriter.Append("Zoom", (Zoom == 0) ? 6 : Zoom, 6);
-            objectWriter.Append("MinZoom", MinZoom, 0);
-            objectWriter.Append("MaxZoom", MaxZoom, 0);
+            objectWriter.Append("scaleControlVisible", ScaleControlVisible, false);
+            objectWriter.Append("width", Width, 0);
+            objectWriter.Append("zoom", (Zoom == 0) ? 6 : Zoom, 6);
+            objectWriter.Append("minZoom", MinZoom, 0);
+            objectWriter.Append("maxZoom", MaxZoom, 0);
 
             if (EnableMarkersClustering)
             {
-                objectWriter.AppendObject("MarkerClusteringOptions", MarkerClusteringOptions.Serialize());
+                objectWriter.AppendObject("markerClusteringOptions", MarkerClusteringOptions.Serialize());
             }
 
             if (Markers.Any())
@@ -229,7 +229,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
                 if (markers.Any())
                 {
-                    objectWriter.AppendCollection("Markers", markers);
+                    objectWriter.AppendCollection("markers", markers);
                 }
             }
 
@@ -241,7 +241,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
                 if (polygons.Any())
                 {
-                    objectWriter.AppendCollection("Polygons", polygons);
+                    objectWriter.AppendCollection("polygons", polygons);
                 }
             }
 
@@ -253,7 +253,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
                 if (circles.Any())
                 {
-                    objectWriter.AppendCollection("Circles", circles);
+                    objectWriter.AppendCollection("circles", circles);
                 }
             }
 

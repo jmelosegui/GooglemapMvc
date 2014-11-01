@@ -4,7 +4,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -242,13 +243,15 @@ namespace Jmelosegui.Mvc.Googlemap
         public virtual ClientSideObjectWriter AppendCollection(string name, IEnumerable value)
         {
             if (name == null) throw new ArgumentNullException("name");
-            return Append(String.Format("{0}:{1}", name, new JavaScriptSerializer().Serialize(value)));
+            
+            return Append(String.Format("{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
         }
 
         public virtual ClientSideObjectWriter AppendObject(string name, object value)
         {
             if (name == null) throw new ArgumentNullException("name");
-            return Append(String.Format("{0}:{1}", name, new JavaScriptSerializer().Serialize(value)));
+
+            return Append(String.Format("{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
         }
 
         public virtual ClientSideObjectWriter AppendClientEvent(string name, ClientEvent clientEvent)
@@ -413,6 +416,20 @@ namespace Jmelosegui.Mvc.Googlemap
             {
                 throw new InvalidOperationException("You must have to call start prior calling this method");
             }
+        }
+
+        private static JsonSerializerSettings GetJsonSerializerSettings()
+        {
+            var settings = new JsonSerializerSettings
+            {
+                //TODO: camelCase for javascript serialization
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            settings.Converters.Add(new SizeJsonConverter());
+            settings.Converters.Add(new PointJsonConverter());
+            return settings;
         }
     }
 }

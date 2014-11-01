@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.WebPages;
+using Newtonsoft.Json;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -7,6 +8,7 @@ namespace Jmelosegui.Mvc.Googlemap
     {
         private Action content;
 
+        [JsonIgnore]
         public Action Content
         {
             get
@@ -57,6 +59,7 @@ namespace Jmelosegui.Mvc.Googlemap
             }
         }
 
+        [JsonIgnore]
         public Action<T> CodeBlockTemplate
         {
             get
@@ -74,6 +77,7 @@ namespace Jmelosegui.Mvc.Googlemap
             }
         }
 
+        [JsonIgnore]
         public Func<T, object> InlineTemplate
         {
             get
