@@ -2,18 +2,19 @@
 <package >
   <metadata>
     <id>Jmelosegui.Mvc.Googlemap</id>
-    <version>0.2.0.0</version>
-    <title>Googlemap Mvc (Beta)</title>
+    <version>0.3.0.0</version>
+    <title>Googlemap control for AspNet.Mvc</title>
     <authors>jmelosegui</authors>
     <owners>jmelosegui</owners>
+    <projectUrl>https://github.com/jmelosegui/GooglemapMvc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NET MVC applications.</description>
-    <copyright>Copyright ©  2014</copyright>
+    <description>Googlemap control for AspNet.Mvc wraps Google maps API simplifying the use of Google maps in ASP.NET MVC applications.</description>
     <tags>Googlemap AspNet Mvc AspNetMvc</tags>
     <dependencies>
       <group>
         <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.3" />
         <dependency id="jQuery" version="1.10.2" />
+        <dependency id="Newtonsoft.Json" version="6.0.6" />
       </group>
     </dependencies>
   </metadata>
