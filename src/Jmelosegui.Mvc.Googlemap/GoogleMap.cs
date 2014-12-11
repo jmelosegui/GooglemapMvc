@@ -90,6 +90,8 @@ namespace Jmelosegui.Mvc.Googlemap
             private set;
         }
 
+        public bool UseCurrentPosition { get; set; }
+
         #endregion
 
         #region Constructor
@@ -140,6 +142,7 @@ namespace Jmelosegui.Mvc.Googlemap
             ScaleControlVisible = false;
             Height = 300;
             Width = 0;
+            UseCurrentPosition = false;
         }
 
         #endregion
@@ -160,8 +163,7 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("draggable", Draggable, true);
             objectWriter.Append("enableMarkersClustering", EnableMarkersClustering, false);
             objectWriter.Append("height", Height);
-            objectWriter.Append("latitude", Latitude);
-            objectWriter.Append("longitude", Longitude);
+            objectWriter.AppendObject("center", new { Latitude, Longitude, UseCurrentPosition });
             objectWriter.Append("mapTypeId", MapTypeId);
             objectWriter.Append("mapTypeControlPosition", MapTypeControlPosition, ControlPosition.TopRight);
             objectWriter.Append("mapTypeControlVisible", MapTypeControlVisible, true);

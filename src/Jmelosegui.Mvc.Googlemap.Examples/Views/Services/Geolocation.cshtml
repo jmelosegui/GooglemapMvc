@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Geolocation";
+}
+
+@{
+    Html.GoogleMap()
+        .Name("map")
+        .Center(c => c.UseCurrentPosition()
+                        //this will be the Latitude if your map do not support 
+                        //geolocation or the client denies the location sharing
+                        .Latitude(23d)
+                        //this will be the Longitude if your map do not support 
+                        //geolocation or the client denies the location sharing
+                        .Longitude(-82.3d))
+        .Markers(m => m.Add()
+                        .Title("Hello Geolocation!")
+                        .Window(window => window.Add()
+                            .MaxWidth(200)
+                            .zIndex(3)
+                            .DisableAutoPan(false)
+                            .Content(
+                            @<text>
+                                <div>
+                                    <h1>Geolocation</h1>
+                                    <div id="bodyContent">
+                                        <p>
+                                            This marker is placed in your current location if your browser support Geolocation and you have allowed the location sharing, otherwise it is placed in the map default location.
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </text>
+            )
+                        )
+        )
+        .Render();
+}           

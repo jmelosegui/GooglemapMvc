@@ -5,7 +5,7 @@
 @(
         Html.GoogleMap()
             .Name("map")
-            .Latitude(23.140971656573335)
-            .Longitude(-82.39435493946075)
+            .Center(c => c.Latitude(23.140971656573335)
+                          .Longitude(-82.39435493946075))
             .Markers(m => m.Add().Title("Hello World!"))
 )

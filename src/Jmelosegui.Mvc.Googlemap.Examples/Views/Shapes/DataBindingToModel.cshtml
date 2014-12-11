@@ -10,8 +10,8 @@
                 .Name("map")
                 .Width(880)
                 .Height(600)
-                .Latitude(40)
-                .Longitude(-3)
+                .Center(c => c.Latitude(40)
+                              .Longitude(-3))
                 .BindTo<RegionInfo, Circle>
                 (Model, mappings => mappings.For<RegionInfo>
                         (

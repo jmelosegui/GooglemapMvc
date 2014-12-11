@@ -37,6 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -128,6 +129,8 @@
     <Compile Include="Controllers\Marker\InfoWindowController.cs" />
     <Compile Include="Controllers\Marker\MarkerClusteringController.cs" />
     <Compile Include="Controllers\Marker\SimpleMarkerController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\Services\GeolocationController.cs" />
     <Compile Include="Controllers\ShapesController.cs" />
     <Compile Include="Controllers\Shapes\CircleBasicController.cs" />
     <Compile Include="Controllers\Shapes\DataBindingToModelController.cs" />
@@ -154,6 +157,7 @@
     <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
     <Content Include="Content\MapType\map_natural.jpg" />
     <Content Include="Content\MapType\speculative_map.jpg" />
+    <Content Include="Content\Services\Descriptions\Geolocation.html" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Marker\Descriptions\CustomIcons.html" />
     <Content Include="Content\Marker\Descriptions\DataBindingToModel.html" />
@@ -263,7 +267,6 @@
     <Content Include="Views\Shared\_TwitterButton.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
-    <Content Include="Web.sitemap" />
     <Content Include="Views\Basic\FirstLook.cshtml" />
     <Content Include="Views\Shared\_LayoutExamples.cshtml" />
     <Content Include="Views\Shared\_CodeViewer.cshtml" />
@@ -281,6 +284,7 @@
     <Content Include="Views\Basic\ClientEvents.cshtml" />
     <Content Include="Views\MapType\ImageMapType.cshtml" />
     <Content Include="Views\MapType\StyledMapType.cshtml" />
+    <Content Include="Views\Services\Geolocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

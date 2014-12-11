@@ -29,7 +29,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
 
         public bool DisableAutoPan { get; set; }
 
-        public override double Longitude
+        public override double? Longitude
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             set { base.Longitude = value; }
         }
 
-        public override double Latitude
+        public override double? Latitude
         {
             get
             {

@@ -39,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
@@ -72,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CenterFactory.cs" />
     <Compile Include="ControlPosition.cs" />
     <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapType.cs" />

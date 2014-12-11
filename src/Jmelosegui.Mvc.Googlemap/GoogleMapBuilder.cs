@@ -9,7 +9,7 @@ namespace Jmelosegui.Mvc.Googlemap
     public class GoogleMapBuilder : IHtmlString
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
-        private ScriptRegistrar scriptRegistrar;
+        private readonly ScriptRegistrar scriptRegistrar;
 
         public GoogleMapBuilder(GoogleMap component)
         {
@@ -46,6 +46,15 @@ namespace Jmelosegui.Mvc.Googlemap
             }
 
             return content;
+        }
+
+        public GoogleMapBuilder Center(Action<CenterFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+
+            var factory = new CenterFactory(Component);
+            action(factory);
+            return this;
         }
 
         public GoogleMapBuilder Circles(Action<CircleFactory> action)
@@ -96,12 +105,14 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        [Obsolete("This method is obsolete, use the Center method instead")]
         public GoogleMapBuilder Latitude(double value)
         {
             Component.Latitude = value;
             return this;
         }
 
+        [Obsolete("This method is obsolete, use the Center method instead")]
         public GoogleMapBuilder Longitude(double value)
         {
             Component.Longitude = value;

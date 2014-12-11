@@ -17,8 +17,8 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
 
             FluentDictionary.For(result)
                 .Add("title", marker.Title, () => marker.Title != null)
-                .Add("lat", marker.Latitude)
-                .Add("lng", marker.Longitude)
+                .Add("lat", marker.Latitude, () => marker.Latitude != null)
+                .Add("lng", marker.Longitude, () => marker.Latitude != null)
                 .Add("zIndex", marker.zIndex, 0)
                 .Add("clickable", marker.Clickable, true)
                 .Add("draggable", marker.Draggable, false)

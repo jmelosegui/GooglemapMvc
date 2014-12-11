@@ -303,8 +303,9 @@
         this.markerClusteringOptions = options.markerClusteringOptions;
         this.height = options.height;
         this.width = options.width;
-        this.latitude = options.latitude;
-        this.longitude = options.longitude;
+        this.latitude = options.center.latitude;
+        this.longitude = options.center.longitude;
+        this.useCurrentPosition = options.center.useCurrentPosition;
         this.zoom = (options.zoom !== undefined) ? options.zoom : 6;
         this.maxZoom = (options.maxZoom !== undefined) ? options.maxZoom : null;
         this.minZoom = (options.minZoom !== undefined) ? options.minZoom : null;
@@ -558,8 +559,21 @@
                 this.attachMapEvents();
             }
             else {
-                if ((this.latitude !== undefined) && (this.longitude !== undefined))
+                if (this.useCurrentPosition && navigator.geolocation) {
+                    var self = this;
+                    navigator.geolocation.getCurrentPosition(function (position) {
+
+                        self.latitude = position.coords.latitude;
+                        self.longitude = position.coords.longitude;
+                        self.load(new google.maps.LatLng(self.latitude, self.longitude));
+
+                    }, function () {
+                        console.log("Error: The Geolocation service failed.");
+                        self.load(new google.maps.LatLng(this.latitude, this.longitude));
+                    });
+                } else {
                     this.load(new google.maps.LatLng(this.latitude, this.longitude));
+                }
             }
         },
         attachMapEvents: function () {
@@ -581,6 +595,15 @@
             if (this.markers) {
                 for (i = 0; i < this.markers.length; i++) {
                     var config = this.markers[i];
+
+                    if (!config.lat) {
+                        config.lat = this.GMap.center.lat();
+                    }
+
+                    if (!config.lng) {
+                        config.lng = this.GMap.center.lng();
+                    }
+
                     config.enableMarkersClustering = this.enableMarkersClustering;
                     var marker = new $jmelosegui.GoogleMarker(this.GMap, i, config);
                     this.renderMarker(marker);

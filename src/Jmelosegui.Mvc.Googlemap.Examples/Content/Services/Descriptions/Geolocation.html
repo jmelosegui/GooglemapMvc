@@ -1,0 +1,36 @@
+﻿<p>
+    Note: This example requires that you consent to location sharing when prompted by your browser.
+    If you deny permission for location sharing or your browser do not support geolocation the control will use the map default location.
+</p>
+
+<pre class="prettyprint">
+@{ Html.GoogleMap()
+    .Name(&quot;map&quot;)
+    .Center(c => c.UseCurrentPosition()
+                //this will be the Latitude if your map do not support 
+                //geolocation or the client denies the location sharing
+                .Latitude(23d)
+                //this will be the Longitude if your map do not support 
+                //geolocation or the client denies the location sharing
+                .Longitude(-82.3d))
+                .Markers(marker =&gt; marker.Add()
+                            .Title(&quot;Hello Geolocation&quot;)
+                            .Window(window =&gt; window.Add()
+                                                    .MaxWidth(200)
+                                                    .zIndex(3)
+                                                    .DisableAutoPan(false)
+                                                    .Content(
+                                &lt;div&gt;
+                                    &lt;h1&gt;Geolocation&lt;/h1&gt;
+                                    &lt;div id=&quot;bodyContent&quot;&gt;
+                                        &lt;p&gt;
+                                            This marker is placed in your current location if your browser support Geolocation and you have allowed the location sharing, otherwise it is placed in the map default location.
+                                        &lt;/p&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                                        )
+                                                                    
+                                    )
+                    ).Render();
+}
+</pre>

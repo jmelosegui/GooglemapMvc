@@ -8,8 +8,8 @@
  Html.GoogleMap()
         .Name("map")
         .Height(500)
-        .Latitude(24.886436490787712)
-        .Longitude(-70.2685546875)
+        .Center(c => c.Latitude(24.886436490787712)
+                      .Longitude(-70.2685546875))
         .Zoom(5)
         .Polygons(pf => pf.Add()
                         .Points(ptn =>

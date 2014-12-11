@@ -5,8 +5,8 @@
 
 @(Html.GoogleMap()
         .Name("map")
-        .Latitude(40.6743890)
-        .Longitude(-73.9455)
+        .Center(c=> c.Latitude(40.6743890)
+                     .Longitude(-73.9455))
         .Zoom(12)
         .Height(400)
         .StyledMapTypes(map =>

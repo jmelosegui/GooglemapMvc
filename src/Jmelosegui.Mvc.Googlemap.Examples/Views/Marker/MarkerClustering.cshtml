@@ -10,8 +10,8 @@
 @{ Html.GoogleMap()
                 .Name("map")
                 .Height(600)
-                .Latitude(40)
-                .Longitude(-3)
+                .Center(c => c.Latitude(40)
+                              .Longitude(-3))
                 .EnableMarkersClustering(options =>
                 {
                     options.MaxZoom = (int)ViewData["MaxZoom"];
