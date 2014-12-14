@@ -20,6 +20,8 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
   - Polygons
   - Circles
   - Databinding
+- Services
+  - Geolocation
 
 ## Links
 
