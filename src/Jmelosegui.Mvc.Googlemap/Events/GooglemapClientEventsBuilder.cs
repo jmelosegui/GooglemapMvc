@@ -182,5 +182,13 @@ namespace Jmelosegui.Mvc.Googlemap
 
             return this;
         }
+
+        public GoogleMapClientEventsBuilder OnMapLoaded(string onMapLoad)
+        {
+            if (String.IsNullOrEmpty(onMapLoad)) throw new ArgumentNullException("onMapLoad");
+            clientEvents.OnMapLoaded.HandlerName = onMapLoad;
+
+            return this;
+        }
     }
 }

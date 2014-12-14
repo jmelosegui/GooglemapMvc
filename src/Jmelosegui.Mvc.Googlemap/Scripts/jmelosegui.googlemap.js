@@ -1,4 +1,4 @@
-﻿(function ($) { 
+﻿(function ($) {
     "use strict";
 
     var $jmelosegui = $.jmelosegui = {
@@ -50,12 +50,12 @@
         return $jmelosegui.create(this, {
             name: 'GoogleMap',
             init: function (element, options) {
-                return new $jmelosegui.map(element, options);
+                return new $jmelosegui.Googlemap(element, options);
             },
             options: options,
             success: function (map) {
                 map.load();
-            }
+            },
         });
 
     };
@@ -207,7 +207,7 @@
     };
 
     //Image Map Types
-    $jmelosegui.ImageMapType = function(map, config) {
+    $jmelosegui.ImageMapType = function (map, config) {
 
         this.map = map;
         this.name = config.name;
@@ -224,7 +224,7 @@
     }
 
     $jmelosegui.ImageMapType.prototype = {
-        getTileUrl: function(coord, zoom) {
+        getTileUrl: function (coord, zoom) {
             var normalizedCoord = this.getNormalizedCoord(coord, zoom);
 
             if (!normalizedCoord) {
@@ -236,7 +236,7 @@
             return imageUrl;
 
         },
-        
+
         getNormalizedCoord: function getNormalizedCoord(coord, zoom) {
             var y = coord.y;
             var x = coord.x;
@@ -264,11 +264,11 @@
             };
         },
 
-        format: function(value) {
+        format: function (value) {
             var args = Array.prototype.slice.call(arguments, 1);
             return value.replace(/{(\d+)}/g, function (match, number) {
                 return typeof args[number] != 'undefined'
-                  ? args[number] 
+                  ? args[number]
                   : match
                 ;
             });
@@ -291,7 +291,7 @@
 
     $jmelosegui.StyledMapType.prototype = {}
 
-    $jmelosegui.map = function (element, options) {
+    $jmelosegui.Googlemap = function (element, options) {
 
         this.element = element;
         $.extend(this, options);
@@ -313,7 +313,7 @@
         this.mapTypeControlPosition = (options.mapTypeControlPosition !== undefined) ? options.mapTypeControlPosition : 'TOP_RIGHT';
         this.mapTypeControlStyle = options.mapTypeControlStyle;
         this.mapTypeControlVisible = (options.mapTypeControlVisible !== undefined) ? options.mapTypeControlVisible : true;
-        
+
         this.panControlVisible = (options.panControlVisible !== undefined) ? options.panControlVisible : true;
         this.panControlPosition = (options.panControlPosition !== undefined) ? options.panControlPosition : 'TOP_LEFT';
 
@@ -400,13 +400,16 @@
         if (options.zoom_changed !== undefined) {
             this.events.push({ 'zoom_changed': options.zoom_changed });
         }
+        if (options.map_loaded !== undefined) {
+            this.map_loaded = options.map_loaded;
+        }
 
         $jmelosegui.bind(this, {
             load: this.onLoad
         });
     };
 
-    $jmelosegui.map.prototype = {
+    $jmelosegui.Googlemap.prototype = {
         initialize: function () {
 
             var innerOptions = {
@@ -557,6 +560,10 @@
                 this.initialize();
                 this.render();
                 this.attachMapEvents();
+                if (this.map_loaded !== undefined) {
+                    var args = { 'map': this.GMap };
+                    this.map_loaded(args);
+                }
             }
             else {
                 if (this.useCurrentPosition && navigator.geolocation) {
@@ -582,7 +589,7 @@
                 this.mapEventsCallBack(this.GMap, this.events[i][eventName], eventName);
             }
         },
-        mapEventsCallBack: function (map, handler, eventName) {
+        mapEventsCallBack: function (map, handler, eventName) {            
             google.maps.event.addListener(map, eventName, function (e) {
                 var args = { 'map': map, 'eventName': eventName };
                 $.extend(args, e);
@@ -660,7 +667,7 @@
         addStyledMapType: function (map, mapType) {
             var gStyledMapType = new google.maps.StyledMapType(mapType.styles, mapType);
             map.mapTypes.set(mapType.name, gStyledMapType);
-    }
+        }
     };
 
 })(jQuery);

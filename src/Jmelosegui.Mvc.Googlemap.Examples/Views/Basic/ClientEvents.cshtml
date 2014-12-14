@@ -44,6 +44,7 @@
                 .OnTilesLoaded("highlightEvent")
                 .OnTiltChanged("highlightEvent")
                 .OnZoomChanged("highlightEvent")
+                .OnMapLoaded("mapLoadedHandler")
             ))
     </div>
     <div id="events" class="col-md-2">
@@ -85,7 +86,7 @@
             var eventRow = document.getElementById(args.eventName);
             eventRow.className = 'event active';
             clearTimeout(timeout);
-            var timeout = setTimeout(function() {
+            setTimeout(function() {
                 eventRow.className = 'event inactive';
             }, 1000);
             if (args.eventName === 'click') {
@@ -94,11 +95,25 @@
         }
 
         function placeMarker(position, map) {
-            var marker = new google.maps.Marker({
+            new google.maps.Marker({
                 position: position,
                 map: map
             });
             map.panTo(position);
         }
+
+        function mapLoadedHandler(args) {
+            var map = args.map;
+            var position = map.getCenter();
+
+            var options = {
+                map: map,
+                position: position,
+                content: "Infowindow created on map loaded"
+            };
+
+            new google.maps.InfoWindow(options);
+        }
+
     </script>
 }

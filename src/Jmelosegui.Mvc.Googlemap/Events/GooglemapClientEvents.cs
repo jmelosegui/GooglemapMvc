@@ -24,6 +24,7 @@ namespace Jmelosegui.Mvc.Googlemap
             OnTilesLoaded = new ClientEvent();
             OnTiltChanged = new ClientEvent();
             OnZoomChanged = new ClientEvent();
+            OnMapLoaded = new ClientEvent();
 
         }
 
@@ -64,6 +65,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public ClientEvent OnTiltChanged { get; private set; }
 
         public ClientEvent OnZoomChanged { get; private set; }
+        public ClientEvent OnMapLoaded { get; private set; }
 
         public void SerializeTo(ClientSideObjectWriter writer)
         {
@@ -86,6 +88,7 @@ namespace Jmelosegui.Mvc.Googlemap
             writer.AppendClientEvent("tilesloaded", OnTilesLoaded);
             writer.AppendClientEvent("resize", OnTiltChanged);
             writer.AppendClientEvent("zoom_changed", OnZoomChanged);
+            writer.AppendClientEvent("map_loaded", OnMapLoaded);
         }
     }
 
