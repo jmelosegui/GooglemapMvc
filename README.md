@@ -9,7 +9,7 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
 - Client Events
 - Map Types
   - Styled Map Type
-  - Image Map Type
+  - [Image Map Type (Game of Thrones)](http://www.jmelosegui.com/map/MapType/ImageMapType)
 - Languages
 - Markers
   - Custom Icons
