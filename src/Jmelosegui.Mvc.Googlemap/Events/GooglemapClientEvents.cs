@@ -78,7 +78,7 @@ namespace Jmelosegui.Mvc.Googlemap
             writer.AppendClientEvent("dragend", OnMapDragEnd);
             writer.AppendClientEvent("dragstart", OnMapDragStart);
             writer.AppendClientEvent("heading_changed", OnMapHeadingChanged);
-            writer.AppendClientEvent("idle", OnMapHeadingChanged);
+            writer.AppendClientEvent("idle", OnMapIdle);
             writer.AppendClientEvent("maptypeid_changed", OnMapTypeIdChanged);
             writer.AppendClientEvent("mousemove", OnMouseMove);
             writer.AppendClientEvent("mouseout", OnMouseOut);
