@@ -1,0 +1,29 @@
+﻿@model String
+
+@{
+    ViewBag.Title = "Geocoding";
+}
+<h2>title</h2>
+
+@(
+    Html.GoogleMap()
+        .Name("map")
+        .Center(c => c.Address(Model))
+        .Markers(m => m.Add())
+)
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Google Map Settings</h4>
+    <div class="form-group">
+        <label for="mapLanguage" class="col-sm-2 control-label" style="white-space: nowrap;">Address: </label>
+        <div class="col-sm-5">
+            @Html.TextBox("address", Model, new { @class = "form-control", id = "mapLanguages" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

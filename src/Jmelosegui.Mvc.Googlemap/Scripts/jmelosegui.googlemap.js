@@ -306,6 +306,7 @@
         this.latitude = options.center.latitude;
         this.longitude = options.center.longitude;
         this.useCurrentPosition = options.center.useCurrentPosition;
+        this.address = options.center.address;
         this.zoom = (options.zoom !== undefined) ? options.zoom : 6;
         this.maxZoom = (options.maxZoom !== undefined) ? options.maxZoom : null;
         this.minZoom = (options.minZoom !== undefined) ? options.minZoom : null;
@@ -566,8 +567,10 @@
                 }
             }
             else {
+                var self = this;
+
                 if (this.useCurrentPosition && navigator.geolocation) {
-                    var self = this;
+
                     navigator.geolocation.getCurrentPosition(function (position) {
 
                         self.latitude = position.coords.latitude;
@@ -578,6 +581,20 @@
                         console.log("Error: The Geolocation service failed.");
                         self.load(new google.maps.LatLng(this.latitude, this.longitude));
                     });
+                } else if (this.address) {
+
+                    var geocoder = new google.maps.Geocoder();
+
+                    geocoder.geocode({ 'address': this.address }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            self.latitude = results[0].geometry.location.lat();
+                            self.longitude = results[0].geometry.location.lng();
+                            self.load(new google.maps.LatLng(self.latitude, self.longitude));
+                        } else {
+                            console.log('Error: Geocode was not successful for the following reason: ' + status);
+                        }
+                    });
+
                 } else {
                     this.load(new google.maps.LatLng(this.latitude, this.longitude));
                 }
@@ -589,7 +606,7 @@
                 this.mapEventsCallBack(this.GMap, this.events[i][eventName], eventName);
             }
         },
-        mapEventsCallBack: function (map, handler, eventName) {            
+        mapEventsCallBack: function (map, handler, eventName) {
             google.maps.event.addListener(map, eventName, function (e) {
                 var args = { 'map': map, 'eventName': eventName };
                 $.extend(args, e);

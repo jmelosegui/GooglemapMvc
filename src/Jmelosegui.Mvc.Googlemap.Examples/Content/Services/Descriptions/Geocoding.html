@@ -1,0 +1,15 @@
+﻿<p>
+    This example shows how to set the center of the map using Gooogle maps Geocoder Services and a valid address.
+</p>
+<p>
+    Change the configuration above to see how it affects the map.
+</p>
+
+<pre class="prettyprint">
+@(
+    Html.GoogleMap()
+        .Name(&quot;map&quot;)
+        .Center(c =&gt; c.Address("Madrid, Spain"))
+        .Markers(m =&gt; m.Add())
+)
+</pre>

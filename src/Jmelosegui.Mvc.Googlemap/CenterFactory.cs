@@ -32,5 +32,10 @@ namespace Jmelosegui.Mvc.Googlemap
             map.Longitude = value;
             return this;
         }
+
+        public void Address(string address)
+        {
+            map.Address = address;
+        }
     }
 }
