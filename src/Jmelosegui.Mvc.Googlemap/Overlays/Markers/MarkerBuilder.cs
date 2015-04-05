@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Web.Optimization;
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
@@ -12,6 +11,12 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         public MarkerBuilder(Marker marker)
         {
             this.marker = marker;
+        }
+
+        public MarkerBuilder Id(string id)
+        {
+            marker.Id = id;
+            return this;
         }
 
         public MarkerBuilder Clickable(bool enabled)

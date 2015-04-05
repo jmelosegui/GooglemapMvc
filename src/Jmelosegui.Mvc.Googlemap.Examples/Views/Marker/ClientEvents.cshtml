@@ -25,16 +25,25 @@
               .Height(420)
               .Markers(m =>
               {
-                  m.Add().Title("Hello World!").Longitude(-82)
-                      .Latitude(23);
-                  m.Add().Title("Hola Mundo").Longitude(-81.9)
-                      .Latitude(22.9);
+                  m.Add().Id("UniqueId-1")
+                      .Title("Hello Marker Client Events!")
+                      .Longitude(-83)
+                      .Latitude(23)
+                      .Draggable(true);
               })
               .MarkerEvents(events =>
                     events.OnMarkerClick("highlightEvent")
+                        .OnMarkerDblClick("highlightEvent")
                         .OnMarkerDragStart("highlightEvent")
                         .OnMarkerDrag("highlightEvent")
                         .OnMarkerDragEnd("highlightEvent")
+                        .OnMarkerIconChanged("highlightEvent")
+                        .OnMarkerMouseDown("highlightEvent")
+                        .OnMarkerMouseOut("highlightEvent")
+                        .OnMarkerMouseOver("highlightEvent")
+                        .OnMarkerMouseUp("highlightEvent")
+                        .OnMarkerPositionChanged("highlightEvent")
+                        .OnMarkerRightClick("highlightEvent")
                 )
           )
     </div>
@@ -49,7 +58,9 @@
         $(document).ready(function() {
 
             var events = [
-                'click'
+                'animation_changed', 'click', 'clickable_changed', 'cursor_changed', 'dblclick', 'dragstart', 'drag', 'dragend'
+                , 'flat_changed', 'icon_changed', 'mousedown', 'mouseout', 'mouseover', 'mouseup', 'position_changed', 'rightclick'
+                , 'shape_changed', 'title_changed', 'visible_changed', 'zindex_changed'
             ];
 
             // Dynamically create the table of events from the defined hashmap
@@ -75,7 +86,7 @@
                 eventRow.className = 'event inactive';
             }, 1000);
             if (args.eventName === 'click') {
-                //TODO: do somethig with the marker
+                alert("you clicked the marker with id =" + args.id);
             }
         }
 

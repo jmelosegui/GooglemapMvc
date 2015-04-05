@@ -10,6 +10,8 @@
             index = map.Markers.Count;
         }
 
+        public string Id { get; set; }
+
         public int Index
         {
             get { return index; }

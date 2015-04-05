@@ -1,0 +1,32 @@
+﻿<p>This example shows the client-side events asociated to the google map marker supported by Googlemap control for Asp.Net MVC.</p>
+<p>Interact with the marker above to see the results</p>
+<p>
+    The Marker Object on Googlemap control for Asp.Net MVC has an Id property wich is passed to the client side event througth the argument.
+    That property could be binded to some datasource object using the databinding capabilities and also
+    could be used to keep the track of the user interaction with the markers and send it back to the server to make some decitions.
+</p>
+
+<pre class="prettyprint">
+
+    @(Html.GoogleMap()
+        .Name(&quot;map&quot;)
+        .Height(420)
+        .Markers(m =&gt;
+        {
+            m.Add().Id(&quot;UniqueId-1&quot;)
+                .Title(&quot;Hello World!&quot;)
+                .Longitude(-82)
+                .Latitude(23);
+        })
+        .MarkerEvents(events =&gt; events.OnMarkerClick(&quot;markerClick&quot;))
+    )
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        function markerClick(args) {
+           
+                alert(&quot;You clicked the marker with id =&quot; + args.id);
+           
+        }
+    &lt;/script&gt;
+
+</pre>

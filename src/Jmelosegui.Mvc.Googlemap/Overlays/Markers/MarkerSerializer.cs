@@ -16,6 +16,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             IDictionary<string, object> result = new Dictionary<string, object>();
 
             FluentDictionary.For(result)
+                .Add("id", marker.Id, () => marker.Id != null)
                 .Add("title", marker.Title, () => marker.Title != null)
                 .Add("lat", marker.Latitude, () => marker.Latitude != null)
                 .Add("lng", marker.Longitude, () => marker.Latitude != null)

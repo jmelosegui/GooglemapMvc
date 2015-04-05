@@ -144,6 +144,7 @@
         this.Map = map;
         this.index = index;
         //properties
+        this.id = config.id;
         this.latitude = config.lat;
         this.longitude = config.lng;
         this.title = config.title;
@@ -169,17 +170,21 @@
             }
 
             if (this.markerEvents) {
-                for (var i = 0; i < this.markerEvents.length; i++) {
-                    var eventName = Object.getOwnPropertyNames(this.markerEvents[i])[0];
-                    var handler = this.markerEvents[i][eventName];
-                    var tempMarker = this.gMarker;
-                    google.maps.event.addListener(tempMarker, eventName, function (e) {
-                        var args = { 'marker': tempMarker, 'eventName': eventName };
-                        $.extend(args, e);
-                        handler(args);
-                    });
-                }
+                this.attachMarkerEvents();
             }
+        },
+        attachMarkerEvents: function () {
+            for (var i = 0; i < this.markerEvents.length; i++) {
+                var eventName = Object.getOwnPropertyNames(this.markerEvents[i])[0];
+                this.markerEventsCallBack(this.id, this.gMarker, this.markerEvents[i][eventName], eventName);
+            }
+        },
+        markerEventsCallBack: function (id, marker, handler, eventName) {
+            google.maps.event.addListener(marker, eventName, function (e) {
+                var args = { 'id': id, 'marker': marker, 'eventName': eventName };
+                $.extend(args, e);
+                handler(args);
+            });
         },
         createImage: function (options) {
             var image = new google.maps.MarkerImage(options.path,
@@ -424,11 +429,82 @@
         this.markerEvents = [];
 
         if (options.markerEvents) {
+            if (options.markerEvents.animation_changed !== undefined) {
+                this.markerEvents.push({ 'animation_changed': options.markerEvents.animation_changed });
+            }
+
             if (options.markerEvents.click !== undefined) {
                 this.markerEvents.push({ 'click': options.markerEvents.click });
             }
+
+            if (options.markerEvents.clickable_changed !== undefined) {
+                this.markerEvents.push({ 'clickable_changed': options.markerEvents.clickable_changed });
+            }
+
+            if (options.markerEvents.cursor_changed !== undefined) {
+                this.markerEvents.push({ 'cursor_changed': options.markerEvents.cursor_changed });
+            }
+
+            if (options.markerEvents.dragstart !== undefined) {
+                this.markerEvents.push({ 'dragstart': options.markerEvents.dragstart });
+            }
+
+            if (options.markerEvents.drag !== undefined) {
+                this.markerEvents.push({ 'drag': options.markerEvents.drag });
+            }
+
+            if (options.markerEvents.dragend !== undefined) {
+                this.markerEvents.push({ 'dragend': options.markerEvents.dragend });
+            }
+
+            if (options.markerEvents.flat_changed !== undefined) {
+                this.markerEvents.push({ 'flat_changed': options.markerEvents.flat_changed });
+            }
+
+            if (options.markerEvents.icon_changed !== undefined) {
+                this.markerEvents.push({ 'icon_changed': options.markerEvents.icon_changed });
+            }
+
+            if (options.markerEvents.mousedown !== undefined) {
+                this.markerEvents.push({ 'mousedown': options.markerEvents.mousedown });
+            }
+
+            if (options.markerEvents.mouseout !== undefined) {
+                this.markerEvents.push({ 'mouseout': options.markerEvents.mouseout });
+            }
+
+            if (options.markerEvents.mouseover !== undefined) {
+                this.markerEvents.push({ 'mouseover': options.markerEvents.mouseover });
+            }
+
+            if (options.markerEvents.mouseup !== undefined) {
+                this.markerEvents.push({ 'mouseup': options.markerEvents.mouseup });
+            }
+
+            if (options.markerEvents.position_changed !== undefined) {
+                this.markerEvents.push({ 'position_changed': options.markerEvents.position_changed });
+            }
+
+            if (options.markerEvents.rightclick !== undefined) {
+                this.markerEvents.push({ 'rightclick': options.markerEvents.rightclick });
+            }
+
+            if (options.markerEvents.shape_changed !== undefined) {
+                this.markerEvents.push({ 'shape_changed': options.markerEvents.shape_changed });
+            }
+
+            if (options.markerEvents.title_changed !== undefined) {
+                this.markerEvents.push({ 'title_changed': options.markerEvents.title_changed });
+            }
+
+            if (options.markerEvents.visible_changed !== undefined) {
+                this.markerEvents.push({ 'visible_changed': options.markerEvents.visible_changed });
+            }
+
+            if (options.markerEvents.zindex_changed !== undefined) {
+                this.markerEvents.push({ 'zindex_changed': options.markerEvents.zindex_changed });
+            }
         }
-        
 
         $jmelosegui.bind(this, {
             load: this.onLoad

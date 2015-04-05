@@ -164,6 +164,7 @@
     <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
     <Content Include="Content\MapType\map_natural.jpg" />
     <Content Include="Content\MapType\speculative_map.jpg" />
+    <Content Include="Content\Marker\Descriptions\ClientEvents.html" />
     <Content Include="Content\Services\Descriptions\Geocoding.html" />
     <Content Include="Content\Services\Descriptions\Geolocation.html" />
     <Content Include="fonts\fontawesome-webfont.svg" />
