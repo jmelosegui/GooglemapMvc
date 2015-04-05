@@ -124,6 +124,7 @@
     <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
     <Compile Include="Controllers\MapType\StyledMapTypeController.cs" />
     <Compile Include="Controllers\MarkerController.cs" />
+    <Compile Include="Controllers\Marker\ClientEventsController.cs" />
     <Compile Include="Controllers\Marker\CustomIconsController.cs" />
     <Compile Include="Controllers\Marker\DataBindingToModelController.cs" />
     <Compile Include="Controllers\Marker\InfoWindowController.cs" />
@@ -269,6 +270,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Home\FirstLook.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -284,7 +288,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\FirstLook.cshtml" />
     <Content Include="Views\Shared\_TwitterButton.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
@@ -307,6 +310,7 @@
     <Content Include="Views\MapType\StyledMapType.cshtml" />
     <Content Include="Views\Services\Geolocation.cshtml" />
     <Content Include="Views\Services\Geocoding.cshtml" />
+    <Content Include="Views\Marker\ClientEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

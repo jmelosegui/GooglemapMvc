@@ -16,6 +16,7 @@ namespace Jmelosegui.Mvc.Googlemap
         private readonly TextWriter writer;
         private bool appended;
         private bool hasStarted;
+        private bool writeExplicitObject;
 
         public ClientSideObjectWriter(string id, string type, TextWriter textWriter)
         {
@@ -48,7 +49,11 @@ namespace Jmelosegui.Mvc.Googlemap
 
             if (!string.IsNullOrEmpty(keyValuePair))
             {
-                writer.Write(appended ? ", " : "{");
+                if (!writeExplicitObject)
+                {
+                    writer.Write(appended ? ", " : "{");
+                }
+                writeExplicitObject = false;
                 writer.Write(keyValuePair);
 
                 if (!appended)
@@ -276,6 +281,21 @@ namespace Jmelosegui.Mvc.Googlemap
                     }
                 }
             }
+            return this;
+        }
+
+        public virtual ClientSideObjectWriter AppendClientEventObject(string name, IClientEventObject clientEvents)
+        {
+            if (name == null) throw new ArgumentNullException("name");
+            if (clientEvents == null) throw new ArgumentNullException("clientEvents");
+
+            EnsureStart();
+            writer.Write(appended ? ", " : "{");
+            writer.Write("{0}:{{", name);
+            writeExplicitObject = true;
+            clientEvents.SerializeTo(this);
+            writer.Write("}");
+
             return this;
         }
 

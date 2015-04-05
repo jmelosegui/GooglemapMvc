@@ -153,6 +153,7 @@
         this.window = config.window;
         this.zIndex = config.zIndex ? config.zIndex : 0;
         this.enableMarkersClustering = config.enableMarkersClustering ? config.enableMarkersClustering : false;
+        this.markerEvents = config.markerEvents;
     };
 
     var infowindow;
@@ -165,6 +166,19 @@
         initialize: function () {
             if (this.window) {
                 google.maps.event.addListener(this.gMarker, 'click', $jmelosegui.delegate(this, this.openInfoWindow));
+            }
+
+            if (this.markerEvents) {
+                for (var i = 0; i < this.markerEvents.length; i++) {
+                    var eventName = Object.getOwnPropertyNames(this.markerEvents[i])[0];
+                    var handler = this.markerEvents[i][eventName];
+                    var tempMarker = this.gMarker;
+                    google.maps.event.addListener(tempMarker, eventName, function (e) {
+                        var args = { 'marker': tempMarker, 'eventName': eventName };
+                        $.extend(args, e);
+                        handler(args);
+                    });
+                }
             }
         },
         createImage: function (options) {
@@ -342,6 +356,7 @@
         this.imageMapTypes = eval(options.imageMapTypes);
         this.styledMapTypes = eval(options.styledMapTypes);
 
+        //Map Events
         this.events = [];
 
         if (options.bounds_changed !== undefined) {
@@ -404,6 +419,16 @@
         if (options.map_loaded !== undefined) {
             this.map_loaded = options.map_loaded;
         }
+
+        //Marker Events
+        this.markerEvents = [];
+
+        if (options.markerEvents) {
+            if (options.markerEvents.click !== undefined) {
+                this.markerEvents.push({ 'click': options.markerEvents.click });
+            }
+        }
+        
 
         $jmelosegui.bind(this, {
             load: this.onLoad
@@ -545,7 +570,7 @@
         },
         renderMarker: function (m) {
 
-            if ((m.latitude != 0) && (m.longitude != 0)) {
+            if ((m.latitude !== 0) && (m.longitude !== 0)) {
 
                 try {
                     m.load(new google.maps.LatLng(m.latitude, m.longitude), false);
@@ -629,6 +654,7 @@
                     }
 
                     config.enableMarkersClustering = this.enableMarkersClustering;
+                    config.markerEvents = this.markerEvents;
                     var marker = new $jmelosegui.GoogleMarker(this.GMap, i, config);
                     this.renderMarker(marker);
                 };

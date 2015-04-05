@@ -290,6 +290,15 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        public GoogleMapBuilder MarkerEvents(Action<MarkerEventsBuilder> eventsBuilder)
+        {
+            if (eventsBuilder == null) throw new ArgumentNullException("eventsBuilder");
+
+            eventsBuilder(new MarkerEventsBuilder(Component.MarkerClientEvents));
+
+            return this;
+        }
+
         public ScriptRegistrarBuilder ScriptRegistrar()
         {
             return new ScriptRegistrarBuilder(scriptRegistrar);

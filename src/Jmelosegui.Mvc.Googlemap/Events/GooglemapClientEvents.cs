@@ -1,7 +1,7 @@
 ﻿
 namespace Jmelosegui.Mvc.Googlemap
 {
-    public class GoogleMapClientEvents
+    public class GoogleMapClientEvents : IClientEventObject
     {
         public GoogleMapClientEvents()
         {
@@ -65,6 +65,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public ClientEvent OnTiltChanged { get; private set; }
 
         public ClientEvent OnZoomChanged { get; private set; }
+
         public ClientEvent OnMapLoaded { get; private set; }
 
         public void SerializeTo(ClientSideObjectWriter writer)

@@ -20,6 +20,8 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public GoogleMapClientEvents ClientEvents { get; private set; }
 
+        public MarkerClientEvents MarkerClientEvents { get; private set; }
+
         public CultureInfo Culture { get; set; }
 
         public bool DisableDoubleClickZoom { get; set; }
@@ -102,9 +104,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             ScriptFileNames = new List<string>();
             ScriptFileNames.AddRange(new[] { "jmelosegui.googlemap.js" });
-
-            ClientEvents = new GoogleMapClientEvents();
-
+            
             if (viewContext == null)
             {
                 throw new ArgumentNullException("viewContext");
@@ -118,6 +118,7 @@ namespace Jmelosegui.Mvc.Googlemap
         private void Initialize()
         {
             ClientEvents = new GoogleMapClientEvents();
+            MarkerClientEvents = new MarkerClientEvents();
             DisableDoubleClickZoom = false;
             Draggable = true;
             EnableMarkersClustering = false;
@@ -244,6 +245,8 @@ namespace Jmelosegui.Mvc.Googlemap
                 {
                     objectWriter.AppendCollection("markers", markers);
                 }
+
+                objectWriter.AppendClientEventObject("markerEvents", this.MarkerClientEvents);
             }
 
             if (Polygons.Any())
@@ -271,6 +274,8 @@ namespace Jmelosegui.Mvc.Googlemap
             }
 
             this.ClientEvents.SerializeTo(objectWriter);
+
+            //TODO: Call a virtual method OnCompleting to allow derived class to inject its own json objects
 
             objectWriter.Complete();
 
@@ -348,6 +353,7 @@ namespace Jmelosegui.Mvc.Googlemap
         }
 
         #endregion
+        
         public void Render()
         {
             TextWriter writer = ViewContext.Writer;
