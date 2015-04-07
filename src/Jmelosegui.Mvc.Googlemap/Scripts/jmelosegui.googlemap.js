@@ -181,8 +181,21 @@
         },
         markerEventsCallBack: function (id, marker, handler, eventName) {
             google.maps.event.addListener(marker, eventName, function (e) {
+                var mouseEvent;
+                for (var key in e) {
+                    if (e.hasOwnProperty(key) && typeof e[key] !== 'function') {
+                        if (e[key] && e[key].constructor && e[key].constructor === MouseEvent) {
+                            mouseEvent = e[key];
+                        }
+                    }
+                }
                 var args = { 'id': id, 'marker': marker, 'eventName': eventName };
-                $.extend(args, e);
+                if (mouseEvent) {
+                    $.extend(args, e, { 'mouseEvent': mouseEvent });
+                } else {
+                    $.extend(args, e);
+                }
+
                 handler(args);
             });
         },
