@@ -231,8 +231,15 @@
                     infowindow.close();
                 }
                 var node = document.getElementById(this.window.content).cloneNode(true);
-                infowindow = new google.maps.InfoWindow();
+                infowindow = new google.maps.InfoWindow(this.window);
                 infowindow.setContent(node.innerHTML);
+                var windowsLoc;
+                if (this.window.lat && this.window.lng) {
+                    windowsLoc = new google.maps.LatLng(this.window.lat, this.window.lng);
+                } else {
+                    windowsLoc = this.gMarker.getPosition();
+                }
+                infowindow.setPosition(windowsLoc);
                 infowindow.open(this.Map, this.gMarker);
             }
         }

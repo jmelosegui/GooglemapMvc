@@ -13,6 +13,16 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
 
         public virtual IDictionary<string, object> Serialize()
         {
+            IDictionary<string, object> windowDictionary = new Dictionary<string, object>();
+
+            FluentDictionary.For(windowDictionary)
+                .Add("content", marker.Window.Content)
+                .Add("disableAutoPan", marker.Window.DisableAutoPan, () => marker.Window.DisableAutoPan)
+                .Add("lat", marker.Window.Latitude, () => marker.Latitude != marker.Window.Latitude)
+                .Add("lng", marker.Window.Longitude, () => marker.Longitude != marker.Window.Longitude)
+                .Add("maxWidth", marker.Window.MaxWidth, () => marker.Window.MaxWidth != 0)
+                .Add("zIndex", marker.Window.zIndex, () => marker.Window.zIndex != 0);
+
             IDictionary<string, object> result = new Dictionary<string, object>();
 
             FluentDictionary.For(result)
@@ -24,7 +34,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
                 .Add("clickable", marker.Clickable, true)
                 .Add("draggable", marker.Draggable, false)
                 .Add("icon", marker.Icon, () => marker.Icon != null)
-                .Add("window", marker.Window, () => marker.Window != null);
+                .Add("window", windowDictionary, () => marker.Window != null);
 
             return result;
         }
