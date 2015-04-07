@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
@@ -17,8 +17,8 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         
             Template = new HtmlTemplate();
         }
-        
-        [ScriptIgnore]
+
+        [JsonIgnore]
         public HtmlTemplate Template
         {
             get;
