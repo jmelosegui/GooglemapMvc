@@ -149,7 +149,7 @@
         this.longitude = config.lng;
         this.title = config.title;
         this.icon = config.icon;
-        this.clickable = config.clickable ? config.clickable : true;
+        this.clickable = (config.clickable !== undefined) ? config.clickable : true;
         this.draggable = config.draggable;
         this.window = config.window;
         this.zIndex = config.zIndex ? config.zIndex : 0;
@@ -181,21 +181,8 @@
         },
         markerEventsCallBack: function (id, marker, handler, eventName) {
             google.maps.event.addListener(marker, eventName, function (e) {
-                var mouseEvent;
-                for (var key in e) {
-                    if (e.hasOwnProperty(key) && typeof e[key] !== 'function') {
-                        if (e[key] && e[key].constructor && e[key].constructor === MouseEvent) {
-                            mouseEvent = e[key];
-                        }
-                    }
-                }
                 var args = { 'id': id, 'marker': marker, 'eventName': eventName };
-                if (mouseEvent) {
-                    $.extend(args, e, { 'mouseEvent': mouseEvent });
-                } else {
-                    $.extend(args, e);
-                }
-
+                $.extend(args, e);
                 handler(args);
             });
         },

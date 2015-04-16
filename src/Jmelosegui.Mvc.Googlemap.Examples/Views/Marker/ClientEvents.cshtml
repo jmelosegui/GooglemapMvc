@@ -25,9 +25,10 @@
                 .Name("map")
                 .Height(420)
                 .Markers(m =>
+                {
                     m.Add().Id("UniqueId-1")
                         .Title("Hello Marker Client Events!")
-                        .Longitude(-83)
+                        .Longitude(-82)
                         .Latitude(23)
                         .Draggable(true)
                         .Window(window => window.Add()
@@ -37,11 +38,23 @@
                             .Content(
                                 @<text>
                                     <div>
-                                        Hello Marker Client Events!
+                                        <h5>Hello Marker Client Events!</h5>
+                                        <p>Drag me over the map</p>
                                     </div>
                                  </text>
                             )
-                        ))
+                        );
+
+                    m.Add().Id("UniqueId-2")
+                            .Longitude(-81)
+                            .Latitude(23);
+                            
+                    m.Add().Id("UniqueId-3")
+                            .Longitude(-80)
+                            .Latitude(23)
+                            .Clickable(false)
+                            .Draggable(false);                                               
+                })
                         .MarkerEvents(events =>
                             events.OnMarkerClick("highlightEvent")
                                 .OnMarkerDblClick("highlightEvent")
@@ -94,8 +107,8 @@
             setTimeout(function() {
                 eventRow.className = 'event inactive';
             }, 1000);
-            if (args.eventName === 'click' && args.mouseEvent.ctrlKey === true) {
-                alert("You clicked the marker with id =" + args.id + " while pressing the ctrl key");
+            if (args.eventName === 'click') {
+                alert("You clicked the marker with id =" + args.id);
             }
         }
 
