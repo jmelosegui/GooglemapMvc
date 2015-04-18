@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "Geocoding";
 }
-<h2>title</h2>
 
 @(
     Html.GoogleMap()
         .Name("map")
+        .Height(300)        
         .Center(c => c.Address(Model))
         .Markers(m => m.Add())
 )
