@@ -165,7 +165,8 @@
             return (this.gMarker !== null);
         },
         initialize: function () {
-            if (this.window) {
+            //Work around to the issue https://code.google.com/p/gmaps-api-issues/issues/detail?id=7925
+            if (this.window && this.clickable) {
                 google.maps.event.addListener(this.gMarker, 'click', $jmelosegui.delegate(this, this.openInfoWindow));
             }
 
@@ -176,6 +177,8 @@
         attachMarkerEvents: function () {
             for (var i = 0; i < this.markerEvents.length; i++) {
                 var eventName = Object.getOwnPropertyNames(this.markerEvents[i])[0];
+                //Work around to the issue https://code.google.com/p/gmaps-api-issues/issues/detail?id=7925
+                if (eventName === 'click' && !this.clickable) continue;
                 this.markerEventsCallBack(this.id, this.gMarker, this.markerEvents[i][eventName], eventName);
             }
         },

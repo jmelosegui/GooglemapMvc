@@ -1,4 +1,6 @@
-﻿@{
+﻿@model dynamic
+
+@{
     ViewBag.Title = "Marker Client Events";
     Layout = "~/Views/Shared/_LayoutExamples.cshtml";
 }
@@ -30,7 +32,8 @@
                         .Title("Hello Marker Client Events!")
                         .Longitude(-82)
                         .Latitude(23)
-                        .Draggable(true)
+                        .Clickable((bool)ViewData["clickable"])
+                        .Draggable((bool)ViewData["draggable"])
                         .Window(window => window.Add()
                             .MaxWidth(200)
                             .zIndex(3)
@@ -44,16 +47,7 @@
                                  </text>
                             )
                         );
-
-                    m.Add().Id("UniqueId-2")
-                            .Longitude(-81)
-                            .Latitude(23);
-                            
-                    m.Add().Id("UniqueId-3")
-                            .Longitude(-80)
-                            .Latitude(23)
-                            .Clickable(false)
-                            .Draggable(false);                                               
+                                              
                 })
                         .MarkerEvents(events =>
                             events.OnMarkerClick("highlightEvent")
@@ -74,6 +68,30 @@
     <div id="events" class="col-md-2">
     </div>
 </div>
+
+<form class="form-horizontal" role="form">
+    <h4> Marker Settings</h4>
+
+    <div class="form-group">
+        <div class="col-sm-5 col-lg-offset-1">
+            <div class="checkbox">
+                <label>@Html.CheckBox("clickable") Clickable</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-5 col-lg-offset-1">
+            <div class="checkbox">
+                <label>@Html.CheckBox("draggable") Draggable</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>
 
 @section Scripts{
 
