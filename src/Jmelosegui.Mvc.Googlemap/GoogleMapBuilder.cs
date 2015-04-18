@@ -44,6 +44,10 @@ namespace Jmelosegui.Mvc.Googlemap
             {
                 content.Css("height", Component.Height + "px");
             }
+            else
+            {
+                content.Css("height", "100%");
+            }
 
             return content;
         }

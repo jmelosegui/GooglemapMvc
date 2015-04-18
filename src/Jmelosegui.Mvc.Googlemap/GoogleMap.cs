@@ -143,7 +143,7 @@ namespace Jmelosegui.Mvc.Googlemap
             ZoomControlPosition = ControlPosition.TopLeft;
             ZoomControlStyle = ZoomControlStyle.Default;
             ScaleControlVisible = false;
-            Height = 300;
+            Height = 0;
             Width = 0;
             UseCurrentPosition = false;
         }

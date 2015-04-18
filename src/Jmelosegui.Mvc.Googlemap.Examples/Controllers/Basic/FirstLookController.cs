@@ -6,7 +6,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
     {
         public ActionResult FirstLook(int? height, int? width)
         {
-            ViewData["height"] = height ?? 300;
+            ViewData["height"] = height ?? 0;
             ViewData["width"] = width ?? 0;
             return View();
         }
