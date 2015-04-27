@@ -50,6 +50,8 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public IList<Marker> Markers { get; private set; }
 
+        public bool MarkersFromAddress { get; set; }
+
         public MarkerClusteringOptions MarkerClusteringOptions { get; private set; }
 
         public int MaxZoom { get; set; }
@@ -165,6 +167,8 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("disableDoubleClickZoom", DisableDoubleClickZoom, false);
             objectWriter.Append("draggable", Draggable, true);
             objectWriter.Append("enableMarkersClustering", EnableMarkersClustering, false);
+            objectWriter.Append("markersFromAddress", MarkersFromAddress, false);
+
             objectWriter.Append("height", Height);
 
             if (Address.HasValue())

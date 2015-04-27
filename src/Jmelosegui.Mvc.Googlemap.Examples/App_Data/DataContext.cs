@@ -12,6 +12,9 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.App_Data
         public string ImagePath { get; set; }
         public string InfoWindowContent { get; set; }
         public double population { get; set; }
+        public string Address {
+            get { return Title + ", Spain"; }
+        }
     }
 
     public class DataContext

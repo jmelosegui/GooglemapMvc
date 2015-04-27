@@ -13,6 +13,12 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             this.marker = marker;
         }
 
+        public MarkerBuilder Address(string address)
+        {
+            marker.Address = address;
+            return this;
+        }
+
         public MarkerBuilder Id(string id)
         {
             marker.Id = id;

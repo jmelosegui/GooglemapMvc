@@ -124,6 +124,7 @@
     <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
     <Compile Include="Controllers\MapType\StyledMapTypeController.cs" />
     <Compile Include="Controllers\MarkerController.cs" />
+    <Compile Include="Controllers\Marker\GeocodingController.cs" />
     <Compile Include="Controllers\Marker\ClientEventsController.cs" />
     <Compile Include="Controllers\Marker\CustomIconsController.cs" />
     <Compile Include="Controllers\Marker\DataBindingToModelController.cs" />
@@ -312,6 +313,7 @@
     <Content Include="Views\Services\Geolocation.cshtml" />
     <Content Include="Views\Services\Geocoding.cshtml" />
     <Content Include="Views\Marker\ClientEvents.cshtml" />
+    <Content Include="Views\Marker\Geocoding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

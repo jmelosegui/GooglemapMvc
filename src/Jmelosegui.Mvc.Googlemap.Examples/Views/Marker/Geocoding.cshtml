@@ -3,7 +3,7 @@
 @model IEnumerable<RegionInfo>
 
 @{
-    ViewBag.Title = "Binding To Model";
+    ViewBag.Title = "Geocode";
 }
 
 @{
@@ -11,7 +11,8 @@
         .Name("map")
         .Height(600)
         .Center(c => c.Latitude(40)
-            .Longitude(-3))
+                      .Longitude(-3))
+        .MarkersFromAddress(true)                      
         .BindTo<RegionInfo, Marker>
         (Model, mappings => mappings.For<RegionInfo>
             (
@@ -19,14 +20,9 @@
                     (
                         (marker, regionInfo) =>
                         {
-                            marker.Latitude = regionInfo.Latitude;
-                            marker.Longitude = regionInfo.Longitude;
+                            marker.Address = regionInfo.Address;
                             marker.Title = regionInfo.Title;
                             marker.zIndex = regionInfo.zIndex;
-                            marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}", regionInfo.ImagePath)
-                                , new Size(18, 12)
-                                , new Point(0, 0)
-                                , new Point(0, 12));
 
                             marker.Window = new InfoWindow(marker)
                             {

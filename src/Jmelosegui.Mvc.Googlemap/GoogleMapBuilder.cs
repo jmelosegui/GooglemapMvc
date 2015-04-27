@@ -88,6 +88,12 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        public GoogleMapBuilder MarkersFromAddress(bool value)
+        {
+            Component.MarkersFromAddress = value;
+            return this;
+        }
+
         public GoogleMapBuilder EnableMarkersClustering()
         {
             return EnableMarkersClustering(null);
