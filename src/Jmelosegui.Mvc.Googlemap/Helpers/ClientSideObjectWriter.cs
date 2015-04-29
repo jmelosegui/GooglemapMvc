@@ -295,7 +295,7 @@ namespace Jmelosegui.Mvc.Googlemap
             writeExplicitObject = true;
             clientEvents.SerializeTo(this);
             writer.Write("}");
-
+            writeExplicitObject = false;
             return this;
         }
 

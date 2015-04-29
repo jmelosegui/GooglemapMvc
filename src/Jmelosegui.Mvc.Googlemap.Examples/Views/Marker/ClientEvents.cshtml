@@ -39,15 +39,15 @@
                             .zIndex(3)
                             .DisableAutoPan(false)
                             .Content(
-                                @<text>
-                                    <div>
-                                        <h5>Hello Marker Client Events!</h5>
-                                        <p>Drag me over the map</p>
-                                    </div>
-                                 </text>
-                            )
+                            @<text>
+                                <div>
+                                    <h5>Hello Marker Client Events!</h5>
+                                    <p>Drag me over the map</p>
+                                </div>
+                            </text>
+)
                         );
-                                              
+
                 })
                         .MarkerEvents(events =>
                             events.OnMarkerClick("highlightEvent")
@@ -63,8 +63,8 @@
                                 .OnMarkerPositionChanged("highlightEvent")
                                 .OnMarkerRightClick("highlightEvent")
                         ).Render();
-                }
-            </div>
+        }
+    </div>
     <div id="events" class="col-md-2">
     </div>
 </div>
@@ -127,6 +127,12 @@
             }, 1000);
             if (args.eventName === 'click') {
                 alert("You clicked the marker with id =" + args.id);
+            }
+            if (args.eventName === 'dragend') {
+                args.marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () {
+                    args.marker.setAnimation(null);
+                }, 1000);
             }
         }
 

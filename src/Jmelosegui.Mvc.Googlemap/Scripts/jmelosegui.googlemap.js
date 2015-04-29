@@ -141,7 +141,8 @@
     $jmelosegui.GoogleMarker = function (map, index, config) {
         // init
         this.gMarker = null;
-        this.Map = map;
+        this.Map = map.GMap;
+        this.parent = map;
         this.index = index;
         //properties
         this.id = config.id;
@@ -210,6 +211,9 @@
             };
             // create
             this.gMarker = new google.maps.Marker(markerOptions);
+            if (this.parent.fitToMarkersBounds) {
+                this.parent.bounds.extend(this.gMarker.position);
+            }
             this.initialize();
             if (this.enableMarkersClustering === true) {
                 markersCluster.push(this.gMarker);
@@ -329,6 +333,7 @@
         this.disableDoubleClickZoom = options.disableDoubleClickZoom;
         this.enableMarkersClustering = options.enableMarkersClustering;
         this.markersFromAddress = options.markersFromAddress;
+        this.fitToMarkersBounds = options.fitToMarkersBounds;
         this.markerClusteringOptions = options.markerClusteringOptions;
         this.height = options.height;
         this.width = options.width;
@@ -370,6 +375,8 @@
         this.polygons = eval(options.polygons);
         this.imageMapTypes = eval(options.imageMapTypes);
         this.styledMapTypes = eval(options.styledMapTypes);
+
+        this.bounds = new google.maps.LatLngBounds();
 
         //Map Events
         this.events = [];
@@ -433,6 +440,9 @@
         }
         if (options.map_loaded !== undefined) {
             this.map_loaded = options.map_loaded;
+        }
+        if (options.markers_geocoding_completed !== undefined) {
+            this.markers_geocoding_completed = options.markers_geocoding_completed;
         }
 
         //Marker Events
@@ -649,7 +659,7 @@
                     var p = results[0].geometry.location;
                     config.lat = p.lat();
                     config.lng = p.lng();
-                    var marker = new $jmelosegui.GoogleMarker(map.GMap, markerIndex, config);
+                    var marker = new $jmelosegui.GoogleMarker(map, markerIndex, config);
                     map.renderMarker(marker);
                 }
                 else {
@@ -697,7 +707,13 @@
                 markerIndex++;
             }
             else {
-                //map.fitBounds(bounds);
+                if (map.fitToMarkersBounds) {
+                    map.GMap.fitBounds(map.bounds);
+                }
+                if (map.markers_geocoding_completed !== undefined) {
+                    var args = { 'map': map };
+                    map.markers_geocoding_completed(args);
+                }
             }
         },
         renderPolygon: function (p) {
@@ -780,11 +796,14 @@
 
                         config.enableMarkersClustering = this.enableMarkersClustering;
                         config.markerEvents = this.markerEvents;
-                        var marker = new $jmelosegui.GoogleMarker(this.GMap, i, config);
+                        var marker = new $jmelosegui.GoogleMarker(this, i, config);
                         this.renderMarker(marker);
                     };
                     if (this.enableMarkersClustering === true) {
                         this.refreshMap();
+                    }
+                    if (this.fitToMarkersBounds) {
+                        this.GMap.fitBounds(this.bounds);
                     }
                 }
             }

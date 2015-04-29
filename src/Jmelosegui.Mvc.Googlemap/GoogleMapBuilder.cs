@@ -88,12 +88,6 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder MarkersFromAddress(bool value)
-        {
-            Component.MarkersFromAddress = value;
-            return this;
-        }
-
         public GoogleMapBuilder EnableMarkersClustering()
         {
             return EnableMarkersClustering(null);
@@ -109,9 +103,23 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        public GoogleMapBuilder FitToMarkersBounds(bool value)
+        {
+            Component.FitToMarkersBounds = value;
+            return this;
+        }
+
         public GoogleMapBuilder Height(int value)
         {
             Component.Height = value;
+            return this;
+        }
+
+        public GoogleMapBuilder ImageMapTypes(Action<ImageMapTypeFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new ImageMapTypeFactory(Component);
+            action(factory);
             return this;
         }
 
@@ -141,19 +149,9 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder ImageMapTypes(Action<ImageMapTypeFactory> action)
+        public GoogleMapBuilder MarkersGeocoding(bool value)
         {
-            if (action == null) throw new ArgumentNullException("action");
-            var factory = new ImageMapTypeFactory(Component);
-            action(factory);
-            return this;
-        }
-
-        public GoogleMapBuilder StyledMapTypes(Action<StyledMapTypeFactory> action)
-        {
-            if (action == null) throw new ArgumentNullException("action");
-            var factory = new StyledMapTypeFactory(Component);
-            action(factory);
+            Component.MarkersGeocoding = value;
             return this;
         }
 
@@ -251,6 +249,14 @@ namespace Jmelosegui.Mvc.Googlemap
             Component.StreetViewControlPosition = controlPosition;
             return this;
             
+        }
+
+        public GoogleMapBuilder StyledMapTypes(Action<StyledMapTypeFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new StyledMapTypeFactory(Component);
+            action(factory);
+            return this;
         }
 
         public GoogleMapBuilder Width(int value)

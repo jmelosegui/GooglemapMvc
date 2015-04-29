@@ -12,7 +12,10 @@
         .Height(600)
         .Center(c => c.Latitude(40)
                       .Longitude(-3))
-        .MarkersFromAddress(true)                      
+        .ClientEvents(e =>
+            e.OnMarkersGeocodingCompleted("MarkerFromAddressCompleted")
+        )
+        .MarkersGeocoding(true)                      
         .BindTo<RegionInfo, Marker>
         (Model, mappings => mappings.For<RegionInfo>
             (
@@ -34,5 +37,17 @@
                         }
                     )
             )
-        ).Render();
+        )
+        .Render();
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function MarkerFromAddressCompleted(args) {
+           alert("Load markers using Geocoding completed !!!");
+        }
+
+    </script>
 }

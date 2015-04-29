@@ -190,5 +190,14 @@ namespace Jmelosegui.Mvc.Googlemap
 
             return this;
         }
+
+        public GoogleMapClientEventsBuilder OnMarkersGeocodingCompleted(string onMarkersGeocodingCompleted)
+        {
+            if (String.IsNullOrEmpty(onMarkersGeocodingCompleted)) throw new ArgumentNullException("onMarkersGeocodingCompleted");
+            clientEvents.OnMarkersGeocodingCompleted.HandlerName = onMarkersGeocodingCompleted;
+
+            return this;
+        }
+
     }
 }
