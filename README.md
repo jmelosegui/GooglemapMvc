@@ -18,6 +18,7 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
   - Databinding
   - Client Events
   - Geocoding
+  - FitToMarkersBounds
 - Shapes
   - Polygons
   - Circles

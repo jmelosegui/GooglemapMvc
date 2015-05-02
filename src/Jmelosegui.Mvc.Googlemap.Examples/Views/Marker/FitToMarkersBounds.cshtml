@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Fit to markers bounds";
+    Layout = "~/Views/Shared/_LayoutExamples.cshtml";
+}
+
+<div id="main" class="row">
+    <div class="col-md-12">
+        @(Html.GoogleMap()
+                .Name("map")
+                .Center(c => c.Latitude(40)
+                                .Longitude(-3))
+                .Height(420)
+                .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
+                .MarkersGeocoding(true)
+                .Markers(m =>
+                {
+                    m.Add().Address("Madrid, Spain");
+                    m.Add().Address("Florida, USA");
+                })
+        )
+    </div>
+    <div id="events" class="col-md-2">
+    </div>
+</div>
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Map Settings</h4>
+
+    <div class="form-group">
+        <div class="col-sm-5 col-lg-offset-1">
+            <div class="checkbox">
+                <label>@Html.CheckBox("FitToMarkersBounds") Fit Map to Markers Bounds</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

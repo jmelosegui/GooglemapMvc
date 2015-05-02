@@ -1,0 +1,15 @@
+﻿<p>This example show how to setup Googlemap  Control for Asp.Net MVC to set the bounds of the map based on markers coordinates. If this option is set to true, the map viewport is centered and zoomed to the bounding box determined from the markers coordinates. Default value is false.</p>
+<p>Change the configuration above to see how it affects the map.</p>
+
+<pre>
+     @(Html.GoogleMap()
+                .Name(&quot;map&quot;)
+                <b>.FitToMarkersBounds(true)</b>
+                .MarkersGeocoding(true)
+                .Markers(m =&gt;
+                {
+                    m.Add().Address(&quot;Madrid, Spain&quot;);
+                    m.Add().Address(&quot;Florida, USA&quot;);
+                })
+        )
+</pre>

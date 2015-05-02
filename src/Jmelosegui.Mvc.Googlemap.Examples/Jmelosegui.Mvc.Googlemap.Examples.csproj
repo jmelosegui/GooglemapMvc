@@ -129,6 +129,7 @@
     <Compile Include="Controllers\Marker\CustomIconsController.cs" />
     <Compile Include="Controllers\Marker\DataBindingToModelController.cs" />
     <Compile Include="Controllers\Marker\InfoWindowController.cs" />
+    <Compile Include="Controllers\Marker\FitToMarkersBoundsController.cs" />
     <Compile Include="Controllers\Marker\MarkerClusteringController.cs" />
     <Compile Include="Controllers\Marker\SimpleMarkerController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -165,6 +166,7 @@
     <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
     <Content Include="Content\MapType\map_natural.jpg" />
     <Content Include="Content\MapType\speculative_map.jpg" />
+    <Content Include="Content\Marker\Descriptions\FitToMarkersBounds.html" />
     <Content Include="Content\Marker\Descriptions\Geocoding.html" />
     <Content Include="Content\Marker\Descriptions\ClientEvents.html" />
     <Content Include="Content\Services\Descriptions\Geocoding.html" />
@@ -315,9 +317,11 @@
     <Content Include="Views\Services\Geocoding.cshtml" />
     <Content Include="Views\Marker\ClientEvents.cshtml" />
     <Content Include="Views\Marker\Geocoding.cshtml" />
+    <Content Include="Views\Marker\FitToMarkersBounds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\MapFir\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
