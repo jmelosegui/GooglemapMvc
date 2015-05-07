@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
+using System.Web.Mvc;
 using Jmelosegui.Mvc.Googlemap.Overlays;
 
 namespace Jmelosegui.Mvc.Googlemap
@@ -10,14 +11,33 @@ namespace Jmelosegui.Mvc.Googlemap
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private readonly ScriptRegistrar scriptRegistrar;
+        private GoogleMap component;
 
-        public GoogleMapBuilder(GoogleMap component)
+        public GoogleMapBuilder(ViewContext viewContext)
         {
-            Component = component;
-            scriptRegistrar = (ScriptRegistrar) component.ViewContext.HttpContext.Items[Key] ?? new ScriptRegistrar(Component);
+            if (viewContext == null)
+            {
+                throw new ArgumentNullException("viewContext");
+            }
+
+            this.ViewContext = viewContext;
+            scriptRegistrar = (ScriptRegistrar)viewContext.HttpContext.Items[Key] ?? new ScriptRegistrar(viewContext);
         }
 
-        public GoogleMap Component { get; private set; }
+        public GoogleMap Component
+        {
+            get
+            {
+                if (component == null)
+                {
+                    component = new GoogleMap(this);
+                    scriptRegistrar.AddComponent(component);
+                }
+                return component;
+            }
+        }
+
+        public ViewContext ViewContext { get; private set; }
 
         #region Public Methods
 
@@ -32,8 +52,8 @@ namespace Jmelosegui.Mvc.Googlemap
             var content = new HtmlElement("div")
                 .AddClass("googlemap")
                 .Attribute("id", Component.Id);
-                //TODO: Implementar
-                //.Attributes(Component.HtmlAttributes);
+            //TODO: Implementar
+            //.Attributes(Component.HtmlAttributes);
 
             if (Component.Width != 0)
             {
@@ -64,7 +84,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public GoogleMapBuilder Circles(Action<CircleFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
-            
+
             var factory = new CircleFactory(Component);
             action(factory);
             return this;
@@ -96,7 +116,8 @@ namespace Jmelosegui.Mvc.Googlemap
         public GoogleMapBuilder EnableMarkersClustering(Action<MarkerClusteringOptionsFactory> action)
         {
             Component.EnableMarkersClustering = true;
-            if(action != null){
+            if (action != null)
+            {
                 var options = new MarkerClusteringOptionsFactory(Component);
                 action(options);
             }
@@ -248,7 +269,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             Component.StreetViewControlPosition = controlPosition;
             return this;
-            
+
         }
 
         public GoogleMapBuilder StyledMapTypes(Action<StyledMapTypeFactory> action)

@@ -8,8 +8,8 @@ namespace Jmelosegui.Mvc.Googlemap
         public static GoogleMapBuilder GoogleMap(this HtmlHelper helper)
         {
             if (helper == null) throw new ArgumentNullException("helper");
-            
-            return new GoogleMapBuilder(new GoogleMap(helper.ViewContext));
+
+            return new GoogleMapBuilder(helper.ViewContext);
         }
     }
 }

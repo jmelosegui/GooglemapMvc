@@ -1,0 +1,20 @@
+﻿<p>
+    The following sample show how to render multiple maps in a single view
+</p>
+
+<pre class="prettyprint">
+     &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-6&quot; style=&quot;height: 300px&quot;&gt;
+            @(
+                Html.GoogleMap()
+                    .Name(&quot;map&quot;)
+             )
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-6&quot; style=&quot;height: 300px&quot;&gt;
+            @(
+                Html.GoogleMap()
+                    .Name(&quot;map1&quot;)
+            )
+        &lt;/div&gt;
+    &lt;/div&gt;
+</pre>

@@ -3,7 +3,8 @@ using System.IO;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.UI;
-using Microsoft.Ajax.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -11,18 +12,17 @@ namespace Jmelosegui.Mvc.Googlemap
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private bool hasRendered;
-        private readonly GoogleMap component;
+        private readonly List<GoogleMap> components;
 
-        public ScriptRegistrar(GoogleMap component)
+        public ScriptRegistrar(ViewContext viewContext)
         {
-            ViewContext viewContext = component.ViewContext;
-
             if (viewContext.HttpContext.Items[Key] != null)
             {
                 throw new InvalidOperationException("Only one ScriptRegistrar is allowed in a single request");
             }
 
-            this.component = component;
+            this.components = new List<GoogleMap>();
+
             viewContext.HttpContext.Items[Key] = this;
             BasePath = "~/Scripts";
             ViewContext = viewContext;
@@ -42,12 +42,20 @@ namespace Jmelosegui.Mvc.Googlemap
             {
                 throw new InvalidOperationException("cannot call render more than once");
             }
+
             TextWriter writer = ViewContext.Writer;
             using (new HtmlTextWriter(writer))
             {
                 Write(writer);
             }
             hasRendered = true;
+        }
+
+        internal void AddComponent(GoogleMap component)
+        {
+            if(component == null) throw new ArgumentNullException("component");
+
+            components.Add(component);
         }
 
         protected virtual void Write(TextWriter writer)
@@ -61,7 +69,8 @@ namespace Jmelosegui.Mvc.Googlemap
             const string bundlePath = "~/jmelosegui/googlemap";
             var bundle = new ScriptBundle(bundlePath);
 
-            foreach (var scriptFileName in component.ScriptFileNames)
+            var scripts = components.SelectMany(c => c.ScriptFileNames).Distinct().ToList();
+            foreach (var scriptFileName in scripts)
             {
                 var localScriptFileName = scriptFileName;
                 
@@ -82,14 +91,17 @@ namespace Jmelosegui.Mvc.Googlemap
 
         private void WriteScriptStatements(TextWriter writer)
         {
-            writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
+            foreach (var component in components)
+            {
+                writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
 
-            writer.WriteLine("jQuery(document).ready(function(){");
-            component.WriteInitializationScript(writer);
-            writer.WriteLine();
-            writer.WriteLine("});");
+                writer.WriteLine("jQuery(document).ready(function(){");
+                component.WriteInitializationScript(writer);
+                writer.WriteLine();
+                writer.WriteLine("});");
 
-            writer.Write("//]]>{0}</script>", Environment.NewLine);
+                writer.Write("//]]>{0}</script>", Environment.NewLine); 
+            }
         }
 
         public string ToHtmlString()

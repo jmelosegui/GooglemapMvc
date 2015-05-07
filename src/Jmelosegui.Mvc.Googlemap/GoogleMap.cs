@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Web.Mvc;
 using System.Web.UI;
 using Jmelosegui.Mvc.Googlemap.Overlays;
 
@@ -12,9 +11,60 @@ namespace Jmelosegui.Mvc.Googlemap
 {
     public class GoogleMap
     {
+        private readonly GoogleMapBuilder builder;
+
+        #region Constructor
+
+        public GoogleMap(GoogleMapBuilder builder)
+        {
+            this.builder = builder;
+            ScriptFileNames = new List<string>();
+            ScriptFileNames.AddRange(new[] { "jmelosegui.googlemap.js" });
+            Initialize();
+        }
+
+
+        private void Initialize()
+        {
+            Id = "map";
+            ClientEvents = new GoogleMapClientEvents();
+            MarkerClientEvents = new MarkerClientEvents();
+            DisableDoubleClickZoom = false;
+            Draggable = true;
+            EnableMarkersClustering = false;
+            Latitude = 23;
+            Longitude = -82;
+            MapTypeId = MapTypes.Roadmap.ToClientSideString();
+            MapTypeControlPosition = ControlPosition.TopRight;
+            MapTypeControlVisible = true;
+            ImageMapTypes = new List<ImageMapType>();
+            StyledMapTypes = new List<StyledMapType>();
+            Markers = new List<Marker>();
+            MarkerClusteringOptions = new MarkerClusteringOptions();
+            Polygons = new List<Polygon>();
+            Circles = new List<Circle>();
+            PanControlPosition = ControlPosition.TopLeft;
+            PanControlVisible = true;
+            OverviewMapControlVisible = false;
+            OverviewMapControlOpened = false;
+            StreetViewControlVisible = true;
+            StreetViewControlPosition = ControlPosition.TopLeft;
+            ZoomControlVisible = true;
+            ZoomControlPosition = ControlPosition.TopLeft;
+            ZoomControlStyle = ZoomControlStyle.Default;
+            ScaleControlVisible = false;
+            Height = 0;
+            Width = 0;
+            UseCurrentPosition = false;
+        }
+
+        #endregion
+
         #region Public Properties
 
         public string Id { get; internal set; }
+
+        public string Address { get; set; }
 
         public string ApiKey { get; internal set; }
 
@@ -90,67 +140,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public ZoomControlStyle ZoomControlStyle { get; set; }
 
-        public ViewContext ViewContext
-        {
-            get;
-            private set;
-        }
-
         public bool UseCurrentPosition { get; set; }
-
-        public string Address { get; set; }
-
-        #endregion
-
-        #region Constructor
-
-        public GoogleMap(ViewContext viewContext)
-        {
-            ScriptFileNames = new List<string>();
-            ScriptFileNames.AddRange(new[] { "jmelosegui.googlemap.js" });
-            
-            if (viewContext == null)
-            {
-                throw new ArgumentNullException("viewContext");
-            }
-
-            ViewContext = viewContext;
-            Initialize();
-        }
-
-
-        private void Initialize()
-        {
-            ClientEvents = new GoogleMapClientEvents();
-            MarkerClientEvents = new MarkerClientEvents();
-            DisableDoubleClickZoom = false;
-            Draggable = true;
-            EnableMarkersClustering = false;
-            Latitude = 23;
-            Longitude = -82;
-            MapTypeId = MapTypes.Roadmap.ToClientSideString();
-            MapTypeControlPosition = ControlPosition.TopRight;
-            MapTypeControlVisible = true;
-            ImageMapTypes = new List<ImageMapType>();
-            StyledMapTypes = new List<StyledMapType>();
-            Markers = new List<Marker>();
-            MarkerClusteringOptions = new MarkerClusteringOptions();
-            Polygons = new List<Polygon>();
-            Circles = new List<Circle>();
-            PanControlPosition = ControlPosition.TopLeft;
-            PanControlVisible = true;
-            OverviewMapControlVisible = false;
-            OverviewMapControlOpened = false;
-            StreetViewControlVisible = true;
-            StreetViewControlPosition = ControlPosition.TopLeft;
-            ZoomControlVisible = true;
-            ZoomControlPosition = ControlPosition.TopLeft;
-            ZoomControlStyle = ZoomControlStyle.Default;
-            ScaleControlVisible = false;
-            Height = 0;
-            Width = 0;
-            UseCurrentPosition = false;
-        }
 
         #endregion
 
@@ -293,7 +283,6 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (writer == null) throw new ArgumentNullException("writer");
 
-            var builder = new GoogleMapBuilder(this);
             IHtmlNode rootTag = builder.Build();
             rootTag.WriteTo(writer);
 
@@ -363,7 +352,7 @@ namespace Jmelosegui.Mvc.Googlemap
         
         public void Render()
         {
-            TextWriter writer = ViewContext.Writer;
+            TextWriter writer = builder.ViewContext.Writer;
             using (HtmlTextWriter htmlTextWriter = new HtmlTextWriter(writer))
             {
                 this.WriteHtml(htmlTextWriter);

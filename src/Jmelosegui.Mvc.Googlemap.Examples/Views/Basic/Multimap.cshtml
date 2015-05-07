@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Multimap";
+    Layout = "~/Views/Shared/_LayoutExamples.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6" style="height: 300px">
+        @(
+            Html.GoogleMap()
+                .Name("map")
+         )
+    </div>
+    <div class="col-md-6" style="height: 300px">
+        @(
+            Html.GoogleMap()
+                .Name("map1")
+                .Center(c => c.Address("Madrid, Spain"))
+        )
+    </div>
+
+</div>
