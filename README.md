@@ -7,6 +7,7 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
 - [Nuget Package](https://www.nuget.org/packages/Jmelosegui.Mvc.Googlemap/) - for easy setup
 - UI Controls
 - Client Events
+- Multiple Maps
 - Map Types
   - Styled Map Type
   - [Image Map Type (Game of Thrones)](http://www.jmelosegui.com/map/MapType/ImageMapType)
