@@ -27,7 +27,8 @@ Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NE
 - Services
   - Geolocation
   - Geocoding
-
+- Layers
+  - Heatmap
 ## Links
 
 [Online Demo](http://www.jmelosegui.com/map/)<br/>
