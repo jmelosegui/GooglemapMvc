@@ -12,14 +12,14 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.App_Data
         public string ImagePath { get; set; }
         public string InfoWindowContent { get; set; }
         public double population { get; set; }
-        public string Address {
+        public string Address
+        {
             get { return Title + ", Spain"; }
         }
     }
 
     public class DataContext
     {
-
         public static IEnumerable<RegionInfo> GetRegions()
         {
             return new List<RegionInfo>
@@ -196,7 +196,6 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.App_Data
                                }
                        };
         }
-
         public static IEnumerable<RegionInfo> GetHugeAmountOfMarkers()
         {
             var result = new List<RegionInfo>();
@@ -212,7 +211,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.App_Data
                 var lng = 0D;
                 for (int i = 0; i < regionMarkers; i++)
                 {
-                    if(i == 0)
+                    if (i == 0)
                     {
                         lat = region.Latitude;
                         lng = region.Longitude;
@@ -223,11 +222,11 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.App_Data
                     }
                     else
                     {
-                        lng = lngData.GetNextValue();    
+                        lng = lngData.GetNextValue();
                     }
-                    
 
-                    result.Add(new RegionInfo{Latitude = lat, Longitude = lng});
+
+                    result.Add(new RegionInfo { Latitude = lat, Longitude = lng });
                 }
             }
             return result;

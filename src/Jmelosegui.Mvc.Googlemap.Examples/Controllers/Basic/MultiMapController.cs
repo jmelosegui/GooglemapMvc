@@ -4,7 +4,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
 {
     public partial class BasicController
     {
-        public ActionResult Multimap(int? height, int? width)
+        public ActionResult Multimap()
         {
             return View();
         }

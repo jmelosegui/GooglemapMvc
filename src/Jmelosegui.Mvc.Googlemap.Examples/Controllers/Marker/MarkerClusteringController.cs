@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Jmelosegui.Mvc.Googlemap.Examples.App_Data;
 using Jmelosegui.Mvc.Googlemap.Overlays;
 
 namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
@@ -14,9 +13,9 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
             ViewData["ZoomOnClick"] = options.ZoomOnClick;
             ViewData["HideSingleGroupMarker"] = options.HideSingleGroupMarker;
             ViewData["CustomStyles"] = CustomStyles;
-            
 
-            return View(DataContext.GetHugeAmountOfMarkers());
+
+            return View(App_Data.DataContext.GetHugeAmountOfMarkers());
         }
 
     }

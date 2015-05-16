@@ -1,6 +1,6 @@
 ﻿namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class InfoWindowFactory: IHideObjectMembers
+    public class InfoWindowFactory : IHideObjectMembers
     {
         private readonly Marker marker;
 

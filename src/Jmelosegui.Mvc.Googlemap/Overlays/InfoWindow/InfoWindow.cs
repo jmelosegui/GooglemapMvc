@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class InfoWindow : Overlay, IHideObjectMembers
+    public class InfoWindow : LocationOverlay, IHideObjectMembers
     {
         
         private readonly Marker marker;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Jmelosegui.Mvc.Googlemap.Overlays
+﻿namespace Jmelosegui.Mvc.Googlemap
 {
     public struct Location
     {
@@ -49,16 +47,5 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
         {
             return (Latitude.GetHashCode() ^ Longitude.GetHashCode());
         }
-
-        public IDictionary<string, object> Serialize()
-        {
-            IDictionary<string, object> result = new Dictionary<string, object>();
-
-            result["Latitude"] = Latitude;
-            result["Longitude"] = Longitude;
-
-            return result;
-        }
-
     }
 }

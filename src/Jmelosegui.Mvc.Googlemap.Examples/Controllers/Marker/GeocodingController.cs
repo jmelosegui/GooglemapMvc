@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Jmelosegui.Mvc.Googlemap.Examples.App_Data;
 
 namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
 {
@@ -7,7 +6,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
     {
         public ActionResult Geocoding()
         {
-            return View(DataContext.GetRegions());
+            return View(App_Data.DataContext.GetRegions());
         }
     }
 }

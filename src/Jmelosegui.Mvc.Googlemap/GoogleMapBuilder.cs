@@ -24,7 +24,7 @@ namespace Jmelosegui.Mvc.Googlemap
             scriptRegistrar = (ScriptRegistrar)viewContext.HttpContext.Items[Key] ?? new ScriptRegistrar(viewContext);
         }
 
-        public GoogleMap Component
+        internal GoogleMap Component
         {
             get
             {
@@ -155,6 +155,14 @@ namespace Jmelosegui.Mvc.Googlemap
         public GoogleMapBuilder Longitude(double value)
         {
             Component.Longitude = value;
+            return this;
+        }
+
+        public GoogleMapBuilder Layers(Action<LayerFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new LayerFactory(Component);
+            action(factory);
             return this;
         }
 

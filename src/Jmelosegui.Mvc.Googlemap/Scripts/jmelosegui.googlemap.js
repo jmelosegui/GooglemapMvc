@@ -77,7 +77,7 @@
 
         if (config.points) {
             for (var i = 0; i < config.points.length; i++) {
-                this.points.push(new google.maps.LatLng(config.points[i].latitude, config.points[i].longitude));
+                this.points.push(new google.maps.LatLng(config.points[i].lat, config.points[i].lng));
             }
         }
 
@@ -124,7 +124,7 @@
         },
         load: function () {
             var options = {
-                center: new google.maps.LatLng(this.center.latitude, this.center.longitude),
+                center: new google.maps.LatLng(this.center.lat, this.center.lng),
                 radius: this.radius,
                 strokeColor: this.strokeColor,
                 strokeOpacity: this.strokeOpacity,

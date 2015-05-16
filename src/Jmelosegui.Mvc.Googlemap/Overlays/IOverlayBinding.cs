@@ -2,8 +2,7 @@
 
 namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class OverlayBinding<TGoogleMapOverlay, TDataItem> : IOverlayBinding<TGoogleMapOverlay>
-        where TGoogleMapOverlay : Overlay
+    public class OverlayBinding<TGoogleMapOverlay, TDataItem> : IOverlayBinding<TGoogleMapOverlay> where TGoogleMapOverlay : Overlay
     {
 
         public Action<TGoogleMapOverlay, TDataItem> ItemDataBound

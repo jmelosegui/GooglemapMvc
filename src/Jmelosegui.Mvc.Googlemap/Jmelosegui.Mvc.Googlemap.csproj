@@ -17,6 +17,8 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +56,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -97,7 +100,17 @@
   <ItemGroup>
     <Compile Include="CenterFactory.cs" />
     <Compile Include="ControlPosition.cs" />
+    <Compile Include="Helpers\Serialization\PointJsonConverter.cs" />
     <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
+    <Compile Include="Overlays\Layers\Heat\HeatmapLayerSerializer.cs" />
+    <Compile Include="Location\ILocationBinding.cs" />
+    <Compile Include="Location\LocationBinding.cs" />
+    <Compile Include="Location\LocationBindingBuilder.cs" />
+    <Compile Include="Location\LocationBindingFactory.cs" />
+    <Compile Include="Overlays\Layers\Layer.cs" />
+    <Compile Include="Overlays\Layers\Heat\HeatLayerBuilder.cs" />
+    <Compile Include="Overlays\Layers\LayerFactory.cs" />
+    <Compile Include="Overlays\Layers\Heat\HeatmapLayer.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapTypeBuilder.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs" />
@@ -126,8 +139,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Events\IClientEventObject.cs" />
+    <Compile Include="Helpers\Serialization\LocationJsonConverter.cs" />
+    <Compile Include="Overlays\LocationOverlay.cs" />
     <Compile Include="Overlays\Markers\Events\MarkerEventsBuilder.cs" />
     <Compile Include="Overlays\Markers\Events\MarkerClientEvents.cs" />
+    <Compile Include="Location\ILocationContainer.cs" />
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
     <Compile Include="Extensions\EnumExtentions.cs" />
@@ -153,8 +169,8 @@
     <Compile Include="Overlays\InfoWindow\InfoWindowBuilder.cs" />
     <Compile Include="Overlays\InfoWindow\InfoWindowFactory.cs" />
     <Compile Include="ISerializer.cs" />
-    <Compile Include="Overlays\Location.cs" />
-    <Compile Include="Overlays\LocationFactory.cs" />
+    <Compile Include="Location\Location.cs" />
+    <Compile Include="Location\LocationFactory.cs" />
     <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
     <Compile Include="Overlays\Markers\MarkerImage.cs" />
     <Compile Include="GoogleMap.cs" />
@@ -189,18 +205,17 @@
     <Content Include="Scripts\jmelosegui.googlemap.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".nuget\Jmelosegui.Mvc.Googlemap.nuspec" />
-    <None Include=".nuget\NuGet.targets" />
+    <None Include="Jmelosegui.Mvc.Googlemap.nuspec" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Overlays\OverlayClassDiagram.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ProjectDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -221,4 +236,11 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>

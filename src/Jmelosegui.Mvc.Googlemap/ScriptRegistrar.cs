@@ -91,17 +91,15 @@ namespace Jmelosegui.Mvc.Googlemap
 
         private void WriteScriptStatements(TextWriter writer)
         {
+            writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
+            writer.WriteLine("jQuery(document).ready(function(){");
             foreach (var component in components)
             {
-                writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
-
-                writer.WriteLine("jQuery(document).ready(function(){");
                 component.WriteInitializationScript(writer);
                 writer.WriteLine();
-                writer.WriteLine("});");
-
-                writer.Write("//]]>{0}</script>", Environment.NewLine); 
             }
+            writer.WriteLine("});");
+            writer.Write("//]]>{0}</script>", Environment.NewLine); 
         }
 
         public string ToHtmlString()

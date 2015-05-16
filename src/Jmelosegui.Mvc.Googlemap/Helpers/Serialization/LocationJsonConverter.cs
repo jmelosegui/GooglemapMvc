@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Drawing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
-    public class SizeJsonConverter : JsonConverter
+    public class LocationJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(Size));
+            return (objectType == typeof(Location));
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             //TODO: camelCase for javascript serialization
-            var size = (Size)value;
-            var jo = new JObject {{"width", size.Width}, {"height", size.Height}};
+            var location = (Location)value;
+            var jo = new JObject { { "lat", location.Latitude }, { "lng", location.Longitude } };
             jo.WriteTo(writer);
         }
 
@@ -24,7 +23,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             //TODO: camelCase for javascript serialization
             JObject jo = JObject.Load(reader);
-            return new Size((int)jo["width"], (int)jo["height"]);
+            return new Location((double)jo["lat"], (double)jo["lng"]);
         }
     }
 }

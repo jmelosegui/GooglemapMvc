@@ -449,6 +449,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
             settings.Converters.Add(new SizeJsonConverter());
             settings.Converters.Add(new PointJsonConverter());
+            settings.Converters.Add(new LocationJsonConverter());
             return settings;
         }
     }

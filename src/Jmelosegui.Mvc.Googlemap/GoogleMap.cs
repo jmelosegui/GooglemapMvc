@@ -34,6 +34,7 @@ namespace Jmelosegui.Mvc.Googlemap
             EnableMarkersClustering = false;
             Latitude = 23;
             Longitude = -82;
+            Layers = new List<Layer>();
             MapTypeId = MapTypes.Roadmap.ToClientSideString();
             MapTypeControlPosition = ControlPosition.TopRight;
             MapTypeControlVisible = true;
@@ -85,6 +86,8 @@ namespace Jmelosegui.Mvc.Googlemap
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }
+
+        public IList<Layer> Layers { get; private set; }
 
         public string MapTypeId { get; set; }
 
@@ -177,6 +180,18 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("mapTypeControlPosition", MapTypeControlPosition, ControlPosition.TopRight);
             objectWriter.Append("mapTypeControlVisible", MapTypeControlVisible, true);
             objectWriter.Append("mapTypeControlStyle", MapTypeControlStyle, MapTypeControlStyle.Default);
+
+            if (Layers.Any())
+            {
+                var layers = new List<IDictionary<string, object>>();
+
+                Layers.Each(l => layers.Add(l.CreateSerializer().Serialize()));
+
+                if (layers.Any())
+                {
+                    objectWriter.AppendCollection("layers", layers);
+                }
+            }
 
             if (ImageMapTypes.Any())
             {
@@ -288,8 +303,8 @@ namespace Jmelosegui.Mvc.Googlemap
 
             var languaje = (Culture != null) ? "&language=" + Culture.TwoLetterISOLanguageName : String.Empty;
             var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
-
-            var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?v=3.exp{0}{1}", key, languaje);
+            var visualization = Layers.Any(l => l.GetType() == typeof (HeatmapLayer)) ? "&libraries=visualization" : "";
+            var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?v=3.exp{0}{1}{2}", key, languaje, visualization);
             ScriptFileNames.Add(mainJs);
 
             if (EnableMarkersClustering)
@@ -316,8 +331,7 @@ namespace Jmelosegui.Mvc.Googlemap
             }
         }
         
-        public virtual void BindTo<TGoogleMapOverlay, TDataItem>(IEnumerable<TDataItem> dataSource, Action<OverlayBindingFactory<TGoogleMapOverlay>> action)
-            where TGoogleMapOverlay : Overlay
+        public virtual void BindTo<TGoogleMapOverlay, TDataItem>(IEnumerable<TDataItem> dataSource, Action<OverlayBindingFactory<TGoogleMapOverlay>> action) where TGoogleMapOverlay : Overlay
         {
             if (action == null) throw new ArgumentNullException("action");
 

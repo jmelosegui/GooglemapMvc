@@ -1,4 +1,6 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Overlays
+﻿using System;
+
+namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
     public class MarkerFactory : IHideObjectMembers
     {
@@ -6,6 +8,7 @@
 
         public MarkerFactory(GoogleMap map)
         {
+            if(map == null) throw new ArgumentNullException("map");
             this.map = map;
         }
 

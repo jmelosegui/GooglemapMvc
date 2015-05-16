@@ -1,6 +1,6 @@
 ﻿namespace Jmelosegui.Mvc.Googlemap.Overlays
 {
-    public class Marker : Overlay, IHideObjectMembers
+    public class Marker : LocationOverlay, IHideObjectMembers
     {
         private readonly int index;
         public Marker(GoogleMap map) : base(map)
