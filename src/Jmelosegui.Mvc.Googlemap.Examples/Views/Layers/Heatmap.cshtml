@@ -1,0 +1,77 @@
+﻿@using Jmelosegui.Mvc.Googlemap.Examples.Controllers
+@using Jmelosegui.Mvc.Googlemap.Overlays
+@model HeatMapModel
+@{
+    ViewBag.Title = "Heatmap";
+    Layout = "~/Views/Shared/_LayoutExamples.cshtml";
+}
+
+@(Html.GoogleMap()
+      .Name("map")
+      .Height(350)
+      .Center(c => c.Latitude(37.774546)
+                .Longitude(-122.433523))
+      .MapTypeId(MapTypes.Satellite)
+      .Zoom(13)
+      .Layers(layer => layer.AddHeatLayer()
+                            .Dissipating(Model.Dissipating)
+                            .MaxIntensity(Model.MaxIntensity)
+                            .Opacity(Model.Opacity)
+                            .Radius(Model.Radius)
+                            .BindTo<MyLocationObject, HeatmapLayer>
+                            (Model.Points, mappings => mappings.For<MyLocationObject>
+                                (
+                                    binding => binding.ItemDataBound
+                                        (
+                                            (heatmap, myLocationObject) =>
+                                            {
+                                                heatmap.AddPoint(
+                                                    new Location
+                                                    {
+                                                        Latitude = myLocationObject.Latitude,
+                                                        Longitude = myLocationObject.Longitude
+                                                    });
+                                            }
+                                        )
+                                )
+                            )
+            )
+      )
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Heatmap Layer Settings</h4>
+
+    <div class="form-group">
+        <label for="width" class="col-sm-2 control-label">Max Intensity</label>
+        <div class="col-sm-4">
+            @Html.TextBox("MaxIntensity", null, new {@class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number"})
+        </div>
+        <label for="width" class="col-sm-2 control-label">Radius</label>
+        <div class="col-sm-4">
+            @Html.TextBox("Radius", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="height" class="col-sm-2 control-label">Opacity</label>
+        <div class="col-sm-4">
+            @Html.TextBox("Opacity", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter a decimal value", @type = "number", step = "0.01" })
+            <label>value between 0 and 1</label>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-4">
+            <div class="checkbox">
+                <label style="display: inline;">
+                    @Html.CheckBox("Dissipating", new {id = "Dissipating"})
+                    Dissipating
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

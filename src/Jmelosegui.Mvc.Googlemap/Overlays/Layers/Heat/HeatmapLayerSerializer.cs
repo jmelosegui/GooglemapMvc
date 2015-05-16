@@ -23,13 +23,14 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             FluentDictionary.For(layerDictionary)
                 .Add("dissipating", layer.Dissipating, () => layer.Dissipating)
                 .Add("maxIntensity", layer.MaxIntensity, () => layer.MaxIntensity > 0)
-                .Add("opacity", layer.Opacity, () => layer.Opacity < 1)
-                .Add("radius", layer.Radius)
+                .Add("opacity", layer.Opacity, () => layer.Opacity > 0)
+                .Add("radius", layer.Radius, () => layer.Radius > 0)
                 .Add("gradient", gradientCollection, () => layer.Gradient.Any())
                 .Add("data", layer.Data, () => layer.Data.Any());
 
             IDictionary<string, object> result = new Dictionary<string, object>();
-            result["heatLayer"] = layerDictionary;
+            result["name"] = "heatmap";
+            result["options"] = layerDictionary;
             return result;
         }
     }

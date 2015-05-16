@@ -1,19 +1,41 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Web.Mvc;
 
 namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
 {
     public partial class LayersController
     {
-        public ActionResult HeatLayer()
+        public ActionResult Heatmap(HeatMapModel model)
         {
-            return View(DataContext.GetTaxiData());
+            return View(model);
         }
+        
     }
 
-    public class DataContext
+    public class HeatMapModel
     {
-        public static IEnumerable<MyLocationObject> GetTaxiData()
+        public HeatMapModel()
+        {
+            Gradient = new List<Color>();
+            Points = new List<MyLocationObject>(GetTaxiData());
+            Dissipating = true;
+            Opacity = .6M;
+        }
+
+        public bool Dissipating { get; set; }
+
+        public List<Color> Gradient { get; private set; }
+
+        public int MaxIntensity { get; set; }
+        
+        public decimal Opacity { get; set; }
+
+        public int Radius { get; set; }
+
+        public List<MyLocationObject> Points { get; set; }
+
+        public IEnumerable<MyLocationObject> GetTaxiData()
         {
             return new List<MyLocationObject>
             {
@@ -520,6 +542,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
             };
         } 
     }
+
 
     public class MyLocationObject
     {

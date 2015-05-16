@@ -324,6 +324,21 @@
 
     $jmelosegui.StyledMapType.prototype = {}
 
+    // Layers
+    // HeatMapLayer
+    $jmelosegui.HeatMapLayer = function (map, config) {
+
+        this.map = map;
+        this.dissipating = (config.dissipating !== undefined) ? config.clickable : true;
+        this.maxIntensity = config.maxIntensity;
+        this.opacity = config.opacity;
+        this.radius = config.radius;
+        this.gradient = config.gradient;
+        this.data = config.data;
+    }
+
+    $jmelosegui.HeatMapLayer.prototype = {}
+
     $jmelosegui.Googlemap = function (element, options) {
 
         this.element = element;
@@ -375,6 +390,7 @@
         this.polygons = eval(options.polygons);
         this.imageMapTypes = eval(options.imageMapTypes);
         this.styledMapTypes = eval(options.styledMapTypes);
+        this.layers = eval(options.layers);
 
         this.bounds = new google.maps.LatLngBounds();
 
@@ -533,7 +549,7 @@
     var delay = 100;
     var markerIndex = 0;
     $jmelosegui.Googlemap.prototype = {
-        initialize: function() {
+        initialize: function () {
 
             var innerOptions = {
                 zoom: this.zoom,
@@ -586,69 +602,69 @@
 
             this.GMap = new google.maps.Map(this.getElement(), innerOptions);
         },
-        getZoomControlStyle: function() {
+        getZoomControlStyle: function () {
             switch (this.zoomControlStyle) {
-            case 'LARGE':
-                return google.maps.ZoomControlStyle.LARGE;
-            case 'SMALL':
-                return google.maps.ZoomControlStyle.SMALL;
-            default:
-                return google.maps.ZoomControlStyle.DEFAULT;
+                case 'LARGE':
+                    return google.maps.ZoomControlStyle.LARGE;
+                case 'SMALL':
+                    return google.maps.ZoomControlStyle.SMALL;
+                default:
+                    return google.maps.ZoomControlStyle.DEFAULT;
             }
         },
-        getMapTypeControlStyle: function() {
+        getMapTypeControlStyle: function () {
             switch (this.mapTypeControlStyle) {
-            case 'DROPDOWN_MENU':
-                return google.maps.MapTypeControlStyle.DROPDOWN_MENU;
-            case 'HORIZONTAL_BAR':
-                return google.maps.MapTypeControlStyle.HORIZONTAL_BAR;
-            default:
-                return google.maps.MapTypeControlStyle.DEFAULT;
+                case 'DROPDOWN_MENU':
+                    return google.maps.MapTypeControlStyle.DROPDOWN_MENU;
+                case 'HORIZONTAL_BAR':
+                    return google.maps.MapTypeControlStyle.HORIZONTAL_BAR;
+                default:
+                    return google.maps.MapTypeControlStyle.DEFAULT;
             }
         },
-        getMapTypeId: function() {
+        getMapTypeId: function () {
             switch (this.mapTypeId) {
-            case 'HYBRID':
-                return google.maps.MapTypeId.HYBRID;
-            case 'SATELLITE':
-                return google.maps.MapTypeId.SATELLITE;
-            case 'TERRAIN':
-                return google.maps.MapTypeId.TERRAIN;
-            case 'ROADMAP':
-                return google.maps.MapTypeId.ROADMAP;
-            default:
-                return this.mapTypeId;
+                case 'HYBRID':
+                    return google.maps.MapTypeId.HYBRID;
+                case 'SATELLITE':
+                    return google.maps.MapTypeId.SATELLITE;
+                case 'TERRAIN':
+                    return google.maps.MapTypeId.TERRAIN;
+                case 'ROADMAP':
+                    return google.maps.MapTypeId.ROADMAP;
+                default:
+                    return this.mapTypeId;
             }
         },
-        getElement: function() {
+        getElement: function () {
             return document.getElementById(this.clientId);
         },
-        getControlPosition: function(position) {
+        getControlPosition: function (position) {
             switch (position) {
-            case 'TOP_CENTER':
-                return google.maps.ControlPosition.TOP_CENTER;
-            case 'TOP_LEFT':
-                return google.maps.ControlPosition.TOP_LEFT;
-            case 'LEFT_TOP':
-                return google.maps.ControlPosition.LEFT_TOP;
-            case 'BOTTOM_CENTER':
-                return google.maps.ControlPosition.BOTTOM_CENTER;
-            case 'BOTTOM_LEFT':
-                return google.maps.ControlPosition.BOTTOM_LEFT;
-            case 'BOTTOM_RIGHT':
-                return google.maps.ControlPosition.BOTTOM_RIGHT;
-            case 'LEFT_BOTTOM':
-                return google.maps.ControlPosition.LEFT_BOTTOM;
-            case 'RIGHT_BOTTOM':
-                return google.maps.ControlPosition.RIGHT_BOTTOM;
-            case 'LEFT_CENTER':
-                return google.maps.ControlPosition.LEFT_CENTER;
-            case 'RIGHT_CENTER':
-                return google.maps.ControlPosition.RIGHT_CENTER;
-            case 'TOP_RIGHT':
-                return google.maps.ControlPosition.TOP_RIGHT;
-            case 'RIGHT_TOP':
-                return google.maps.ControlPosition.RIGHT_TOP;
+                case 'TOP_CENTER':
+                    return google.maps.ControlPosition.TOP_CENTER;
+                case 'TOP_LEFT':
+                    return google.maps.ControlPosition.TOP_LEFT;
+                case 'LEFT_TOP':
+                    return google.maps.ControlPosition.LEFT_TOP;
+                case 'BOTTOM_CENTER':
+                    return google.maps.ControlPosition.BOTTOM_CENTER;
+                case 'BOTTOM_LEFT':
+                    return google.maps.ControlPosition.BOTTOM_LEFT;
+                case 'BOTTOM_RIGHT':
+                    return google.maps.ControlPosition.BOTTOM_RIGHT;
+                case 'LEFT_BOTTOM':
+                    return google.maps.ControlPosition.LEFT_BOTTOM;
+                case 'RIGHT_BOTTOM':
+                    return google.maps.ControlPosition.RIGHT_BOTTOM;
+                case 'LEFT_CENTER':
+                    return google.maps.ControlPosition.LEFT_CENTER;
+                case 'RIGHT_CENTER':
+                    return google.maps.ControlPosition.RIGHT_CENTER;
+                case 'TOP_RIGHT':
+                    return google.maps.ControlPosition.TOP_RIGHT;
+                case 'RIGHT_TOP':
+                    return google.maps.ControlPosition.RIGHT_TOP;
             }
         },
         getAddress: function (config, next) {
@@ -665,7 +681,7 @@
                 else {
                     if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                         markerIndex--;
-                        delay= delay + 10;
+                        delay = delay + 10;
                     } else {
                         console.log('Error: Geocode was not successful for the following reason: ' + status);
                     }
@@ -697,11 +713,11 @@
             }
             catch (ex) { }
         },
-        rendeMarkers: function(map) {
+        rendeMarkers: function (map) {
             if (markerIndex < map.markers.length) {
                 var config = map.markers[markerIndex];
                 config.markerEvents = map.markerEvents;
-                setTimeout(function() {
+                setTimeout(function () {
                     map.getAddress(config, map.rendeMarkers);
                 }, delay);
                 markerIndex++;
@@ -836,6 +852,16 @@
                     this.addStyledMapType(this.GMap, mapType);
                 }
             }
+            //layers
+            if (this.layers) {
+                for (i = 0; i < this.layers.length; i++) {
+                    var layer = this.layers[i];
+                    if (layer.name === 'heatmap') {
+                        var heatmap = new $jmelosegui.HeatMapLayer(this.GMap, layer.options);
+                        this.addHeatMapLayer(this.GMap, heatmap);
+                    }
+                }
+            }
             this.GMap.setMapTypeId(this.getMapTypeId());
         },
         // Items --------------------------------------------------------------------------------------
@@ -855,6 +881,25 @@
         addStyledMapType: function (map, mapType) {
             var gStyledMapType = new google.maps.StyledMapType(mapType.styles, mapType);
             map.mapTypes.set(mapType.name, gStyledMapType);
+        },
+        // Heatmap
+        addHeatMapLayer: function (map, options) {
+
+            var data = [];
+            for (var j = 0; j < options.data.length; j++) {
+                data.push(new google.maps.LatLng(options.data[j].lat, options.data[j].lng));
+            }
+
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+                dissipating: options.dissipating,
+                maxIntensity: options.maxIntensity,
+                opacity: options.opacity,
+                radius: options.radius,
+                gradient: options.gradient,
+                data: data
+            });
+
+            heatmap.setMap(map);
         }
     };
 
