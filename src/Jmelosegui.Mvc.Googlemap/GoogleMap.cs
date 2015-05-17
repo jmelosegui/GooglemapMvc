@@ -165,8 +165,6 @@ namespace Jmelosegui.Mvc.Googlemap
             objectWriter.Append("markersFromAddress", MarkersGeocoding, false);
             objectWriter.Append("fitToMarkersBounds", FitToMarkersBounds, false);
 
-            objectWriter.Append("height", Height);
-
             if (Address.HasValue())
             {
                 objectWriter.AppendObject("center", new { Address });    
@@ -237,7 +235,6 @@ namespace Jmelosegui.Mvc.Googlemap
 
 
             objectWriter.Append("scaleControlVisible", ScaleControlVisible, false);
-            objectWriter.Append("width", Width, 0);
             objectWriter.Append("zoom", (Zoom == 0) ? 6 : Zoom, 6);
             objectWriter.Append("minZoom", MinZoom, 0);
             objectWriter.Append("maxZoom", MaxZoom, 0);
