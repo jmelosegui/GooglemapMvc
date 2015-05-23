@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Web.Mvc;
 using System.Web.UI;
 using Jmelosegui.Mvc.Googlemap.Overlays;
 
@@ -301,7 +302,8 @@ namespace Jmelosegui.Mvc.Googlemap
             var languaje = (Culture != null) ? "&language=" + Culture.TwoLetterISOLanguageName : String.Empty;
             var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
             var visualization = Layers.Any(l => l.GetType() == typeof (HeatmapLayer)) ? "&libraries=visualization" : "";
-            var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?v=3.exp{0}{1}{2}", key, languaje, visualization);
+            var isAjax = builder.ViewContext.HttpContext.Request.IsAjaxRequest() ? "&callback=executeAsync" : "";
+            var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?v=3.exp{3}{0}{1}{2}", key, languaje, visualization, isAjax);
             ScriptFileNames.Add(mainJs);
 
             if (EnableMarkersClustering)

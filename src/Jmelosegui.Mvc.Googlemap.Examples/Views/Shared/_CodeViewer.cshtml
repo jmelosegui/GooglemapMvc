@@ -4,7 +4,11 @@
 <div id="about-example">
     <ul id="myTab" class="nav nav-tabs" role="tablist">
         <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
-        <li><a href="#view" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["View"] })">View</a></li>
+        <li><a href="#view" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new {file = ((Dictionary<string, string>) ViewData["codeFiles"])["View"]})">View</a></li>
+        @foreach (var aditionalFile in (Dictionary<string, String>)ViewData["aditionalFiles"])
+        {
+            <li><a href="#@aditionalFile.Key.Trim('_').Replace(".", "")" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = aditionalFile.Value})">@aditionalFile.Key</a></li>
+        }
         <li><a href="#controller" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["Controller"] })">Controller</a></li>
         <li><a href="#layoutExamples" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["_LayoutExamples.cshtml"] })">_LayoutExamples.cshtml</a></li>
         <li><a href="#layout" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["_Layout.cshtml"] })">_Layout.cshtml</a></li>
@@ -12,9 +16,13 @@
     <!-- Tab panes -->
     <div id="myTabContent" class="tab-content" style="padding: 20px">
         <div class="tab-pane active" id="description">@ViewData["Description"]</div>
-        <div class="tab-pane" id="view">view</div>
-        <div class="tab-pane" id="controller">controller</div>
-        <div class="tab-pane" id="layout">layout</div>
-        <div class="tab-pane" id="layoutExamples">layoutExamples</div>
+        <div class="tab-pane" id="view"></div>
+        @foreach (var aditionalFile in (Dictionary<string, String>)ViewData["aditionalFiles"])
+        {
+            <div class="tab-pane" id="@aditionalFile.Key.Trim('_').Replace(".", "")"></div>
+        }
+        <div class="tab-pane" id="controller"></div>
+        <div class="tab-pane" id="layout"></div>
+        <div class="tab-pane" id="layoutExamples"></div>
     </div>
 </div>

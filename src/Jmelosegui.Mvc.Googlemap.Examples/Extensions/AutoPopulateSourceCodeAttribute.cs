@@ -44,7 +44,7 @@ namespace Jmelosegui.Mvc.Googlemap.Examples
 
                 var viewData = filterContext.Controller.ViewData;
 
-                if (System.IO.File.Exists(descriptionPath))
+                if (File.Exists(descriptionPath))
                 {
                     var descriptionText = System.IO.File.ReadAllText(descriptionPath);
                     viewData["Description"] = new HtmlString(descriptionText);
@@ -56,6 +56,15 @@ namespace Jmelosegui.Mvc.Googlemap.Examples
                 RegisterLayoutPages(filterContext, codeFiles);
 
                 viewData["codeFiles"] = codeFiles;
+
+                var additionalFiles = new Dictionary<string, string>();
+                switch (viewName)
+                {
+                    case "AjaxPartialView":
+                        additionalFiles["_GooglemapPartialView.cshtml"] = baseViewPath + "Basic" + Path.AltDirectorySeparatorChar + "_GooglemapPartialView" + viewExtension;
+                        break;
+                }
+                viewData["aditionalFiles"] = additionalFiles;
             }
         }
 

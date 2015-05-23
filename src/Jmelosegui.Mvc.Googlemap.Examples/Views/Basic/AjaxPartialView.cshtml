@@ -1,0 +1,44 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "PartialView with Ajax";
+}
+
+<div style="height: 500px; border: solid 1px #cccccc" id="mapContainer">
+
+</div>
+
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Google Map Settings</h4>
+
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="button" id="myButton" class="btn btn-default">Load Googlemap Partial View with Ajax</button>
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+    <script type='text/javascript'>
+
+        $('#myButton').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var mapContainer = $('#mapContainer');
+            var url = '@Url.Action("GooglemapPartialView", "Basic")';
+
+            $.ajax({
+                url: url,
+                type: "Get",
+                datatype: "html",
+                success: function (data) {
+                    mapContainer.html(data);
+                }
+            });
+        });
+
+    </script>
+}

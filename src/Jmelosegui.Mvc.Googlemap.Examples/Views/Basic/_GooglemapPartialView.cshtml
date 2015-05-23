@@ -1,0 +1,14 @@
+﻿
+@{
+    Html.GoogleMap()
+        .Name("map")
+        .Markers(marker => marker.Add()
+            .Window(w => w.Add()
+                .Content(@<text>
+                            "Hello PartialView with ajax!!!"
+                          </text>)))
+        .Render();
+}
+
+@(Html.GoogleMap().ScriptRegistrar())
+    
