@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.UI;
-using Jmelosegui.Mvc.Googlemap.Overlays;
+using Jmelosegui.Mvc.Googlemap.Objects;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -330,34 +330,34 @@ namespace Jmelosegui.Mvc.Googlemap
             }
         }
         
-        public virtual void BindTo<TGoogleMapOverlay, TDataItem>(IEnumerable<TDataItem> dataSource, Action<OverlayBindingFactory<TGoogleMapOverlay>> action) where TGoogleMapOverlay : Overlay
+        public virtual void BindTo<TMapObject, TDataItem>(IEnumerable<TDataItem> dataSource, Action<MapObjectBindingFactory<TMapObject>> action) where TMapObject : MapObject
         {
             if (action == null) throw new ArgumentNullException("action");
 
-            var factory = new OverlayBindingFactory<TGoogleMapOverlay>();
+            var factory = new MapObjectBindingFactory<TMapObject>();
             action(factory);
 
             foreach (TDataItem dataItem in dataSource)
             {
-                Overlay overlay = null;
+                MapObject mapObject = null;
 
-                switch (typeof(TGoogleMapOverlay).FullName)
+                switch (typeof(TMapObject).FullName)
                 {
-                    case "Jmelosegui.Mvc.Googlemap.Overlays.Marker":
-                        overlay = new Marker(this);
-                        Markers.Add((Marker)overlay);
+                    case "Jmelosegui.Mvc.Googlemap.Objects.Marker":
+                        mapObject = new Marker(this);
+                        Markers.Add((Marker)mapObject);
                         break;
-                    case "Jmelosegui.Mvc.Googlemap.Overlays.Circle":
-                        overlay = new Circle(this);
-                        Circles.Add((Circle)overlay);
+                    case "Jmelosegui.Mvc.Googlemap.Objects.Circle":
+                        mapObject = new Circle(this);
+                        Circles.Add((Circle)mapObject);
                         break;
-                    case "Jmelosegui.Mvc.Googlemap.Overlays.Polygon":
-                        overlay = new Polygon(this);
-                        Polygons.Add((Polygon)overlay);
+                    case "Jmelosegui.Mvc.Googlemap.Objects.Polygon":
+                        mapObject = new Polygon(this);
+                        Polygons.Add((Polygon)mapObject);
                         break;
                 }
 
-                factory.Binder.ItemDataBound((TGoogleMapOverlay)overlay, dataItem);
+                factory.Binder.ItemDataBound((TMapObject)mapObject, dataItem);
             }
         }
 

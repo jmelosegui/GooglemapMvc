@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.MapObject" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\MapObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.Overlay" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Overlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.Circle" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAIAAA=</HashCode>
+      <FileName>Objects\Shapes\Circle\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.Shape" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAAAAAgAAAAAECAAAAEAAAAAAAIAACgAAAE=</HashCode>
+      <FileName>Objects\Shapes\Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.Polygon" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAQgAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Objects\Shapes\Polygons\Polygon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.Marker" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEgAAAABAAAAAAEAAAACAAMACAEBAAA=</HashCode>
+      <FileName>Objects\Markers\Marker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.Layer" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Objects\Layers\Layer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.InfoWindow" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAkAAAAABAAAIAAAAQAEAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Objects\InfoWindow\InfoWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.Objects.HeatmapLayer" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIEAAAAABQAAAAAAAAAAAAAAAAABAAAAIwACAAACA=</HashCode>
+      <FileName>Objects\Layers\Heat\HeatmapLayer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

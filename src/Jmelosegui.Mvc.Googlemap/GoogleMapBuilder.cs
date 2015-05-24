@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
 using System.Web.Mvc;
-using Jmelosegui.Mvc.Googlemap.Overlays;
+using Jmelosegui.Mvc.Googlemap.Objects;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -320,7 +320,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         #endregion
 
-        public GoogleMapBuilder BindTo<T, TOverlay>(IEnumerable<T> dataSource, Action<OverlayBindingFactory<TOverlay>> itemDataBound) where TOverlay : Overlay
+        public GoogleMapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound) where TMapObject : MapObject
         {
             Component.BindTo(dataSource, itemDataBound);
             return this;

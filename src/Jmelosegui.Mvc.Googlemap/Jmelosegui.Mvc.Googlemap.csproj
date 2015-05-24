@@ -102,15 +102,15 @@
     <Compile Include="ControlPosition.cs" />
     <Compile Include="Helpers\Serialization\PointJsonConverter.cs" />
     <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
-    <Compile Include="Overlays\Layers\Heat\HeatmapLayerSerializer.cs" />
+    <Compile Include="Objects\Layers\Heat\HeatmapLayerSerializer.cs" />
     <Compile Include="Location\ILocationBinding.cs" />
     <Compile Include="Location\LocationBinding.cs" />
     <Compile Include="Location\LocationBindingBuilder.cs" />
     <Compile Include="Location\LocationBindingFactory.cs" />
-    <Compile Include="Overlays\Layers\Layer.cs" />
-    <Compile Include="Overlays\Layers\Heat\HeatLayerBuilder.cs" />
-    <Compile Include="Overlays\Layers\LayerFactory.cs" />
-    <Compile Include="Overlays\Layers\Heat\HeatmapLayer.cs" />
+    <Compile Include="Objects\Layers\Layer.cs" />
+    <Compile Include="Objects\Layers\Heat\HeatLayerBuilder.cs" />
+    <Compile Include="Objects\Layers\LayerFactory.cs" />
+    <Compile Include="Objects\Layers\Heat\HeatmapLayer.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapTypeBuilder.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs" />
@@ -140,9 +140,9 @@
     </Compile>
     <Compile Include="Events\IClientEventObject.cs" />
     <Compile Include="Helpers\Serialization\LocationJsonConverter.cs" />
-    <Compile Include="Overlays\LocationOverlay.cs" />
-    <Compile Include="Overlays\Markers\Events\MarkerEventsBuilder.cs" />
-    <Compile Include="Overlays\Markers\Events\MarkerClientEvents.cs" />
+    <Compile Include="Objects\Overlay.cs" />
+    <Compile Include="Objects\Markers\Events\MarkerEventsBuilder.cs" />
+    <Compile Include="Objects\Markers\Events\MarkerClientEvents.cs" />
     <Compile Include="Location\ILocationContainer.cs" />
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
@@ -162,40 +162,40 @@
     <Compile Include="Helpers\IHideObjectMembers.cs" />
     <Compile Include="Helpers\UrlHelperExtension.cs" />
     <Compile Include="HtmlTemplate.cs" />
-    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
-    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringStyles.cs" />
-    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptions.cs" />
-    <Compile Include="Overlays\InfoWindow\InfoWindow.cs" />
-    <Compile Include="Overlays\InfoWindow\InfoWindowBuilder.cs" />
-    <Compile Include="Overlays\InfoWindow\InfoWindowFactory.cs" />
+    <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
+    <Compile Include="Objects\Markers\Clustering\MarkerClusteringStyles.cs" />
+    <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptions.cs" />
+    <Compile Include="Objects\InfoWindow\InfoWindow.cs" />
+    <Compile Include="Objects\InfoWindow\InfoWindowBuilder.cs" />
+    <Compile Include="Objects\InfoWindow\InfoWindowFactory.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="Location\Location.cs" />
     <Compile Include="Location\LocationFactory.cs" />
-    <Compile Include="Overlays\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
-    <Compile Include="Overlays\Markers\MarkerImage.cs" />
+    <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
+    <Compile Include="Objects\Markers\MarkerImage.cs" />
     <Compile Include="GoogleMap.cs" />
-    <Compile Include="Overlays\Markers\MarkerSerializer.cs">
+    <Compile Include="Objects\Markers\MarkerSerializer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Overlays\OverlayBindingBuilder.cs" />
-    <Compile Include="Overlays\OverlayBindingFactory.cs" />
-    <Compile Include="Overlays\IOverlayBinding.cs" />
-    <Compile Include="Overlays\Markers\Marker.cs" />
-    <Compile Include="Overlays\Markers\MarkerBuilder.cs" />
-    <Compile Include="Overlays\Markers\MarkerFactory.cs" />
-    <Compile Include="Overlays\Overlay.cs" />
-    <Compile Include="Overlays\Shapes\Circle\Circle.cs" />
-    <Compile Include="Overlays\Shapes\Circle\CircleBuilder.cs" />
-    <Compile Include="Overlays\Shapes\Circle\CircleFactory.cs" />
+    <Compile Include="Objects\MapObjectBindingBuilder.cs" />
+    <Compile Include="Objects\MapObjectBindingFactory.cs" />
+    <Compile Include="Objects\IMapOpjectBinding.cs" />
+    <Compile Include="Objects\Markers\Marker.cs" />
+    <Compile Include="Objects\Markers\MarkerBuilder.cs" />
+    <Compile Include="Objects\Markers\MarkerFactory.cs" />
+    <Compile Include="Objects\MapObject.cs" />
+    <Compile Include="Objects\Shapes\Circle\Circle.cs" />
+    <Compile Include="Objects\Shapes\Circle\CircleBuilder.cs" />
+    <Compile Include="Objects\Shapes\Circle\CircleFactory.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
-    <Compile Include="Overlays\Shapes\Circle\CircleSerializer.cs" />
-    <Compile Include="Overlays\Shapes\Polygons\PolygonBuilder.cs" />
-    <Compile Include="Overlays\Shapes\Polygons\Polygon.cs" />
-    <Compile Include="Overlays\Shapes\Polygons\PolygonFactory.cs" />
-    <Compile Include="Overlays\Shapes\Polygons\PolygonSerializer.cs" />
-    <Compile Include="Overlays\Shapes\ShapeSerializer.cs" />
-    <Compile Include="Overlays\Shapes\Shape.cs" />
-    <Compile Include="Overlays\Shapes\ShapeBuilder.cs" />
+    <Compile Include="Objects\Shapes\Circle\CircleSerializer.cs" />
+    <Compile Include="Objects\Shapes\Polygons\PolygonBuilder.cs" />
+    <Compile Include="Objects\Shapes\Polygons\Polygon.cs" />
+    <Compile Include="Objects\Shapes\Polygons\PolygonFactory.cs" />
+    <Compile Include="Objects\Shapes\Polygons\PolygonSerializer.cs" />
+    <Compile Include="Objects\Shapes\ShapeSerializer.cs" />
+    <Compile Include="Objects\Shapes\Shape.cs" />
+    <Compile Include="Objects\Shapes\ShapeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptRegistrar.cs" />
     <Compile Include="ScriptRegistrarBuilder.cs" />
@@ -209,7 +209,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Overlays\OverlayClassDiagram.cd" />
+    <None Include="Objects\MapObjectClassDiagram.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

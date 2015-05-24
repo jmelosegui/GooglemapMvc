@@ -4,16 +4,16 @@ namespace Jmelosegui.Mvc.Googlemap
 {
     public class LocationBindingBuilder<TLocationContainer, TDataItem> where TLocationContainer : ILocationContainer
     {
-        readonly LocationBinding<TLocationContainer, TDataItem> bindingComponent;
+        readonly LocationBinding<TLocationContainer, TDataItem> locationBinding;
 
-        public LocationBindingBuilder(LocationBinding<TLocationContainer, TDataItem> overlayBinding)
+        public LocationBindingBuilder(LocationBinding<TLocationContainer, TDataItem> locationBinding)
         {
-            bindingComponent = overlayBinding;
+            this.locationBinding = locationBinding;
         }
 
         public LocationBindingBuilder<TLocationContainer, TDataItem> ItemDataBound(Action<TLocationContainer, TDataItem> action)
         {
-            bindingComponent.ItemDataBound = action;
+            locationBinding.ItemDataBound = action;
             return this;
         }
     }
