@@ -159,7 +159,7 @@
     };
 
     var infowindow;
-    var markersCluster = [];
+    var markersCluster = {};
     $jmelosegui.GoogleMarker.prototype = {
 
         isLoaded: function () {
@@ -215,9 +215,9 @@
                 this.parent.bounds.extend(this.gMarker.position);
             }
             this.initialize();
-            if (this.enableMarkersClustering === true) {
-                markersCluster.push(this.gMarker);
-            }
+            
+            markersCluster[this.id] = this.gMarker;
+            
         },
         openInfoWindow: function () {
             if (this.isLoaded()) {
@@ -698,7 +698,8 @@
                 hideSingleGroupMarker: this.markerClusteringOptions.hideSingleGroupMarker,
                 styles: this.markerClusteringOptions.customStyles
             };
-            new MarkerClusterer(this.GMap, markersCluster, options);
+            var markerArray = $.map(markersCluster, function(v) { return v; });
+            new MarkerClusterer(this.GMap, markerArray, options);
         },
         renderCircle: function (c) {
             c.load();
@@ -713,12 +714,12 @@
             }
             catch (ex) { }
         },
-        rendeMarkers: function (map) {
+        renderMarkers: function (map) {
             if (markerIndex < map.markers.length) {
                 var config = map.markers[markerIndex];
                 config.markerEvents = map.markerEvents;
                 setTimeout(function () {
-                    map.getAddress(config, map.rendeMarkers);
+                    map.getAddress(config, map.renderMarkers);
                 }, delay);
                 markerIndex++;
             }
@@ -727,7 +728,7 @@
                     map.GMap.fitBounds(map.bounds);
                 }
                 if (map.markers_geocoding_completed !== undefined) {
-                    var args = { 'map': map };
+                    var args = { 'map': map.GMap, 'markers': markersCluster };
                     map.markers_geocoding_completed(args);
                 }
             }
@@ -741,7 +742,7 @@
                 this.render();
                 this.attachMapEvents();
                 if (this.map_loaded !== undefined) {
-                    var args = { 'map': this.GMap };
+                    var args = { 'map': this.GMap, 'markers': markersCluster };
                     this.map_loaded(args);
                 }
             }
@@ -797,7 +798,7 @@
             var i;
             if (this.markers) {
                 if (this.markersFromAddress) {
-                    this.rendeMarkers(this);
+                    this.renderMarkers(this);
                 } else {
                     for (i = 0; i < this.markers.length; i++) {
                         var config = this.markers[i];
@@ -863,14 +864,6 @@
                 }
             }
             this.GMap.setMapTypeId(this.getMapTypeId());
-        },
-        // Items --------------------------------------------------------------------------------------
-        // Marker
-        addMarker: function (config, render) {
-            if (!this.markers) this.markers = new Array();
-            var marker = new $jmelosegui.GoogleMarker(this, this.markers.length, config);
-            this.markers.push(marker);
-            if (render) this.renderMarker(marker);
         },
         // Image MapTypes
         addImageMapType: function (map, mapType) {

@@ -1,0 +1,38 @@
+﻿
+<p>This sample show how to reference markers from outside the google map. Click on the items of the right list of Spanish regions to see the results.</p>
+
+<p>To get the reference to the marker collection you will need to subcribe to the "OnMapLoaded" map client event.</p>
+
+<pre class="prettyprint">
+@(
+    Html.Googlemap()
+        .Name("map")
+        .Markers(m => m.Add()
+                       <b>.Id("marker-1")</b>
+                       .Title("Hello World!"))
+        .ClientEvents(events => events.OnMapLoaded("onMapLoadHandler")) 
+ )
+
+&lt;ul class=&quot;marker-list&quot;&gt;
+    &lt;li data-id=&quot;marker-1&quot;&gt;My Marker&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p>Then you could write an script such as the following.</p>
+
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot;&gt;
+        var markers = {};
+        function onMapLoadHandler(args) {
+            markers = args.markers;
+        }
+        $(".marker-list li").click(function () {
+            var id = $(this).attr('data-id');
+            google.maps.event.trigger(<b>markers[id]</b>, 'click');
+        });
+&lt;/script&gt;
+</pre>
+
+<p>Note that the Id property of the GoogleMap Control for Asp.Net Marker will be used to access to the items in the marker "dictionary"</p>
+<p>If you do not set the Marker Id property in the GoogleMap Mvc Helper the index of the marker inside the collection will be used instead.</p>
+<p>If you use Google Geocoding service to load markers in the map. The event you will have to subscribe to must be "OnMarkersGeocodingCompleted"</p>

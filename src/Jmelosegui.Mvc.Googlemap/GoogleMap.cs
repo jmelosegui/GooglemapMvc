@@ -248,8 +248,16 @@ namespace Jmelosegui.Mvc.Googlemap
             if (Markers.Any())
             {
                 var markers = new List<IDictionary<string, object>>();
-
-                Markers.Each(m => markers.Add(m.CreateSerializer().Serialize()));
+                int i = 0;
+                Markers.Each(m =>
+                {
+                    if (String.IsNullOrWhiteSpace(m.Id))
+                    {
+                        m.Id = i.ToString();
+                    }
+                    markers.Add(m.CreateSerializer().Serialize());
+                    i++;
+                });
 
                 if (markers.Any())
                 {

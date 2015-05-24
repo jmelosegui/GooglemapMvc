@@ -139,6 +139,7 @@
     <Compile Include="Controllers\Marker\InfoWindowController.cs" />
     <Compile Include="Controllers\Marker\FitToMarkersBoundsController.cs" />
     <Compile Include="Controllers\Marker\MarkerClusteringController.cs" />
+    <Compile Include="Controllers\Marker\ExternalReferenceController.cs" />
     <Compile Include="Controllers\Marker\SimpleMarkerController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\Services\GeocodingController.cs" />
@@ -177,6 +178,7 @@
     <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
     <Content Include="Content\MapType\map_natural.jpg" />
     <Content Include="Content\MapType\speculative_map.jpg" />
+    <Content Include="Content\Marker\Descriptions\ExternalReference.html" />
     <Content Include="Content\Marker\Descriptions\FitToMarkersBounds.html" />
     <Content Include="Content\Marker\Descriptions\Geocoding.html" />
     <Content Include="Content\Marker\Descriptions\ClientEvents.html" />
@@ -333,6 +335,7 @@
     <Content Include="Views\Layers\Heatmap.cshtml" />
     <Content Include="Views\Basic\AjaxPartialView.cshtml" />
     <Content Include="Views\Basic\_GooglemapPartialView.cshtml" />
+    <Content Include="Views\Marker\ExternalReference.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

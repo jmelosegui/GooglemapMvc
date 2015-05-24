@@ -1,0 +1,83 @@
+﻿@using Jmelosegui.Mvc.Googlemap.Examples.App_Data
+@using Jmelosegui.Mvc.Googlemap.Objects
+@model IEnumerable<RegionInfo>
+
+@{
+    ViewBag.Title = "External Reference";
+}
+<style>
+    ul {
+        list-style: none;
+    }
+    ul li {
+        margin: 5px;
+        cursor: pointer;
+    }
+</style>
+<div id="main" class="row">
+    <div class="col-md-9">
+        @{
+            Html.GoogleMap()
+                .Name("map")
+                .Height(600)
+                .Center(c => c.Latitude(40)
+                    .Longitude(-3))
+                .BindTo<RegionInfo, Marker>
+                (Model, mappings => mappings.For<RegionInfo>
+                    (
+                        binding => binding.ItemDataBound
+                            (
+                                (marker, regionInfo) =>
+                                {
+                                    marker.Id = regionInfo.Id.ToString();
+                                    marker.Latitude = regionInfo.Latitude;
+                                    marker.Longitude = regionInfo.Longitude;
+                                    marker.Title = regionInfo.Title;
+                                    marker.zIndex = regionInfo.zIndex;
+                                    marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}", regionInfo.ImagePath)
+                                        , new Size(18, 12)
+                                        , new Point(0, 0)
+                                        , new Point(0, 12));
+
+                                    marker.Window = new InfoWindow(marker)
+                                    {
+                                        Template =
+                                        {
+                                            Content = () => ViewContext.Writer.Write(regionInfo.InfoWindowContent)
+                                        }
+                                    };
+                                }
+                            )
+                    )
+                )
+                .ClientEvents(events => events.OnMapLoaded("onMapLoadHandler"))
+                .Render();
+        }
+    </div>
+    <div id="events" class="col-md-3">
+        <ul class="marker-list">
+            @foreach (RegionInfo info in Model)
+            {
+                <li data-id="@info.Id"><img src="@(String.Format("../Images/flags/{0}", info.ImagePath))"/> @info.Title</li>
+            }
+        </ul>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        var markers = {};
+
+        function onMapLoadHandler(args) {
+            markers = args.markers;
+        }
+
+        $(".marker-list li").click(function () {
+            var id = $(this).attr('data-id');
+            google.maps.event.trigger(markers[id], 'click');
+        });
+
+    </script>
+}
