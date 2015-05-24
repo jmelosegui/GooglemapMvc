@@ -12,7 +12,7 @@ namespace Jmelosegui.Mvc.Googlemap.Overlays
             this.map = map;
         }
 
-        public HeatLayerBuilder AddHeatLayer()
+        public HeatLayerBuilder AddHeatmapLayer()
         {
             var heatLayer = new HeatmapLayer(map);
 

@@ -13,7 +13,7 @@
                 .Longitude(-122.433523))
       .MapTypeId(MapTypes.Satellite)
       .Zoom(13)
-      .Layers(layer => layer.AddHeatLayer()
+      .Layers(layer => layer.AddHeatmapLayer()
                             .Dissipating(Model.Dissipating)
                             .MaxIntensity(Model.MaxIntensity)
                             .Opacity(Model.Opacity)
