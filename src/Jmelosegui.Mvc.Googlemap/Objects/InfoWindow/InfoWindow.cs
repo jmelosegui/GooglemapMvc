@@ -29,6 +29,8 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public bool DisableAutoPan { get; set; }
 
+        public bool OpenOnRightClick { get; set; }
+
         public override double? Longitude
         {
             get

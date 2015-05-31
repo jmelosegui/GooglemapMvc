@@ -29,6 +29,12 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
+       public InfoWindowBuilder OpenOnRightClick(bool value)
+        {
+            window.OpenOnRightClick = value;
+            return this;
+        }
+
         public InfoWindowBuilder Latitude(double value)
         {
             window.Latitude = value;

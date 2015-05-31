@@ -20,6 +20,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
                 FluentDictionary.For(windowDictionary)
                 .Add("content", marker.Window.Content)
                 .Add("disableAutoPan", marker.Window.DisableAutoPan, () => marker.Window.DisableAutoPan)
+                .Add("openOnRightClick", marker.Window.OpenOnRightClick, () => marker.Window.OpenOnRightClick)
                 .Add("lat", marker.Window.Latitude, () => marker.Latitude != marker.Window.Latitude)
                 .Add("lng", marker.Window.Longitude, () => marker.Longitude != marker.Window.Longitude)
                 .Add("maxWidth", marker.Window.MaxWidth, () => marker.Window.MaxWidth != 0)

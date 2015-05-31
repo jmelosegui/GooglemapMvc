@@ -4,9 +4,20 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
 {
     public partial class MarkerController
     {
-        public ActionResult InfoWindow()
+        public ActionResult InfoWindow(InfoWindowModel infoWindow)
         {
-            return View();
+            return View(infoWindow);
         }
+    }
+
+    public class InfoWindowModel
+    {
+        public InfoWindowModel()
+        {
+            MaxWidth = 500;
+        }
+        public int MaxWidth { get; set; }
+        public bool DisableAutoPan { get; set; }
+        public bool OpenOnRightClick { get; set; }
     }
 }

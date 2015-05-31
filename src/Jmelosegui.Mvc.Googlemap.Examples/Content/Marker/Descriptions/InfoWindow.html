@@ -1,7 +1,7 @@
 ﻿<p>
-    This example shows how to add an info windows to a marker. The windows will open when you click on the marker
+    This example shows how to add an info windows to a marker. The windows will open when you either click or rightclick on the marker base on the property <b>OpenOnRightClick</b>.
 </p>
-
+<p>Change the configuration above to see how it affects the map.</p>
 <pre class="prettyprint">
 @{ Html.GoogleMap()
     .Name(&quot;map&quot;)
@@ -15,6 +15,7 @@
                                                     .MaxWidth(200)
                                                     .zIndex(3)
                                                     .DisableAutoPan(false)
+                                                    <b>.OpenOnRightClick(true)</b>
                                                     .Content(
 @&lt;text&gt;
     &lt;div&gt;

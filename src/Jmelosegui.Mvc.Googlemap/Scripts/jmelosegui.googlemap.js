@@ -168,7 +168,11 @@
         initialize: function () {
             //Work around to the issue https://code.google.com/p/gmaps-api-issues/issues/detail?id=7925
             if (this.window && this.clickable) {
-                google.maps.event.addListener(this.gMarker, 'click', $jmelosegui.delegate(this, this.openInfoWindow));
+                var openWindowEvent = 'click';
+                if (this.window.openOnRightClick) {
+                    openWindowEvent = 'rightclick';
+                }
+                google.maps.event.addListener(this.gMarker, openWindowEvent, $jmelosegui.delegate(this, this.openInfoWindow));
             }
 
             if (this.markerEvents) {

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Jmelosegui.Mvc.Googlemap.Examples.Controllers.InfoWindowModel
+@{
     ViewBag.Title = "Info Window";
 }
 
@@ -12,9 +13,9 @@
                                 .Latitude(23.140971656573335)
                                 .Longitude(-82.39435493946075)
                                 .Window(window => window.Add()
-                                                        .MaxWidth(500)
-                                                        .zIndex(3)
-                                                        .DisableAutoPan(false)
+                                                        .MaxWidth(Model.MaxWidth)
+                                                        .DisableAutoPan(Model.DisableAutoPan)
+                                                        .OpenOnRightClick(Model.OpenOnRightClick)
                                                         .Content(
 @<text>
         <div id="content">
@@ -44,3 +45,40 @@
                                         )
         ).Render();
 }
+
+<br />
+<br />
+<form class="form-horizontal" method="POST" role="form">
+    <h4> InfoWindow Settings</h4>
+
+    <div class="form-group">
+        <label for="MaxWidth" class="col-sm-2 control-label">Max Width</label>
+        <div class="col-md-5">
+            @Html.TextBox("MaxWidth", null, new { @class = "form-control", id = "MaxWidth" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 col-md-offset-2">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("DisableAutoPan")
+                    Disable AutoPan
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("OpenOnRightClick")
+                    Open On RightClick
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

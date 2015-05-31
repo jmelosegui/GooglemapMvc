@@ -26,13 +26,13 @@
     <h4> Google Map Settings</h4>
 
     <div class="form-group">
-        <div class="col-md-12">
-            <label for="mapType" class="control-label" >Url</label>
-            @Html.TextBox("Url", null, new { @class = "form-control" })
+        <label for="Url" class="col-sm-1 control-label">Url</label>
+        <div class="col-md-11">
+            @Html.TextBox("Url", null, new { @class = "form-control", id = "Url" })
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-3">
+        <div class="col-md-2 col-md-offset-1">
             <div class="checkbox">
                 <label>
                     @Html.CheckBox("Clickable")
@@ -67,7 +67,7 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-md-11 col-md-offset-1">
             <button type="submit" class="btn btn-default">Apply</button>
         </div>
     </div>
