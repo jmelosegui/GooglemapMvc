@@ -339,6 +339,20 @@
 
     $jmelosegui.HeatMapLayer.prototype = {}
 
+    // KmlLayer
+    $jmelosegui.KmlLayer = function (map, config) {
+
+        this.map = map;
+        this.clickable = config.clickable;
+        this.preserveViewport = config.preserveViewport;
+        this.screenOverlays = config.screenOverlays;
+        this.suppressInfoWindows = config.suppressInfoWindows;
+        this.zIndex = config.zIndex;
+        this.url = config.url;
+    }
+
+    $jmelosegui.KmlLayer.prototype = {}
+
     $jmelosegui.Googlemap = function (element, options) {
 
         this.element = element;
@@ -861,6 +875,10 @@
                         var heatmap = new $jmelosegui.HeatMapLayer(this.GMap, layer.options);
                         this.addHeatMapLayer(this.GMap, heatmap);
                     }
+                    if (layer.name === 'kml') {
+                        var kml = new $jmelosegui.KmlLayer(this.GMap, layer.options);
+                        this.addKmlLayer(this.GMap, kml);
+                    }
                 }
             }
             this.GMap.setMapTypeId(this.getMapTypeId());
@@ -893,6 +911,12 @@
             });
 
             heatmap.setMap(map);
+        },
+        //Kml
+        addKmlLayer: function (map, options) {
+
+            var kmlLayer = new google.maps.KmlLayer(options);
+            kmlLayer.setMap(map);
         }
     };
 

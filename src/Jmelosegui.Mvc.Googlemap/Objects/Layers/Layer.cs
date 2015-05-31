@@ -7,6 +7,6 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             
         }
 
-        public abstract ISerializer CreateSerializer();
+        public abstract LayerSerializer CreateSerializer();
     }
 }

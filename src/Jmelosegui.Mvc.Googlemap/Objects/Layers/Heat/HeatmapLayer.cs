@@ -33,7 +33,8 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         public decimal Opacity { get; set; }
 
         public int Radius { get; set; }
-        public override ISerializer CreateSerializer()
+
+        public override LayerSerializer CreateSerializer()
         {
             return new HeatmapLayerSerializer(this);
         }

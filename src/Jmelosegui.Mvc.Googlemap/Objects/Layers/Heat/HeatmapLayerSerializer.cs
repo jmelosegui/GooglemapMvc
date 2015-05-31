@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    internal class HeatmapLayerSerializer : ISerializer
+    internal class HeatmapLayerSerializer : LayerSerializer
     {
         private readonly HeatmapLayer layer;
 
@@ -14,7 +14,12 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             this.layer = layer;
         }
 
-        public IDictionary<string, object> Serialize()
+        public override string Name
+        {
+            get { return "heatmap"; }
+        }
+
+        protected override  IDictionary<string, object> LayerSerialize()
         {
             List<string> gradientCollection = layer.Gradient.Select(color => String.Format("rgba({0}, {1}, {2}, {3})", color.R, color.G, color.B, color.A)).ToList();
 
@@ -28,10 +33,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
                 .Add("gradient", gradientCollection, () => layer.Gradient.Any())
                 .Add("data", layer.Data, () => layer.Data.Any());
 
-            IDictionary<string, object> result = new Dictionary<string, object>();
-            result["name"] = "heatmap";
-            result["options"] = layerDictionary;
-            return result;
+            return layerDictionary;
         }
     }
 }

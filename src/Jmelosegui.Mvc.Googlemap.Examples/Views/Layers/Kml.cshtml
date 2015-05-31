@@ -1,0 +1,74 @@
+﻿@model Jmelosegui.Mvc.Googlemap.Examples.Controllers.KmlModel
+
+@{
+    ViewBag.Title = "Kml Layer";
+    Layout = "~/Views/Shared/_LayoutExamples.cshtml";
+}
+
+@(
+    Html.GoogleMap()
+    .Height(400)
+    .Center(c => c.Latitude(41.875696)
+                   .Longitude(-87.624207))
+    .Zoom(11)
+    .Layers(l => l.AddKmlLayer()
+                  .Clickable(Model.Clickable)
+                  .PreserveViewport(Model.PreserveViewport)
+                  .SuppressInfoWindows(Model.SuppressInfoWindows)
+                  .ScreenOverlays(Model.ScreenOverlays)
+                  .Url(Model.Url)
+                  .zIndex(Model.zIndex)
+            )
+)
+<br />
+<br />
+<form class="form-horizontal" method="POST" role="form">
+    <h4> Google Map Settings</h4>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <label for="mapType" class="control-label" >Url</label>
+            @Html.TextBox("Url", null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("Clickable")
+                    Clickable
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("PreserveViewport")
+                    Preserve Viewport
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("ScreenOverlays")
+                    Screen Overlays
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("SuppressInfoWindows")
+                    Suppress InfoWindows
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>

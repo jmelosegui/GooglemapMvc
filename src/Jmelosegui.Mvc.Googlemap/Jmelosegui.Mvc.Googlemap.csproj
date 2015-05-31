@@ -107,6 +107,9 @@
     <Compile Include="Location\LocationBinding.cs" />
     <Compile Include="Location\LocationBindingBuilder.cs" />
     <Compile Include="Location\LocationBindingFactory.cs" />
+    <Compile Include="Objects\Layers\Kml\KmlLayer.cs" />
+    <Compile Include="Objects\Layers\Kml\KmlLayerBuilder.cs" />
+    <Compile Include="Objects\Layers\Kml\KmlLayerSerializer.cs" />
     <Compile Include="Objects\Layers\Layer.cs" />
     <Compile Include="Objects\Layers\Heat\HeatLayerBuilder.cs" />
     <Compile Include="Objects\Layers\LayerFactory.cs" />
@@ -140,6 +143,7 @@
     </Compile>
     <Compile Include="Events\IClientEventObject.cs" />
     <Compile Include="Helpers\Serialization\LocationJsonConverter.cs" />
+    <Compile Include="Objects\Layers\LayerSerializer.cs" />
     <Compile Include="Objects\Overlay.cs" />
     <Compile Include="Objects\Markers\Events\MarkerEventsBuilder.cs" />
     <Compile Include="Objects\Markers\Events\MarkerClientEvents.cs" />

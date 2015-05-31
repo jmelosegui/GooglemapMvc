@@ -128,6 +128,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayersController.cs" />
     <Compile Include="Controllers\Layers\HeatmapController.cs" />
+    <Compile Include="Controllers\Layers\KmlController.cs" />
     <Compile Include="Controllers\MapTypeController.cs" />
     <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
     <Compile Include="Controllers\MapType\StyledMapTypeController.cs" />
@@ -174,6 +175,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Layers\Descriptions\Heatmap.html" />
+    <Content Include="Content\Layers\Descriptions\Kml.html" />
     <Content Include="Content\MapType\Descriptions\ImageMapType.html" />
     <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
     <Content Include="Content\MapType\map_natural.jpg" />
@@ -336,6 +338,7 @@
     <Content Include="Views\Basic\AjaxPartialView.cshtml" />
     <Content Include="Views\Basic\_GooglemapPartialView.cshtml" />
     <Content Include="Views\Marker\ExternalReference.cshtml" />
+    <Content Include="Views\Layers\Kml.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

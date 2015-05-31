@@ -20,5 +20,14 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
             return new HeatLayerBuilder(heatLayer);
         }
+
+        public KmlLayerBuilder AddKmlLayer()
+        {
+            var kmlLayer = new KmlLayer(map);
+
+            map.Layers.Add(kmlLayer);
+
+            return new KmlLayerBuilder(kmlLayer);
+        }
     }
 }
