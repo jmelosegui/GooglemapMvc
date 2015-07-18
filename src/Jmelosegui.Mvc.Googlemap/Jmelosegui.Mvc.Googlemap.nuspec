@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/jmelosegui/GooglemapMvc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Googlemap control for AspNet.Mvc wraps Google maps API simplifying the use of Google maps in ASP.NET MVC applications.</description>
-    <tags>Googlemap AspNet Mvc AspNetMvc</tags>
+    <tags>Google maps Googlemap AspNet Mvc AspNetMvc</tags>
     <dependencies>
       <group>
         <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
