@@ -53,7 +53,7 @@
   <Class Name="Jmelosegui.Mvc.Googlemap.Objects.InfoWindow" Collapsed="true">
     <Position X="7.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAkAAAAABAAAIAAAAQAEAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAkAAAAABAAAIAAAAQAEAAACAAAAAAAAAABA=</HashCode>
       <FileName>Objects\InfoWindow\InfoWindow.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -65,5 +65,12 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Interface Name="Jmelosegui.Mvc.Googlemap.ILocationContainer" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\ILocationContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

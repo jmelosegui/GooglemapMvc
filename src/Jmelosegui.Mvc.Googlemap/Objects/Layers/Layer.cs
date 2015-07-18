@@ -1,12 +1,18 @@
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public abstract class Layer : MapObject
+    public class Layer : MapObject
     {
-        internal protected Layer(GoogleMap map) : base(map)
+        internal protected Layer(string name, GoogleMap map) : base(map)
         {
-            
+            Name = name;
         }
 
-        public abstract LayerSerializer CreateSerializer();
+        public string Name { get; private set; }
+
+        public virtual LayerSerializer CreateSerializer()
+        {
+            return new LayerSerializer(this);
+        }
+    
     }
 }

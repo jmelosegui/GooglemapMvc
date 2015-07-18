@@ -1,40 +1,42 @@
 using System;
+using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public class KmlLayerBuilder
+    public class KmlLayerBuilder : LayerBuilder<KmlLayer>
     {
-        private readonly KmlLayer kmlLayer;
-
+        #region Constructor
         internal KmlLayerBuilder(KmlLayer kmlLayer)
+            : base(kmlLayer)
         {
-            if (kmlLayer == null) throw new ArgumentNullException("kmlLayer");
 
-            this.kmlLayer = kmlLayer;
-        }
+        } 
+        #endregion
 
+        #region Public Methods
         public KmlLayerBuilder Clickable(bool value)
         {
-            kmlLayer.Clickable = value;
+            Layer.Clickable = value;
 
             return this;
         }
+
         public KmlLayerBuilder PreserveViewport(bool value)
         {
-            kmlLayer.PreserveViewport = value;
+            Layer.PreserveViewport = value;
 
             return this;
         }
 
         public KmlLayerBuilder ScreenOverlays(bool value)
         {
-            kmlLayer.ScreenOverlays = value;
+            Layer.ScreenOverlays = value;
             return this;
         }
 
         public KmlLayerBuilder SuppressInfoWindows(bool value)
         {
-            kmlLayer.SuppressInfoWindows = value;
+            Layer.SuppressInfoWindows = value;
             return this;
         }
 
@@ -44,11 +46,11 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
             if (url.IndexOf("://", StringComparison.Ordinal) == -1)
             {
-                kmlLayer.Url = System.Web.VirtualPathUtility.ToAbsolute(url);
+                Layer.Url = System.Web.VirtualPathUtility.ToAbsolute(url);
             }
             else
             {
-                kmlLayer.Url = url;
+                Layer.Url = url;
             }
 
             return this;
@@ -56,8 +58,9 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public KmlLayerBuilder zIndex(int value)
         {
-            kmlLayer.zIndex = value;
+            Layer.zIndex = value;
             return this;
-        }
+        } 
+        #endregion
     }
 }

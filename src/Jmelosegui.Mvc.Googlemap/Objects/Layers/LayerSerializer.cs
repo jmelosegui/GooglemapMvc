@@ -3,20 +3,40 @@ using System.Globalization;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public abstract class LayerSerializer : ISerializer
+    public class LayerSerializer<T> : LayerSerializer where T : Layer
     {
-        public abstract string Name { get; }
+        internal LayerSerializer(T layer) : base(layer)
+        {
+        }
 
-        protected abstract IDictionary<string, object> LayerSerialize();
+        public new T Layer
+        {
+            get { return base.Layer as T; }
+            
+        }
+    }
+
+    public class LayerSerializer : ISerializer
+    {
+        internal LayerSerializer(Layer layer)
+        {
+            Layer = layer;
+        }
+
+        public Layer Layer { get; private set; }
+
+        protected virtual IDictionary<string, object> LayerSerialize()
+        {
+            return new Dictionary<string, object>();
+        }
 
         public IDictionary<string, object> Serialize()
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
-            result["name"] = Name.ToLower(CultureInfo.InvariantCulture);
+            result["name"] = Layer.Name.ToLower(CultureInfo.InvariantCulture);
             result["options"] = LayerSerialize();
             return result;
         }
-
 
     }
 }

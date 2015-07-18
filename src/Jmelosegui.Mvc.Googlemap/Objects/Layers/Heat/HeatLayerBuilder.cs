@@ -1,30 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public class HeatLayerBuilder
+    public class HeatLayerBuilder : LayerBuilder<HeatmapLayer>
     {
-        private readonly HeatmapLayer heatLayer;
-
-        internal HeatLayerBuilder(HeatmapLayer heatLayer)
-        {
-            if (heatLayer == null) throw new ArgumentNullException("heatLayer");
-            this.heatLayer = heatLayer;
-        }
+        internal HeatLayerBuilder(HeatmapLayer heatLayer) : base(heatLayer) { }
 
         public HeatLayerBuilder Data(Action<LocationFactory<HeatmapLayer>> action)
         {
             if (action == null) throw new ArgumentNullException("action");
-            var factory = new LocationFactory<HeatmapLayer>(heatLayer);
+            var factory = new LocationFactory<HeatmapLayer>(base.Layer);
             action(factory);
             return this;
         }
 
         public HeatLayerBuilder Dissipating(bool value)
         {
-            this.heatLayer.Dissipating = value;
+            Layer.Dissipating = value;
             return this;
         }
 
@@ -32,26 +27,26 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (action == null) throw new ArgumentNullException("action");
 
-            HeatmapGradientFactory factory = new HeatmapGradientFactory(this.heatLayer);
+            HeatmapGradientFactory factory = new HeatmapGradientFactory(base.Layer);
             action(factory);
             return this;
         }
 
         public HeatLayerBuilder MaxIntensity(int value)
         {
-            this.heatLayer.MaxIntensity = value;
+            Layer.MaxIntensity = value;
             return this;
         }
 
         public HeatLayerBuilder Opacity(decimal value)
         {
-            this.heatLayer.Opacity = value;
+            Layer.Opacity = value;
             return this;
         }
 
         public HeatLayerBuilder Radius(int value)
         {
-            this.heatLayer.Radius = value;
+            Layer.Radius = value;
             return this;
         }
 
@@ -60,7 +55,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             if (dataSource == null) throw new ArgumentNullException("dataSource");
             if (itemDataBound == null) throw new ArgumentNullException("itemDataBound");
 
-            this.heatLayer.BindTo(dataSource, itemDataBound);
+            Layer.BindTo(dataSource, itemDataBound);
             return this;
         }
     }

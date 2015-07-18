@@ -2,7 +2,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class KmlLayer : Layer
     {
-        public KmlLayer(GoogleMap map) : base(map)
+        public KmlLayer(GoogleMap map) : base("kml", map)
         {
             Clickable = true;
             ScreenOverlays = true;

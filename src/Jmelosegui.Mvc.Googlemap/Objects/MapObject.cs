@@ -10,6 +10,6 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             Map = map;
         }
 
-        protected internal GoogleMap Map { get; }
+        protected internal GoogleMap Map { get; private set; }
     }
 }

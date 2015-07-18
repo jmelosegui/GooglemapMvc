@@ -9,7 +9,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
     {
         private readonly List<Location> data;
 
-        public HeatmapLayer(GoogleMap map) : base(map)
+        public HeatmapLayer(GoogleMap map) : base("heatmap", map)
         {
             Gradient = new List<Color>();
             data = new List<Location>();

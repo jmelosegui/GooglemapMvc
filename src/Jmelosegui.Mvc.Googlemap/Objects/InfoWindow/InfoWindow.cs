@@ -25,7 +25,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             private set;
         }
 
-        public string Content { get; }
+        public string Content { get; private set; }
 
         public bool DisableAutoPan { get; set; }
 

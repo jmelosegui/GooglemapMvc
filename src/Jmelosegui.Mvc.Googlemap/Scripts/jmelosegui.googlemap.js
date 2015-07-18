@@ -219,9 +219,9 @@
                 this.parent.bounds.extend(this.gMarker.position);
             }
             this.initialize();
-            
+
             markersCluster[this.id] = this.gMarker;
-            
+
         },
         openInfoWindow: function () {
             if (this.isLoaded()) {
@@ -716,7 +716,7 @@
                 hideSingleGroupMarker: this.markerClusteringOptions.hideSingleGroupMarker,
                 styles: this.markerClusteringOptions.customStyles
             };
-            var markerArray = $.map(markersCluster, function(v) { return v; });
+            var markerArray = $.map(markersCluster, function (v) { return v; });
             new MarkerClusterer(this.GMap, markerArray, options);
         },
         renderCircle: function (c) {
@@ -876,12 +876,21 @@
                 for (i = 0; i < this.layers.length; i++) {
                     var layer = this.layers[i];
                     if (layer.name === 'heatmap') {
-                        var heatmap = new $jmelosegui.HeatMapLayer(this.GMap, layer.options);
-                        this.addHeatMapLayer(this.GMap, heatmap);
+                        var heatmapLayer = new $jmelosegui.HeatMapLayer(this.GMap, layer.options);
+                        this.addHeatMapLayer(this.GMap, heatmapLayer);
                     }
                     if (layer.name === 'kml') {
-                        var kml = new $jmelosegui.KmlLayer(this.GMap, layer.options);
-                        this.addKmlLayer(this.GMap, kml);
+                        var kmlLayer = new $jmelosegui.KmlLayer(this.GMap, layer.options);
+                        this.addKmlLayer(this.GMap, kmlLayer);
+                    }
+                    if (layer.name === 'traffic') {
+                        this.addTrafficLayer(this.GMap);
+                    }
+                    if (layer.name === 'bicycling') {
+                        this.addBicyclingLayer(this.GMap);
+                    }
+                    if (layer.name === 'transit') {
+                        this.addTransitLayer(this.GMap);
                     }
                 }
             }
@@ -921,6 +930,21 @@
 
             var kmlLayer = new google.maps.KmlLayer(options);
             kmlLayer.setMap(map);
+        },
+        //Traffic
+        addTrafficLayer: function (map) {
+            var trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+        },
+        //Bicycling
+        addBicyclingLayer: function (map) {
+            var bikeLayer = new google.maps.BicyclingLayer();
+            bikeLayer.setMap(map);
+        },
+        //Transit
+        addTransitLayer: function (map) {
+            var transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(map);
         }
     };
 

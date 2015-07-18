@@ -1,4 +1,5 @@
 using System;
+using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
@@ -28,6 +29,28 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             map.Layers.Add(kmlLayer);
 
             return new KmlLayerBuilder(kmlLayer);
+        }
+
+        public LayerBuilder AddTrafficLayer()
+        {
+            return CreateLayerBuilder(LayerType.Traffic);
+        }
+
+        public LayerBuilder AddBicyclingLayer()
+        {
+            return CreateLayerBuilder(LayerType.Bicycling);
+        }
+
+        public LayerBuilder AddTransitLayer()
+        {
+            return CreateLayerBuilder(LayerType.Transit);
+        }
+
+        private LayerBuilder CreateLayerBuilder(LayerType type)
+        {
+            var layer = new Layer(type.ToString(), map);
+            map.Layers.Add(layer);
+            return new LayerBuilder(layer);
         }
     }
 }

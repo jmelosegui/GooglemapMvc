@@ -1,0 +1,63 @@
+﻿@model Jmelosegui.Mvc.Googlemap.Examples.Controllers.LayerViewModel
+
+@{
+    ViewBag.Title = "Traffic, Transit and Bicycling Layer";
+}
+
+@(Html.GoogleMap()
+    .Height(450)
+    .Center(c => c.Address("Madrid"))
+    .Zoom(14)
+    .Layers(l =>
+    {
+        if (Model.ShowTrafficLayer)
+        {
+            l.AddTrafficLayer();
+        }
+        if (Model.ShowBicyclingLayer)
+        {
+            l.AddBicyclingLayer();
+        }
+        if (Model.ShowTransitLayer)
+        {
+            l.AddTransitLayer();
+        }
+    })
+)
+<br />
+<form class="form-horizontal" method="POST" role="form">
+    <h4> Google Map Settings</h4>
+    <div class="col-md-1">
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("ShowTrafficLayer", new { id = "mapShowTrafficLayer" })
+                    Show Traffic Layer
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("ShowBicyclingLayer", new { id = "mapShowBicyclingLayer" })
+                    Show Bicycling Layer
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("ShowTransitLayer", new { id = "mapShowTransitLayer" })
+                    Show Transit Layer
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>
