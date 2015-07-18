@@ -288,6 +288,12 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        public GoogleMapBuilder Version(string version)
+        {
+            Component.Version = version;
+            return this;
+        }
+
         public GoogleMapBuilder Width(int value)
         {
             Component.Width = value;

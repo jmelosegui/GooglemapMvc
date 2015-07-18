@@ -134,6 +134,10 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public ControlPosition StreetViewControlPosition { get; set; }
 
+        public bool UseCurrentPosition { get; set; }
+
+        public string Version { get; set; }
+
         public int Width { get; set; }
 
         public int Zoom { get; set; }
@@ -143,8 +147,6 @@ namespace Jmelosegui.Mvc.Googlemap
         public ControlPosition ZoomControlPosition { get; set; }
 
         public ZoomControlStyle ZoomControlStyle { get; set; }
-
-        public bool UseCurrentPosition { get; set; }
 
         #endregion
 
@@ -311,7 +313,9 @@ namespace Jmelosegui.Mvc.Googlemap
             var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
             var visualization = Layers.Any(l => l.GetType() == typeof (HeatmapLayer)) ? "&libraries=visualization" : "";
             var isAjax = builder.ViewContext.HttpContext.Request.IsAjaxRequest() ? "&callback=executeAsync" : "";
-            var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?v=3.exp{3}{0}{1}{2}", key, languaje, visualization, isAjax);
+            var version = (String.IsNullOrWhiteSpace(Version)) ? "" : ("v=" + Version);
+            var mainJs = String.Format("https://maps.googleapis.com/maps/api/js?{0}{1}{2}{3}{4}", version, key, languaje, visualization, isAjax);
+                                                                                    
             ScriptFileNames.Add(mainJs);
 
             if (EnableMarkersClustering)

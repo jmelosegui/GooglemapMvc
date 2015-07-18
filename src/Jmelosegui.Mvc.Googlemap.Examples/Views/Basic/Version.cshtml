@@ -1,0 +1,39 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "GoogleMap Version";
+}
+
+<div style="height: 500px; border: solid 1px #cccccc">
+    @(Html.GoogleMap()
+          .Name("map")
+          .Version(ViewData["version"] as string)
+          .Height(500))
+</div>
+
+<br />
+
+<form class="form-horizontal" role="form">
+    <h4> Google Map Settings</h4>
+    <div class="form-group">
+        <label for="width" class="col-sm-2 control-label">Version</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("version", 
+                                new List<SelectListItem>
+                                {
+                                    new SelectListItem {Text = "Default", Value = ""},
+                                    new SelectListItem {Text = "3.exp", Value = "3.exp"},
+                                    new SelectListItem {Text = "3.20", Value = "3.20"},
+                                    new SelectListItem {Text = "3.19", Value = "3.19"},
+                                }, 
+                                new { @class = "form-control", id = "mapHeight" }
+                              )
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>
+

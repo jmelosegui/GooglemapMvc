@@ -125,6 +125,7 @@
     <Compile Include="Controllers\Basic\LanguageController.cs" />
     <Compile Include="Controllers\Basic\UIControlsController.cs" />
     <Compile Include="Controllers\Basic\FirstLookController.cs" />
+    <Compile Include="Controllers\Basic\VersionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayersController.cs" />
     <Compile Include="Controllers\Layers\HeatmapController.cs" />
@@ -292,6 +293,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Content\Basic\Descriptions\Version.html" />
     <Content Include="Views\Home\FirstLook.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -342,6 +344,7 @@
     <Content Include="Views\Marker\ExternalReference.cshtml" />
     <Content Include="Views\Layers\Kml.cshtml" />
     <Content Include="Views\Layers\TrafficTransitBike.cshtml" />
+    <Content Include="Views\Basic\Version.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

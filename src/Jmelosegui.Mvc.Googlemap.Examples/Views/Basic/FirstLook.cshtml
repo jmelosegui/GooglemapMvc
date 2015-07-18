@@ -14,23 +14,18 @@
 <br />
 
 <form class="form-horizontal" role="form">
-    <h4> Google Map Settings</h4>
-
+    <h4> Google Map Settings</h4>    
     <div class="form-group">
-        <label for="width" class="col-sm-1 control-label">Width</label>
-        <div class="col-sm-5">
+        <label for="width" class="col-sm-2 control-label">Width (px)</label>
+        <div class="col-sm-4">
             @Html.TextBox("width", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number" })
             <label>0 for automatic with</label>
         </div>
-        <label class="col-sm-1 control-label">px</label>
-    </div>
-    <div class="form-group">
-        <label for="height" class="col-sm-1 control-label">Height</label>
-        <div class="col-sm-5">
-            @Html.TextBox("height", null, new {@class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number"}) 
+        <label for="height" class="col-sm-2 control-label">Height (px)</label>
+        <div class="col-sm-4">
+            @Html.TextBox("height", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number" })
             <label>0 for automatic height</label>
         </div>
-        <label class="col-sm-1 control-label">px</label>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-10">
