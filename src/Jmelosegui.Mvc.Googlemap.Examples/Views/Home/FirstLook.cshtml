@@ -6,33 +6,50 @@
 <div class="row">
     <div class="col-md-12">
         <img src="~/Images/logo.jpg" alt="Alternate Text" class="pull-left hidden-xs" style="margin-right: 30px" />
-        <p style="margin-top: 30px;">
-            The control wraps Google maps API simplifying the use of Google maps in ASP.NET
+        <h4 style="margin-top: 30px;">
+            Googlemap control for Asp.Net MVC wraps Google maps API simplifying the use of Google maps in ASP.NET
             MVC applications.<br />
-        </p>
+        </h4>
     </div>
 </div>
 
 <div class="row">
-    <ul id="highlights">
-        <li>
-            <h3>
-                Open Source
-            </h3>
-            <p>
-                Feel free to use it under <strong>GPLv2</strong> license
-            </p>
-        </li>
-        <li>
-            <h3>Nuget Package Available</h3>
-            <div class="col-lg-9 col-xs-12 nuget">
-                PM> Install-Package Jmelosegui.Mvc.Googlemap
-            </div>
-            <div class="clearfix"></div>
-            <p>
-                See the <a href="https://github.com/jmelosegui/GooglemapMvc/wiki/Installation">Installation</a> page on github
-            </p>
+    <div class="col-sm-12">
+        <h2>Install</h2>
+        <p>Inside Visual Studio create a new AspNet Mvc Application.</p>
+        <p> Open the package manager console and install the Googlemap Mvc nuget package by typing the following command.</p>
 
-        </li>
-    </ul>
+        <div class="col-lg-9 col-xs-12 nuget">
+            PM> Install-Package Jmelosegui.Mvc.Googlemap
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <br />
+    <div class="col-sm-12">
+
+        <p>Once you have it go to the Views-&gt;Home-&gt;Index.cshtml and include the following</p>
+        <pre class="prettyprint">
+    @@(
+        Html.Googlemap()
+            .Name("map")
+            .Markers(m => m.Add().Title("Hello World!")) 
+    )
+        </pre>
+
+        <p>and at the end of that page add the following</p>
+
+        <pre class="prettyprint">
+    @@section scripts
+    {
+       @@(Html.GoogleMap().ScriptRegistrar())
+    }
+        </pre>
+
+        <p>Now hit F5 and you should see the map rendering on the page </p>
+    </div>
+
+    <div class="col-sm-12">
+        <h2>License</h2>
+        <p>Googlemap control for Asp.Net MVC is released under the <a href="https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE">GNU GENERAL PUBLIC LICENSE</a> Version 2.</p>
+    </div>
 </div>
