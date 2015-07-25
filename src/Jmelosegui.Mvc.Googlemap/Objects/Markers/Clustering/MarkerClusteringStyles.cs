@@ -9,7 +9,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         public string Url
         {
             get { return url; }
-            set { url = System.Web.VirtualPathUtility.ToAbsolute(value); }
+            set { url = value.ToAbsoluteUrl(); }
         }
 
         public int Height { get; set; }

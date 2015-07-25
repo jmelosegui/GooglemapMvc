@@ -32,15 +32,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public ImageMapTypeBuilder TileUrlPattern(string value)
         {
-            if (value.IndexOf("://", StringComparison.Ordinal) == -1)
-            {
-                mapType.TileUrlPattern = System.Web.VirtualPathUtility.ToAbsolute(value);
-            }
-            else
-            {
-                mapType.TileUrlPattern = value;    
-            }
-
+            mapType.TileUrlPattern = value.ToAbsoluteUrl();
             return this;
         }
     }

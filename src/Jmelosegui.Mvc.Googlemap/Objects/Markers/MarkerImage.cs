@@ -8,7 +8,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public MarkerImage(string path, Size size, Point point, Point anchor)
         {
-            Path = System.Web.VirtualPathUtility.ToAbsolute(path);
+            Path = path.ToAbsoluteUrl();
             Size = size;
             Point = point;
             Anchor = anchor;
@@ -24,7 +24,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             }
             set
             {
-                path = System.Web.VirtualPathUtility.ToAbsolute(value);
+                path = value.ToAbsoluteUrl();
             }
         }
 

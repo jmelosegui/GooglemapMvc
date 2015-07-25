@@ -7,6 +7,19 @@
   Origins, anchor positions and coordinates of the marker increase in the X direction to the right and in the Y direction down.
 </p>
 
+<p>You will find 3 overloads for creating an Icon</p>
+<p>
+    This method will give you the more fine grained control over the marker customization.
+    This method will receive the URL of the image along with the size, origin and anchor point. 
+    The URL could be either a virtual or an absolute path.
+</p>
+<pre class="prettyprint">
+public MarkerBuilder Icon(string path, Size size, Point point, Point anchor)
+</pre>
+<p>
+    The following sample will show you how to use it.
+</p>
+
 <pre class="prettyprint">
 @{
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -15,7 +28,6 @@
     var origin = new Point(0, 0);
     // The anchor for this image is the base of the flagpole at 0,32.
     var anchor = new Point(0, 32);
-
     Html.Googlemap()
         .Name("map")
         .Markers(marker =&gt;
@@ -29,4 +41,18 @@
         })
         .Render();
 }
+</pre>
+<p>
+    The following method will receive the URL of the image along with it's size. 
+    By default this method will assume the marker position will be in the middle of the bottom line of the marker image.
+</p>
+<pre class="prettyprint">
+public MarkerBuilder Icon(string path, Size size)
+</pre>
+<p>
+    The following method will receive the URL.
+    By default this method will assume the image size will be 32x32 px and marker position in the middle of the bottom line of the marker image.
+</p>
+<pre class="prettyprint">
+public MarkerBuilder Icon(string path)
 </pre>

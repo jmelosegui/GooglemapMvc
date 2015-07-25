@@ -37,6 +37,20 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
+        public MarkerBuilder Icon(string path)
+        {
+            Size size = new Size(32, 32);
+            return Icon(path, size);
+        }
+
+        public MarkerBuilder Icon(string path, Size size)
+        {
+            Point point = new Point(0,0);
+            Point anchor = new Point(size.Width/2, size.Height);
+            
+            return Icon(path, size, point, anchor);
+        }
+
         public MarkerBuilder Icon(string path, Size size, Point point, Point anchor)
         {
             marker.Icon = new MarkerImage(path, size, point, anchor); 

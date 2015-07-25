@@ -43,16 +43,8 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         public KmlLayerBuilder Url(string url)
         {
             if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(url, "Url cannot be null");
-
-            if (url.IndexOf("://", StringComparison.Ordinal) == -1)
-            {
-                Layer.Url = System.Web.VirtualPathUtility.ToAbsolute(url);
-            }
-            else
-            {
-                Layer.Url = url;
-            }
-
+            Layer.Url = url.ToAbsoluteUrl();
+            
             return this;
         }
 
