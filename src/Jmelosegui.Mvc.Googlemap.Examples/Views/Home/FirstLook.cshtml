@@ -30,8 +30,9 @@
         <p>Once you have it go to the Views-&gt;Home-&gt;Index.cshtml and include the following</p>
         <pre class="prettyprint">
     @@(
-        Html.Googlemap()
+        Html.GoogleMap()
             .Name("map")
+            .Height(500)
             .Markers(m => m.Add().Title("Hello World!")) 
     )
         </pre>

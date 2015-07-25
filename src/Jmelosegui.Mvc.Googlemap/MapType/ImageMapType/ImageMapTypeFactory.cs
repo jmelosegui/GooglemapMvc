@@ -2,18 +2,18 @@
 {
     public class ImageMapTypeFactory : IHideObjectMembers 
     {
-        private readonly GoogleMap map;
-
         public ImageMapTypeFactory(GoogleMap map)
         {
-            this.map = map;
+            this.Map = map;
         }
+
+        protected GoogleMap Map { get; private set; }
 
         public ImageMapTypeBuilder Add()
         {
             var maptype = new ImageMapType();
 
-            map.ImageMapTypes.Add(maptype);
+            Map.ImageMapTypes.Add(maptype);
 
             return new ImageMapTypeBuilder(maptype);
         }

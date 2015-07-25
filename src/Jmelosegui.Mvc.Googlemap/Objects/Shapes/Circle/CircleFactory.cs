@@ -2,18 +2,18 @@
 {
     public class CircleFactory : IHideObjectMembers
     {
-        private readonly GoogleMap map;
-
         public CircleFactory(GoogleMap map)
         {
-            this.map = map;
+            this.Map = map;
         }
+
+        protected GoogleMap Map { get; private set; }
 
         public CircleBuilder Add()
         {
-            var circle = new Circle(map);
+            var circle = new Circle(Map);
 
-            map.Circles.Add(circle);
+            Map.Circles.Add(circle);
 
             return new CircleBuilder(circle);
         }

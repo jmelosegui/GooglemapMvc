@@ -2,21 +2,21 @@
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public class MarkerFactory : IHideObjectMembers
+    public class MarkerFactory : IHideObjectMembers 
     {
-        private readonly GoogleMap map;
-
         public MarkerFactory(GoogleMap map)
         {
             if(map == null) throw new ArgumentNullException("map");
-            this.map = map;
+            Map = map;
         }
 
-        public MarkerBuilder Add()
-        {
-            var marker = new Marker(map);
+        protected GoogleMap Map { get; private set; }
 
-            map.Markers.Add(marker);
+        public MarkerBuilder Add() 
+        {
+            var marker = new Marker(Map);
+
+            Map.Markers.Add(marker);
 
             return new MarkerBuilder(marker);
         }

@@ -5,28 +5,28 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class LayerFactory
     {
-        private readonly GoogleMap map;
-
         public LayerFactory(GoogleMap map)
         {
             if (map == null) throw new ArgumentNullException("map");
-            this.map = map;
+            this.Map = map;
         }
+
+        protected GoogleMap Map { get; private set; }
 
         public HeatLayerBuilder AddHeatmapLayer()
         {
-            var heatLayer = new HeatmapLayer(map);
+            var heatLayer = new HeatmapLayer(Map);
 
-            map.Layers.Add(heatLayer);
+            Map.Layers.Add(heatLayer);
 
             return new HeatLayerBuilder(heatLayer);
         }
 
         public KmlLayerBuilder AddKmlLayer()
         {
-            var kmlLayer = new KmlLayer(map);
+            var kmlLayer = new KmlLayer(Map);
 
-            map.Layers.Add(kmlLayer);
+            Map.Layers.Add(kmlLayer);
 
             return new KmlLayerBuilder(kmlLayer);
         }
@@ -48,8 +48,8 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         private LayerBuilder CreateLayerBuilder(LayerType type)
         {
-            var layer = new Layer(type.ToString(), map);
-            map.Layers.Add(layer);
+            var layer = new Layer(type.ToString(), Map);
+            Map.Layers.Add(layer);
             return new LayerBuilder(layer);
         }
     }

@@ -2,18 +2,18 @@
 {
     public class PolygonFactory : IHideObjectMembers
     {
-        private readonly GoogleMap map;
-
         public PolygonFactory(GoogleMap map)
         {
-            this.map = map;
+            this.Map = map;
         }
+
+        protected GoogleMap Map { get; private set; }
 
         public PolygonBuilder Add()
         {
-            var polygon = new Polygon(map);
+            var polygon = new Polygon(Map);
 
-            map.Polygons.Add(polygon);
+            Map.Polygons.Add(polygon);
 
             return new PolygonBuilder(polygon);
         }

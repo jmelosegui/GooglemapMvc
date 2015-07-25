@@ -24,7 +24,7 @@ namespace Jmelosegui.Mvc.Googlemap
             scriptRegistrar = (ScriptRegistrar)viewContext.HttpContext.Items[Key] ?? new ScriptRegistrar(viewContext);
         }
 
-        internal GoogleMap Component
+        protected internal GoogleMap Component
         {
             get
             {

@@ -12,7 +12,6 @@ namespace Jmelosegui.Mvc.Googlemap
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private bool hasRendered;
-        private readonly List<GoogleMap> components;
 
         public ScriptRegistrar(ViewContext viewContext)
         {
@@ -21,7 +20,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 throw new InvalidOperationException("Only one ScriptRegistrar is allowed in a single request");
             }
 
-            this.components = new List<GoogleMap>();
+            Components = new List<GoogleMap>();
 
             viewContext.HttpContext.Items[Key] = this;
             BasePath = "~/Scripts";
@@ -29,6 +28,8 @@ namespace Jmelosegui.Mvc.Googlemap
         }
 
         public string BasePath { get; set; }
+
+        protected List<GoogleMap> Components { get; private set; }
 
         protected ViewContext ViewContext
         {
@@ -55,7 +56,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if(component == null) throw new ArgumentNullException("component");
 
-            components.Add(component);
+            Components.Add(component);
         }
 
         protected virtual void Write(TextWriter writer)
@@ -69,7 +70,7 @@ namespace Jmelosegui.Mvc.Googlemap
             const string bundlePath = "~/jmelosegui/googlemap";
             var bundle = new ScriptBundle(bundlePath);
 
-            var scripts = components.SelectMany(c => c.ScriptFileNames).Distinct().ToList();
+            var scripts = Components.SelectMany(c => c.ScriptFileNames).Distinct().ToList();
             foreach (var scriptFileName in scripts)
             {
                 var localScriptFileName = scriptFileName;
@@ -96,7 +97,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 ? "function executeAsync(){"
                 : "jQuery(document).ready(function(){");
 
-            foreach (var component in components)
+            foreach (var component in Components)
             {
                 component.WriteInitializationScript(writer);
                 writer.WriteLine();

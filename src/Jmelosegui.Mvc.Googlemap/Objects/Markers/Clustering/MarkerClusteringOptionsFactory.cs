@@ -4,22 +4,22 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class MarkerClusteringOptionsFactory
     {
-        private readonly GoogleMap map;
-
         public MarkerClusteringOptionsFactory(GoogleMap component)
         {
-            this.map = component;
+            this.Map = component;
         }
+
+        protected GoogleMap Map { get; private set; }
 
         public int MaxZoom
         {
             get
             {
-                return map.MarkerClusteringOptions.MaxZoom;
+                return Map.MarkerClusteringOptions.MaxZoom;
             }
             set 
             {
-                map.MarkerClusteringOptions.MaxZoom = value;
+                Map.MarkerClusteringOptions.MaxZoom = value;
             }
         }
 
@@ -27,11 +27,11 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             get
             {
-                return map.MarkerClusteringOptions.GridSize;
+                return Map.MarkerClusteringOptions.GridSize;
             }
             set
             {
-                map.MarkerClusteringOptions.GridSize = value;
+                Map.MarkerClusteringOptions.GridSize = value;
             }
         }
 
@@ -39,11 +39,11 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             get
             {
-                return map.MarkerClusteringOptions.AverageCenter;
+                return Map.MarkerClusteringOptions.AverageCenter;
             }
             set
             {
-                map.MarkerClusteringOptions.AverageCenter = value;
+                Map.MarkerClusteringOptions.AverageCenter = value;
             }
         }
 
@@ -51,11 +51,11 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             get
             {
-                return map.MarkerClusteringOptions.ZoomOnClick;
+                return Map.MarkerClusteringOptions.ZoomOnClick;
             }
             set
             {
-                map.MarkerClusteringOptions.ZoomOnClick = value;
+                Map.MarkerClusteringOptions.ZoomOnClick = value;
             }
         }
 
@@ -63,17 +63,17 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             get
             {
-                return map.MarkerClusteringOptions.HideSingleGroupMarker;
+                return Map.MarkerClusteringOptions.HideSingleGroupMarker;
             }
             set
             {
-                map.MarkerClusteringOptions.HideSingleGroupMarker = value;
+                Map.MarkerClusteringOptions.HideSingleGroupMarker = value;
             }
         }
 
         public List<MarkerClusteringStyles> CustomStyles
         {
-            get { return map.MarkerClusteringOptions.CustomStyles; }
+            get { return Map.MarkerClusteringOptions.CustomStyles; }
             
         }
     }
