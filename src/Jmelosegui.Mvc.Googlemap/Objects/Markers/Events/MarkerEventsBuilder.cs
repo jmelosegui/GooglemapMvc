@@ -4,20 +4,24 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class MarkerEventsBuilder: IHideObjectMembers
     {
-        private readonly MarkerClientEvents clientEvents;
+        protected MarkerEventsBuilder(MarkerEventsBuilder builder) : this(builder.ClientEvents)
+        {
+        }
 
         public MarkerEventsBuilder(MarkerClientEvents clientEvents)
         {
             if(clientEvents == null)throw  new ArgumentNullException("clientEvents");
 
-            this.clientEvents = clientEvents;
+            this.ClientEvents = clientEvents;
         }
+
+        protected MarkerClientEvents ClientEvents { get; private set; }
 
         public MarkerEventsBuilder OnMarkerClick(string onMarkerClickHandlerName)
         {
             if (String.IsNullOrEmpty(onMarkerClickHandlerName)) throw new ArgumentNullException("onMarkerClickHandlerName");
 
-            clientEvents.OnMarkerClick.HandlerName = onMarkerClickHandlerName;
+            ClientEvents.OnMarkerClick.HandlerName = onMarkerClickHandlerName;
 
             return this;
         }
@@ -26,7 +30,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerDblClickkHandlerName)) throw new ArgumentNullException("onMarkerDblClickkHandlerName");
 
-            clientEvents.OnMarkerDblClick.HandlerName = onMarkerDblClickkHandlerName;
+            ClientEvents.OnMarkerDblClick.HandlerName = onMarkerDblClickkHandlerName;
 
             return this;
         }
@@ -35,7 +39,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerDragStartHandlerName)) throw new ArgumentNullException("onMarkerDragStartHandlerName");
 
-            clientEvents.OnMarkerDragStart.HandlerName = onMarkerDragStartHandlerName;
+            ClientEvents.OnMarkerDragStart.HandlerName = onMarkerDragStartHandlerName;
 
             return this;
         }
@@ -44,7 +48,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerDragHandlerName)) throw new ArgumentNullException("onMarkerDragHandlerName");
 
-            clientEvents.OnMarkerDrag.HandlerName = onMarkerDragHandlerName;
+            ClientEvents.OnMarkerDrag.HandlerName = onMarkerDragHandlerName;
 
             return this;
         }
@@ -53,7 +57,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerDragEndHandlerName)) throw new ArgumentNullException("onMarkerDragEndHandlerName");
 
-            clientEvents.OnMarkerDragEnd.HandlerName = onMarkerDragEndHandlerName;
+            ClientEvents.OnMarkerDragEnd.HandlerName = onMarkerDragEndHandlerName;
 
             return this;
         }
@@ -62,7 +66,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerFlatChangedHandlerName)) throw new ArgumentNullException("onMarkerFlatChangedHandlerName");
 
-            clientEvents.OnMarkerFlatChanged.HandlerName = onMarkerFlatChangedHandlerName;
+            ClientEvents.OnMarkerFlatChanged.HandlerName = onMarkerFlatChangedHandlerName;
 
             return this;
         }
@@ -71,7 +75,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerIconChangedHandlerName)) throw new ArgumentNullException("onMarkerIconChangedHandlerName");
 
-            clientEvents.OnMarkerIconChanged.HandlerName = onMarkerIconChangedHandlerName;
+            ClientEvents.OnMarkerIconChanged.HandlerName = onMarkerIconChangedHandlerName;
 
             return this;
         }
@@ -80,7 +84,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerMouseDownHandlerName)) throw new ArgumentNullException("onMarkerMouseDownHandlerName");
 
-            clientEvents.OnMarkerMouseDown.HandlerName = onMarkerMouseDownHandlerName;
+            ClientEvents.OnMarkerMouseDown.HandlerName = onMarkerMouseDownHandlerName;
 
             return this;
         }
@@ -89,7 +93,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerMouseOutHandlerName)) throw new ArgumentNullException("onMarkerMouseOutHandlerName");
 
-            clientEvents.OnMarkerMouseOut.HandlerName = onMarkerMouseOutHandlerName;
+            ClientEvents.OnMarkerMouseOut.HandlerName = onMarkerMouseOutHandlerName;
 
             return this;
         }
@@ -98,7 +102,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerMouseOverHandlerName)) throw new ArgumentNullException("onMarkerMouseOverHandlerName");
 
-            clientEvents.OnMarkerMouseOver.HandlerName = onMarkerMouseOverHandlerName;
+            ClientEvents.OnMarkerMouseOver.HandlerName = onMarkerMouseOverHandlerName;
 
             return this;
         }
@@ -107,7 +111,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerMouseUpHandlerName)) throw new ArgumentNullException("onMarkerMouseUpHandlerName");
 
-            clientEvents.OnMarkerMouseUp.HandlerName = onMarkerMouseUpHandlerName;
+            ClientEvents.OnMarkerMouseUp.HandlerName = onMarkerMouseUpHandlerName;
 
             return this;
         }
@@ -116,7 +120,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerPositionChangedHandlerName)) throw new ArgumentNullException("onMarkerPositionChangedHandlerName");
 
-            clientEvents.OnMarkerPositionChanged.HandlerName = onMarkerPositionChangedHandlerName;
+            ClientEvents.OnMarkerPositionChanged.HandlerName = onMarkerPositionChangedHandlerName;
 
             return this;
         }
@@ -125,7 +129,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerRightClickHandlerName)) throw new ArgumentNullException("onMarkerRightClickHandlerName");
 
-            clientEvents.OnMarkerRightClick.HandlerName = onMarkerRightClickHandlerName;
+            ClientEvents.OnMarkerRightClick.HandlerName = onMarkerRightClickHandlerName;
 
             return this;
         }
@@ -134,7 +138,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerShapeChangedHandlerName)) throw new ArgumentNullException("onMarkerShapeChangedHandlerName");
 
-            clientEvents.OnMarkerShapeChanged.HandlerName = onMarkerShapeChangedHandlerName;
+            ClientEvents.OnMarkerShapeChanged.HandlerName = onMarkerShapeChangedHandlerName;
 
             return this;
         }
@@ -143,7 +147,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerTitleChangedHandlerName)) throw new ArgumentNullException("onMarkerTitleChangedHandlerName");
 
-            clientEvents.OnMarkerTitleChanged.HandlerName = onMarkerTitleChangedHandlerName;
+            ClientEvents.OnMarkerTitleChanged.HandlerName = onMarkerTitleChangedHandlerName;
 
             return this;
         }
@@ -152,7 +156,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerVisibleChangedHandlerName)) throw new ArgumentNullException("onMarkerVisibleChangedHandlerName");
 
-            clientEvents.OnMarkerVisibleChanged.HandlerName = onMarkerVisibleChangedHandlerName;
+            ClientEvents.OnMarkerVisibleChanged.HandlerName = onMarkerVisibleChangedHandlerName;
 
             return this;
         }
@@ -161,7 +165,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if (String.IsNullOrEmpty(onMarkerzIndexChangedHandlerName)) throw new ArgumentNullException("onMarkerzIndexChangedHandlerName");
 
-            clientEvents.OnMarkerzIndexChanged.HandlerName = onMarkerzIndexChangedHandlerName;
+            ClientEvents.OnMarkerzIndexChanged.HandlerName = onMarkerzIndexChangedHandlerName;
 
             return this;
         }

@@ -4,52 +4,57 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class ShapeBuilder<TShape> where TShape : Shape
     {
-        private readonly TShape shape;
+        protected ShapeBuilder(ShapeBuilder<TShape> builder)
+            : this(builder.Shape)
+        {
+        }
 
         public ShapeBuilder(TShape shape)
         {
-            this.shape = shape;
+            this.Shape = shape;
         }
+
+        protected TShape Shape { get; private set; }
 
         public ShapeBuilder<TShape> Clickable(bool enabled)
         {
-            shape.Clickable = enabled;
+            Shape.Clickable = enabled;
             return this; 
         }
 
         public ShapeBuilder<TShape> FillColor(Color value)
         {
-            shape.FillColor = value;
+            Shape.FillColor = value;
             return this;
         }
 
         public ShapeBuilder<TShape> FillOpacity(double value)
         {
-            shape.FillOpacity = value;
+            Shape.FillOpacity = value;
             return this;
         }
 
         public ShapeBuilder<TShape> StrokeColor(Color value)
         {
-            shape.StrokeColor = value;
+            Shape.StrokeColor = value;
             return this;
         }
 
         public ShapeBuilder<TShape> StrokeOpacity(double value)
         {
-            shape.StrokeOpacity = value;
+            Shape.StrokeOpacity = value;
             return this;
         }
 
         public ShapeBuilder<TShape> StrokeWeight(int value)
         {
-            shape.StrokeWeight = value;
+            Shape.StrokeWeight = value;
             return this;
         }
 
         public ShapeBuilder<TShape> zIndex(int value)
         {
-            shape.zIndex = value;
+            Shape.zIndex = value;
             return this;
         }
     }

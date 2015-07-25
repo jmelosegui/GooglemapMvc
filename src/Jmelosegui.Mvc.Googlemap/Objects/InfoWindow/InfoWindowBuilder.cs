@@ -4,59 +4,63 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class InfoWindowBuilder
     {
-        private readonly InfoWindow window;
+        protected InfoWindowBuilder(InfoWindowBuilder builder) : this(builder.Window)
+        {
+        }
 
         public InfoWindowBuilder(InfoWindow window)
         {
-            this.window = window;
+            this.Window = window;
         }
+
+        protected InfoWindow Window { get; private set; }
 
         public InfoWindowBuilder Content(Action content)
         {
-            window.Template.Content = content;
+            Window.Template.Content = content;
             return this;
         }
 
         public InfoWindowBuilder Content(Func<object, object> content)
         {
-            window.Template.InlineTemplate = content;
+            Window.Template.InlineTemplate = content;
             return this;
         }
 
         public InfoWindowBuilder DisableAutoPan(bool disable)
         {
-            window.DisableAutoPan = disable;
+            Window.DisableAutoPan = disable;
             return this;
         }
 
        public InfoWindowBuilder OpenOnRightClick(bool value)
         {
-            window.OpenOnRightClick = value;
+            Window.OpenOnRightClick = value;
             return this;
         }
 
         public InfoWindowBuilder Latitude(double value)
         {
-            window.Latitude = value;
+            Window.Latitude = value;
             return this;
         }
 
         public InfoWindowBuilder Longitude(double value)
         {
-            window.Longitude = value;
+            Window.Longitude = value;
             return this;
         }
 
         public InfoWindowBuilder MaxWidth(int value)
         {
-            window.MaxWidth = value;
+            Window.MaxWidth = value;
             return this;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
         public InfoWindowBuilder zIndex(int value)
         {
-            window.zIndex = value;
+            Window.zIndex = value;
             return this;
         }
     }

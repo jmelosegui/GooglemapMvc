@@ -31,26 +31,26 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return new KmlLayerBuilder(kmlLayer);
         }
 
-        public LayerBuilder AddTrafficLayer()
+        public LayerBuilder<Layer> AddTrafficLayer()
         {
             return CreateLayerBuilder(LayerType.Traffic);
         }
 
-        public LayerBuilder AddBicyclingLayer()
+        public LayerBuilder<Layer> AddBicyclingLayer()
         {
             return CreateLayerBuilder(LayerType.Bicycling);
         }
 
-        public LayerBuilder AddTransitLayer()
+        public LayerBuilder<Layer> AddTransitLayer()
         {
             return CreateLayerBuilder(LayerType.Transit);
         }
 
-        private LayerBuilder CreateLayerBuilder(LayerType type)
+        private LayerBuilder<Layer> CreateLayerBuilder(LayerType type)
         {
             var layer = new Layer(type.ToString(), Map);
             Map.Layers.Add(layer);
-            return new LayerBuilder(layer);
+            return new LayerBuilder<Layer>(layer);
         }
     }
 }

@@ -4,17 +4,14 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class PolygonBuilder : ShapeBuilder<Polygon>
     {
-        private readonly Polygon polygon;
-
-        public PolygonBuilder(Polygon polygon): base(polygon)
+        public PolygonBuilder(Polygon shape) : base(shape)
         {
-            this.polygon = polygon;
         }
 
         public virtual ShapeBuilder<Polygon> Points(Action<LocationFactory<Polygon>> action)
         {
             if (action == null) throw new ArgumentNullException("action");
-            var factory = new LocationFactory<Polygon>(polygon);
+            var factory = new LocationFactory<Polygon>(base.Shape);
             action(factory);
             return this;
         }

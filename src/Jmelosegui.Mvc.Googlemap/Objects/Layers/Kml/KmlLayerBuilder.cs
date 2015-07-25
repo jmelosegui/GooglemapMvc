@@ -6,8 +6,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
     public class KmlLayerBuilder : LayerBuilder<KmlLayer>
     {
         #region Constructor
-        internal KmlLayerBuilder(KmlLayer kmlLayer)
-            : base(kmlLayer)
+        internal KmlLayerBuilder(KmlLayer kmlLayer) : base(kmlLayer)
         {
 
         } 

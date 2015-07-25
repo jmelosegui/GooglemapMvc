@@ -1,16 +1,19 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
     public class ScriptRegistrarBuilder : IHtmlString
     {
-        private readonly ScriptRegistrar scriptRegistrar;
+        protected ScriptRegistrarBuilder(ScriptRegistrarBuilder builder) : this(builder.ScriptRegistrar)
+        {
+        }
 
         public ScriptRegistrarBuilder(ScriptRegistrar scriptRegistrar)
         {
-            this.scriptRegistrar = scriptRegistrar;
+            this.ScriptRegistrar = scriptRegistrar;
         }
+
+        protected ScriptRegistrar ScriptRegistrar { get; private set; }
 
         public override string ToString()
         {
@@ -19,14 +22,14 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public string ToHtmlString()
         {
-            return scriptRegistrar.ToHtmlString();
+            return ScriptRegistrar.ToHtmlString();
         }
 
         public ScriptRegistrarBuilder ScriptsBasePath(string basePath)
         {
             UrlHelper.AssertVirtualPath(basePath, "basePath");
 
-            scriptRegistrar.BasePath = basePath;
+            ScriptRegistrar.BasePath = basePath;
             return this;
         }
     }

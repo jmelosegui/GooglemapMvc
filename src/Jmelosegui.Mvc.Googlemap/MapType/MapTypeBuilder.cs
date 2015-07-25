@@ -2,46 +2,51 @@ namespace Jmelosegui.Mvc.Googlemap
 {
     public class MapTypeBuilder<TMapType> where TMapType : MapType
     {
-        private readonly TMapType mapType;
+        protected MapTypeBuilder(MapTypeBuilder<TMapType> builder)
+            : this(builder.MapType)
+        {
+        }
 
         public MapTypeBuilder(TMapType mapType)
         {
-            this.mapType = mapType;
+            this.MapType = mapType;
         }
+
+        protected TMapType MapType { get; private set; }
 
         public MapTypeBuilder<TMapType> MapTypeAltName(string mapTypeAltName)
         {
-            mapType.MapTypeAltName = mapTypeAltName;
+            MapType.MapTypeAltName = mapTypeAltName;
             return this;
         }
 
         public MapTypeBuilder<TMapType> MaxZoom(int maxZoom)
         {
-            mapType.MaxZoom = maxZoom;
+            MapType.MaxZoom = maxZoom;
             return this;
         }
 
         public MapTypeBuilder<TMapType> MinZoom(int minZoom)
         {
-            mapType.MinZoom = minZoom;
+            MapType.MinZoom = minZoom;
             return this;
         }
 
         public MapTypeBuilder<TMapType> MapTypeName(string name)
         {
-            mapType.MapTypeName = name;
+            MapType.MapTypeName = name;
             return this;
         }
 
         public MapTypeBuilder<TMapType> Opacity(int value)
         {
-            mapType.Opacity = value;
+            MapType.Opacity = value;
             return this;
         }
 
         public MapTypeBuilder<TMapType> Radius(int value)
         {
-            mapType.Radius = value;
+            MapType.Radius = value;
             return this;
         }
     }

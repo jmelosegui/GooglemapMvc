@@ -6,34 +6,39 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class MarkerBuilder
     {
-        private readonly Marker marker;
+        protected MarkerBuilder(MarkerBuilder builder)  : this(builder.Marker)
+        {
+            
+        }
 
         public MarkerBuilder(Marker marker)
         {
-            this.marker = marker;
+            this.Marker = marker;
         }
+
+        protected Marker Marker { get; private set; }
 
         public MarkerBuilder Address(string address)
         {
-            marker.Address = address;
+            Marker.Address = address;
             return this;
         }
 
         public MarkerBuilder Id(string id)
         {
-            marker.Id = id;
+            Marker.Id = id;
             return this;
         }
 
         public MarkerBuilder Clickable(bool enabled)
         {
-            marker.Clickable = enabled;
+            Marker.Clickable = enabled;
             return this;
         }
 
         public MarkerBuilder Draggable(bool enabled)
         {
-            marker.Draggable = enabled;
+            Marker.Draggable = enabled;
             return this;
         }
 
@@ -53,33 +58,33 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public MarkerBuilder Icon(string path, Size size, Point point, Point anchor)
         {
-            marker.Icon = new MarkerImage(path, size, point, anchor); 
+            Marker.Icon = new MarkerImage(path, size, point, anchor); 
             return this;
         }
 
         public MarkerBuilder Latitude(double value)
         {
-            marker.Latitude = value;
+            Marker.Latitude = value;
             return this;
         }
 
         public MarkerBuilder Longitude(double value)
         {
-            marker.Longitude = value;
+            Marker.Longitude = value;
             return this;
         }
 
         public MarkerBuilder Title(string value)
         {
-            marker.Title = value;
+            Marker.Title = value;
             return this;
         }
 
         public MarkerBuilder Window(Action<InfoWindowFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
-            
-            var factory = new InfoWindowFactory(marker);
+
+            var factory = new InfoWindowFactory(Marker);
             action(factory);
             return this;
         }
@@ -87,7 +92,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
         public MarkerBuilder zIndex(int value)
         {
-            marker.zIndex = value;
+            Marker.zIndex = value;
             return this;
         }
     }

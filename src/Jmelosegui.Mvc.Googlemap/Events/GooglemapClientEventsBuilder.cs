@@ -4,28 +4,34 @@ namespace Jmelosegui.Mvc.Googlemap
 {
     public class GoogleMapClientEventsBuilder : IHideObjectMembers
     {
-        private readonly GoogleMapClientEvents clientEvents;
+        protected GoogleMapClientEventsBuilder(GoogleMapClientEventsBuilder builder)
+            : this(builder.ClientEvents)
+        {
+        }
 
         public GoogleMapClientEventsBuilder(GoogleMapClientEvents clientEvents)
         {
             if(clientEvents == null)throw  new ArgumentNullException("clientEvents");
 
-            this.clientEvents = clientEvents;
+            this.ClientEvents = clientEvents;
         }
+
+        protected GoogleMapClientEvents ClientEvents { get; private set; }
 
         public GoogleMapClientEventsBuilder OnMapBoundChanged(string onMapBoundChangedHandlerName)
         {
             if (String.IsNullOrEmpty(onMapBoundChangedHandlerName)) throw new ArgumentNullException("onMapBoundChangedHandlerName");
 
-            clientEvents.OnMapBoundChanged.HandlerName = onMapBoundChangedHandlerName;
+            ClientEvents.OnMapBoundChanged.HandlerName = onMapBoundChangedHandlerName;
 
             return this;
         }
+
         public GoogleMapClientEventsBuilder OnMapCenterChanged(string onMapCenterChangedHandlerName)
         {
             if (String.IsNullOrEmpty(onMapCenterChangedHandlerName)) throw new ArgumentNullException("onMapCenterChangedHandlerName");
 
-            clientEvents.OnMapCenterChanged.HandlerName = onMapCenterChangedHandlerName;
+            ClientEvents.OnMapCenterChanged.HandlerName = onMapCenterChangedHandlerName;
 
             return this;
         }
@@ -34,7 +40,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapClickHandlerName)) throw new ArgumentNullException("onMapClickHandlerName");
 
-            clientEvents.OnMapClick.HandlerName = onMapClickHandlerName;
+            ClientEvents.OnMapClick.HandlerName = onMapClickHandlerName;
 
             return this;
         }
@@ -43,7 +49,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapDobleClickHandlerName)) throw new ArgumentNullException("onMapDobleClickHandlerName");
 
-            clientEvents.OnMapDobleClick.HandlerName = onMapDobleClickHandlerName;
+            ClientEvents.OnMapDobleClick.HandlerName = onMapDobleClickHandlerName;
 
             return this;
         }
@@ -52,7 +58,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapRightClickkHandlerName)) throw new ArgumentNullException("onMapRightClickkHandlerName");
 
-            clientEvents.OnMapRightClick.HandlerName = onMapRightClickkHandlerName;
+            ClientEvents.OnMapRightClick.HandlerName = onMapRightClickkHandlerName;
 
             return this;
         }
@@ -61,7 +67,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapDragHandlerName)) throw new ArgumentNullException("onMapDragHandlerName");
 
-            clientEvents.OnMapDrag.HandlerName = onMapDragHandlerName;
+            ClientEvents.OnMapDrag.HandlerName = onMapDragHandlerName;
 
             return this;
         }
@@ -70,7 +76,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapDragEndHandlerName)) throw new ArgumentNullException("onMapDragEndHandlerName");
 
-            clientEvents.OnMapDragEnd.HandlerName = onMapDragEndHandlerName;
+            ClientEvents.OnMapDragEnd.HandlerName = onMapDragEndHandlerName;
 
             return this;
         }
@@ -79,7 +85,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapDragStartHandlerName)) throw new ArgumentNullException("onMapDragStartHandlerName");
 
-            clientEvents.OnMapDragStart.HandlerName = onMapDragStartHandlerName;
+            ClientEvents.OnMapDragStart.HandlerName = onMapDragStartHandlerName;
 
             return this;
         }
@@ -88,7 +94,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapHeadingChangedHandlerName)) throw new ArgumentNullException("onMapHeadingChangedHandlerName");
 
-            clientEvents.OnMapHeadingChanged.HandlerName = onMapHeadingChangedHandlerName;
+            ClientEvents.OnMapHeadingChanged.HandlerName = onMapHeadingChangedHandlerName;
 
             return this;
         }
@@ -97,7 +103,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapIdleHandlerName)) throw new ArgumentNullException("onMapIdleHandlerName");
 
-            clientEvents.OnMapIdle.HandlerName = onMapIdleHandlerName;
+            ClientEvents.OnMapIdle.HandlerName = onMapIdleHandlerName;
 
             return this;
         }
@@ -106,7 +112,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapTypeIdChangedHandlerName)) throw new ArgumentNullException("onMapTypeIdChangedHandlerName");
 
-            clientEvents.OnMapTypeIdChanged.HandlerName = onMapTypeIdChangedHandlerName;
+            ClientEvents.OnMapTypeIdChanged.HandlerName = onMapTypeIdChangedHandlerName;
 
             return this;
         }
@@ -115,7 +121,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMouseMoveHandlerName)) throw new ArgumentNullException("onMouseMoveHandlerName");
 
-            clientEvents.OnMouseMove.HandlerName = onMouseMoveHandlerName;
+            ClientEvents.OnMouseMove.HandlerName = onMouseMoveHandlerName;
 
             return this;
         }
@@ -124,7 +130,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMouseOutHandlerName)) throw new ArgumentNullException("onMouseOutHandlerName");
 
-            clientEvents.OnMouseOut.HandlerName = onMouseOutHandlerName;
+            ClientEvents.OnMouseOut.HandlerName = onMouseOutHandlerName;
 
             return this;
         }
@@ -133,7 +139,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMouseOverHandlerName)) throw new ArgumentNullException("onMouseOverHandlerName");
 
-            clientEvents.OnMouseOver.HandlerName = onMouseOverHandlerName;
+            ClientEvents.OnMouseOver.HandlerName = onMouseOverHandlerName;
 
             return this;
         }
@@ -142,7 +148,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onMapProjectionChangedHandlerName)) throw new ArgumentNullException("onMapProjectionChangedHandlerName");
 
-            clientEvents.OnMapProjectionChanged.HandlerName = onMapProjectionChangedHandlerName;
+            ClientEvents.OnMapProjectionChanged.HandlerName = onMapProjectionChangedHandlerName;
 
             return this;
         }
@@ -151,7 +157,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onResizeHandlerName)) throw new ArgumentNullException("onResizeHandlerName");
 
-            clientEvents.OnResize.HandlerName = onResizeHandlerName;
+            ClientEvents.OnResize.HandlerName = onResizeHandlerName;
 
             return this;
         }
@@ -160,7 +166,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onTilesLoadedHandlerName)) throw new ArgumentNullException("onTilesLoadedHandlerName");
 
-            clientEvents.OnTilesLoaded.HandlerName = onTilesLoadedHandlerName;
+            ClientEvents.OnTilesLoaded.HandlerName = onTilesLoadedHandlerName;
 
             return this;
         }
@@ -169,7 +175,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onTiltChangedHandlerName)) throw new ArgumentNullException("onTiltChangedHandlerName");
 
-            clientEvents.OnTiltChanged.HandlerName = onTiltChangedHandlerName;
+            ClientEvents.OnTiltChanged.HandlerName = onTiltChangedHandlerName;
 
             return this;
         }
@@ -178,7 +184,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (String.IsNullOrEmpty(onZoomChangedHandlerName)) throw new ArgumentNullException("onZoomChangedHandlerName");
 
-            clientEvents.OnZoomChanged.HandlerName = onZoomChangedHandlerName;
+            ClientEvents.OnZoomChanged.HandlerName = onZoomChangedHandlerName;
 
             return this;
         }
@@ -186,7 +192,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public GoogleMapClientEventsBuilder OnMapLoaded(string onMapLoad)
         {
             if (String.IsNullOrEmpty(onMapLoad)) throw new ArgumentNullException("onMapLoad");
-            clientEvents.OnMapLoaded.HandlerName = onMapLoad;
+            ClientEvents.OnMapLoaded.HandlerName = onMapLoad;
 
             return this;
         }
@@ -194,7 +200,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public GoogleMapClientEventsBuilder OnMarkersGeocodingCompleted(string onMarkersGeocodingCompleted)
         {
             if (String.IsNullOrEmpty(onMarkersGeocodingCompleted)) throw new ArgumentNullException("onMarkersGeocodingCompleted");
-            clientEvents.OnMarkersGeocodingCompleted.HandlerName = onMarkersGeocodingCompleted;
+            ClientEvents.OnMarkersGeocodingCompleted.HandlerName = onMarkersGeocodingCompleted;
 
             return this;
         }
@@ -202,7 +208,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public GoogleMapClientEventsBuilder OnMarkersGeocodingProgress(string onMarkersGeocodingProgress)
         {
             if (String.IsNullOrEmpty(onMarkersGeocodingProgress)) throw new ArgumentNullException("onMarkersGeocodingProgress");
-            clientEvents.OnMarkersGeocodingProgress.HandlerName = onMarkersGeocodingProgress;
+            ClientEvents.OnMarkersGeocodingProgress.HandlerName = onMarkersGeocodingProgress;
 
             return this;
         }
