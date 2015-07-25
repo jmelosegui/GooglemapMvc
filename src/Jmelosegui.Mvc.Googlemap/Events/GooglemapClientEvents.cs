@@ -26,7 +26,7 @@ namespace Jmelosegui.Mvc.Googlemap
             OnZoomChanged = new ClientEvent();
             OnMapLoaded = new ClientEvent();
             OnMarkersGeocodingCompleted = new ClientEvent();
-
+            OnMarkersGeocodingProgress = new ClientEvent();
         }
 
         public ClientEvent OnMapBoundChanged { get; private set; }
@@ -71,6 +71,8 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public ClientEvent OnMarkersGeocodingCompleted { get; private set; }
 
+        public ClientEvent OnMarkersGeocodingProgress { get; private set; }
+
         public void SerializeTo(ClientSideObjectWriter writer)
         {
             writer.AppendClientEvent("bounds_changed", OnMapBoundChanged);
@@ -94,6 +96,7 @@ namespace Jmelosegui.Mvc.Googlemap
             writer.AppendClientEvent("zoom_changed", OnZoomChanged);
             writer.AppendClientEvent("map_loaded", OnMapLoaded);
             writer.AppendClientEvent("markers_geocoding_completed", OnMarkersGeocodingCompleted);
+            writer.AppendClientEvent("markers_geocoding_progress", OnMarkersGeocodingProgress);
         }
     }
 

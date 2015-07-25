@@ -10,6 +10,9 @@
     You can subscribe to that event using the Map Client Event "OnMarkersGeocodingCompleted"
 </p>
 <p>
+    Googlemap control for Asp.Net MVC will also rise an event ("OnMarkersGeocodingProgress") you can subcribe to, in order to show progress on loading markers from Geocoding.
+</p>
+<p>
     Be aware of the Google Geocoding Services API <a href="https://developers.google.com/maps/documentation/geocoding/#Limits">limits</a>
 </p>
 <pre class="prettyprint">
@@ -21,6 +24,7 @@
                       .Longitude(-3))
         .ClientEvents(e =&gt;
             e.OnMarkersGeocodingCompleted(&quot;MarkerFromAddressCompleted&quot;)
+             .OnMarkersGeocodingProgress(&quot;OnProgress&quot;)
         )
         .MarkersGeocoding(true)                      
         .BindTo&lt;RegionInfo, Marker&gt;
@@ -45,5 +49,20 @@
             )
         )
         .Render();
+}
+
+@section Scripts{
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        function MarkerFromAddressCompleted(args) {
+            alert(&quot;Load markers using Geocoding completed !!!&quot;);
+        }
+        function OnProgress(args) {
+            alert(&quot;Progress Percentage = &quot; + args.value);
+
+            if (args.status !== google.maps.GeocoderStatus.OK) {
+                alert(&quot;Error loading address &quot; + args.address + &quot;. Reason: &quot; + args.status);
+            }
+        }
+    &lt;/script&gt;
 }
 </pre>

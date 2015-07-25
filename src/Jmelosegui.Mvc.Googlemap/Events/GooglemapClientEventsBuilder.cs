@@ -199,5 +199,12 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        public GoogleMapClientEventsBuilder OnMarkersGeocodingProgress(string onMarkersGeocodingProgress)
+        {
+            if (String.IsNullOrEmpty(onMarkersGeocodingProgress)) throw new ArgumentNullException("onMarkersGeocodingProgress");
+            clientEvents.OnMarkersGeocodingProgress.HandlerName = onMarkersGeocodingProgress;
+
+            return this;
+        }
     }
 }

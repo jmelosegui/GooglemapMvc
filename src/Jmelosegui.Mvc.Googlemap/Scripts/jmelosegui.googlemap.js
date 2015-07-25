@@ -478,6 +478,9 @@
         if (options.markers_geocoding_completed !== undefined) {
             this.markers_geocoding_completed = options.markers_geocoding_completed;
         }
+        if (options.markers_geocoding_progress !== undefined) {
+            this.markers_geocoding_progress = options.markers_geocoding_progress;
+        }
 
         //Marker Events
         this.markerEvents = [];
@@ -689,19 +692,26 @@
             var geo = new google.maps.Geocoder();
             var map = this;
             geo.geocode({ address: config.address }, function (results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    var p = results[0].geometry.location;
-                    config.lat = p.lat();
-                    config.lng = p.lng();
-                    var marker = new $jmelosegui.GoogleMarker(map, markerIndex, config);
-                    map.renderMarker(marker);
-                }
-                else {
-                    if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-                        markerIndex--;
-                        delay = delay + 10;
+                var percentageProgress = Math.round(markerIndex / map.markers.length * 100);
+                if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                    markerIndex--;
+                    delay = delay + 10;
+                } else {
+
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        var p = results[0].geometry.location;
+                        config.lat = p.lat();
+                        config.lng = p.lng();
+                        var marker = new $jmelosegui.GoogleMarker(map, markerIndex, config);
+                        map.renderMarker(marker);
+
                     } else {
                         console.log('Error: Geocode was not successful for the following reason: ' + status);
+                    }
+
+                    if (map.markers_geocoding_progress !== undefined) {
+                        var progressArgs = { 'map': map.GMap, value: percentageProgress, address: config.address, status: status };
+                        map.markers_geocoding_progress(progressArgs);
                     }
                 }
                 next(map);
