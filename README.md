@@ -34,7 +34,7 @@ Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of 
   - Kml
   - Traffic
   - Transit
-  - Bicycling Layer
+  - Bicycling
 
 ## Install
 
@@ -46,7 +46,10 @@ Once you have it go to the Views->Home->Index.cshtml and include the following
 ```html
 <div class="row">
     <div class="col-md-12">
-        @(Html.GoogleMap().Name("map"))
+        @(Html.GoogleMap()
+              .Name("map")
+              .Height(500)
+          )
     </div>
 </div>
 ```
