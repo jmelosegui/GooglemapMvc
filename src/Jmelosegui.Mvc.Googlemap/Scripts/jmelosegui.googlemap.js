@@ -94,7 +94,8 @@
                 strokeOpacity: this.strokeOpacity,
                 strokeWeight: this.strokeWeight,
                 fillColor: this.fillColor,
-                fillOpacity: this.fillOpacity
+                fillOpacity: this.fillOpacity,
+                clickable: this.clickable
             };
             var polygon = new google.maps.Polygon(options);
             polygon.setMap(this.Map);
@@ -130,7 +131,8 @@
                 strokeOpacity: this.strokeOpacity,
                 strokeWeight: this.strokeWeight,
                 fillColor: this.fillColor,
-                fillOpacity: this.fillOpacity
+                fillOpacity: this.fillOpacity,
+                clickable: this.clickable
             };
             var circle = new google.maps.Circle(options);
             circle.setMap(this.Map);

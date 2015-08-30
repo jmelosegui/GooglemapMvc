@@ -13,6 +13,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             FillColor = Color.Red;
             StrokeColor = Color.DarkRed;
             zIndex = 1;
+            Clickable = true;
         }
 
         public bool Clickable { get; set; }
