@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ImageMapTypeBuilder : MapTypeBuilder<ImageMapType>
     {

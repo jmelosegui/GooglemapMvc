@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ScriptRegistrarBuilder : IHtmlString
     {

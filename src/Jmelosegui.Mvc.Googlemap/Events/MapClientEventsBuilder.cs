@@ -1,23 +1,23 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class GoogleMapClientEventsBuilder : IHideObjectMembers
+    public class MapClientEventsBuilder : IHideObjectMembers
     {
-        protected GoogleMapClientEventsBuilder(GoogleMapClientEventsBuilder builder) : this(PassThroughNonNull(builder).ClientEvents)
+        protected MapClientEventsBuilder(MapClientEventsBuilder builder) : this(PassThroughNonNull(builder).ClientEvents)
         {
         }
 
-        public GoogleMapClientEventsBuilder(GoogleMapClientEvents clientEvents)
+        public MapClientEventsBuilder(MapClientEvents clientEvents)
         {
             if(clientEvents == null)throw  new ArgumentNullException("clientEvents");
 
             ClientEvents = clientEvents;
         }
 
-        protected GoogleMapClientEvents ClientEvents { get; private set; }
+        protected MapClientEvents ClientEvents { get; private set; }
 
-        public GoogleMapClientEventsBuilder OnMapBoundChanged(string handlerName)
+        public MapClientEventsBuilder OnMapBoundChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -26,7 +26,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapCenterChanged(string handlerName)
+        public MapClientEventsBuilder OnMapCenterChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -35,7 +35,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapClick(string handlerName)
+        public MapClientEventsBuilder OnMapClick(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -44,7 +44,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDoubleClick(string handlerName)
+        public MapClientEventsBuilder OnMapDoubleClick(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -53,7 +53,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapRightClick(string handlerName)
+        public MapClientEventsBuilder OnMapRightClick(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -62,7 +62,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDrag(string handlerName)
+        public MapClientEventsBuilder OnMapDrag(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -71,7 +71,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDragEnd(string handlerName)
+        public MapClientEventsBuilder OnMapDragEnd(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -80,7 +80,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDragStart(string handlerName)
+        public MapClientEventsBuilder OnMapDragStart(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -89,7 +89,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapHeadingChanged(string handlerName)
+        public MapClientEventsBuilder OnMapHeadingChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -98,7 +98,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapIdle(string handlerName)
+        public MapClientEventsBuilder OnMapIdle(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -107,7 +107,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapTypeIdChanged(string handlerName)
+        public MapClientEventsBuilder OnMapTypeIdChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -116,7 +116,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMouseMove(string handlerName)
+        public MapClientEventsBuilder OnMouseMove(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -125,7 +125,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMouseOut(string handlerName)
+        public MapClientEventsBuilder OnMouseOut(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -134,7 +134,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMouseOver(string handlerName)
+        public MapClientEventsBuilder OnMouseOver(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -143,7 +143,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapProjectionChanged(string handlerName)
+        public MapClientEventsBuilder OnMapProjectionChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -152,7 +152,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnResize(string handlerName)
+        public MapClientEventsBuilder OnResize(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -161,7 +161,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnTilesLoaded(string handlerName)
+        public MapClientEventsBuilder OnTilesLoaded(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -170,7 +170,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnTiltChanged(string handlerName)
+        public MapClientEventsBuilder OnTiltChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -179,7 +179,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnZoomChanged(string handlerName)
+        public MapClientEventsBuilder OnZoomChanged(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
@@ -188,7 +188,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapLoaded(string handlerName)
+        public MapClientEventsBuilder OnMapLoaded(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
             ClientEvents.OnMapLoaded.HandlerName = handlerName;
@@ -196,7 +196,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMarkersGeocodingCompleted(string handlerName)
+        public MapClientEventsBuilder OnMarkersGeocodingCompleted(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
             ClientEvents.OnMarkersGeocodingCompleted.HandlerName = handlerName;
@@ -204,7 +204,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMarkersGeocodingProgress(string handlerName)
+        public MapClientEventsBuilder OnMarkersGeocodingProgress(string handlerName)
         {
             if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
             ClientEvents.OnMarkersGeocodingProgress.HandlerName = handlerName;
@@ -212,7 +212,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        private static GoogleMapClientEventsBuilder PassThroughNonNull(GoogleMapClientEventsBuilder builder)
+        private static MapClientEventsBuilder PassThroughNonNull(MapClientEventsBuilder builder)
         {
             if (builder == null)
                 throw new ArgumentNullException("builder");

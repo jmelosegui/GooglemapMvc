@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public static class HtmlHelperExtension
     {
-        public static GoogleMapBuilder GoogleMap(this HtmlHelper helper)
+        public static MapBuilder GoogleMap(this HtmlHelper helper)
         {
             if (helper == null) throw new ArgumentNullException("helper");
 
-            return new GoogleMapBuilder(helper.ViewContext);
+            return new MapBuilder(helper.ViewContext);
         }
     }
 }

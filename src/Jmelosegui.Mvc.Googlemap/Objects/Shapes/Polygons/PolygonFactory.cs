@@ -1,8 +1,8 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public class PolygonFactory : MapObject, IHideObjectMembers
     {
-        public PolygonFactory(GoogleMap map) : base(map)
+        public PolygonFactory(Map map) : base(map)
         {
         }
 

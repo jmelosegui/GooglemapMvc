@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples
+namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
     public class FilterConfig
     {

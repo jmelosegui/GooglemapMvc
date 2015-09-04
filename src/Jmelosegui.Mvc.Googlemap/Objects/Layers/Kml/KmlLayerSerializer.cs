@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class KmlLayerSerializer : LayerSerializer<KmlLayer>
     {

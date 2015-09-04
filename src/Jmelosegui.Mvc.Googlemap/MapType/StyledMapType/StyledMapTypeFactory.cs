@@ -1,13 +1,13 @@
-﻿namespace Jmelosegui.Mvc.Googlemap
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public class StyledMapTypeFactory : IHideObjectMembers 
     {
-        public StyledMapTypeFactory(GoogleMap map)
+        public StyledMapTypeFactory(Map map)
         {
             Map = map;
         }
 
-        protected GoogleMap Map { get; private set; }
+        protected Map Map { get; private set; }
 
         public StyledMapTypeBuilder Add()
         {

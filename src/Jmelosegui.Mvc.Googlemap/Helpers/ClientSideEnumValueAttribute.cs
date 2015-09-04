@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class ClientSideEnumValueAttribute : Attribute

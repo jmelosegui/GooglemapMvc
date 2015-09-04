@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class Polygon : Shape, ILocationContainer
     {
         private readonly List<Location> points;
-        public Polygon(GoogleMap map): base(map)
+        public Polygon(Map map): base(map)
         {
             points = new List<Location>();
         }

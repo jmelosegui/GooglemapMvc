@@ -1,8 +1,8 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public class Overlay : MapObject
     {
-        public Overlay(GoogleMap map) : base(map)
+        public Overlay(Map map) : base(map)
         {
         }
 

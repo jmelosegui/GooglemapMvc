@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class Marker : Overlay
     {
         private readonly int index;
-        public Marker(GoogleMap map) : base(map)
+        public Marker(Map map) : base(map)
         {
             if (map == null) throw new ArgumentNullException("map");
             Clickable = true;

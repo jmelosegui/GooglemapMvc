@@ -1,13 +1,13 @@
-﻿namespace Jmelosegui.Mvc.Googlemap
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public class CenterFactory
     {
-        public CenterFactory(GoogleMap map)
+        public CenterFactory(Map map)
         {
             Map = map;
         }
 
-        protected GoogleMap Map { get; private set; }
+        protected Map Map { get; private set; }
 
         public CenterFactory UseCurrentPosition()
         {

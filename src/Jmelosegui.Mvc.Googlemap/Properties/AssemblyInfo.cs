@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Jmelosegui.Mvc.Googlemap")]
-[assembly: AssemblyDescription("Googlemap control for AspNet.Mvc wraps Google maps API simplifying the use of Google maps in ASP.NET MVC applications.")]
+[assembly: AssemblyTitle("Jmelosegui.Mvc.GoogleMap")]
+[assembly: AssemblyDescription("GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying the use of Google maps in ASP.NET MVC applications.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Jmelosegui.Mvc.Googlemap")]
+[assembly: AssemblyProduct("Jmelosegui.Mvc.GoogleMap")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

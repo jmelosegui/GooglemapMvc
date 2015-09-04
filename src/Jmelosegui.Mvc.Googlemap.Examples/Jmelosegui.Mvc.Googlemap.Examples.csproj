@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jmelosegui.Mvc.Googlemap.Examples</RootNamespace>
-    <AssemblyName>Jmelosegui.Mvc.Googlemap.Examples</AssemblyName>
+    <RootNamespace>Jmelosegui.Mvc.GoogleMap.Examples</RootNamespace>
+    <AssemblyName>Jmelosegui.Mvc.GoogleMap.Examples</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
@@ -355,9 +355,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.Googlemap.csproj">
+    <ProjectReference Include="..\Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.GoogleMap.csproj">
       <Project>{5476dbd6-f0ec-4b7a-a616-db42a7ef7e1b}</Project>
-      <Name>Jmelosegui.Mvc.Googlemap</Name>
+      <Name>Jmelosegui.Mvc.GoogleMap</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

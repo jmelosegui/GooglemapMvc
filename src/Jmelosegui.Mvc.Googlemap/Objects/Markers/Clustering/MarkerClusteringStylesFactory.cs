@@ -1,8 +1,8 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MarkerClusteringStylesFactory : MapObject
     {
-        public MarkerClusteringStylesFactory(GoogleMap map) : base(map)
+        public MarkerClusteringStylesFactory(Map map) : base(map)
         {
         }
 

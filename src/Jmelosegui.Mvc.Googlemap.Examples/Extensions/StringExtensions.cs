@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples
+namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
     public static class StringExtensions
     {

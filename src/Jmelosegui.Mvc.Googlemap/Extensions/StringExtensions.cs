@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Web;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     internal static class StringExtensions
     {

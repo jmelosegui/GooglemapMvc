@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IHideObjectMembers

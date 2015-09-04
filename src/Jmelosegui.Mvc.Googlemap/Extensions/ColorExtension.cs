@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Globalization;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    static class ColorExtension
+    internal static class ColorExtension
     {
         public static string ToHtml(this Color c)
         {

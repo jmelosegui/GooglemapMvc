@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples
+namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
     public class BundleConfig
     {

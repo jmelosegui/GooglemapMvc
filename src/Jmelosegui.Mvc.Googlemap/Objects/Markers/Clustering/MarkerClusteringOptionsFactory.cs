@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MarkerClusteringOptionsFactory : MapObject
     {
-        public MarkerClusteringOptionsFactory(GoogleMap component) : base(component)
+        public MarkerClusteringOptionsFactory(Map component) : base(component)
         {
         }
 

@@ -7,17 +7,16 @@ using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.UI;
-using Jmelosegui.Mvc.Googlemap.Objects;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class GoogleMap
+    public class Map
     {
-        private readonly GoogleMapBuilder builder;
+        private readonly MapBuilder builder;
 
         #region Constructor
 
-        public GoogleMap(GoogleMapBuilder builder)
+        public Map(MapBuilder builder)
         {
             this.builder = builder;
             ScriptFileNames = new Collection<string> {"jmelosegui.googlemap.js"};
@@ -28,7 +27,7 @@ namespace Jmelosegui.Mvc.Googlemap
         private void Initialize()
         {
             Id = "map";
-            ClientEvents = new GoogleMapClientEvents();
+            ClientEvents = new MapClientEvents();
             MarkerClientEvents = new MarkerClientEvents();
             DisableDoubleClickZoom = false;
             Draggable = true;
@@ -70,7 +69,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public string ApiKey { get; internal set; }
 
-        public GoogleMapClientEvents ClientEvents { get; private set; }
+        public MapClientEvents ClientEvents { get; private set; }
 
         public MarkerClientEvents MarkerClientEvents { get; private set; }
 
@@ -167,15 +166,15 @@ namespace Jmelosegui.Mvc.Googlemap
 
                 switch (typeof(TMapObject).FullName)
                 {
-                    case "Jmelosegui.Mvc.Googlemap.Objects.Marker":
+                    case "Jmelosegui.Mvc.GoogleMap.Marker":
                         mapObject = new Marker(this);
                         Markers.Add((Marker)mapObject);
                         break;
-                    case "Jmelosegui.Mvc.Googlemap.Objects.Circle":
+                    case "Jmelosegui.Mvc.GoogleMap.Circle":
                         mapObject = new Circle(this);
                         Circles.Add((Circle)mapObject);
                         break;
-                    case "Jmelosegui.Mvc.Googlemap.Objects.Polygon":
+                    case "Jmelosegui.Mvc.GoogleMap.Polygon":
                         mapObject = new Polygon(this);
                         Polygons.Add((Polygon)mapObject);
                         break;

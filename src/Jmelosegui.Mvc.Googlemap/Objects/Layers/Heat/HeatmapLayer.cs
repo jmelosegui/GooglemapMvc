@@ -4,13 +4,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class HeatmapLayer : Layer, ILocationContainer
     {
         private readonly List<Location> data;
 
-        public HeatmapLayer(GoogleMap map) : base("heatmap", map)
+        public HeatmapLayer(Map map) : base("heatmap", map)
         {
             Gradient = new Collection<Color>();
             data = new List<Location>();

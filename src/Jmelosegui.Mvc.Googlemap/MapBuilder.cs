@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
 using System.Web.Mvc;
-using Jmelosegui.Mvc.Googlemap.Objects;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class GoogleMapBuilder : IHtmlString
+    public class MapBuilder : IHtmlString
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private readonly ScriptRegistrar scriptRegistrar;
-        private GoogleMap component;
+        private Map component;
 
-        public GoogleMapBuilder(ViewContext viewContext)
+        public MapBuilder(ViewContext viewContext)
         {
             if (viewContext == null)
             {
@@ -24,13 +23,13 @@ namespace Jmelosegui.Mvc.Googlemap
             scriptRegistrar = (ScriptRegistrar)viewContext.HttpContext.Items[Key] ?? new ScriptRegistrar(viewContext);
         }
 
-        protected internal GoogleMap Component
+        protected internal Map Component
         {
             get
             {
                 if (component == null)
                 {
-                    component = new GoogleMap(this);
+                    component = new Map(this);
                     scriptRegistrar.AddComponent(component);
                 }
                 return component;
@@ -41,7 +40,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         #region Public Methods
 
-        public GoogleMapBuilder ApiKey(string value)
+        public MapBuilder ApiKey(string value)
         {
             Component.ApiKey = value;
             return this;
@@ -72,7 +71,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return content;
         }
 
-        public GoogleMapBuilder Center(Action<CenterFactory> action)
+        public MapBuilder Center(Action<CenterFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
 
@@ -81,7 +80,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder Circles(Action<CircleFactory> action)
+        public MapBuilder Circles(Action<CircleFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
 
@@ -90,30 +89,30 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder Culture(CultureInfo value)
+        public MapBuilder Culture(CultureInfo value)
         {
             Component.Culture = value;
             return this;
         }
 
-        public GoogleMapBuilder DisableDoubleClickZoom(bool disabled)
+        public MapBuilder DisableDoubleClickZoom(bool disabled)
         {
             Component.DisableDoubleClickZoom = disabled;
             return this;
         }
 
-        public GoogleMapBuilder Draggable(bool enabled)
+        public MapBuilder Draggable(bool enabled)
         {
             Component.Draggable = enabled;
             return this;
         }
 
-        public GoogleMapBuilder EnableMarkersClustering()
+        public MapBuilder EnableMarkersClustering()
         {
             return EnableMarkersClustering(null);
         }
 
-        public GoogleMapBuilder EnableMarkersClustering(Action<MarkerClusteringOptionsFactory> action)
+        public MapBuilder EnableMarkersClustering(Action<MarkerClusteringOptionsFactory> action)
         {
             Component.EnableMarkersClustering = true;
             if (action != null)
@@ -124,19 +123,19 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder FitToMarkersBounds(bool value)
+        public MapBuilder FitToMarkersBounds(bool value)
         {
             Component.FitToMarkersBounds = value;
             return this;
         }
 
-        public GoogleMapBuilder Height(int value)
+        public MapBuilder Height(int value)
         {
             Component.Height = value;
             return this;
         }
 
-        public GoogleMapBuilder ImageMapTypes(Action<ImageMapTypeFactory> action)
+        public MapBuilder ImageMapTypes(Action<ImageMapTypeFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
             var factory = new ImageMapTypeFactory(Component);
@@ -145,20 +144,20 @@ namespace Jmelosegui.Mvc.Googlemap
         }
 
         [Obsolete("This method is obsolete, use the Center method instead")]
-        public GoogleMapBuilder Latitude(double value)
+        public MapBuilder Latitude(double value)
         {
             Component.Latitude = value;
             return this;
         }
 
         [Obsolete("This method is obsolete, use the Center method instead")]
-        public GoogleMapBuilder Longitude(double value)
+        public MapBuilder Longitude(double value)
         {
             Component.Longitude = value;
             return this;
         }
 
-        public GoogleMapBuilder Layers(Action<LayerFactory> action)
+        public MapBuilder Layers(Action<LayerFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
             var factory = new LayerFactory(Component);
@@ -166,43 +165,43 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder MapTypeId(MapType value)
+        public MapBuilder MapTypeId(MapType value)
         {
             Component.MapTypeId = value.ToClientSideString();
             return this;
         }
 
-        public GoogleMapBuilder MapTypeId(string value)
+        public MapBuilder MapTypeId(string value)
         {
             Component.MapTypeId = value;
             return this;
         }
 
-        public GoogleMapBuilder MarkersGeocoding(bool value)
+        public MapBuilder MarkersGeocoding(bool value)
         {
             Component.MarkersGeocoding = value;
             return this;
         }
 
-        public GoogleMapBuilder MapTypeControlPosition(ControlPosition value)
+        public MapBuilder MapTypeControlPosition(ControlPosition value)
         {
             Component.MapTypeControlPosition = value;
             return this;
         }
 
-        public GoogleMapBuilder MapTypeControlVisible(bool visible)
+        public MapBuilder MapTypeControlVisible(bool visible)
         {
             Component.MapTypeControlVisible = visible;
             return this;
         }
 
-        public GoogleMapBuilder MapTypeControlStyle(MapTypeControlStyle value)
+        public MapBuilder MapTypeControlStyle(MapTypeControlStyle value)
         {
             Component.MapTypeControlStyle = value;
             return this;
         }
 
-        public GoogleMapBuilder Markers(Action<MarkerFactory> action)
+        public MapBuilder Markers(Action<MarkerFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
             var factory = new MarkerFactory(Component);
@@ -210,50 +209,50 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder MaxZoom(int value)
+        public MapBuilder MaxZoom(int value)
         {
             Component.MaxZoom = value;
             return this;
         }
 
-        public GoogleMapBuilder MinZoom(int value)
+        public MapBuilder MinZoom(int value)
         {
             Component.MinZoom = value;
             return this;
         }
 
-        public GoogleMapBuilder Name(string value)
+        public MapBuilder Name(string value)
         {
             if (value == null) throw new ArgumentNullException("value");
             Component.Id = value;
             return this;
         }
 
-        public GoogleMapBuilder PanControlPosition(ControlPosition controlPosition)
+        public MapBuilder PanControlPosition(ControlPosition controlPosition)
         {
             Component.PanControlPosition = controlPosition;
             return this;
         }
 
-        public GoogleMapBuilder PanControlVisible(bool visible)
+        public MapBuilder PanControlVisible(bool visible)
         {
             Component.PanControlVisible = visible;
             return this;
         }
 
-        public GoogleMapBuilder OverviewMapControlOpened(bool opened)
+        public MapBuilder OverviewMapControlOpened(bool opened)
         {
             Component.OverviewMapControlOpened = opened;
             return this;
         }
 
-        public GoogleMapBuilder OverviewMapControlVisible(bool visible)
+        public MapBuilder OverviewMapControlVisible(bool visible)
         {
             Component.OverviewMapControlVisible = visible;
             return this;
         }
 
-        public GoogleMapBuilder Polygons(Action<PolygonFactory> action)
+        public MapBuilder Polygons(Action<PolygonFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
             var factory = new PolygonFactory(Component);
@@ -261,26 +260,26 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder ScaleControlVisible(bool visible)
+        public MapBuilder ScaleControlVisible(bool visible)
         {
             Component.ScaleControlVisible = visible;
             return this;
         }
 
-        public GoogleMapBuilder StreetViewControlVisible(bool visible)
+        public MapBuilder StreetViewControlVisible(bool visible)
         {
             Component.StreetViewControlVisible = visible;
             return this;
         }
 
-        public GoogleMapBuilder StreetViewControlPosition(ControlPosition controlPosition)
+        public MapBuilder StreetViewControlPosition(ControlPosition controlPosition)
         {
             Component.StreetViewControlPosition = controlPosition;
             return this;
 
         }
 
-        public GoogleMapBuilder StyledMapTypes(Action<StyledMapTypeFactory> action)
+        public MapBuilder StyledMapTypes(Action<StyledMapTypeFactory> action)
         {
             if (action == null) throw new ArgumentNullException("action");
             var factory = new StyledMapTypeFactory(Component);
@@ -288,37 +287,37 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder Version(string value)
+        public MapBuilder Version(string value)
         {
             Component.Version = value;
             return this;
         }
 
-        public GoogleMapBuilder Width(int value)
+        public MapBuilder Width(int value)
         {
             Component.Width = value;
             return this;
         }
 
-        public GoogleMapBuilder Zoom(int value)
+        public MapBuilder Zoom(int value)
         {
             Component.Zoom = value;
             return this;
         }
 
-        public GoogleMapBuilder ZoomControlPosition(ControlPosition controlPosition)
+        public MapBuilder ZoomControlPosition(ControlPosition controlPosition)
         {
             Component.ZoomControlPosition = controlPosition;
             return this;
         }
 
-        public GoogleMapBuilder ZoomControlVisible(bool visible)
+        public MapBuilder ZoomControlVisible(bool visible)
         {
             Component.ZoomControlVisible = visible;
             return this;
         }
 
-        public GoogleMapBuilder ZoomControlStyle(ZoomControlStyle controlStyle)
+        public MapBuilder ZoomControlStyle(ZoomControlStyle controlStyle)
         {
             Component.ZoomControlStyle = controlStyle;
             return this;
@@ -327,22 +326,22 @@ namespace Jmelosegui.Mvc.Googlemap
         #endregion
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        public GoogleMapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound) where TMapObject : MapObject
+        public MapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound) where TMapObject : MapObject
         {
             Component.BindTo(dataSource, itemDataBound);
             return this;
         }
 
-        public GoogleMapBuilder ClientEvents(Action<GoogleMapClientEventsBuilder> eventsBuilder)
+        public MapBuilder ClientEvents(Action<MapClientEventsBuilder> eventsBuilder)
         {
             if (eventsBuilder == null) throw new ArgumentNullException("eventsBuilder");
 
-            eventsBuilder(new GoogleMapClientEventsBuilder(Component.ClientEvents));
+            eventsBuilder(new MapClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }
 
-        public GoogleMapBuilder MarkerEvents(Action<MarkerEventsBuilder> eventsBuilder)
+        public MapBuilder MarkerEvents(Action<MarkerEventsBuilder> eventsBuilder)
         {
             if (eventsBuilder == null) throw new ArgumentNullException("eventsBuilder");
 

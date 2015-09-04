@@ -50,7 +50,7 @@
         return $jmelosegui.create(this, {
             name: 'GoogleMap',
             init: function (element, options) {
-                return new $jmelosegui.Googlemap(element, options);
+                return new $jmelosegui.GoogleMap(element, options);
             },
             options: options,
             success: function (map) {
@@ -359,7 +359,7 @@
 
     $jmelosegui.KmlLayer.prototype = {}
 
-    $jmelosegui.Googlemap = function (element, options) {
+    $jmelosegui.GoogleMap = function (element, options) {
 
         this.element = element;
         $.extend(this, options);
@@ -571,7 +571,7 @@
     };
     var delay = 100;
     var markerIndex = 0;
-    $jmelosegui.Googlemap.prototype = {
+    $jmelosegui.GoogleMap.prototype = {
         initialize: function () {
 
             var innerOptions = {

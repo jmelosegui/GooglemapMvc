@@ -1,11 +1,11 @@
 ﻿
 using System;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class GoogleMapClientEvents : IClientEventObject
+    public class MapClientEvents : IClientEventObject
     {
-        public GoogleMapClientEvents()
+        public MapClientEvents()
         {
             OnMapBoundChanged = new ClientEvent();
             OnMapCenterChanged = new ClientEvent();

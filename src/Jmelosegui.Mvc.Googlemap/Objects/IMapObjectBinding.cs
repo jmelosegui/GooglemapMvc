@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public sealed class MapObjectBinding<TMapObject, TDataItem> : IMapObjectBinding<TMapObject> where TMapObject : MapObject
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples
+namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class AutoPopulateSourceCodeAttribute : FilterAttribute, IResultFilter

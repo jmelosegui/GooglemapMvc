@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MapTypeStyleBuilder
     {

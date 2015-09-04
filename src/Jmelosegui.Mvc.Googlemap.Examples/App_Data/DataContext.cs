@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples.App_Data
+namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 {
     public class RegionInfo
     {

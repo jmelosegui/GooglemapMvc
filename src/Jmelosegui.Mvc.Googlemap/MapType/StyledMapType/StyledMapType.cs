@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class StyledMapType : MapTypeBase
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public abstract class Shape : MapObject
     {
-        protected Shape(GoogleMap map) : base(map)
+        protected Shape(Map map) : base(map)
         {
             fillOpacity = 0.5D;
             strokeOpacity = 0.8D;

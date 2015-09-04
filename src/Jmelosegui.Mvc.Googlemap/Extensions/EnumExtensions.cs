@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public static class EnumExtensions
+    internal static class EnumExtensions
     {
         public static string ToClientSideString(this Enum source)
         {

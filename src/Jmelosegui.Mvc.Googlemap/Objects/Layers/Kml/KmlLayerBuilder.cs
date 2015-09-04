@@ -1,6 +1,6 @@
 using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class KmlLayerBuilder : LayerBuilder<KmlLayer>
     {

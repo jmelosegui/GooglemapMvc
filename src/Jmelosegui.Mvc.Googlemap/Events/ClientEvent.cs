@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ClientEvent
     {

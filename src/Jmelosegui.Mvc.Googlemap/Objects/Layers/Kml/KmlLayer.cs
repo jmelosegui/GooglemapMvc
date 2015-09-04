@@ -1,10 +1,10 @@
 using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class KmlLayer : Layer
     {
-        public KmlLayer(GoogleMap map) : base("kml", map)
+        public KmlLayer(Map map) : base("kml", map)
         {
             Clickable = true;
             ScreenOverlays = true;

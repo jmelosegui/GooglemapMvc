@@ -1,14 +1,13 @@
 using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.UI;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ScriptRegistrar
     {
@@ -24,7 +23,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 throw new InvalidOperationException("Only one ScriptRegistrar is allowed in a single request");
             }
 
-            Components = new Collection<GoogleMap>();
+            Components = new Collection<Map>();
 
             viewContext.HttpContext.Items[Key] = this;
             BasePath = "~/Scripts";
@@ -33,7 +32,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public string BasePath { get; set; }
 
-        protected Collection<GoogleMap> Components { get; private set; }
+        protected Collection<Map> Components { get; private set; }
 
         protected ViewContext ViewContext
         {
@@ -56,7 +55,7 @@ namespace Jmelosegui.Mvc.Googlemap
             hasRendered = true;
         }
 
-        internal void AddComponent(GoogleMap component)
+        internal void AddComponent(Map component)
         {
             if(component == null) throw new ArgumentNullException("component");
 

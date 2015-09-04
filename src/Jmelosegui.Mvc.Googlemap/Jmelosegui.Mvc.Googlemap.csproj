@@ -8,8 +8,8 @@
     <ProjectGuid>{5476DBD6-F0EC-4B7A-A616-DB42A7EF7E1B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jmelosegui.Mvc.Googlemap</RootNamespace>
-    <AssemblyName>Jmelosegui.Mvc.Googlemap</AssemblyName>
+    <RootNamespace>Jmelosegui.Mvc.GoogleMap</RootNamespace>
+    <AssemblyName>Jmelosegui.Mvc.GoogleMap</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -169,10 +169,10 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\ViewComponentFactoryExtension.cs" />
-    <Compile Include="GoogleMapBuilder.cs" />
-    <Compile Include="Events\GooglemapClientEventsBuilder.cs" />
-    <Compile Include="Events\GooglemapClientEvents.cs" />
+    <Compile Include="ViewComponentFactoryExtension.cs" />
+    <Compile Include="MapBuilder.cs" />
+    <Compile Include="Events\MapClientEventsBuilder.cs" />
+    <Compile Include="Events\MapClientEvents.cs" />
     <Compile Include="Helpers\ClientSideObjectWriter.cs" />
     <Compile Include="Helpers\FluentDictionary.cs" />
     <Compile Include="Helpers\ClientSideEnumValueAttribute.cs" />
@@ -193,7 +193,7 @@
     <Compile Include="Location\LocationFactory.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
     <Compile Include="Objects\Markers\MarkerImage.cs" />
-    <Compile Include="GoogleMap.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Objects\Markers\MarkerSerializer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -225,7 +225,6 @@
     <Content Include="Scripts\jmelosegui.googlemap.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GoogleMapClassDiagram.cd" />
     <None Include="Jmelosegui.Mvc.Googlemap.nuspec" />
     <None Include="app.config">
       <SubType>Designer</SubType>
