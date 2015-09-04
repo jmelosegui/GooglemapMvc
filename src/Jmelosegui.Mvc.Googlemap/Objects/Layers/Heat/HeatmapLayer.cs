@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 
@@ -11,21 +12,21 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public HeatmapLayer(GoogleMap map) : base("heatmap", map)
         {
-            Gradient = new List<Color>();
+            Gradient = new Collection<Color>();
             data = new List<Location>();
         }
 
-        public IList<Location> Data
+        public ReadOnlyCollection<Location> Data
         {
             get
             {
-                return data.AsReadOnly();
+                return new ReadOnlyCollection<Location>(data);
             }
         }
 
         public bool Dissipating { get; set; }
 
-        public List<Color> Gradient { get; private set; }
+        public Collection<Color> Gradient { get; private set; }
 
         public int MaxIntensity { get; set; }
 

@@ -27,9 +27,9 @@
             return this;
         }
 
-        public void Address(string address)
+        public void Address(string value)
         {
-            Map.Address = address;
+            Map.Address = value;
         }
     }
 }

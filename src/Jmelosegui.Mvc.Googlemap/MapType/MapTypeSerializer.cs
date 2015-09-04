@@ -5,9 +5,9 @@ namespace Jmelosegui.Mvc.Googlemap
 {
     public class MapTypeSerializer : ISerializer
     {
-        private readonly MapType mapType;
+        private readonly MapTypeBase mapType;
 
-        public MapTypeSerializer(MapType mapType)
+        public MapTypeSerializer(MapTypeBase mapType)
         {
             this.mapType = mapType;
         }

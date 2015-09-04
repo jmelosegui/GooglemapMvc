@@ -30,6 +30,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return new Dictionary<string, object>();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public IDictionary<string, object> Serialize()
         {
             IDictionary<string, object> result = new Dictionary<string, object>();

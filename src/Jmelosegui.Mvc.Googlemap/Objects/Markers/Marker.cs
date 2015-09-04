@@ -1,10 +1,14 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class Marker : Overlay
     {
         private readonly int index;
         public Marker(GoogleMap map) : base(map)
         {
+            if (map == null) throw new ArgumentNullException("map");
             Clickable = true;
             Draggable = false;
             index = map.Markers.Count;
@@ -21,14 +25,14 @@
 
         public bool Clickable { get; set; }
 
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Draggable")]
         public bool Draggable { get; set; }
 
         public MarkerImage Icon { get; set; }
 
         public string Title { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
-        public int zIndex { get; set; }
+        public int ZIndex { get; set; }
 
         public InfoWindow Window { get; set; }
 

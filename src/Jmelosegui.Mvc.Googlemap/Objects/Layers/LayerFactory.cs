@@ -1,5 +1,4 @@
 using System;
-using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {

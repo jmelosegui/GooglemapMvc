@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Web;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
@@ -13,9 +15,17 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (url.IndexOf("://", StringComparison.Ordinal) == -1)
             {
-                return System.Web.VirtualPathUtility.ToAbsolute(url);
+                string applicationAbsoluteUrl = System.Web.VirtualPathUtility.ToAbsolute(url);
+
+                return string.Format(CultureInfo.InvariantCulture, 
+                    "http{0}://{1}{2}",
+                    (HttpContext.Current.Request.IsSecureConnection) ? "s" : "",
+                    HttpContext.Current.Request.Url.Host,
+                    applicationAbsoluteUrl
+                );
             }
             return url;
+
         }
     }
 }

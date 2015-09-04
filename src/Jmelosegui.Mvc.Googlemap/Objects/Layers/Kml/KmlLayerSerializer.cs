@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
@@ -18,7 +17,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
                 .Add("preserveViewport", Layer.PreserveViewport)
                 .Add("screenOverlays", Layer.ScreenOverlays)
                 .Add("suppressInfoWindows", Layer.SuppressInfoWindows)
-                .Add("url", Layer.Url);
+                .Add("url", Layer.Url.AbsoluteUri);
 
             return layerDictionary;
         }

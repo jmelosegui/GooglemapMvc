@@ -6,7 +6,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class MarkerBuilder
     {
-        protected MarkerBuilder(MarkerBuilder builder)  : this(builder.Marker)
+        protected MarkerBuilder(MarkerBuilder builder)  : this(PassThroughNonNull(builder).Marker)
         {
             
         }
@@ -18,15 +18,15 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         protected Marker Marker { get; private set; }
 
-        public MarkerBuilder Address(string address)
+        public MarkerBuilder Address(string value)
         {
-            Marker.Address = address;
+            Marker.Address = value;
             return this;
         }
 
-        public MarkerBuilder Id(string id)
+        public MarkerBuilder Id(string markerId)
         {
-            Marker.Id = id;
+            Marker.Id = markerId;
             return this;
         }
 
@@ -89,11 +89,17 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
-        public MarkerBuilder zIndex(int value)
+        public MarkerBuilder ZIndex(int value)
         {
-            Marker.zIndex = value;
+            Marker.ZIndex = value;
             return this;
+        }
+
+        private static MarkerBuilder PassThroughNonNull(MarkerBuilder builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }

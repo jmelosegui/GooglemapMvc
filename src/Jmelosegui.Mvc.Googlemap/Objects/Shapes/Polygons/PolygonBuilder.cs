@@ -8,6 +8,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public virtual ShapeBuilder<Polygon> Points(Action<LocationFactory<Polygon>> action)
         {
             if (action == null) throw new ArgumentNullException("action");

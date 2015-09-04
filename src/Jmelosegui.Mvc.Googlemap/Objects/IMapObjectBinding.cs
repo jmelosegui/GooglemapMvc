@@ -2,7 +2,7 @@
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public class MapObjectBinding<TMapObject, TDataItem> : IMapOpjectBinding<TMapObject> where TMapObject : MapObject
+    public sealed class MapObjectBinding<TMapObject, TDataItem> : IMapObjectBinding<TMapObject> where TMapObject : MapObject
     {
 
         public Action<TMapObject, TDataItem> ItemDataBound
@@ -11,14 +11,14 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             set;
         }
 
-        void IMapOpjectBinding<TMapObject>.ItemDataBound(TMapObject item, object value)
+        void IMapObjectBinding<TMapObject>.ItemDataBound(TMapObject item, object value)
         {
             ItemDataBound(item, (TDataItem)value);
         }
 
     }
 
-    public interface IMapOpjectBinding<in TMapObject> where TMapObject : MapObject
+    public interface IMapObjectBinding<in TMapObject> where TMapObject : MapObject
     {
         void ItemDataBound(TMapObject item, object value);
     }

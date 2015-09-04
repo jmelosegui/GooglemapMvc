@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jmelosegui.Mvc.Googlemap.ImageMapType" Collapsed="true">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAIAAAAAAAAAAAAAAIAAAAACCA=</HashCode>
+      <FileName>MapType\ImageMapType\ImageMapType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jmelosegui.Mvc.Googlemap.StyledMapType" Collapsed="true">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAIAAAAAAAA=</HashCode>
+      <FileName>MapType\StyledMapType\StyledMapType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Jmelosegui.Mvc.Googlemap.MapType" Collapsed="true">
+    <Position X="9.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQAAAAAAAAAAAAAAAAAAAABAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>MapType\MapType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

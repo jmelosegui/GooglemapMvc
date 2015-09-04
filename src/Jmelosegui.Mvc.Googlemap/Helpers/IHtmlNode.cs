@@ -27,12 +27,12 @@ namespace Jmelosegui.Mvc.Googlemap
         string Attribute(string key);
         IHtmlNode Attribute(string key, string value);
         IHtmlNode Attribute(string key, string value, bool replaceExisting);
-        IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> attributes);
-        IHtmlNode Attributes(object attributes);
-        IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> attributes, bool replaceExisting);
+        IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> values);
+        IHtmlNode Attributes(object value);
+        IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> values, bool replaceExisting);
         IHtmlNode AddClass(params string[] classes);
         IHtmlNode PrependClass(params string[] classes);
-        IHtmlNode ToggleClass(string @class, bool condition);
+        IHtmlNode ToggleClass(string cssClass, bool condition);
         IHtmlNode ToggleAttribute(string key, string value, bool condition);
         IHtmlNode ToggleCss(string key, string value, bool condition);
         IHtmlNode Template(Action<TextWriter> value);

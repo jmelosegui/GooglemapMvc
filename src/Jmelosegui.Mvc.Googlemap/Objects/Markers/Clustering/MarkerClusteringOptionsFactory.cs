@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public class MarkerClusteringOptionsFactory
+    public class MarkerClusteringOptionsFactory : MapObject
     {
-        public MarkerClusteringOptionsFactory(GoogleMap component)
+        public MarkerClusteringOptionsFactory(GoogleMap component) : base(component)
         {
-            this.Map = component;
         }
-
-        protected GoogleMap Map { get; private set; }
 
         public int MaxZoom
         {
@@ -17,13 +17,13 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             {
                 return Map.MarkerClusteringOptions.MaxZoom;
             }
-            set 
+            set
             {
                 Map.MarkerClusteringOptions.MaxZoom = value;
             }
         }
 
-        public int GridSize 
+        public int GridSize
         {
             get
             {
@@ -71,10 +71,17 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             }
         }
 
-        public List<MarkerClusteringStyles> CustomStyles
+        public void CustomStyles(Action<MarkerClusteringStylesFactory> action)
         {
-            get { return Map.MarkerClusteringOptions.CustomStyles; }
-            
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new MarkerClusteringStylesFactory(Map);
+            action(factory);
         }
+
+        //public Collection<MarkerClusteringStyles> CustomStyles
+        //{
+        //    get { return Map.MarkerClusteringOptions.CustomStyles; }
+
+        //}
     }
 }

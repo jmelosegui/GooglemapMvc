@@ -1,0 +1,33 @@
+<Dictionary>
+  <Acronyms>
+    <CasingExceptions>
+    </CasingExceptions>
+  </Acronyms>
+  <Words>
+    <Compound>
+    </Compound>
+    <Deprecated>
+    </Deprecated>
+    <Recognized>
+      <Word>Jmelosegui</Word>
+      <Word>Draggable</Word>
+      <Word>Mvc</Word>
+      <Word>Api</Word>
+      
+      <Word>Landcover</Word>
+      <Word>MapTypeId</Word>
+      <Word>Styler</Word>
+      <Word>Stylers</Word>
+      <Word>Kml</Word>
+      <Word>Heatmap</Word>      
+      <Word>ImageMapTypes</Word>
+      
+      <Word>ClientSideEnumValueAttribute</Word>
+    </Recognized>
+    <Unrecognized>
+      <Word>TypeStyle</Word>      
+      <Word>Markerz</Word>      
+      <Word>ManMade</Word>      
+    </Unrecognized>
+  </Words>
+</Dictionary>

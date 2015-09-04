@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class MarkerClusteringOptions : ISerializer
     {
-        private readonly List<MarkerClusteringStyles> customStyles;
+        private readonly Collection<MarkerClusteringStyles> customStyles;
 
         public MarkerClusteringOptions()
         {
@@ -13,7 +14,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             GridSize = 60;
             HideSingleGroupMarker = true;
             ZoomOnClick = true;
-            customStyles = new List<MarkerClusteringStyles>();
+            customStyles = new Collection<MarkerClusteringStyles>();
         }
 
         public int MaxZoom { get; set; }
@@ -26,7 +27,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public bool HideSingleGroupMarker { get; set; }
 
-        public List<MarkerClusteringStyles> CustomStyles
+        public Collection<MarkerClusteringStyles> CustomStyles
         {
             get { return customStyles; }
 

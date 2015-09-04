@@ -73,7 +73,7 @@ namespace Jmelosegui.Mvc.Googlemap
             {
                 string formattedValue = QuoteString(value);
 
-                Append(String.Format("{0}:'{1}'", name, formattedValue));
+                Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
             }
 
             return this;
@@ -87,7 +87,7 @@ namespace Jmelosegui.Mvc.Googlemap
             {
                 string formattedValue = QuoteString(value);
 
-                Append(String.Format("{0}:'{1}'", name, formattedValue));
+                Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
             }
 
             return this;
@@ -96,7 +96,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public virtual ClientSideObjectWriter Append(string name, int value)
         {
             if (name == null) throw new ArgumentNullException("name");
-            Append(String.Format("{0}:{1}", name, value));
+            Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, value));
 
             return this;
         }
@@ -129,7 +129,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            Append(String.Format("{0}:'{1}'", name, value));
+            Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, value));
 
             return this;
         }
@@ -150,7 +150,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            Append(String.Format("{0}:'{1}'", name, value));
+            Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, value));
 
             return this;
         }
@@ -167,11 +167,12 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "JSON representation of boolean values should be lower case.")]
         public virtual ClientSideObjectWriter Append(string name, bool value)
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            Append(String.Format("{0}:{1}", name, value.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture)));
+            Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, value.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture)));
 
             return this;
         }
@@ -199,7 +200,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
             if (valueAttribute != null)
             {
-                Append(String.Format("{0}:{1}", name,valueAttribute.Value));
+                Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name,valueAttribute.Value));
             }
 
             return this;
@@ -222,7 +223,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
             if (action != null)
             {
-                Append(String.Format("{0}:", name));
+                Append(String.Format(CultureInfo.InvariantCulture, "{0}:", name));
                 action();
             }
 
@@ -238,7 +239,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 object result = func(this);
                 if (result != null)
                 {
-                    Append(String.Format("{0}:{1}", name, result));
+                    Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, result));
                 }
             }
 
@@ -249,19 +250,20 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if (name == null) throw new ArgumentNullException("name");
             
-            return Append(String.Format("{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
+            return Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
         }
 
         public virtual ClientSideObjectWriter AppendObject(string name, object value)
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            return Append(String.Format("{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
+            return Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
         }
 
         public virtual ClientSideObjectWriter AppendClientEvent(string name, ClientEvent clientEvent)
         {
             if (name == null) throw new ArgumentNullException("name");
+            if (clientEvent == null) throw new ArgumentNullException("clientEvent");
 
             if (clientEvent.CodeBlock != null)
             {
@@ -277,7 +279,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 {
                     if (clientEvent.HandlerName.HasValue())
                     {
-                        Append(String.Format("{0}:{1}", name, clientEvent.HandlerName));
+                        Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, clientEvent.HandlerName));
                     }
                 }
             }
@@ -302,6 +304,8 @@ namespace Jmelosegui.Mvc.Googlemap
         public virtual ClientSideObjectWriter Append(string name, HtmlTemplate htmlTemplate)
         {
             if (name == null) throw new ArgumentNullException("name");
+            if (htmlTemplate == null) throw new ArgumentNullException("htmlTemplate");
+
             if (htmlTemplate.HasValue())
             {
                 if (htmlTemplate.Content != null)
@@ -316,7 +320,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 if (htmlTemplate.Html.HasValue())
                 {
                     string formattedValue = QuoteString(htmlTemplate.Html);
-                    Append(String.Format("{0}:'{1}'", name, formattedValue));
+                    Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
                     return this;
                 }
                 if (htmlTemplate.InlineTemplate != null)
@@ -325,7 +329,7 @@ namespace Jmelosegui.Mvc.Googlemap
                     if (inlineTemplate != null)
                     {
                         string formattedValue2 = QuoteString(inlineTemplate.ToString());
-                        Append(String.Format("{0}:'{1}'", name, formattedValue2));
+                        Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue2));
                     }
                 }
             }
@@ -344,6 +348,7 @@ namespace Jmelosegui.Mvc.Googlemap
             appended = false;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         private static string QuoteString(string value)
         {
             var result = new StringBuilder();

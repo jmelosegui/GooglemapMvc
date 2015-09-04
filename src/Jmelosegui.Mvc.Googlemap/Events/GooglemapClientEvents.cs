@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Jmelosegui.Mvc.Googlemap
 {
     public class GoogleMapClientEvents : IClientEventObject
@@ -8,7 +10,7 @@ namespace Jmelosegui.Mvc.Googlemap
             OnMapBoundChanged = new ClientEvent();
             OnMapCenterChanged = new ClientEvent();
             OnMapClick = new ClientEvent();
-            OnMapDobleClick = new ClientEvent();
+            OnMapDoubleClick = new ClientEvent();
             OnMapRightClick = new ClientEvent();
             OnMapDrag = new ClientEvent();
             OnMapDragEnd = new ClientEvent();
@@ -35,7 +37,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public ClientEvent OnMapClick { get; private set; }
 
-        public ClientEvent OnMapDobleClick { get; private set; }
+        public ClientEvent OnMapDoubleClick { get; private set; }
 
         public ClientEvent OnMapRightClick { get; private set; }
 
@@ -75,10 +77,12 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public void SerializeTo(ClientSideObjectWriter writer)
         {
+            if (writer == null) throw new ArgumentNullException("writer");
+            
             writer.AppendClientEvent("bounds_changed", OnMapBoundChanged);
             writer.AppendClientEvent("center_changed", OnMapCenterChanged);
             writer.AppendClientEvent("click", OnMapClick);
-            writer.AppendClientEvent("dblclick", OnMapDobleClick);
+            writer.AppendClientEvent("dblclick", OnMapDoubleClick);
             writer.AppendClientEvent("rightclick", OnMapRightClick);
             writer.AppendClientEvent("drag", OnMapDrag);
             writer.AppendClientEvent("dragend", OnMapDragEnd);

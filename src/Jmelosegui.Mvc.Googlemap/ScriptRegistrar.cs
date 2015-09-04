@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.UI;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 
 namespace Jmelosegui.Mvc.Googlemap
@@ -13,14 +15,16 @@ namespace Jmelosegui.Mvc.Googlemap
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private bool hasRendered;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ScriptRegistrar", Justification = "Need to specify the actual name")]
         public ScriptRegistrar(ViewContext viewContext)
         {
+            if(viewContext == null) throw new ArgumentNullException("viewContext");
             if (viewContext.HttpContext.Items[Key] != null)
             {
                 throw new InvalidOperationException("Only one ScriptRegistrar is allowed in a single request");
             }
 
-            Components = new List<GoogleMap>();
+            Components = new Collection<GoogleMap>();
 
             viewContext.HttpContext.Items[Key] = this;
             BasePath = "~/Scripts";
@@ -29,7 +33,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public string BasePath { get; set; }
 
-        protected List<GoogleMap> Components { get; private set; }
+        protected Collection<GoogleMap> Components { get; private set; }
 
         protected ViewContext ViewContext
         {
@@ -111,7 +115,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public string ToHtmlString()
         {
             string result;
-            using (var stringWriter = new StringWriter())
+            using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
             {
                 Write(stringWriter);
                 result = stringWriter.ToString();
@@ -119,7 +123,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return result;
         }
 
-        public static string CombinePath(string directory, string fileName)
+        private static string CombinePath(string directory, string fileName)
         {
             const string slash = "/";
 

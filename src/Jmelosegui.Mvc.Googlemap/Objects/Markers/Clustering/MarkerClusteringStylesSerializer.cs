@@ -17,11 +17,11 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
 
-            result["url"] = style.Url;
+            result["url"] = style.Url.AbsoluteUri;
             result["height"] = style.Height;
             result["width"] = style.Width;
-            result["textSize"] = style.TextSize;
-            result["textColor"] = style.TextColor.ToHtml();
+            result["textSize"] = style.FontSize;
+            result["textColor"] = style.FontColor.ToHtml();
 
             return result;
         }

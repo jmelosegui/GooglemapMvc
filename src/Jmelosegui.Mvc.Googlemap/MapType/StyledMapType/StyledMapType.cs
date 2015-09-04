@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
-    public class StyledMapType : MapType
+    public class StyledMapType : MapTypeBase
     {
         public StyledMapType()
         {

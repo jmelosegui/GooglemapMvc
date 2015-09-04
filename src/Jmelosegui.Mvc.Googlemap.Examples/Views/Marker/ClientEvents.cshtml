@@ -36,7 +36,7 @@
                         .Draggable((bool)ViewData["draggable"])
                         .Window(window => window.Add()
                             .MaxWidth(200)
-                            .zIndex(3)
+                            .ZIndex(3)
                             .DisableAutoPan(false)
                             .Content(
                             @<text>
@@ -51,7 +51,7 @@
                 })
                         .MarkerEvents(events =>
                             events.OnMarkerClick("highlightEvent")
-                                .OnMarkerDblClick("highlightEvent")
+                                .OnMarkerDoubleClick("highlightEvent")
                                 .OnMarkerDragStart("highlightEvent")
                                 .OnMarkerDrag("highlightEvent")
                                 .OnMarkerDragEnd("highlightEvent")

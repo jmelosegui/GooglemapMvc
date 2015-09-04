@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects.Layers
+namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class LayerBuilder<T> where T : Layer
     {

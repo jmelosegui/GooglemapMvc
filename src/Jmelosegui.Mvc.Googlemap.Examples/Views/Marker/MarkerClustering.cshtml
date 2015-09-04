@@ -8,39 +8,44 @@
 }
 
 @{ Html.GoogleMap()
-                .Name("map")
-                .Height(600)
-                .Center(c => c.Latitude(40)
-                              .Longitude(-3))
-                .EnableMarkersClustering(options =>
-                {
-                    options.MaxZoom = (int)ViewData["MaxZoom"];
-                    options.GridSize = (int)ViewData["GridSize"];
-                    options.AverageCenter = (bool)ViewData["AverageCenter"];
-                    options.ZoomOnClick = (bool)ViewData["ZoomOnClick"];
-                    options.HideSingleGroupMarker = (bool)ViewData["HideSingleGroupMarker"];
-                    if ((string)ViewData["CustomStyles"] == "StackOverflow")
+    .Name("map")
+    .Height(600)
+    .Center(c => c.Latitude(40)
+                .Longitude(-3))
+    .EnableMarkersClustering(options =>
+    {
+        options.MaxZoom = (int)ViewData["MaxZoom"];
+        options.GridSize = (int)ViewData["GridSize"];
+        options.AverageCenter = (bool)ViewData["AverageCenter"];
+        options.ZoomOnClick = (bool)ViewData["ZoomOnClick"];
+        options.HideSingleGroupMarker = (bool)ViewData["HideSingleGroupMarker"];
+        if ((string)ViewData["CustomStyles"] == "StackOverflow")
+        {
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster1.png")
+                                    .Height(35).Width(35).FontSize(12).FontColor(Color.White));
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster2.png")
+                                    .Height(45).Width(45).FontSize(12).FontColor(Color.White));
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster3.png")
+                                    .Height(60).Width(60).FontSize(12).FontColor(Color.White));
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster3.png")
+                                    .Height(60).Width(60).FontSize(12).FontColor(Color.White));
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster3.png")
+                                    .Height(60).Width(60).FontSize(12).FontColor(Color.White));
+        }
+    })
+    .BindTo<RegionInfo, Marker>
+    (Model, mappings => mappings.For<RegionInfo>
+            (
+                binding => binding.ItemDataBound
+                (
+                    (marker, obj) =>
                     {
-                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster1.png", Height = 35, Width = 35, TextSize = 12, TextColor = Color.White });
-                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster2.png", Height = 45, Width = 45, TextSize = 12, TextColor = Color.White });
-                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster3.png", Height = 60, Width = 60, TextSize = 12, TextColor = Color.White });
-                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster3.png", Height = 60, Width = 60, TextSize = 12, TextColor = Color.White });
-                        options.CustomStyles.Add(new MarkerClusteringStyles { Url = "~/Images/cluster3.png", Height = 60, Width = 60, TextSize = 12, TextColor = Color.White });
+                        marker.Latitude = obj.Latitude;
+                        marker.Longitude = obj.Longitude;
                     }
-                })
-                .BindTo<RegionInfo, Marker>
-                (Model, mappings => mappings.For<RegionInfo>
-                        (
-                            binding => binding.ItemDataBound
-                            (
-                                (marker, obj) =>
-                                {
-                                    marker.Latitude = obj.Latitude;
-                                    marker.Longitude = obj.Longitude;
-                                }
-                            )
-                        )
-                ).Render();
+                )
+            )
+    ).Render();
 }
 <br />
 <div class="container">

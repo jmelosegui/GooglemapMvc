@@ -41,9 +41,9 @@ namespace Jmelosegui.Mvc.Googlemap
 
         #region Public Methods
 
-        public GoogleMapBuilder ApiKey(string apiKey)
+        public GoogleMapBuilder ApiKey(string value)
         {
-            Component.ApiKey = apiKey;
+            Component.ApiKey = value;
             return this;
         }
 
@@ -90,9 +90,9 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder Culture(CultureInfo culture)
+        public GoogleMapBuilder Culture(CultureInfo value)
         {
-            Component.Culture = culture;
+            Component.Culture = value;
             return this;
         }
 
@@ -166,7 +166,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder MapTypeId(MapTypes value)
+        public GoogleMapBuilder MapTypeId(MapType value)
         {
             Component.MapTypeId = value.ToClientSideString();
             return this;
@@ -184,9 +184,9 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder MapTypeControlPosition(ControlPosition controlPosition)
+        public GoogleMapBuilder MapTypeControlPosition(ControlPosition value)
         {
-            Component.MapTypeControlPosition = controlPosition;
+            Component.MapTypeControlPosition = value;
             return this;
         }
 
@@ -222,10 +222,10 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder Name(string name)
+        public GoogleMapBuilder Name(string value)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            Component.Id = name;
+            if (value == null) throw new ArgumentNullException("value");
+            Component.Id = value;
             return this;
         }
 
@@ -288,9 +288,9 @@ namespace Jmelosegui.Mvc.Googlemap
             return this;
         }
 
-        public GoogleMapBuilder Version(string version)
+        public GoogleMapBuilder Version(string value)
         {
-            Component.Version = version;
+            Component.Version = value;
             return this;
         }
 
@@ -326,6 +326,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         #endregion
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public GoogleMapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound) where TMapObject : MapObject
         {
             Component.BindTo(dataSource, itemDataBound);

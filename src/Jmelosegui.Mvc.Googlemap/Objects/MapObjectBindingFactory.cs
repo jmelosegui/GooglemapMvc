@@ -16,6 +16,6 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        public IMapOpjectBinding<TMapObject> Binder { get; private set; }
+        public IMapObjectBinding<TMapObject> Binder { get; private set; }
     }
 }

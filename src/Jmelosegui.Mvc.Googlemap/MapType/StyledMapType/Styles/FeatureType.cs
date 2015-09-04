@@ -48,7 +48,7 @@
         PoiBusiness,
 
         [ClientSideEnumValue("'poi.government'")]
-        PoiGoverment,
+        PoiGovernment,
 
         [ClientSideEnumValue("'poi.medical'")]
         PoiMedical,

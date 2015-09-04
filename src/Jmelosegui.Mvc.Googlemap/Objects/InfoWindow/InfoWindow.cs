@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace Jmelosegui.Mvc.Googlemap.Objects
@@ -8,12 +9,12 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         
         private readonly Marker marker;
 
-        public InfoWindow(Marker marker) : base(marker.Map)
+        public InfoWindow(Marker marker) : base(PassThroughNonNull(marker).Map)
         {
             if (marker == null) throw new ArgumentNullException("marker");
             
             this.marker = marker;
-            Content = string.Format("{0}Marker{1}",marker.Map.Id,marker.Index);
+            Content = string.Format(CultureInfo.InvariantCulture, "{0}Marker{1}",marker.Map.Id,marker.Index);
         
             Template = new HtmlTemplate();
         }
@@ -57,7 +58,13 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public int MaxWidth { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
-        public int zIndex { get; set; }
+        public int ZIndex { get; set; }
+
+        private static Marker PassThroughNonNull(Marker marker)
+        {
+            if (marker == null)
+                throw new ArgumentNullException("marker");
+            return marker;
+        }
     }
 }

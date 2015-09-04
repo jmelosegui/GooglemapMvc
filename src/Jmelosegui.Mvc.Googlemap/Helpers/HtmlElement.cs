@@ -78,14 +78,14 @@ namespace Jmelosegui.Mvc.Googlemap
             }
             return result;
         }
-        public IHtmlNode Attributes(object attributes)
+        public IHtmlNode Attributes(object value)
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>(StringComparer.CurrentCultureIgnoreCase);
-            if (attributes != null)
+            if (value != null)
             {
-                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(attributes))
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(value))
                 {
-                    dictionary.Add(property.Name.Replace("_", "-"), property.GetValue(attributes));
+                    dictionary.Add(property.Name.Replace("_", "-"), property.GetValue(value));
                 }
             }
 
@@ -94,6 +94,8 @@ namespace Jmelosegui.Mvc.Googlemap
         }
         public IHtmlNode AddClass(params string[] classes)
         {
+            if (classes == null) throw new ArgumentNullException("classes");
+
             for (int i = 0; i < classes.Length; i++)
             {
                 string @class = classes[i];
@@ -148,13 +150,13 @@ namespace Jmelosegui.Mvc.Googlemap
             }
             return this;
         }
-        public IHtmlNode ToggleClass(string @class, bool condition)
+        public IHtmlNode ToggleClass(string cssClass, bool condition)
         {
             if (condition)
             {
                 this.AddClass(new string[]
 				{
-					@class
+					cssClass
 				});
             }
             return this;
@@ -170,6 +172,7 @@ namespace Jmelosegui.Mvc.Googlemap
         }
         public IHtmlNode AppendTo(IHtmlNode parent)
         {
+            if (parent == null) throw new ArgumentNullException("parent");
             parent.Children.Add(this);
             return this;
         }

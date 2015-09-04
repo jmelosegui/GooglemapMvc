@@ -1,13 +1,10 @@
 ﻿namespace Jmelosegui.Mvc.Googlemap.Objects
 {
-    public class PolygonFactory : IHideObjectMembers
+    public class PolygonFactory : MapObject, IHideObjectMembers
     {
-        public PolygonFactory(GoogleMap map)
+        public PolygonFactory(GoogleMap map) : base(map)
         {
-            this.Map = map;
         }
-
-        protected GoogleMap Map { get; private set; }
 
         public PolygonBuilder Add()
         {

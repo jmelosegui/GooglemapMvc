@@ -4,7 +4,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class InfoWindowBuilder
     {
-        protected InfoWindowBuilder(InfoWindowBuilder builder) : this(builder.Window)
+        protected InfoWindowBuilder(InfoWindowBuilder builder) : this(PassThroughNonNull(builder).Window)
         {
         }
 
@@ -15,15 +15,15 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         protected InfoWindow Window { get; private set; }
 
-        public InfoWindowBuilder Content(Action content)
+        public InfoWindowBuilder Content(Action action)
         {
-            Window.Template.Content = content;
+            Window.Template.Content = action;
             return this;
         }
 
-        public InfoWindowBuilder Content(Func<object, object> content)
+        public InfoWindowBuilder Content(Func<object, object> function)
         {
-            Window.Template.InlineTemplate = content;
+            Window.Template.InlineTemplate = function;
             return this;
         }
 
@@ -57,11 +57,17 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
-        public InfoWindowBuilder zIndex(int value)
+        public InfoWindowBuilder ZIndex(int value)
         {
-            Window.zIndex = value;
+            Window.ZIndex = value;
             return this;
+        }
+
+        private static InfoWindowBuilder PassThroughNonNull(InfoWindowBuilder builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }

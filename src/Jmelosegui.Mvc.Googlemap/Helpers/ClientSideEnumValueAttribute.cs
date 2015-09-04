@@ -3,7 +3,7 @@
 namespace Jmelosegui.Mvc.Googlemap
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class ClientSideEnumValueAttribute : Attribute
+    public sealed class ClientSideEnumValueAttribute : Attribute
     {
         public string Value
         {

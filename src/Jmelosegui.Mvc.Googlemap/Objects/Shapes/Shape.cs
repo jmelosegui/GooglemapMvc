@@ -12,7 +12,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             StrokeWeight = 2;
             FillColor = Color.Red;
             StrokeColor = Color.DarkRed;
-            zIndex = 1;
+            ZIndex = 1;
             Clickable = true;
         }
 
@@ -48,8 +48,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public int StrokeWeight { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
-        public int zIndex { get; set; }
+        public int ZIndex { get; set; }
 
         public abstract ISerializer CreateSerializer();
     }

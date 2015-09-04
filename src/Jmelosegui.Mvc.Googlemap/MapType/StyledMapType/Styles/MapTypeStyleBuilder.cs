@@ -1,11 +1,11 @@
+using System;
 using System.Drawing;
 
 namespace Jmelosegui.Mvc.Googlemap
 {
     public class MapTypeStyleBuilder
     {
-        public MapTypeStyleBuilder(MapTypeStyleBuilder builder)
-            : this(builder.Style)
+        public MapTypeStyleBuilder(MapTypeStyleBuilder builder) : this(PassThroughNonNull(builder).Style)
         {
         }
         public MapTypeStyleBuilder(MapTypeStyle style)
@@ -15,33 +15,33 @@ namespace Jmelosegui.Mvc.Googlemap
 
         protected MapTypeStyle Style { get; private set; }
 
-        public MapTypeStyleBuilder FeatureType(FeatureType featureType)
+        public MapTypeStyleBuilder FeatureType(FeatureType value)
         {
-            Style.FeatureType = featureType;
+            Style.FeatureType = value;
             return this;
         }
 
-        public MapTypeStyleBuilder ElementType(ElementType elementType)
+        public MapTypeStyleBuilder ElementType(ElementType value)
         {
-            Style.ElementType = elementType;
+            Style.ElementType = value;
             return this;
         }
 
-        public MapTypeStyleBuilder Color(Color color)
+        public MapTypeStyleBuilder Color(Color value)
         {
-            Style.Stylers.Add(new { color = color.ToHtml() } );
+            Style.Stylers.Add(new { color = value.ToHtml() } );
             return this;
         }
 
-        public MapTypeStyleBuilder Gamma(float gamma)
+        public MapTypeStyleBuilder Gamma(float value)
         {
-            Style.Stylers.Add(new { gamma });
+            Style.Stylers.Add(new { gamma = value });
             return this;
         }
 
-        public MapTypeStyleBuilder HueColor(Color hueColor)
+        public MapTypeStyleBuilder HueColor(Color value)
         {
-            Style.Stylers.Add(new { hue = hueColor.ToHtml() });
+            Style.Stylers.Add(new { hue = value.ToHtml() });
             return this;
         }
 
@@ -73,6 +73,14 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             Style.Stylers.Add(new { weight = value });
             return this;
+        }
+
+
+        private static MapTypeStyleBuilder PassThroughNonNull(MapTypeStyleBuilder builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }

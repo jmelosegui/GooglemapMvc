@@ -1,4 +1,6 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿using System;
+
+namespace Jmelosegui.Mvc.Googlemap.Objects
 {
     public class MarkerClientEvents : IClientEventObject
     {
@@ -8,7 +10,7 @@
             OnMarkerClick = new ClientEvent();
             OnMarkerClickableChanged = new ClientEvent();
             OnMarkerCursorChanged = new ClientEvent();
-            OnMarkerDblClick = new ClientEvent();
+            OnMarkerDoubleClick = new ClientEvent();
             OnMarkerDragStart = new ClientEvent();
             OnMarkerDrag = new ClientEvent();
             OnMarkerDragEnd = new ClientEvent();
@@ -23,7 +25,7 @@
             OnMarkerShapeChanged = new ClientEvent();
             OnMarkerTitleChanged = new ClientEvent();
             OnMarkerVisibleChanged = new ClientEvent();
-            OnMarkerzIndexChanged = new ClientEvent();
+            OnMarkerZIndexChanged = new ClientEvent();
         }
 
         public ClientEvent OnMarkerAnimationChanged { get; private set; }
@@ -34,7 +36,7 @@
 
         public ClientEvent OnMarkerCursorChanged { get; private set; }
 
-        public ClientEvent OnMarkerDblClick { get; private set; }
+        public ClientEvent OnMarkerDoubleClick { get; private set; }
 
         public ClientEvent OnMarkerDragStart { get; private set; }
 
@@ -64,15 +66,17 @@
 
         public ClientEvent OnMarkerVisibleChanged { get; private set; }
 
-        public ClientEvent OnMarkerzIndexChanged { get; private set; }
+        public ClientEvent OnMarkerZIndexChanged { get; private set; }
 
         public void SerializeTo(ClientSideObjectWriter writer)
         {
+            if (writer == null) throw new ArgumentNullException("writer");
+
             writer.AppendClientEvent("animation_changed", OnMarkerAnimationChanged);
             writer.AppendClientEvent("click", OnMarkerClick);
             writer.AppendClientEvent("clickable_changed", OnMarkerClickableChanged);
             writer.AppendClientEvent("cursor_changed", OnMarkerCursorChanged);
-            writer.AppendClientEvent("dblclick", OnMarkerDblClick);
+            writer.AppendClientEvent("dblclick", OnMarkerDoubleClick);
             writer.AppendClientEvent("dragstart", OnMarkerDragStart);
             writer.AppendClientEvent("drag", OnMarkerDrag);
             writer.AppendClientEvent("dragend", OnMarkerDragEnd);
@@ -87,7 +91,7 @@
             writer.AppendClientEvent("shape_changed", OnMarkerShapeChanged);
             writer.AppendClientEvent("title_changed", OnMarkerTitleChanged);
             writer.AppendClientEvent("visible_changed", OnMarkerVisibleChanged);
-            writer.AppendClientEvent("zindex_changed", OnMarkerzIndexChanged);
+            writer.AppendClientEvent("zindex_changed", OnMarkerZIndexChanged);
         }
     }
 }

@@ -4,8 +4,7 @@ namespace Jmelosegui.Mvc.Googlemap
 {
     public class GoogleMapClientEventsBuilder : IHideObjectMembers
     {
-        protected GoogleMapClientEventsBuilder(GoogleMapClientEventsBuilder builder)
-            : this(builder.ClientEvents)
+        protected GoogleMapClientEventsBuilder(GoogleMapClientEventsBuilder builder) : this(PassThroughNonNull(builder).ClientEvents)
         {
         }
 
@@ -13,204 +12,211 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             if(clientEvents == null)throw  new ArgumentNullException("clientEvents");
 
-            this.ClientEvents = clientEvents;
+            ClientEvents = clientEvents;
         }
 
         protected GoogleMapClientEvents ClientEvents { get; private set; }
 
-        public GoogleMapClientEventsBuilder OnMapBoundChanged(string onMapBoundChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnMapBoundChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapBoundChangedHandlerName)) throw new ArgumentNullException("onMapBoundChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapBoundChanged.HandlerName = onMapBoundChangedHandlerName;
+            ClientEvents.OnMapBoundChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapCenterChanged(string onMapCenterChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnMapCenterChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapCenterChangedHandlerName)) throw new ArgumentNullException("onMapCenterChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapCenterChanged.HandlerName = onMapCenterChangedHandlerName;
+            ClientEvents.OnMapCenterChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapClick(string onMapClickHandlerName)
+        public GoogleMapClientEventsBuilder OnMapClick(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapClickHandlerName)) throw new ArgumentNullException("onMapClickHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapClick.HandlerName = onMapClickHandlerName;
+            ClientEvents.OnMapClick.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDobleClick(string onMapDobleClickHandlerName)
+        public GoogleMapClientEventsBuilder OnMapDoubleClick(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapDobleClickHandlerName)) throw new ArgumentNullException("onMapDobleClickHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapDobleClick.HandlerName = onMapDobleClickHandlerName;
+            ClientEvents.OnMapDoubleClick.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapRightClick(string onMapRightClickkHandlerName)
+        public GoogleMapClientEventsBuilder OnMapRightClick(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapRightClickkHandlerName)) throw new ArgumentNullException("onMapRightClickkHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapRightClick.HandlerName = onMapRightClickkHandlerName;
+            ClientEvents.OnMapRightClick.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDrag(string onMapDragHandlerName)
+        public GoogleMapClientEventsBuilder OnMapDrag(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapDragHandlerName)) throw new ArgumentNullException("onMapDragHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapDrag.HandlerName = onMapDragHandlerName;
+            ClientEvents.OnMapDrag.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDragEnd(string onMapDragEndHandlerName)
+        public GoogleMapClientEventsBuilder OnMapDragEnd(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapDragEndHandlerName)) throw new ArgumentNullException("onMapDragEndHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapDragEnd.HandlerName = onMapDragEndHandlerName;
+            ClientEvents.OnMapDragEnd.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapDragStart(string onMapDragStartHandlerName)
+        public GoogleMapClientEventsBuilder OnMapDragStart(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapDragStartHandlerName)) throw new ArgumentNullException("onMapDragStartHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapDragStart.HandlerName = onMapDragStartHandlerName;
+            ClientEvents.OnMapDragStart.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapHeadingChanged(string onMapHeadingChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnMapHeadingChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapHeadingChangedHandlerName)) throw new ArgumentNullException("onMapHeadingChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapHeadingChanged.HandlerName = onMapHeadingChangedHandlerName;
+            ClientEvents.OnMapHeadingChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapIdle(string onMapIdleHandlerName)
+        public GoogleMapClientEventsBuilder OnMapIdle(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapIdleHandlerName)) throw new ArgumentNullException("onMapIdleHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapIdle.HandlerName = onMapIdleHandlerName;
+            ClientEvents.OnMapIdle.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapTypeIdChanged(string onMapTypeIdChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnMapTypeIdChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapTypeIdChangedHandlerName)) throw new ArgumentNullException("onMapTypeIdChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapTypeIdChanged.HandlerName = onMapTypeIdChangedHandlerName;
+            ClientEvents.OnMapTypeIdChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMouseMove(string onMouseMoveHandlerName)
+        public GoogleMapClientEventsBuilder OnMouseMove(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMouseMoveHandlerName)) throw new ArgumentNullException("onMouseMoveHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMouseMove.HandlerName = onMouseMoveHandlerName;
+            ClientEvents.OnMouseMove.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMouseOut(string onMouseOutHandlerName)
+        public GoogleMapClientEventsBuilder OnMouseOut(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMouseOutHandlerName)) throw new ArgumentNullException("onMouseOutHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMouseOut.HandlerName = onMouseOutHandlerName;
+            ClientEvents.OnMouseOut.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMouseOver(string onMouseOverHandlerName)
+        public GoogleMapClientEventsBuilder OnMouseOver(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMouseOverHandlerName)) throw new ArgumentNullException("onMouseOverHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMouseOver.HandlerName = onMouseOverHandlerName;
+            ClientEvents.OnMouseOver.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapProjectionChanged(string onMapProjectionChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnMapProjectionChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapProjectionChangedHandlerName)) throw new ArgumentNullException("onMapProjectionChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnMapProjectionChanged.HandlerName = onMapProjectionChangedHandlerName;
+            ClientEvents.OnMapProjectionChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnResize(string onResizeHandlerName)
+        public GoogleMapClientEventsBuilder OnResize(string handlerName)
         {
-            if (String.IsNullOrEmpty(onResizeHandlerName)) throw new ArgumentNullException("onResizeHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnResize.HandlerName = onResizeHandlerName;
+            ClientEvents.OnResize.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnTilesLoaded(string onTilesLoadedHandlerName)
+        public GoogleMapClientEventsBuilder OnTilesLoaded(string handlerName)
         {
-            if (String.IsNullOrEmpty(onTilesLoadedHandlerName)) throw new ArgumentNullException("onTilesLoadedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnTilesLoaded.HandlerName = onTilesLoadedHandlerName;
+            ClientEvents.OnTilesLoaded.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnTiltChanged(string onTiltChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnTiltChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onTiltChangedHandlerName)) throw new ArgumentNullException("onTiltChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnTiltChanged.HandlerName = onTiltChangedHandlerName;
+            ClientEvents.OnTiltChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnZoomChanged(string onZoomChangedHandlerName)
+        public GoogleMapClientEventsBuilder OnZoomChanged(string handlerName)
         {
-            if (String.IsNullOrEmpty(onZoomChangedHandlerName)) throw new ArgumentNullException("onZoomChangedHandlerName");
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
 
-            ClientEvents.OnZoomChanged.HandlerName = onZoomChangedHandlerName;
+            ClientEvents.OnZoomChanged.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMapLoaded(string onMapLoad)
+        public GoogleMapClientEventsBuilder OnMapLoaded(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMapLoad)) throw new ArgumentNullException("onMapLoad");
-            ClientEvents.OnMapLoaded.HandlerName = onMapLoad;
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
+            ClientEvents.OnMapLoaded.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMarkersGeocodingCompleted(string onMarkersGeocodingCompleted)
+        public GoogleMapClientEventsBuilder OnMarkersGeocodingCompleted(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMarkersGeocodingCompleted)) throw new ArgumentNullException("onMarkersGeocodingCompleted");
-            ClientEvents.OnMarkersGeocodingCompleted.HandlerName = onMarkersGeocodingCompleted;
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
+            ClientEvents.OnMarkersGeocodingCompleted.HandlerName = handlerName;
 
             return this;
         }
 
-        public GoogleMapClientEventsBuilder OnMarkersGeocodingProgress(string onMarkersGeocodingProgress)
+        public GoogleMapClientEventsBuilder OnMarkersGeocodingProgress(string handlerName)
         {
-            if (String.IsNullOrEmpty(onMarkersGeocodingProgress)) throw new ArgumentNullException("onMarkersGeocodingProgress");
-            ClientEvents.OnMarkersGeocodingProgress.HandlerName = onMarkersGeocodingProgress;
+            if (String.IsNullOrEmpty(handlerName)) throw new ArgumentNullException("handlerName");
+            ClientEvents.OnMarkersGeocodingProgress.HandlerName = handlerName;
 
             return this;
+        }
+
+        private static GoogleMapClientEventsBuilder PassThroughNonNull(GoogleMapClientEventsBuilder builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }
