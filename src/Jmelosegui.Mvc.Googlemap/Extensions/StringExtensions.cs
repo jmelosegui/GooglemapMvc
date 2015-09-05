@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Web;
 
 namespace Jmelosegui.Mvc.GoogleMap
@@ -16,13 +17,14 @@ namespace Jmelosegui.Mvc.GoogleMap
             if (url.IndexOf("://", StringComparison.Ordinal) == -1)
             {
                 string applicationAbsoluteUrl = System.Web.VirtualPathUtility.ToAbsolute(url);
-
+                var uri = HttpContext.Current.Request.Url;
                 return string.Format(CultureInfo.InvariantCulture, 
-                    "http{0}://{1}{2}",
+                    "http{0}://{1}{3}{2}",
                     (HttpContext.Current.Request.IsSecureConnection) ? "s" : "",
-                    HttpContext.Current.Request.Url.Host,
-                    applicationAbsoluteUrl
-                );
+                    uri.Host,
+                    applicationAbsoluteUrl,
+                    (new [] {80, 443}.Contains(uri.Port)? "" : ":"+ uri.Port)
+                    );
             }
             return url;
 
