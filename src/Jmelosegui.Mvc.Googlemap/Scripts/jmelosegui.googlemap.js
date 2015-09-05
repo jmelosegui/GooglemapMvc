@@ -149,6 +149,7 @@
         this.id = config.id;
         this.latitude = config.lat;
         this.longitude = config.lng;
+        this.address = config.address;
         this.title = config.title;
         this.icon = config.icon;
         this.clickable = (config.clickable !== undefined) ? config.clickable : true;
@@ -216,6 +217,7 @@
             };
             // create
             this.gMarker = new google.maps.Marker(markerOptions);
+            $.extend(this.gMarker, { address: this.address });
             if (this.parent.fitToMarkersBounds) {
                 this.parent.bounds.extend(this.gMarker.position);
             }
