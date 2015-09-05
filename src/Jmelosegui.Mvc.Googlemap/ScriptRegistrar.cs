@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
@@ -24,7 +25,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
 
             Components = new Collection<Map>();
-
+            FixedScriptCollection = new List<string>();
             viewContext.HttpContext.Items[Key] = this;
             BasePath = "~/Scripts";
             ViewContext = viewContext;
@@ -33,6 +34,8 @@ namespace Jmelosegui.Mvc.GoogleMap
         public string BasePath { get; set; }
 
         protected Collection<Map> Components { get; private set; }
+
+        internal List<string> FixedScriptCollection { get; private set; }
 
         protected ViewContext ViewContext
         {
@@ -73,7 +76,8 @@ namespace Jmelosegui.Mvc.GoogleMap
             const string bundlePath = "~/jmelosegui/googlemap";
             var bundle = new ScriptBundle(bundlePath);
 
-            var scripts = Components.SelectMany(c => c.ScriptFileNames).Distinct().ToList();
+            var scripts = Components.SelectMany(c => c.ScriptFileNames)
+                                    .Union(FixedScriptCollection).Distinct().ToList();
             foreach (var scriptFileName in scripts)
             {
                 var localScriptFileName = scriptFileName;
@@ -95,9 +99,11 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         private void WriteScriptStatements(TextWriter writer)
         {
+            if (!Components.Any()) return;
+
             writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
             writer.WriteLine(ViewContext.HttpContext.Request.IsAjaxRequest()
-                ? "function executeAsync(){"
+                ? GetAjaxScriptStart()
                 : "jQuery(document).ready(function(){");
 
             foreach (var component in Components)
@@ -106,7 +112,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                 writer.WriteLine();
             }
             writer.WriteLine(ViewContext.HttpContext.Request.IsAjaxRequest()
-               ? "}"
+               ? GetAjaxScriptEnd()
                : "});");
             writer.Write("//]]>{0}</script>", Environment.NewLine); 
         }
@@ -130,6 +136,29 @@ namespace Jmelosegui.Mvc.GoogleMap
                           (fileName.StartsWith(slash, StringComparison.Ordinal) ? fileName.Substring(1) : fileName);
 
             return path;
+        }
+
+        private bool ShouldLoadScripts()
+        {
+            return Components.FirstOrDefault(m => m.LoadScripts) != null;
+        }
+
+        private string GetAjaxScriptStart()
+        {
+            if (ShouldLoadScripts())
+            {
+                return "function executeAsync(){";
+            }
+            return "(function (){";
+        }
+
+        private string GetAjaxScriptEnd()
+        {
+            if (ShouldLoadScripts())
+            {
+                return "}";
+            }
+            return "})();";
         }
     }
 }

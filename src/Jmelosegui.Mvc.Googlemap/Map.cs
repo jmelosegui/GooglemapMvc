@@ -19,7 +19,7 @@ namespace Jmelosegui.Mvc.GoogleMap
         public Map(MapBuilder builder)
         {
             this.builder = builder;
-            ScriptFileNames = new Collection<string> {"jmelosegui.googlemap.js"};
+            ScriptFileNames = new Collection<string>();
             Initialize();
         }
 
@@ -147,6 +147,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public ZoomControlStyle ZoomControlStyle { get; set; }
 
+        internal bool LoadScripts { get; private set; }
         #endregion
 
         #region Virtual Methods
@@ -248,17 +249,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             IHtmlNode rootTag = builder.Build();
             rootTag.WriteTo(writer);
 
-            var languaje = (Culture != null) ? "&language=" + Culture.TwoLetterISOLanguageName : String.Empty;
-            var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
-            var visualization = Layers.Any(l => l.GetType() == typeof (HeatmapLayer)) ? "&libraries=visualization" : "";
-            var isAjax = builder.ViewContext.HttpContext.Request.IsAjaxRequest() ? "&callback=executeAsync" : "";
-            var version = (String.IsNullOrWhiteSpace(Version)) ? "" : ("v=" + Version);
-            var mainJs = String.Format(CultureInfo.InvariantCulture, "https://maps.googleapis.com/maps/api/js?{0}{1}{2}{3}{4}", version, key, languaje, visualization, isAjax);
-                                                                                    
-            ScriptFileNames.Add(mainJs);
-
-            if (EnableMarkersClustering)
-                ScriptFileNames.Add("markerclusterer.js");
+            PrepareScripts();
 
             if (Markers.Any(m => m.Window != null))
             {
@@ -281,8 +272,67 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
         }
 
+        private void PrepareScripts()
+        {
+            var request = builder.ViewContext.HttpContext.Request;
+            var languaje = (Culture != null) ? "&language=" + Culture.TwoLetterISOLanguageName : String.Empty;
+            var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
+            var visualization = Layers.Any(l => l.GetType() == typeof (HeatmapLayer)) ? "&libraries=visualization" : "";
+            var isAjax = request.IsAjaxRequest() ? "&callback=executeAsync" : "";
+            var version = (String.IsNullOrWhiteSpace(Version)) ? "" : ("v=" + Version);
+            var mainJs = String.Format(CultureInfo.InvariantCulture, "https://maps.googleapis.com/maps/api/js?{0}{1}{2}{3}{4}",
+                version, key, languaje, visualization, isAjax);
+            this.LoadScripts = ShouldLoadGoogleScript();
+            if (LoadScripts)
+            {
+                ScriptFileNames.Add(mainJs);
+            }
+
+            if (!request.IsAjaxRequest())
+            {
+                ScriptFileNames.Add("jmelosegui.googlemap.js");
+
+                if (EnableMarkersClustering)
+                    ScriptFileNames.Add("markerclusterer.js");
+            }
+        }
+
+        private bool ShouldLoadGoogleScript()
+        {
+            var request = builder.ViewContext.HttpContext.Request;
+            if (!request.IsAjaxRequest())
+            {
+                return true;
+            }
+
+            if ((new []{ "GET", "POST" }).All(method => method != request.HttpMethod.ToUpper(CultureInfo.InvariantCulture)))
+            {
+                return true;
+            }
+
+            if (request.HttpMethod.ToUpper(CultureInfo.InvariantCulture) == "GET")
+            {
+                bool result;
+                if (Boolean.TryParse(request.QueryString.Get("__LoadGoogleMapScript__"), out result))
+                {
+                    return result;
+                }
+            }
+
+            if (request.HttpMethod.ToUpper(CultureInfo.InvariantCulture) == "POST")
+            {
+                bool result;
+                if (Boolean.TryParse(request.Form.Get("__LoadGoogleMapScript__"), out result))
+                {
+                    return result;
+                }
+            }
+
+            return true;
+        }
+
         #endregion
-        
+
         public void Render()
         {
             TextWriter writer = builder.ViewContext.Writer;

@@ -5,9 +5,7 @@
         .Name("map")
         .Markers(marker => marker.Add()
             .Window(w => w.Add()
-                .Content(@<text>
-                            "Hello PartialView with ajax!!!"
-                          </text>)))
+                .Content((o) => String.Format("Hello PartialView {0}", Model))))
         .Render();
 }
 

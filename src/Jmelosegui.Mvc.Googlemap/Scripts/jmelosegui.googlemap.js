@@ -18,7 +18,7 @@
 
                     $jmelosegui.trigger(this, 'load');
 
-                    if (settings.success) settings.success(component);
+                    if (settings.success && !$.isEmptyObject(options)) settings.success(component);
                 }
             });
         },
@@ -55,9 +55,8 @@
             options: options,
             success: function (map) {
                 map.load();
-            },
+            }
         });
-
     };
 
     //Polygons
@@ -362,6 +361,11 @@
     $jmelosegui.GoogleMap = function (element, options) {
 
         this.element = element;
+
+        if ($.isEmptyObject(options)) {
+            return;
+        }
+
         $.extend(this, options);
 
         this.clientId = options.clientId;
@@ -571,7 +575,22 @@
     };
     var delay = 100;
     var markerIndex = 0;
+    var loadGoogleMapScript = true;
     $jmelosegui.GoogleMap.prototype = {
+        ajax: function (options) {
+            var self = this;
+            $.ajax({
+                url: options.url,
+                type: options.type,
+                datatype: "html",
+                data: $.extend(options.data, { __LoadGoogleMapScript__: loadGoogleMapScript }),
+                success: function (data) {
+                    $(self.element).html(data);
+                    loadGoogleMapScript = false;
+                    options.success(data);
+                }
+            });
+        },
         initialize: function () {
 
             var innerOptions = {

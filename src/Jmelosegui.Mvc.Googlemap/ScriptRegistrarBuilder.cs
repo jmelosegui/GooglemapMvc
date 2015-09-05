@@ -42,5 +42,12 @@ namespace Jmelosegui.Mvc.GoogleMap
                 throw new ArgumentNullException("builder");
             return builder;
         }
+
+        public ScriptRegistrarBuilder Add(string scriptFileName)
+        {
+            if (String.IsNullOrWhiteSpace(scriptFileName)) throw new ArgumentNullException("scriptFileName");
+            ScriptRegistrar.FixedScriptCollection.Add(scriptFileName);
+            return this;
+        }
     }
 }

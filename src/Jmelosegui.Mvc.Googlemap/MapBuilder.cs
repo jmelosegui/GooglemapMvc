@@ -355,6 +355,14 @@ namespace Jmelosegui.Mvc.GoogleMap
             return new ScriptRegistrarBuilder(scriptRegistrar);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public ScriptRegistrarBuilder ScriptRegistrar(Action<IList<string>> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            action(scriptRegistrar.FixedScriptCollection);
+            return new ScriptRegistrarBuilder(scriptRegistrar);
+        }
+
         public virtual void Render()
         {
             Component.Render();

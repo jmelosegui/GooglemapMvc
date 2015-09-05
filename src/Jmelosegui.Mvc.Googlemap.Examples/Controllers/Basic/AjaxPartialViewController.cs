@@ -10,9 +10,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
             return View();
         }
 
-        public ActionResult GooglemapPartialView()
+        public ActionResult GooglemapPartialView(string payload)
         {
-            return PartialView("_GooglemapPartialView");
+            object model = payload;
+            return PartialView("_GooglemapPartialView", model);
         }
     }
 }

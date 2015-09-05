@@ -22,20 +22,22 @@
 
 @section scripts
 {
+    @(Html.GoogleMap()
+          .ScriptRegistrar(scripts => scripts.Add("jmelosegui.googlemap.js"))
+     )
+
     <script type='text/javascript'>
 
         $('#myButton').click(function(e) {
             e.preventDefault();
             e.stopPropagation();
-            var mapContainer = $('#mapContainer');
-            var url = '@Url.Action("GooglemapPartialView", "Basic")';
 
-            $.ajax({
-                url: url,
+            new $.jmelosegui.GoogleMap('#mapContainer').ajax({
+                url: '/Basic/GooglemapPartialView',
                 type: "Get",
-                datatype: "html",
-                success: function (data) {
-                    mapContainer.html(data);
+                data: { payload: 'from ajax call'},
+                success: function(data) {
+                    //alert('succeded');
                 }
             });
         });

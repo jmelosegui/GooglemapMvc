@@ -15,8 +15,8 @@
     <AssemblyName>Jmelosegui.Mvc.GoogleMap.Examples</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
-    <IISExpressSSLPort />
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -378,7 +378,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>24576</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Jmelosegui.Mvc.Googlemap.Examples</IISUrl>
+          <IISUrl>http://localhost:24576/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://localhost/Jmelosegui.Mvc.Googlemap.Examples</CustomServerUrl>
