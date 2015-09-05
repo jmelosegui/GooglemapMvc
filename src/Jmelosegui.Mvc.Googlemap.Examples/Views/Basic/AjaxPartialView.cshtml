@@ -33,7 +33,7 @@
             e.stopPropagation();
 
             new $.jmelosegui.GoogleMap('#mapContainer').ajax({
-                url: '/Basic/GooglemapPartialView',
+                url: '@Url.Action("GooglemapPartialView", "Basic")',
                 type: "Get",
                 data: { payload: 'from ajax call'},
                 success: function(data) {
