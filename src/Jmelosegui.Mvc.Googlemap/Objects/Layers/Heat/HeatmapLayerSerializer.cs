@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     internal class HeatmapLayerSerializer : LayerSerializer<HeatmapLayer>
     {
@@ -13,7 +14,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         protected override  IDictionary<string, object> LayerSerialize()
         {
-            List<string> gradientCollection = Layer.Gradient.Select(color => String.Format("rgba({0}, {1}, {2}, {3})", color.R, color.G, color.B, color.A)).ToList();
+            List<string> gradientCollection = Layer.Gradient.Select(color => String.Format(CultureInfo.InvariantCulture, "rgba({0}, {1}, {2}, {3})", color.R, color.G, color.B, color.A)).ToList();
             
             IDictionary<string, object> layerDictionary = new Dictionary<string, object>();
             FluentDictionary.For(layerDictionary)

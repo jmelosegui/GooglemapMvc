@@ -1,15 +1,18 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ScriptRegistrarBuilder : IHtmlString
     {
-        protected ScriptRegistrarBuilder(ScriptRegistrarBuilder builder) : this(builder.ScriptRegistrar)
+        protected ScriptRegistrarBuilder(ScriptRegistrarBuilder builder) : this(PassThroughNonNull(builder).ScriptRegistrar)
         {
         }
 
         public ScriptRegistrarBuilder(ScriptRegistrar scriptRegistrar)
         {
+            if (scriptRegistrar == null) throw new ArgumentNullException("scriptRegistrar");
+
             this.ScriptRegistrar = scriptRegistrar;
         }
 
@@ -30,6 +33,20 @@ namespace Jmelosegui.Mvc.Googlemap
             UrlHelper.AssertVirtualPath(basePath, "basePath");
 
             ScriptRegistrar.BasePath = basePath;
+            return this;
+        }
+
+        private static ScriptRegistrarBuilder PassThroughNonNull(ScriptRegistrarBuilder builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
+        }
+
+        public ScriptRegistrarBuilder Add(string scriptFileName)
+        {
+            if (String.IsNullOrWhiteSpace(scriptFileName)) throw new ArgumentNullException("scriptFileName");
+            ScriptRegistrar.FixedScriptCollection.Add(scriptFileName);
             return this;
         }
     }

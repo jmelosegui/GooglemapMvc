@@ -2,7 +2,7 @@
 using System.Web.WebPages;
 using Newtonsoft.Json;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class HtmlTemplate : HtmlTemplate<object>
     {

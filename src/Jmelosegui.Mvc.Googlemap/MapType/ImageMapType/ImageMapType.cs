@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class ImageMapType : MapType
+    public class ImageMapType : MapTypeBase
     {
         public ImageMapType()
         {
@@ -13,6 +13,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public Size TileSize { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
         public string TileUrlPattern { get; set; }
 
         public bool RepeatHorizontally { get; set; }

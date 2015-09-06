@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class HeatLayerBuilder : LayerBuilder<HeatmapLayer>
     {
         internal HeatLayerBuilder(HeatmapLayer heatLayer) : base(heatLayer) { }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public HeatLayerBuilder Data(Action<LocationFactory<HeatmapLayer>> action)
         {
             if (action == null) throw new ArgumentNullException("action");
@@ -50,6 +50,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public HeatLayerBuilder BindTo<T, TLocationContainer>(IEnumerable<T> dataSource, Action<LocationBindingFactory<TLocationContainer>> itemDataBound) where TLocationContainer : class, ILocationContainer
         {
             if (dataSource == null) throw new ArgumentNullException("dataSource");

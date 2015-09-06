@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
+namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
     public partial class BasicController
     {
@@ -10,9 +10,10 @@ namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
             return View();
         }
 
-        public ActionResult GooglemapPartialView()
+        public ActionResult GooglemapPartialView(string payload)
         {
-            return PartialView("_GooglemapPartialView");
+            object model = payload;
+            return PartialView("_GooglemapPartialView", model);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public interface ILocationBinding<in TLocationContainer> where TLocationContainer : ILocationContainer
     {

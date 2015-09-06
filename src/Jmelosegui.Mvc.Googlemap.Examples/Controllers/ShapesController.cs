@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
+namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
     public partial class ShapesController : Controller
     {

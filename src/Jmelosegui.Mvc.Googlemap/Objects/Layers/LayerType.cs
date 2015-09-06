@@ -1,4 +1,4 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     internal enum LayerType
     {

@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public abstract class MapObject
     {
-        protected MapObject(GoogleMap map)
+        protected MapObject(Map map)
         {
             if (map == null) throw new ArgumentNullException("map");
             Map = map;
         }
 
-        protected internal GoogleMap Map { get; private set; }
+        protected internal Map Map { get; private set; }
     }
 }

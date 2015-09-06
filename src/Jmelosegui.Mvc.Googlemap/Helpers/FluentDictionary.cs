@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a proper name")]
     public class FluentDictionary
     {
         private readonly IDictionary<string, object> dictionary;
@@ -29,6 +30,8 @@ namespace Jmelosegui.Mvc.Googlemap
         }
         public FluentDictionary Add<T>(string key, T value, Func<bool> condition)
         {
+            if (condition == null) throw new ArgumentNullException("condition");
+            if (key == null) throw new ArgumentNullException("key");
             if (condition())
             {
                 this.dictionary[key] = value;

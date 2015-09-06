@@ -1,7 +1,6 @@
 using System;
-using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class KmlLayerBuilder : LayerBuilder<KmlLayer>
     {
@@ -39,17 +38,18 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        public KmlLayerBuilder Url(string url)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Could be a virtual Url")]
+        public KmlLayerBuilder Url(string value)
         {
-            if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(url, "Url cannot be null");
-            Layer.Url = url.ToAbsoluteUrl();
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(value, "Url cannot be null");
+            Layer.Url = new Uri(value.ToAbsoluteUrl());
             
             return this;
         }
 
-        public KmlLayerBuilder zIndex(int value)
+        public KmlLayerBuilder ZIndex(int value)
         {
-            Layer.zIndex = value;
+            Layer.ZIndex = value;
             return this;
         } 
         #endregion

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public abstract class Shape : MapObject
     {
-        protected Shape(GoogleMap map) : base(map)
+        protected Shape(Map map) : base(map)
         {
             fillOpacity = 0.5D;
             strokeOpacity = 0.8D;
             StrokeWeight = 2;
             FillColor = Color.Red;
             StrokeColor = Color.DarkRed;
-            zIndex = 1;
+            ZIndex = 1;
+            Clickable = true;
         }
 
         public bool Clickable { get; set; }
@@ -47,8 +48,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public int StrokeWeight { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "z")]
-        public int zIndex { get; set; }
+        public int ZIndex { get; set; }
 
         public abstract ISerializer CreateSerializer();
     }

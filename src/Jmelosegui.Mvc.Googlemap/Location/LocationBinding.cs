@@ -1,8 +1,8 @@
 using System;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class LocationBinding<TLocationContainer, TDataItem> : ILocationBinding<TLocationContainer> where TLocationContainer : ILocationContainer
+    public sealed class LocationBinding<TLocationContainer, TDataItem> : ILocationBinding<TLocationContainer> where TLocationContainer : ILocationContainer
     {
         public Action<TLocationContainer, TDataItem> ItemDataBound
         {

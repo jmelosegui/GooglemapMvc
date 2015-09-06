@@ -1,17 +1,16 @@
 using System;
-using Jmelosegui.Mvc.Googlemap.Objects.Layers;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class LayerFactory
     {
-        public LayerFactory(GoogleMap map)
+        public LayerFactory(Map map)
         {
             if (map == null) throw new ArgumentNullException("map");
             this.Map = map;
         }
 
-        protected GoogleMap Map { get; private set; }
+        protected Map Map { get; private set; }
 
         public HeatLayerBuilder AddHeatmapLayer()
         {

@@ -1,13 +1,13 @@
-﻿namespace Jmelosegui.Mvc.Googlemap.Objects
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public class CircleFactory : IHideObjectMembers
     {
-        public CircleFactory(GoogleMap map)
+        public CircleFactory(Map map)
         {
             this.Map = map;
         }
 
-        protected GoogleMap Map { get; private set; }
+        protected Map Map { get; private set; }
 
         public CircleBuilder Add()
         {

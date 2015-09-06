@@ -1,10 +1,10 @@
 using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MarkerEventsBuilder: IHideObjectMembers
     {
-        protected MarkerEventsBuilder(MarkerEventsBuilder builder) : this(builder.ClientEvents)
+        protected MarkerEventsBuilder(MarkerEventsBuilder builder) : this(PassThroughNonNull(builder).ClientEvents)
         {
         }
 
@@ -12,7 +12,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             if(clientEvents == null)throw  new ArgumentNullException("clientEvents");
 
-            this.ClientEvents = clientEvents;
+            ClientEvents = clientEvents;
         }
 
         protected MarkerClientEvents ClientEvents { get; private set; }
@@ -26,11 +26,11 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        public MarkerEventsBuilder OnMarkerDblClick(string onMarkerDblClickkHandlerName)
+        public MarkerEventsBuilder OnMarkerDoubleClick(string onMarkerDoubleClickHandlerName)
         {
-            if (String.IsNullOrEmpty(onMarkerDblClickkHandlerName)) throw new ArgumentNullException("onMarkerDblClickkHandlerName");
+            if (String.IsNullOrEmpty(onMarkerDoubleClickHandlerName)) throw new ArgumentNullException("onMarkerDoubleClickHandlerName");
 
-            ClientEvents.OnMarkerDblClick.HandlerName = onMarkerDblClickkHandlerName;
+            ClientEvents.OnMarkerDoubleClick.HandlerName = onMarkerDoubleClickHandlerName;
 
             return this;
         }
@@ -161,13 +161,21 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Markerz", Justification = "I meant Marker and zIndex")]
         public MarkerEventsBuilder OnMarkerzIndexChanged(string onMarkerzIndexChangedHandlerName)
         {
             if (String.IsNullOrEmpty(onMarkerzIndexChangedHandlerName)) throw new ArgumentNullException("onMarkerzIndexChangedHandlerName");
 
-            ClientEvents.OnMarkerzIndexChanged.HandlerName = onMarkerzIndexChangedHandlerName;
+            ClientEvents.OnMarkerZIndexChanged.HandlerName = onMarkerzIndexChangedHandlerName;
 
             return this;
+        }
+
+        private static MarkerEventsBuilder PassThroughNonNull(MarkerEventsBuilder builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }

@@ -1,16 +1,16 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MarkerFactory : IHideObjectMembers 
     {
-        public MarkerFactory(GoogleMap map)
+        public MarkerFactory(Map map)
         {
             if(map == null) throw new ArgumentNullException("map");
             Map = map;
         }
 
-        protected GoogleMap Map { get; private set; }
+        protected Map Map { get; private set; }
 
         public MarkerBuilder Add() 
         {

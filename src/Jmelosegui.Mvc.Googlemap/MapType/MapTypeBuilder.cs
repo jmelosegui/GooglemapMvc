@@ -1,9 +1,10 @@
-namespace Jmelosegui.Mvc.Googlemap
+using System;
+
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class MapTypeBuilder<TMapType> where TMapType : MapType
+    public class MapTypeBuilder<TMapType> where TMapType : MapTypeBase
     {
-        protected MapTypeBuilder(MapTypeBuilder<TMapType> builder)
-            : this(builder.MapType)
+        protected MapTypeBuilder(MapTypeBuilder<TMapType> builder) : this(PassThroughNonNull(builder).MapType)
         {
         }
 
@@ -14,21 +15,21 @@ namespace Jmelosegui.Mvc.Googlemap
 
         protected TMapType MapType { get; private set; }
 
-        public MapTypeBuilder<TMapType> MapTypeAltName(string mapTypeAltName)
+        public MapTypeBuilder<TMapType> MapTypeAltName(string value)
         {
-            MapType.MapTypeAltName = mapTypeAltName;
+            MapType.MapTypeAltName = value;
             return this;
         }
 
-        public MapTypeBuilder<TMapType> MaxZoom(int maxZoom)
+        public MapTypeBuilder<TMapType> MaxZoom(int value)
         {
-            MapType.MaxZoom = maxZoom;
+            MapType.MaxZoom = value;
             return this;
         }
 
-        public MapTypeBuilder<TMapType> MinZoom(int minZoom)
+        public MapTypeBuilder<TMapType> MinZoom(int value)
         {
-            MapType.MinZoom = minZoom;
+            MapType.MinZoom = value;
             return this;
         }
 
@@ -48,6 +49,13 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             MapType.Radius = value;
             return this;
+        }
+
+        private static MapTypeBuilder<TMapType> PassThroughNonNull(MapTypeBuilder<TMapType> builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }

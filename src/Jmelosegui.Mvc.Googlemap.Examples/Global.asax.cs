@@ -2,7 +2,7 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples
+namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
     public class MvcApplication : System.Web.HttpApplication
     {

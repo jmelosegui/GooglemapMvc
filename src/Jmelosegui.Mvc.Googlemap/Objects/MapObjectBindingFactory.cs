@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MapObjectBindingFactory<TMapObject> where TMapObject : MapObject
     {
@@ -16,6 +16,6 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        public IMapOpjectBinding<TMapObject> Binder { get; private set; }
+        public IMapObjectBinding<TMapObject> Binder { get; private set; }
     }
 }

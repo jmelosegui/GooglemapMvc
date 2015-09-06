@@ -1,17 +1,17 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ShapeBuilder<TShape> where TShape : Shape
     {
-        protected ShapeBuilder(ShapeBuilder<TShape> builder)
-            : this(builder.Shape)
+        protected ShapeBuilder(ShapeBuilder<TShape> builder) : this(PassThroughNonNull(builder).Shape)
         {
         }
 
         public ShapeBuilder(TShape shape)
         {
-            this.Shape = shape;
+            Shape = shape;
         }
 
         protected TShape Shape { get; private set; }
@@ -52,10 +52,17 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
             return this;
         }
 
-        public ShapeBuilder<TShape> zIndex(int value)
+        public ShapeBuilder<TShape> ZIndex(int value)
         {
-            Shape.zIndex = value;
+            Shape.ZIndex = value;
             return this;
+        }
+
+        private static ShapeBuilder<TShape> PassThroughNonNull(ShapeBuilder<TShape> builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            return builder;
         }
     }
 }

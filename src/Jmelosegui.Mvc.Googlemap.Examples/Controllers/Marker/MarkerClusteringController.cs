@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
-using Jmelosegui.Mvc.Googlemap.Objects;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
+namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
     public partial class MarkerController
     {

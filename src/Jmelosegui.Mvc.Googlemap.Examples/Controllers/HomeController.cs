@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples.Controllers
+namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
     public class HomeController : Controller
     {

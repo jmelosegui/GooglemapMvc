@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Linq;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
-    public static class EnumExtentions
+    internal static class EnumExtensions
     {
         public static string ToClientSideString(this Enum source)
         {
+            if (source == null) throw new ArgumentNullException("source");
+
             var valueAttribute = source.GetType().GetField(source.ToString())
                                     .GetCustomAttributes(true)
                                     .OfType<ClientSideEnumValueAttribute>()
@@ -14,7 +16,7 @@ namespace Jmelosegui.Mvc.Googlemap
 
             if (valueAttribute == null)
             {
-                throw new Exception("You must decorate the enum value with the attribute \"ClientSideEnumValueAttribute\"");
+                throw new InvalidOperationException("You must decorate the enum value with the attribute \"ClientSideEnumValueAttribute\"");
             }
 
             return valueAttribute.Value.Replace("'", "");

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.UI;
 
-namespace Jmelosegui.Mvc.Googlemap.Examples
+namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
     public static class HtmlHelpersExtensions
     {

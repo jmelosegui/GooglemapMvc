@@ -1,8 +1,8 @@
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class Layer : MapObject
     {
-        internal protected Layer(string name, GoogleMap map) : base(map)
+        internal protected Layer(string name, Map map) : base(map)
         {
             Name = name;
         }

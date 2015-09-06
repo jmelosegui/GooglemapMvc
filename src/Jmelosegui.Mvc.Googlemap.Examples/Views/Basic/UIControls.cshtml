@@ -1,4 +1,4 @@
-﻿@model Jmelosegui.Mvc.Googlemap.Examples.Controllers.UIControlViewModel
+﻿@model Jmelosegui.Mvc.GoogleMap.Examples.Controllers.UIControlViewModel
 
 @{
     ViewBag.Title = "UI Controls";
@@ -141,7 +141,7 @@
 
         <div class="col-md-3">
             <label for="mapType" class="control-label" style="white-space: nowrap;">Type</label>
-            @Html.DropDownList("MapTypeControl", new SelectList(typeof(MapTypes).GetEnumDataSource(), "Key", "Value"), new { @class = "form-control", id = "mapType" })
+            @Html.DropDownList("MapTypeControl", new SelectList(typeof(MapType).GetEnumDataSource(), "Key", "Value"), new { @class = "form-control", id = "mapType" })
         </div>
     </div>
 

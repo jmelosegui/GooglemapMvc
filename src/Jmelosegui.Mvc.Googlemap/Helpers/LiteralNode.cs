@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class LiteralNode : IHtmlNode
     {
@@ -60,15 +60,15 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             throw new NotSupportedException();
         }
-        public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> attributes)
+        public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> values)
         {
             throw new NotSupportedException();
         }
-        public IHtmlNode Attributes(object attributes)
+        public IHtmlNode Attributes(object value)
         {
             throw new NotSupportedException();
         }
-        public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> attributes, bool replaceExisting)
+        public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> values, bool replaceExisting)
         {
             throw new NotSupportedException();
         }
@@ -80,7 +80,7 @@ namespace Jmelosegui.Mvc.Googlemap
         {
             throw new NotSupportedException();
         }
-        public IHtmlNode ToggleClass(string @class, bool condition)
+        public IHtmlNode ToggleClass(string cssClass, bool condition)
         {
             throw new NotSupportedException();
         }
@@ -114,10 +114,14 @@ namespace Jmelosegui.Mvc.Googlemap
         }
         public void WriteTo(TextWriter output)
         {
+            if (output == null) throw new ArgumentNullException("output");
+
             output.Write(this.Content);
         }
         public IHtmlNode AppendTo(IHtmlNode parent)
         {
+            if (parent == null) throw new ArgumentNullException("parent");
+
             parent.Children.Add(this);
             return this;
         }

@@ -1,6 +1,6 @@
-﻿@using Jmelosegui.Mvc.Googlemap.Examples.App_Data
-@using Jmelosegui.Mvc.Googlemap.Objects
-@model IEnumerable<RegionInfo>
+﻿@using Jmelosegui.Mvc.GoogleMap
+@using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+@model IEnumerable<Jmelosegui.Mvc.GoogleMap.Examples.App_Data.RegionInfo>
 
 @{
     ViewBag.Title = "External Reference";
@@ -33,7 +33,7 @@
                                     marker.Latitude = regionInfo.Latitude;
                                     marker.Longitude = regionInfo.Longitude;
                                     marker.Title = regionInfo.Title;
-                                    marker.zIndex = regionInfo.zIndex;
+                                    marker.ZIndex = regionInfo.zIndex;
                                     marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}", regionInfo.ImagePath)
                                         , new Size(18, 12)
                                         , new Point(0, 0)

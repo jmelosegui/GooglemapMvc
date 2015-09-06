@@ -1,6 +1,6 @@
-﻿@using Jmelosegui.Mvc.Googlemap.Examples.Controllers
-@using Jmelosegui.Mvc.Googlemap.Objects
-@model HeatMapModel
+﻿@using Jmelosegui.Mvc.GoogleMap
+@using Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+@model Jmelosegui.Mvc.GoogleMap.Examples.Controllers.HeatMapModel
 @{
     ViewBag.Title = "Heatmap";
     Layout = "~/Views/Shared/_LayoutExamples.cshtml";
@@ -11,7 +11,7 @@
       .Height(350)
       .Center(c => c.Latitude(37.774546)
                 .Longitude(-122.433523))
-      .MapTypeId(MapTypes.Satellite)
+      .MapTypeId(MapType.Satellite)
       .Zoom(13)
       .Layers(layer => layer.AddHeatmapLayer()
                             .Dissipating(Model.Dissipating)

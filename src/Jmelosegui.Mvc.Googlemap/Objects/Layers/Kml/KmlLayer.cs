@@ -1,8 +1,10 @@
-namespace Jmelosegui.Mvc.Googlemap.Objects
+using System;
+
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class KmlLayer : Layer
     {
-        public KmlLayer(GoogleMap map) : base("kml", map)
+        public KmlLayer(Map map) : base("kml", map)
         {
             Clickable = true;
             ScreenOverlays = true;
@@ -16,9 +18,9 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
 
         public bool SuppressInfoWindows { get; set; }
 
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
-        public int zIndex { get; set; }
+        public int ZIndex { get; set; }
 
         public override LayerSerializer CreateSerializer()
         {

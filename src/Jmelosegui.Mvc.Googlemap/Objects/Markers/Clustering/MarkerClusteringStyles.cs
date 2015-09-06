@@ -1,21 +1,15 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MarkerClusteringStyles
     {
-        private string url;
-
-        public string Url
-        {
-            get { return url; }
-            set { url = value.ToAbsoluteUrl(); }
-        }
-
+        public Uri Url { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public int TextSize { get; set; }
-        public Color TextColor { get; set; }
+        public int FontSize { get; set; }
+        public Color FontColor { get; set; }
 
         public ISerializer CreateSerializer()
         {

@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MapTypeStyle : ISerializer
     {
         public MapTypeStyle()
         {
-            Stylers = new List<object>();
+            Stylers = new Collection<object>();
         }
 
         public ElementType? ElementType { get; set; }
 
         public FeatureType? FeatureType { get; set; }
 
-        public List<object> Stylers { get; set; }
+        public Collection<object> Stylers { get; private set; }
 
         public IDictionary<string, object> Serialize()
         {

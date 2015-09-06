@@ -18,7 +18,7 @@
 
                     $jmelosegui.trigger(this, 'load');
 
-                    if (settings.success) settings.success(component);
+                    if (settings.success && !$.isEmptyObject(options)) settings.success(component);
                 }
             });
         },
@@ -50,14 +50,13 @@
         return $jmelosegui.create(this, {
             name: 'GoogleMap',
             init: function (element, options) {
-                return new $jmelosegui.Googlemap(element, options);
+                return new $jmelosegui.GoogleMap(element, options);
             },
             options: options,
             success: function (map) {
                 map.load();
-            },
+            }
         });
-
     };
 
     //Polygons
@@ -94,7 +93,8 @@
                 strokeOpacity: this.strokeOpacity,
                 strokeWeight: this.strokeWeight,
                 fillColor: this.fillColor,
-                fillOpacity: this.fillOpacity
+                fillOpacity: this.fillOpacity,
+                clickable: this.clickable
             };
             var polygon = new google.maps.Polygon(options);
             polygon.setMap(this.Map);
@@ -130,7 +130,8 @@
                 strokeOpacity: this.strokeOpacity,
                 strokeWeight: this.strokeWeight,
                 fillColor: this.fillColor,
-                fillOpacity: this.fillOpacity
+                fillOpacity: this.fillOpacity,
+                clickable: this.clickable
             };
             var circle = new google.maps.Circle(options);
             circle.setMap(this.Map);
@@ -148,6 +149,7 @@
         this.id = config.id;
         this.latitude = config.lat;
         this.longitude = config.lng;
+        this.address = config.address;
         this.title = config.title;
         this.icon = config.icon;
         this.clickable = (config.clickable !== undefined) ? config.clickable : true;
@@ -215,6 +217,7 @@
             };
             // create
             this.gMarker = new google.maps.Marker(markerOptions);
+            $.extend(this.gMarker, { address: this.address });
             if (this.parent.fitToMarkersBounds) {
                 this.parent.bounds.extend(this.gMarker.position);
             }
@@ -357,9 +360,14 @@
 
     $jmelosegui.KmlLayer.prototype = {}
 
-    $jmelosegui.Googlemap = function (element, options) {
+    $jmelosegui.GoogleMap = function (element, options) {
 
         this.element = element;
+
+        if ($.isEmptyObject(options)) {
+            return;
+        }
+
         $.extend(this, options);
 
         this.clientId = options.clientId;
@@ -569,7 +577,22 @@
     };
     var delay = 100;
     var markerIndex = 0;
-    $jmelosegui.Googlemap.prototype = {
+    var loadGoogleMapScript = true;
+    $jmelosegui.GoogleMap.prototype = {
+        ajax: function (options) {
+            var self = this;
+            $.ajax({
+                url: options.url,
+                type: options.type,
+                datatype: "html",
+                data: $.extend(options.data, { __LoadGoogleMapScript__: loadGoogleMapScript }),
+                success: function (data) {
+                    $(self.element).html(data);
+                    loadGoogleMapScript = false;
+                    options.success(data);
+                }
+            });
+        },
         initialize: function () {
 
             var innerOptions = {

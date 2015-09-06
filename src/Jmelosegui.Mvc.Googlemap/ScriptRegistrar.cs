@@ -1,27 +1,31 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.UI;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ScriptRegistrar
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private bool hasRendered;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ScriptRegistrar", Justification = "Need to specify the actual name")]
         public ScriptRegistrar(ViewContext viewContext)
         {
+            if(viewContext == null) throw new ArgumentNullException("viewContext");
             if (viewContext.HttpContext.Items[Key] != null)
             {
                 throw new InvalidOperationException("Only one ScriptRegistrar is allowed in a single request");
             }
 
-            Components = new List<GoogleMap>();
-
+            Components = new Collection<Map>();
+            FixedScriptCollection = new List<string>();
             viewContext.HttpContext.Items[Key] = this;
             BasePath = "~/Scripts";
             ViewContext = viewContext;
@@ -29,7 +33,9 @@ namespace Jmelosegui.Mvc.Googlemap
 
         public string BasePath { get; set; }
 
-        protected List<GoogleMap> Components { get; private set; }
+        protected Collection<Map> Components { get; private set; }
+
+        internal List<string> FixedScriptCollection { get; private set; }
 
         protected ViewContext ViewContext
         {
@@ -52,7 +58,7 @@ namespace Jmelosegui.Mvc.Googlemap
             hasRendered = true;
         }
 
-        internal void AddComponent(GoogleMap component)
+        internal void AddComponent(Map component)
         {
             if(component == null) throw new ArgumentNullException("component");
 
@@ -70,7 +76,8 @@ namespace Jmelosegui.Mvc.Googlemap
             const string bundlePath = "~/jmelosegui/googlemap";
             var bundle = new ScriptBundle(bundlePath);
 
-            var scripts = Components.SelectMany(c => c.ScriptFileNames).Distinct().ToList();
+            var scripts = Components.SelectMany(c => c.ScriptFileNames)
+                                    .Union(FixedScriptCollection).Distinct().ToList();
             foreach (var scriptFileName in scripts)
             {
                 var localScriptFileName = scriptFileName;
@@ -92,9 +99,11 @@ namespace Jmelosegui.Mvc.Googlemap
 
         private void WriteScriptStatements(TextWriter writer)
         {
+            if (!Components.Any()) return;
+
             writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
             writer.WriteLine(ViewContext.HttpContext.Request.IsAjaxRequest()
-                ? "function executeAsync(){"
+                ? GetAjaxScriptStart()
                 : "jQuery(document).ready(function(){");
 
             foreach (var component in Components)
@@ -103,7 +112,7 @@ namespace Jmelosegui.Mvc.Googlemap
                 writer.WriteLine();
             }
             writer.WriteLine(ViewContext.HttpContext.Request.IsAjaxRequest()
-               ? "}"
+               ? GetAjaxScriptEnd()
                : "});");
             writer.Write("//]]>{0}</script>", Environment.NewLine); 
         }
@@ -111,7 +120,7 @@ namespace Jmelosegui.Mvc.Googlemap
         public string ToHtmlString()
         {
             string result;
-            using (var stringWriter = new StringWriter())
+            using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
             {
                 Write(stringWriter);
                 result = stringWriter.ToString();
@@ -119,7 +128,7 @@ namespace Jmelosegui.Mvc.Googlemap
             return result;
         }
 
-        public static string CombinePath(string directory, string fileName)
+        private static string CombinePath(string directory, string fileName)
         {
             const string slash = "/";
 
@@ -127,6 +136,29 @@ namespace Jmelosegui.Mvc.Googlemap
                           (fileName.StartsWith(slash, StringComparison.Ordinal) ? fileName.Substring(1) : fileName);
 
             return path;
+        }
+
+        private bool ShouldLoadScripts()
+        {
+            return Components.FirstOrDefault(m => m.LoadScripts) != null;
+        }
+
+        private string GetAjaxScriptStart()
+        {
+            if (ShouldLoadScripts())
+            {
+                return "function executeAsync(){";
+            }
+            return "(function (){";
+        }
+
+        private string GetAjaxScriptEnd()
+        {
+            if (ShouldLoadScripts())
+            {
+                return "}";
+            }
+            return "})();";
         }
     }
 }

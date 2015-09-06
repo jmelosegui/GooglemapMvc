@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap.Objects
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class ShapeSerializer<TShape>: ISerializer where TShape : Shape
     {
@@ -15,7 +15,7 @@ namespace Jmelosegui.Mvc.Googlemap.Objects
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
 
-            if(shape.Clickable)
+            if(!shape.Clickable)
                 result["Clickable"] = shape.Clickable;
             result["FillColor"] = shape.FillColor.ToHtml();
             result["FillOpacity"] = shape.FillOpacity;

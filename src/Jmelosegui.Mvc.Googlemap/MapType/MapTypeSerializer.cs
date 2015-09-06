@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jmelosegui.Mvc.Googlemap
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MapTypeSerializer : ISerializer
     {
-        private readonly MapType mapType;
+        private readonly MapTypeBase mapType;
 
-        public MapTypeSerializer(MapType mapType)
+        public MapTypeSerializer(MapTypeBase mapType)
         {
             this.mapType = mapType;
         }

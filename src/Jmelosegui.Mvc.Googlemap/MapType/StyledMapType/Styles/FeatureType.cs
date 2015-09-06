@@ -1,4 +1,4 @@
-﻿namespace Jmelosegui.Mvc.Googlemap
+﻿namespace Jmelosegui.Mvc.GoogleMap
 {
     public enum FeatureType
     {
@@ -48,7 +48,7 @@
         PoiBusiness,
 
         [ClientSideEnumValue("'poi.government'")]
-        PoiGoverment,
+        PoiGovernment,
 
         [ClientSideEnumValue("'poi.medical'")]
         PoiMedical,
