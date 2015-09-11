@@ -62,6 +62,12 @@ and at the end of that page add the following
     @(Html.GoogleMap().ScriptRegistrar())
 }
 ```
+Don't forget to add the namespace to the very top of your page
+
+```
+@using Jmelosegui.Mvc.GoogleMap
+```
+
 Now hit F5 and you should see the map rendering on the page 
  
 ## Links
