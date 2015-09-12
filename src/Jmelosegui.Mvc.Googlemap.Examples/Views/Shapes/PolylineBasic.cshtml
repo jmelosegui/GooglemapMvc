@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Polyline Basic";
+}
+
+@(
+ Html.GoogleMap()
+        .Name("map")
+        .Height(500)
+        .Center(c => c.Latitude(0)
+                      .Longitude(-180))
+        .Zoom(3)
+        .Polylines(pf => pf.Add()
+                        .Points(ptn =>
+                        {
+                            ptn.Add(37.772, -122.214);
+                            ptn.Add(21.291, -157.821);
+                            ptn.Add(-18.142, 178.431);
+                            ptn.Add(-27.467, 153.027);
+                        })
+                        .FillColor(Color.Blue)
+                        .StrokeColor(Color.DarkBlue)
+                  )
+
+)
+
