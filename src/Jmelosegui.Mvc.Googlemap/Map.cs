@@ -183,6 +183,10 @@ namespace Jmelosegui.Mvc.GoogleMap
                         mapObject = new Polygon(this);
                         Polygons.Add((Polygon)mapObject);
                         break;
+                    case "Jmelosegui.Mvc.GoogleMap.Polyline":
+                        mapObject = new Polyline(this);
+                        Polylines.Add((Polyline)mapObject);
+                        break;
                 }
 
                 factory.Binder.ItemDataBound((TMapObject)mapObject, dataItem);
