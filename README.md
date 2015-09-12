@@ -24,6 +24,7 @@ Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of 
   - FitToMarkersBounds
   - External Reference
 - Shapes
+  - Polyline
   - Polygons
   - Circles
   - Databinding
