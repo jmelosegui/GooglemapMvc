@@ -162,6 +162,10 @@
     <Compile Include="Objects\Markers\Events\MarkerEventsBuilder.cs" />
     <Compile Include="Objects\Markers\Events\MarkerClientEvents.cs" />
     <Compile Include="Location\ILocationContainer.cs" />
+    <Compile Include="Objects\Shapes\Polyline\PolylineBuilder.cs" />
+    <Compile Include="Objects\Shapes\Polyline\PolylineFactory.cs" />
+    <Compile Include="Objects\Shapes\Polyline\Polyline.cs" />
+    <Compile Include="Objects\Shapes\Polyline\PolylineSerializer.cs" />
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

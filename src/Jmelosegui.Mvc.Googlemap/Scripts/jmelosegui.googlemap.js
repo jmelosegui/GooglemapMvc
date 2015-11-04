@@ -59,6 +59,43 @@
         });
     };
 
+    //Polyline
+    $jmelosegui.GooglePolyline = function (map, config) {
+        //init
+        this.Map = map;
+        this.gPolyline = null;
+        //properties
+        this.clickable = config.clickable;
+        this.points = config.points;
+        this.strokeColor = config.strokeColor;
+        this.strokeOpacity = config.strokeOpacity;
+        this.strokeWeight = config.strokeWeight;
+        this.points = [];
+
+        if (config.points) {
+            for (var i = 0; i < config.points.length; i++) {
+                this.points.push(new google.maps.LatLng(config.points[i].lat, config.points[i].lng));
+            }
+        }
+    };
+
+    $jmelosegui.GooglePolyline.prototype = {
+        isLoaded: function () {
+            return this.gPolyline !== null;
+        },
+        load: function () {
+            var options = {
+                path: this.points,
+                strokeColor: this.strokeColor,
+                strokeOpacity: this.strokeOpacity,
+                strokeWeight: this.strokeWeight,
+                clickable: this.clickable
+            };
+            var polyline = new google.maps.Polyline(options);
+            polyline.setMap(this.Map);
+        }
+    };
+
     //Polygons
     $jmelosegui.GooglePolygon = function (map, config) {
         //init
@@ -784,7 +821,7 @@
                 }
             }
         },
-        renderPolygon: function (p) {
+        renderShape: function (p) {
             p.load();
         },
         load: function (point) {
@@ -875,18 +912,25 @@
                     }
                 }
             }
+            // polylines
+            if (this.polylines) {
+                for (i = 0; i < this.polylines.length; i++) {
+                    var polyline = new $jmelosegui.GooglePolyline(this.GMap, this.polylines[i]);
+                    this.renderShape(polyline);
+                }
+            }
             // polygons
             if (this.polygons) {
                 for (i = 0; i < this.polygons.length; i++) {
                     var polygon = new $jmelosegui.GooglePolygon(this.GMap, this.polygons[i]);
-                    this.renderPolygon(polygon);
+                    this.renderShape(polygon);
                 }
             }
             // circles
             if (this.circles) {
                 for (i = 0; i < this.circles.length; i++) {
                     var circle = new $jmelosegui.GoogleCircle(this.GMap, this.circles[i]);
-                    this.renderPolygon(circle);
+                    this.renderShape(circle);
                 }
             }
             // mapTypes

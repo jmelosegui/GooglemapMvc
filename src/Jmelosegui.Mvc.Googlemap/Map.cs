@@ -43,6 +43,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             Markers = new List<Marker>();
             MarkerClusteringOptions = new MarkerClusteringOptions();
             Polygons = new List<Polygon>();
+            Polylines = new List<Polyline>();
             Circles = new List<Circle>();
             PanControlPosition = ControlPosition.TopLeft;
             PanControlVisible = true;
@@ -123,6 +124,8 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public IList<Polygon> Polygons { get; private set; }
 
+        public IList<Polyline> Polylines { get; private set; }
+
         public IList<Circle> Circles { get; private set; }
 
         public bool ScaleControlVisible { get; set; }
@@ -148,6 +151,7 @@ namespace Jmelosegui.Mvc.GoogleMap
         public ZoomControlStyle ZoomControlStyle { get; set; }
 
         internal bool LoadScripts { get; private set; }
+
         #endregion
 
         #region Virtual Methods
@@ -178,6 +182,10 @@ namespace Jmelosegui.Mvc.GoogleMap
                     case "Jmelosegui.Mvc.GoogleMap.Polygon":
                         mapObject = new Polygon(this);
                         Polygons.Add((Polygon)mapObject);
+                        break;
+                    case "Jmelosegui.Mvc.GoogleMap.Polyline":
+                        mapObject = new Polyline(this);
+                        Polylines.Add((Polyline)mapObject);
                         break;
                 }
 
@@ -434,6 +442,18 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         private void SerializeShapes(ClientSideObjectWriter objectWriter)
         {
+            if (Polylines.Any())
+            {
+                var polylines = new List<IDictionary<string, object>>();
+
+                Polylines.Each(p => polylines.Add(p.CreateSerializer().Serialize()));
+
+                if (polylines.Any())
+                {
+                    objectWriter.AppendCollection("polylines", polylines);
+                }
+            }
+
             if (Polygons.Any())
             {
                 var polygons = new List<IDictionary<string, object>>();

@@ -151,6 +151,7 @@
     <Compile Include="Controllers\Shapes\CircleBasicController.cs" />
     <Compile Include="Controllers\Shapes\DataBindingToModelController.cs" />
     <Compile Include="Controllers\Shapes\PolygonBasicController.cs" />
+    <Compile Include="Controllers\Shapes\PolylineBasicController.cs" />
     <Compile Include="Extensions\AutoPopulateSourceCodeAttribute.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
@@ -189,6 +190,7 @@
     <Content Include="Content\Marker\Descriptions\ClientEvents.html" />
     <Content Include="Content\Services\Descriptions\Geocoding.html" />
     <Content Include="Content\Services\Descriptions\Geolocation.html" />
+    <Content Include="Content\Shapes\Descriptions\PolylineBasic.html" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Marker\Descriptions\CustomIcons.html" />
     <Content Include="Content\Marker\Descriptions\DataBindingToModel.html" />
@@ -345,9 +347,11 @@
     <Content Include="Views\Layers\Kml.cshtml" />
     <Content Include="Views\Layers\TrafficTransitBike.cshtml" />
     <Content Include="Views\Basic\Version.cshtml" />
+    <Content Include="Views\Shapes\PolylineBasic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\PolylineBasic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

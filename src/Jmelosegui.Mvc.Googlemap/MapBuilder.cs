@@ -260,6 +260,14 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
+        public MapBuilder Polylines(Action<PolylineFactory> action)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            var factory = new PolylineFactory(Component);
+            action(factory);
+            return this;
+        }
+
         public MapBuilder ScaleControlVisible(bool visible)
         {
             Component.ScaleControlVisible = visible;
