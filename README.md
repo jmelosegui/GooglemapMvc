@@ -1,5 +1,6 @@
-[Googlemap control for Asp.Net MVC](http://www.jmelosegui.com/map/) [![Build status](https://ci.appveyor.com/api/projects/status/github/jmelosegui/googlemapmvc?branch=dev&svg=true)](https://ci.appveyor.com/project/jmelosegui/googlemapmvc)
+[Googlemap control for Asp.Net MVC](http://www.jmelosegui.com/map/)
 ==============================
+[![Build status](https://ci.appveyor.com/api/projects/status/github/jmelosegui/googlemapmvc?branch=dev&svg=true)](https://ci.appveyor.com/project/jmelosegui/googlemapmvc) [![Join the chat at https://gitter.im/jmelosegui/GooglemapMvc](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmelosegui/GooglemapMvc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of Google Maps in ASP.NET MVC applications.
 
