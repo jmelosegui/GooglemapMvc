@@ -225,7 +225,6 @@
     <Content Include="Images\flags\Navarra.jpg" />
     <Content Include="Images\flags\PaisVasco.jpg" />
     <Content Include="Images\beachflag.png" />
-    <Content Include="Images\beachflag_shadow.png" />
     <Content Include="Images\cluster1.png" />
     <Content Include="Images\cluster2.png" />
     <Content Include="Images\cluster3.png" />
