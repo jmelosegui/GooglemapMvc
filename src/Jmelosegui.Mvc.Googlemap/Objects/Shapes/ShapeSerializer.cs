@@ -17,11 +17,16 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             if(!shape.Clickable)
                 result["Clickable"] = shape.Clickable;
-            result["FillColor"] = shape.FillColor.ToHtml();
-            result["FillOpacity"] = shape.FillOpacity;
             result["StrokeColor"] = shape.StrokeColor.ToHtml();
             result["StrokeOpacity"] = shape.StrokeOpacity;
             result["StrokeWeight"] = shape.StrokeWeight;
+
+            var shape2D = shape as Shape2D;
+            if (shape2D != null)
+            {
+                result["FillColor"] = shape2D.FillColor.ToHtml();
+                result["FillOpacity"] = shape2D.FillOpacity;
+            }
 
             return result;
         }

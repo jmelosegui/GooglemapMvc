@@ -3,13 +3,13 @@ using System.Drawing;
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class ShapeBuilder<TShape> where TShape : Shape
+    public abstract class ShapeBuilder<TShape> where TShape : Shape
     {
         protected ShapeBuilder(ShapeBuilder<TShape> builder) : this(PassThroughNonNull(builder).Shape)
         {
         }
 
-        public ShapeBuilder(TShape shape)
+        protected ShapeBuilder(TShape shape)
         {
             Shape = shape;
         }
@@ -20,18 +20,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             Shape.Clickable = enabled;
             return this; 
-        }
-
-        public ShapeBuilder<TShape> FillColor(Color value)
-        {
-            Shape.FillColor = value;
-            return this;
-        }
-
-        public ShapeBuilder<TShape> FillOpacity(double value)
-        {
-            Shape.FillOpacity = value;
-            return this;
         }
 
         public ShapeBuilder<TShape> StrokeColor(Color value)

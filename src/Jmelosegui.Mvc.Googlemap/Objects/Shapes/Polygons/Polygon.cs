@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class Polygon : Shape, ILocationContainer
+    public class Polygon : Shape2D, ILocationContainer
     {
         private readonly List<Location> points;
         public Polygon(Map map): base(map)

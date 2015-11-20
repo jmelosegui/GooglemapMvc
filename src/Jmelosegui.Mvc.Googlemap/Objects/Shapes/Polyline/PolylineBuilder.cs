@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
@@ -9,7 +11,7 @@ namespace Jmelosegui.Mvc.GoogleMap
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        public virtual ShapeBuilder<Polyline> Points(Action<LocationFactory<Polyline>> action)
+        public virtual PolylineBuilder Points(Action<LocationFactory<Polyline>> action)
         {
             if (action == null) throw new ArgumentNullException("action");
             var factory = new LocationFactory<Polyline>(base.Shape);

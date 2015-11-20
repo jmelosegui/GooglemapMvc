@@ -1,6 +1,6 @@
 ﻿namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class CircleBuilder : ShapeBuilder<Circle>
+    public class CircleBuilder : Shape2DBuilder<Circle>
     {
         public CircleBuilder(Circle shape) : base(shape)
         {
