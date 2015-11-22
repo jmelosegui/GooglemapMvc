@@ -1,0 +1,11 @@
+﻿{
+  "supports": {},
+  "dependencies": {
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Web.Optimization": "1.1.3",
+    "Newtonsoft.Json": "7.0.1"
+  },
+  "frameworks": {
+    "net45": {}
+  }
+}
