@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(SolutionDir)\NuProj.Extra.props" Condition="Exists('$(SolutionDir)\NuProj.Extra.props')"/>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|AnyCPU">
       <Configuration>Debug</Configuration>
@@ -15,9 +16,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <NuSpecTemplate>Jmelosegui.Mvc.Googlemap.nuspec</NuSpecTemplate>
-  </PropertyGroup>
-  <PropertyGroup>
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
@@ -54,7 +52,6 @@
   </ItemGroup>
   <ImportGroup>
     <Import Project="$(NuProjPath)\NuProj.targets" />
-    <Import Project="$(SolutionDir)\NuProj.Extra.props" Condition="Exists('$(SolutionDir)\NuProj.Extra.props')"/>
     <Import Project="$(SolutionDir)\NuProj.Extra.targets" Condition="Exists('$(SolutionDir)\NuProj.Extra.targets')" />
   </ImportGroup>
 </Project>
