@@ -185,7 +185,6 @@
     <None Include="Jmelosegui.Mvc.Googlemap.snk" />
     <None Include="Objects\MapObjectClassDiagram.cd" />
     <None Include="project.json" />
-    <None Include="version.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
