@@ -14,7 +14,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public static string ToAbsoluteUrl(this string url)
         {
-            if (url.StartsWith("~"))
+            if (url.StartsWith("~", StringComparison.Ordinal))
             {
                 return VirtualPathUtility.ToAbsolute(url);
             }
