@@ -7,5 +7,6 @@
     <Import Project="$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\dotnet\Nerdbank.GitVersioning.targets" Condition="Exists('$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\dotnet\Nerdbank.GitVersioning.targets')" />
     <Import Project="$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\NerdBank.GitVersioning.targets" Condition="Exists('$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\NerdBank.GitVersioning.targets')" />
     <Import Project="$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\portable-net+win+wpa+wp+sl+net-cf+netmf+MonoAndroid+MonoTouch+Xamarin.iOS\Nerdbank.GitVersioning.targets" Condition="Exists('$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\portable-net+win+wpa+wp+sl+net-cf+netmf+MonoAndroid+MonoTouch+Xamarin.iOS\Nerdbank.GitVersioning.targets')" />
+    <Import Project="$(NuGetPackageRoot)\NuProj.Common\0.10.4-beta\build\NuProj.Common.targets" Condition="Exists('$(NuGetPackageRoot)\NuProj.Common\0.10.4-beta\build\NuProj.Common.targets')" />
   </ImportGroup>
 </Project>
