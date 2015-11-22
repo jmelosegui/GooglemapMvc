@@ -1,0 +1,19 @@
+version: 1.0.{build}
+os: Visual Studio 2015
+configuration: Release
+environment:
+  VisualStudioVersion: 14.0
+before_build:
+- ps: nuget restore src
+build:
+  project: src\Jmelosegui.Mvc.Googlemap.sln
+  verbosity: minimal
+artifacts:
+- path: bin\**\*.nupkg
+  name: NuGet Package
+notifications:
+- provider: Webhook
+  url: https://webhooks.gitter.im/e/31d7939f8a726224451f
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
