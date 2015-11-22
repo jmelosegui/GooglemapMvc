@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(NuGetPackageRoot)' == ''">
+    <NuGetPackageRoot>C:\Users\Juan\.nuget\packages\</NuGetPackageRoot>
+  </PropertyGroup>
+  <ImportGroup>
+    <Import Project="$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\dotnet\Nerdbank.GitVersioning.targets" Condition="Exists('$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\dotnet\Nerdbank.GitVersioning.targets')" />
+    <Import Project="$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\NerdBank.GitVersioning.targets" Condition="Exists('$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\NerdBank.GitVersioning.targets')" />
+    <Import Project="$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\portable-net+win+wpa+wp+sl+net-cf+netmf+MonoAndroid+MonoTouch+Xamarin.iOS\Nerdbank.GitVersioning.targets" Condition="Exists('$(NuGetPackageRoot)\Nerdbank.GitVersioning\1.1.52-rc\build\portable-net+win+wpa+wp+sl+net-cf+netmf+MonoAndroid+MonoTouch+Xamarin.iOS\Nerdbank.GitVersioning.targets')" />
+  </ImportGroup>
+</Project>

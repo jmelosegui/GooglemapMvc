@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 
 namespace Jmelosegui.Mvc.GoogleMap
@@ -30,7 +29,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public int MaxIntensity { get; set; }
 
-        [Range(0, 1)]
         public decimal Opacity { get; set; }
 
         public int Radius { get; set; }
