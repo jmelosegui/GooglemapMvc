@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5E62D527-DF60-41ED-837F-C28EC0EB5DA2}"
 	ProjectSection(SolutionItems) = preProject
 		NuProj.Extra.targets = NuProj.Extra.targets
+		NuProj.Extra.props = NuProj.Extra.props
+		version.json = version.json
 	EndProjectSection
 EndProject
 Global

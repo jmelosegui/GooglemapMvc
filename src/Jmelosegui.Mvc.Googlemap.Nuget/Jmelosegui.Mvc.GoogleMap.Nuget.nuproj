@@ -22,7 +22,6 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>Jmelosegui.Mvc.Googlemap</Id>
-    <Version>1.0.1</Version>
     <Title>GoogleMap Control for AspNet.Mvc</Title>
     <Authors>Juan M. Elosegui</Authors>
     <Owners>jmelosegui</Owners>
@@ -53,6 +52,9 @@
       <Link>content\Scripts\markerclusterer.js</Link>
     </Content>
   </ItemGroup>
-  <Import Project="$(NuProjPath)\NuProj.targets" />
-  <Import Project="$(SolutionDir)\NuProj.Extra.targets" Condition="Exists('$(SolutionDir)\NuProj.Extra.targets')" />
+  <ImportGroup>
+    <Import Project="$(NuProjPath)\NuProj.targets" />
+    <Import Project="$(SolutionDir)\NuProj.Extra.props" Condition="Exists('$(SolutionDir)\NuProj.Extra.props')"/>
+    <Import Project="$(SolutionDir)\NuProj.Extra.targets" Condition="Exists('$(SolutionDir)\NuProj.Extra.targets')" />
+  </ImportGroup>
 </Project>
