@@ -3,6 +3,5 @@
   <PropertyGroup>
     <NuProjPath>$(UserProfile)\.nuget\packages\NuProj\0.10.4-beta-gf7fc34e7d8\tools\</NuProjPath>
     <NerdbankGitVersioningPath>$(UserProfile)\.nuget\packages\Nerdbank.GitVersioning\1.1.52-rc\</NerdbankGitVersioningPath>
-    <OutputPath>$(ProjectRoot)bin\$(Configuration)\Packages\</OutputPath>
   </PropertyGroup>
 </Project>

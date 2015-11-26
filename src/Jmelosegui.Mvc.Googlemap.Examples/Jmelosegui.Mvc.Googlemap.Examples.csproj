@@ -21,8 +21,6 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <BuildPackage>false</BuildPackage>
     <UseGlobalApplicationHostFile />
     <CopyNuGetImplementations>true</CopyNuGetImplementations>
     <PlatformTarget>AnyCPU</PlatformTarget>
