@@ -1,31 +1,23 @@
-﻿namespace Jmelosegui.Mvc.GoogleMap
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public struct Location
     {
-        private double longitude;
-        private double latitude;
-
-        public double Latitude
+        public Location(double latitude, double longitude)
         {
-            get { return latitude; }
-            set { latitude = value; }
+            this.Latitude = latitude;
+            this.Longitude = longitude;
         }
 
-        public double Longitude
-        {
-            get { return longitude; }
-            set { longitude = value; }
-        }
+        public double Latitude { get; }
 
-        public Location(double latitude, double longitude) 
-        {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
+        public double Longitude { get; }
 
         public static bool operator ==(Location left, Location right)
         {
-            return ((left.Latitude == right.Latitude) && (left.Longitude == right.Longitude));
+            return (left.Latitude == right.Latitude) && (left.Longitude == right.Longitude);
         }
 
         public static bool operator !=(Location left, Location right)
@@ -39,13 +31,14 @@
             {
                 return false;
             }
+
             var point = (Location)obj;
-            return ((point.Latitude == Latitude) && (point.Longitude == Longitude));
+            return (point.Latitude == this.Latitude) && (point.Longitude == this.Longitude);
         }
 
         public override int GetHashCode()
         {
-            return (Latitude.GetHashCode() ^ Longitude.GetHashCode());
+            return this.Latitude.GetHashCode() ^ this.Longitude.GetHashCode();
         }
     }
 }

@@ -1,13 +1,17 @@
-using System;
+// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+
     public class KmlLayer : Layer
     {
-        public KmlLayer(Map map) : base("kml", map)
+        public KmlLayer(Map map)
+            : base("kml", map)
         {
-            Clickable = true;
-            ScreenOverlays = true;
+            this.Clickable = true;
+            this.ScreenOverlays = true;
         }
 
         public bool Clickable { get; set; }

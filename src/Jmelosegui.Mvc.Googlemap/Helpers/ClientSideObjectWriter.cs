@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Collections;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
+
     public class ClientSideObjectWriter
     {
         private readonly string id;
@@ -20,45 +23,58 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public ClientSideObjectWriter(string id, string type, TextWriter textWriter)
         {
-            if (id == null) throw new ArgumentNullException("id");
-            if (type == null) throw new ArgumentNullException("type");
-            if (textWriter == null) throw new ArgumentNullException("textWriter");
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            if (textWriter == null)
+            {
+                throw new ArgumentNullException(nameof(textWriter));
+            }
 
             this.id = id;
             this.type = type;
-            writer = textWriter;
+            this.writer = textWriter;
         }
 
         public virtual ClientSideObjectWriter Start()
         {
-            if (hasStarted)
+            if (this.hasStarted)
             {
                 throw new InvalidOperationException("You cannot call start more than once");
             }
-            var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
 
-            writer.Write("jQuery('#{0}').{1}(", selector,type);
-            hasStarted = true;
+            var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(this.id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
+
+            this.writer.Write("jQuery('#{0}').{1}(", selector, this.type);
+            this.hasStarted = true;
 
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string keyValuePair)
         {
-            EnsureStart();
+            this.EnsureStart();
 
             if (!string.IsNullOrEmpty(keyValuePair))
             {
-                if (!writeExplicitObject)
+                if (!this.writeExplicitObject)
                 {
-                    writer.Write(appended ? ", " : "{");
+                    this.writer.Write(this.appended ? ", " : "{");
                 }
-                writeExplicitObject = false;
-                writer.Write(keyValuePair);
 
-                if (!appended)
+                this.writeExplicitObject = false;
+                this.writer.Write(keyValuePair);
+
+                if (!this.appended)
                 {
-                    appended = true;
+                    this.appended = true;
                 }
             }
 
@@ -67,13 +83,16 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter Append(string name, string value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value.HasValue())
             {
                 string formattedValue = QuoteString(value);
 
-                Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
+                this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
             }
 
             return this;
@@ -81,13 +100,16 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter AppendNullableString(string name, string value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value != null)
             {
                 string formattedValue = QuoteString(value);
 
-                Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
+                this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
             }
 
             return this;
@@ -95,19 +117,26 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter Append(string name, int value)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, value));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, value));
 
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string name, int value, int defaultValue)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value != defaultValue)
             {
-                Append(name, value);
+                this.Append(name, value);
             }
 
             return this;
@@ -115,11 +144,14 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter Append(string name, int? value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value.HasValue)
             {
-                Append(name, value.Value);
+                this.Append(name, value.Value);
             }
 
             return this;
@@ -127,20 +159,26 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter Append(string name, double value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
-            Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, value));
+            this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, value));
 
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string name, double? value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value.HasValue)
             {
-                Append(name, value.Value);
+                this.Append(name, value.Value);
             }
 
             return this;
@@ -148,20 +186,26 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter Append(string name, decimal value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
-            Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, value));
+            this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, value));
 
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string name, decimal? value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value.HasValue)
             {
-                Append(name, value.Value);
+                this.Append(name, value.Value);
             }
 
             return this;
@@ -170,29 +214,39 @@ namespace Jmelosegui.Mvc.GoogleMap
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "JSON representation of boolean values should be lower case.")]
         public virtual ClientSideObjectWriter Append(string name, bool value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
-            Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, value.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture)));
+            this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, value.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture)));
 
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string name, bool value, bool defaultValue)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (value != defaultValue)
             {
-                Append(name, value);
+                this.Append(name, value);
             }
 
             return this;
         }
 
-        public virtual ClientSideObjectWriter Append<TEnum>(string name, TEnum value) where TEnum : IComparable, IFormattable
+        public virtual ClientSideObjectWriter Append<TEnum>(string name, TEnum value)
+            where TEnum : IComparable, IFormattable
         {
-            if (name == null) throw new ArgumentNullException("name");
-            
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             var valueAttribute = value.GetType().GetField(value.ToString())
                                                 .GetCustomAttributes(true)
                                                 .OfType<ClientSideEnumValueAttribute>()
@@ -200,30 +254,38 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             if (valueAttribute != null)
             {
-                Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name,valueAttribute.Value));
+                this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, valueAttribute.Value));
             }
 
             return this;
         }
 
-        public virtual ClientSideObjectWriter Append<TEnum>(string name, TEnum value, TEnum defaultValue) where TEnum : IComparable, IFormattable
+        public virtual ClientSideObjectWriter Append<TEnum>(string name, TEnum value, TEnum defaultValue)
+            where TEnum : IComparable, IFormattable
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (!value.Equals(defaultValue))
             {
-                Append(name, value);
+                this.Append(name, value);
             }
+
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string name, Action action)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             if (action != null)
             {
-                Append(String.Format(CultureInfo.InvariantCulture, "{0}:", name));
+                this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:", name));
                 action();
             }
 
@@ -232,15 +294,16 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter Append(string name, Func<object, object> func)
         {
-            if (name == null) throw new ArgumentNullException("name");
-
-            if (func != null)
+            if (name == null)
             {
-                object result = func(this);
-                if (result != null)
-                {
-                    Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, result));
-                }
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            object result = func?.Invoke(this);
+
+            if (result != null)
+            {
+                this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, result));
             }
 
             return this;
@@ -248,104 +311,136 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public virtual ClientSideObjectWriter AppendCollection(string name, IEnumerable value)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            
-            return Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
         }
 
         public virtual ClientSideObjectWriter AppendObject(string name, object value)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
-            return Append(String.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
+            return this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, JsonConvert.SerializeObject(value, GetJsonSerializerSettings())));
         }
 
         public virtual ClientSideObjectWriter AppendClientEvent(string name, ClientEvent clientEvent)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (clientEvent == null) throw new ArgumentNullException("clientEvent");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (clientEvent == null)
+            {
+                throw new ArgumentNullException(nameof(clientEvent));
+            }
 
             if (clientEvent.CodeBlock != null)
             {
-                Append(name, clientEvent.CodeBlock);
+                this.Append(name, clientEvent.CodeBlock);
             }
             else
             {
                 if (clientEvent.InlineCodeBlock != null)
                 {
-                    Append(name, clientEvent.InlineCodeBlock);
+                    this.Append(name, clientEvent.InlineCodeBlock);
                 }
                 else
                 {
                     if (clientEvent.HandlerName.HasValue())
                     {
-                        Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, clientEvent.HandlerName));
+                        this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", name, clientEvent.HandlerName));
                     }
                 }
             }
+
             return this;
         }
 
         public virtual ClientSideObjectWriter AppendClientEventObject(string name, IClientEventObject clientEvents)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (clientEvents == null) throw new ArgumentNullException("clientEvents");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
-            EnsureStart();
-            writer.Write(appended ? ", " : "{");
-            writer.Write("{0}:{{", name);
-            writeExplicitObject = true;
+            if (clientEvents == null)
+            {
+                throw new ArgumentNullException(nameof(clientEvents));
+            }
+
+            this.EnsureStart();
+            this.writer.Write(this.appended ? ", " : "{");
+            this.writer.Write("{0}:{{", name);
+            this.writeExplicitObject = true;
             clientEvents.SerializeTo(this);
-            writer.Write("}");
-            writeExplicitObject = false;
+            this.writer.Write("}");
+            this.writeExplicitObject = false;
             return this;
         }
 
         public virtual ClientSideObjectWriter Append(string name, HtmlTemplate htmlTemplate)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (htmlTemplate == null) throw new ArgumentNullException("htmlTemplate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (htmlTemplate == null)
+            {
+                throw new ArgumentNullException(nameof(htmlTemplate));
+            }
 
             if (htmlTemplate.HasValue())
             {
                 if (htmlTemplate.Content != null)
                 {
-                    EnsureStart();
-                    writer.Write(appended ? ", " : "{");
-                    writer.Write("{0}:'", name);
+                    this.EnsureStart();
+                    this.writer.Write(this.appended ? ", " : "{");
+                    this.writer.Write("{0}:'", name);
                     htmlTemplate.Content();
-                    writer.Write("'");
+                    this.writer.Write("'");
                     return this;
                 }
+
                 if (htmlTemplate.Html.HasValue())
                 {
                     string formattedValue = QuoteString(htmlTemplate.Html);
-                    Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
+                    this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
                     return this;
                 }
+
                 if (htmlTemplate.InlineTemplate != null)
                 {
                     object inlineTemplate = htmlTemplate.InlineTemplate(null);
                     if (inlineTemplate != null)
                     {
                         string formattedValue2 = QuoteString(inlineTemplate.ToString());
-                        Append(String.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue2));
+                        this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue2));
                     }
                 }
             }
+
             return this;
         }
 
         public virtual void Complete()
         {
-            EnsureStart();
-            if (appended)
+            this.EnsureStart();
+            if (this.appended)
             {
-                writer.Write("}");
+                this.writer.Write("}");
             }
-            writer.Write(");");
-            hasStarted = false;
-            appended = false;
+
+            this.writer.Write(");");
+            this.hasStarted = false;
+            this.appended = false;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
@@ -435,19 +530,11 @@ namespace Jmelosegui.Mvc.GoogleMap
             builder.AppendFormat(CultureInfo.InvariantCulture, "{0:x4}", (int)c);
         }
 
-        private void EnsureStart()
-        {
-            if (!hasStarted)
-            {
-                throw new InvalidOperationException("You must have to call start prior calling this method");
-            }
-        }
-
         private static JsonSerializerSettings GetJsonSerializerSettings()
         {
             var settings = new JsonSerializerSettings
             {
-                //TODO: camelCase for javascript serialization
+                // TODO: camelCase for javascript serialization
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
@@ -456,6 +543,14 @@ namespace Jmelosegui.Mvc.GoogleMap
             settings.Converters.Add(new PointJsonConverter());
             settings.Converters.Add(new LocationJsonConverter());
             return settings;
+        }
+
+        private void EnsureStart()
+        {
+            if (!this.hasStarted)
+            {
+                throw new InvalidOperationException("You must have to call start prior calling this method");
+            }
         }
     }
 }

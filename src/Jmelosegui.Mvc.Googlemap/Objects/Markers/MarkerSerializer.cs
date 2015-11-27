@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System.Collections.Generic;
+
     public class MarkerSerializer : ISerializer
     {
         private readonly Marker marker;
@@ -15,31 +18,31 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             IDictionary<string, object> windowDictionary = new Dictionary<string, object>();
 
-            if (marker.Window != null)
+            if (this.marker.Window != null)
             {
                 FluentDictionary.For(windowDictionary)
-                .Add("content", marker.Window.Content)
-                .Add("disableAutoPan", marker.Window.DisableAutoPan, () => marker.Window.DisableAutoPan)
-                .Add("openOnRightClick", marker.Window.OpenOnRightClick, () => marker.Window.OpenOnRightClick)
-                .Add("lat", marker.Window.Latitude, () => marker.Latitude != marker.Window.Latitude)
-                .Add("lng", marker.Window.Longitude, () => marker.Longitude != marker.Window.Longitude)
-                .Add("maxWidth", marker.Window.MaxWidth, () => marker.Window.MaxWidth != 0)
-                .Add("zIndex", marker.Window.ZIndex, () => marker.Window.ZIndex != 0); 
+                .Add("content", this.marker.Window.Content)
+                .Add("disableAutoPan", this.marker.Window.DisableAutoPan, () => this.marker.Window.DisableAutoPan)
+                .Add("openOnRightClick", this.marker.Window.OpenOnRightClick, () => this.marker.Window.OpenOnRightClick)
+                .Add("lat", this.marker.Window.Latitude, () => this.marker.Latitude != this.marker.Window.Latitude)
+                .Add("lng", this.marker.Window.Longitude, () => this.marker.Longitude != this.marker.Window.Longitude)
+                .Add("maxWidth", this.marker.Window.MaxWidth, () => this.marker.Window.MaxWidth != 0)
+                .Add("zIndex", this.marker.Window.ZIndex, () => this.marker.Window.ZIndex != 0);
             }
 
             IDictionary<string, object> result = new Dictionary<string, object>();
 
             FluentDictionary.For(result)
-                .Add("id", marker.Id, () => marker.Id != null)
-                .Add("address", marker.Address, () => marker.Address != null)
-                .Add("title", marker.Title, () => marker.Title != null)
-                .Add("lat", marker.Latitude, () => marker.Latitude != null)
-                .Add("lng", marker.Longitude, () => marker.Latitude != null)
-                .Add("zIndex", marker.ZIndex, 0)
-                .Add("clickable", marker.Clickable, true)
-                .Add("draggable", marker.Draggable, false)
-                .Add("icon", marker.Icon, () => marker.Icon != null)
-                .Add("window", windowDictionary, () => marker.Window != null);
+                .Add("id", this.marker.Id, () => this.marker.Id != null)
+                .Add("address", this.marker.Address, () => this.marker.Address != null)
+                .Add("title", this.marker.Title, () => this.marker.Title != null)
+                .Add("lat", this.marker.Latitude, () => this.marker.Latitude != null)
+                .Add("lng", this.marker.Longitude, () => this.marker.Latitude != null)
+                .Add("zIndex", this.marker.ZIndex, 0)
+                .Add("clickable", this.marker.Clickable, true)
+                .Add("draggable", this.marker.Draggable, false)
+                .Add("icon", this.marker.Icon, () => this.marker.Icon != null)
+                .Add("window", windowDictionary, () => this.marker.Window != null);
 
             return result;
         }

@@ -1,55 +1,63 @@
-﻿using System;
-using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public abstract class ShapeBuilder<TShape> where TShape : Shape
+    using System;
+    using System.Drawing;
+
+    public abstract class ShapeBuilder<TShape>
+        where TShape : Shape
     {
-        protected ShapeBuilder(ShapeBuilder<TShape> builder) : this(PassThroughNonNull(builder).Shape)
+        protected ShapeBuilder(ShapeBuilder<TShape> builder)
+            : this(PassThroughNonNull(builder).Shape)
         {
         }
 
         protected ShapeBuilder(TShape shape)
         {
-            Shape = shape;
+            this.Shape = shape;
         }
 
-        protected TShape Shape { get; private set; }
+        protected TShape Shape { get; }
 
         public ShapeBuilder<TShape> Clickable(bool enabled)
         {
-            Shape.Clickable = enabled;
-            return this; 
+            this.Shape.Clickable = enabled;
+            return this;
         }
 
         public ShapeBuilder<TShape> StrokeColor(Color value)
         {
-            Shape.StrokeColor = value;
+            this.Shape.StrokeColor = value;
             return this;
         }
 
         public ShapeBuilder<TShape> StrokeOpacity(double value)
         {
-            Shape.StrokeOpacity = value;
+            this.Shape.StrokeOpacity = value;
             return this;
         }
 
         public ShapeBuilder<TShape> StrokeWeight(int value)
         {
-            Shape.StrokeWeight = value;
+            this.Shape.StrokeWeight = value;
             return this;
         }
 
         public ShapeBuilder<TShape> ZIndex(int value)
         {
-            Shape.ZIndex = value;
+            this.Shape.ZIndex = value;
             return this;
         }
 
         private static ShapeBuilder<TShape> PassThroughNonNull(ShapeBuilder<TShape> builder)
         {
             if (builder == null)
-                throw new ArgumentNullException("builder");
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             return builder;
         }
     }

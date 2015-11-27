@@ -1,34 +1,36 @@
-﻿
-using System;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+
     public class MapClientEvents : IClientEventObject
     {
         public MapClientEvents()
         {
-            OnMapBoundChanged = new ClientEvent();
-            OnMapCenterChanged = new ClientEvent();
-            OnMapClick = new ClientEvent();
-            OnMapDoubleClick = new ClientEvent();
-            OnMapRightClick = new ClientEvent();
-            OnMapDrag = new ClientEvent();
-            OnMapDragEnd = new ClientEvent();
-            OnMapDragStart = new ClientEvent();
-            OnMapHeadingChanged = new ClientEvent();
-            OnMapIdle = new ClientEvent();
-            OnMapTypeIdChanged = new ClientEvent();
-            OnMouseMove = new ClientEvent();
-            OnMouseOut = new ClientEvent();
-            OnMouseOver = new ClientEvent();
-            OnMapProjectionChanged = new ClientEvent();
-            OnResize = new ClientEvent();
-            OnTilesLoaded = new ClientEvent();
-            OnTiltChanged = new ClientEvent();
-            OnZoomChanged = new ClientEvent();
-            OnMapLoaded = new ClientEvent();
-            OnMarkersGeocodingCompleted = new ClientEvent();
-            OnMarkersGeocodingProgress = new ClientEvent();
+            this.OnMapBoundChanged = new ClientEvent();
+            this.OnMapCenterChanged = new ClientEvent();
+            this.OnMapClick = new ClientEvent();
+            this.OnMapDoubleClick = new ClientEvent();
+            this.OnMapRightClick = new ClientEvent();
+            this.OnMapDrag = new ClientEvent();
+            this.OnMapDragEnd = new ClientEvent();
+            this.OnMapDragStart = new ClientEvent();
+            this.OnMapHeadingChanged = new ClientEvent();
+            this.OnMapIdle = new ClientEvent();
+            this.OnMapTypeIdChanged = new ClientEvent();
+            this.OnMouseMove = new ClientEvent();
+            this.OnMouseOut = new ClientEvent();
+            this.OnMouseOver = new ClientEvent();
+            this.OnMapProjectionChanged = new ClientEvent();
+            this.OnResize = new ClientEvent();
+            this.OnTilesLoaded = new ClientEvent();
+            this.OnTiltChanged = new ClientEvent();
+            this.OnZoomChanged = new ClientEvent();
+            this.OnMapLoaded = new ClientEvent();
+            this.OnMarkersGeocodingCompleted = new ClientEvent();
+            this.OnMarkersGeocodingProgress = new ClientEvent();
         }
 
         public ClientEvent OnMapBoundChanged { get; private set; }
@@ -77,31 +79,33 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public void SerializeTo(ClientSideObjectWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException("writer");
-            
-            writer.AppendClientEvent("bounds_changed", OnMapBoundChanged);
-            writer.AppendClientEvent("center_changed", OnMapCenterChanged);
-            writer.AppendClientEvent("click", OnMapClick);
-            writer.AppendClientEvent("dblclick", OnMapDoubleClick);
-            writer.AppendClientEvent("rightclick", OnMapRightClick);
-            writer.AppendClientEvent("drag", OnMapDrag);
-            writer.AppendClientEvent("dragend", OnMapDragEnd);
-            writer.AppendClientEvent("dragstart", OnMapDragStart);
-            writer.AppendClientEvent("heading_changed", OnMapHeadingChanged);
-            writer.AppendClientEvent("idle", OnMapIdle);
-            writer.AppendClientEvent("maptypeid_changed", OnMapTypeIdChanged);
-            writer.AppendClientEvent("mousemove", OnMouseMove);
-            writer.AppendClientEvent("mouseout", OnMouseOut);
-            writer.AppendClientEvent("mouseover", OnMouseOver);
-            writer.AppendClientEvent("projection_changed", OnMapProjectionChanged);
-            writer.AppendClientEvent("resize", OnResize);
-            writer.AppendClientEvent("tilesloaded", OnTilesLoaded);
-            writer.AppendClientEvent("resize", OnTiltChanged);
-            writer.AppendClientEvent("zoom_changed", OnZoomChanged);
-            writer.AppendClientEvent("map_loaded", OnMapLoaded);
-            writer.AppendClientEvent("markers_geocoding_completed", OnMarkersGeocodingCompleted);
-            writer.AppendClientEvent("markers_geocoding_progress", OnMarkersGeocodingProgress);
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
+            writer.AppendClientEvent("bounds_changed", this.OnMapBoundChanged);
+            writer.AppendClientEvent("center_changed", this.OnMapCenterChanged);
+            writer.AppendClientEvent("click", this.OnMapClick);
+            writer.AppendClientEvent("dblclick", this.OnMapDoubleClick);
+            writer.AppendClientEvent("rightclick", this.OnMapRightClick);
+            writer.AppendClientEvent("drag", this.OnMapDrag);
+            writer.AppendClientEvent("dragend", this.OnMapDragEnd);
+            writer.AppendClientEvent("dragstart", this.OnMapDragStart);
+            writer.AppendClientEvent("heading_changed", this.OnMapHeadingChanged);
+            writer.AppendClientEvent("idle", this.OnMapIdle);
+            writer.AppendClientEvent("maptypeid_changed", this.OnMapTypeIdChanged);
+            writer.AppendClientEvent("mousemove", this.OnMouseMove);
+            writer.AppendClientEvent("mouseout", this.OnMouseOut);
+            writer.AppendClientEvent("mouseover", this.OnMouseOver);
+            writer.AppendClientEvent("projection_changed", this.OnMapProjectionChanged);
+            writer.AppendClientEvent("resize", this.OnResize);
+            writer.AppendClientEvent("tilesloaded", this.OnTilesLoaded);
+            writer.AppendClientEvent("resize", this.OnTiltChanged);
+            writer.AppendClientEvent("zoom_changed", this.OnZoomChanged);
+            writer.AppendClientEvent("map_loaded", this.OnMapLoaded);
+            writer.AppendClientEvent("markers_geocoding_completed", this.OnMarkersGeocodingCompleted);
+            writer.AppendClientEvent("markers_geocoding_progress", this.OnMarkersGeocodingProgress);
         }
     }
-
 }

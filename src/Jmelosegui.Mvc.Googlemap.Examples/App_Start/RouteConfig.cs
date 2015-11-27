@@ -12,8 +12,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "FirstLook", id = UrlParameter.Optional }
-            );
+                defaults: new { controller = "Home", action = "FirstLook", id = UrlParameter.Optional });
         }
     }
 }

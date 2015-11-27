@@ -28,10 +28,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,8 +63,11 @@
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
     <Compile Include="ControlPosition.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Helpers\Serialization\PointJsonConverter.cs" />
     <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
+    <Compile Include="HtmlTemplate`1.cs" />
+    <Compile Include="Objects\Layers\Heat\HeatmapGradientFactory.cs" />
     <Compile Include="Objects\Layers\Heat\HeatmapLayerSerializer.cs" />
     <Compile Include="Location\ILocationBinding.cs" />
     <Compile Include="Location\LocationBinding.cs" />
@@ -104,6 +109,7 @@
     </Compile>
     <Compile Include="Events\IClientEventObject.cs" />
     <Compile Include="Helpers\Serialization\LocationJsonConverter.cs" />
+    <Compile Include="Objects\Layers\LayerSerializer`1.cs" />
     <Compile Include="Objects\Layers\LayerSerializer.cs" />
     <Compile Include="Objects\Layers\LayerType.cs" />
     <Compile Include="Objects\Layers\LayerBuilder.cs" />
@@ -122,9 +128,8 @@
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="ViewComponentFactoryExtension.cs" />
+    <Compile Include="HtmlHelperExtension.cs" />
     <Compile Include="MapBuilder.cs" />
     <Compile Include="Events\MapClientEventsBuilder.cs" />
     <Compile Include="Events\MapClientEvents.cs" />
@@ -135,7 +140,7 @@
     <Compile Include="Helpers\HtmlElement.cs" />
     <Compile Include="Helpers\IHtmlNode.cs" />
     <Compile Include="Helpers\IHideObjectMembers.cs" />
-    <Compile Include="Helpers\UrlHelperExtension.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="HtmlTemplate.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStyles.cs" />
@@ -180,6 +185,9 @@
     <Content Include="Scripts\jmelosegui.googlemap.js" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

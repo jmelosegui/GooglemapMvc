@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class ShapeSerializer<TShape>: ISerializer where TShape : Shape
+    using System.Collections.Generic;
+
+    public class ShapeSerializer<TShape> : ISerializer
+        where TShape : Shape
     {
         private readonly TShape shape;
 
@@ -15,13 +19,16 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
 
-            if(!shape.Clickable)
-                result["Clickable"] = shape.Clickable;
-            result["StrokeColor"] = shape.StrokeColor.ToHtml();
-            result["StrokeOpacity"] = shape.StrokeOpacity;
-            result["StrokeWeight"] = shape.StrokeWeight;
+            if (!this.shape.Clickable)
+            {
+                result["Clickable"] = this.shape.Clickable;
+            }
 
-            var shape2D = shape as Shape2D;
+            result["StrokeColor"] = this.shape.StrokeColor.ToHtml();
+            result["StrokeOpacity"] = this.shape.StrokeOpacity;
+            result["StrokeWeight"] = this.shape.StrokeWeight;
+
+            var shape2D = this.shape as Shape2D;
             if (shape2D != null)
             {
                 result["FillColor"] = shape2D.FillColor.ToHtml();

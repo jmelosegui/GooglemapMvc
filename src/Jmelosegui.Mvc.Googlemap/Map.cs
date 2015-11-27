@@ -1,68 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Web.Mvc;
-using System.Web.UI;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Web.Mvc;
+    using System.Web.UI;
+
     public class Map
     {
         private readonly MapBuilder builder;
 
-        #region Constructor
-
         public Map(MapBuilder builder)
         {
             this.builder = builder;
-            ScriptFileNames = new Collection<string>();
-            Initialize();
+            this.ScriptFileNames = new Collection<string>();
+            this.Initialize();
         }
-
-
-        private void Initialize()
-        {
-            Id = "map";
-            ClientEvents = new MapClientEvents();
-            MarkerClientEvents = new MarkerClientEvents();
-            DisableDoubleClickZoom = false;
-            Draggable = true;
-            EnableMarkersClustering = false;
-            Latitude = 23;
-            Longitude = -82;
-            Layers = new List<Layer>();
-            MapTypeId = MapType.Roadmap.ToClientSideString();
-            MapTypeControlPosition = ControlPosition.TopRight;
-            MapTypeControlVisible = true;
-            ImageMapTypes = new List<ImageMapType>();
-            StyledMapTypes = new List<StyledMapType>();
-            Markers = new List<Marker>();
-            MarkerClusteringOptions = new MarkerClusteringOptions();
-            Polygons = new List<Polygon>();
-            Polylines = new List<Polyline>();
-            Circles = new List<Circle>();
-            PanControlPosition = ControlPosition.TopLeft;
-            PanControlVisible = true;
-            OverviewMapControlVisible = false;
-            OverviewMapControlOpened = false;
-            StreetViewControlVisible = true;
-            StreetViewControlPosition = ControlPosition.TopLeft;
-            ZoomControlVisible = true;
-            ZoomControlPosition = ControlPosition.TopLeft;
-            ZoomControlStyle = ZoomControlStyle.Default;
-            ScaleControlVisible = false;
-            Height = 0;
-            Width = 0;
-            UseCurrentPosition = false;
-        }
-
-        #endregion
-
-        #region Public Properties
 
         public string Id { get; internal set; }
 
@@ -152,15 +112,15 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         internal bool LoadScripts { get; private set; }
 
-        #endregion
-
-        #region Virtual Methods
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
-        public virtual void BindTo<TMapObject, TDataItem>(IEnumerable<TDataItem> dataSource, Action<MapObjectBindingFactory<TMapObject>> action) where TMapObject : MapObject
+        public virtual void BindTo<TMapObject, TDataItem>(IEnumerable<TDataItem> dataSource, Action<MapObjectBindingFactory<TMapObject>> action)
+            where TMapObject : MapObject
         {
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
 
             var factory = new MapObjectBindingFactory<TMapObject>();
             action(factory);
@@ -173,19 +133,19 @@ namespace Jmelosegui.Mvc.GoogleMap
                 {
                     case "Jmelosegui.Mvc.GoogleMap.Marker":
                         mapObject = new Marker(this);
-                        Markers.Add((Marker)mapObject);
+                        this.Markers.Add((Marker)mapObject);
                         break;
                     case "Jmelosegui.Mvc.GoogleMap.Circle":
                         mapObject = new Circle(this);
-                        Circles.Add((Circle)mapObject);
+                        this.Circles.Add((Circle)mapObject);
                         break;
                     case "Jmelosegui.Mvc.GoogleMap.Polygon":
                         mapObject = new Polygon(this);
-                        Polygons.Add((Polygon)mapObject);
+                        this.Polygons.Add((Polygon)mapObject);
                         break;
                     case "Jmelosegui.Mvc.GoogleMap.Polyline":
                         mapObject = new Polyline(this);
-                        Polylines.Add((Polyline)mapObject);
+                        this.Polylines.Add((Polyline)mapObject);
                         break;
                 }
 
@@ -193,58 +153,78 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
         }
 
+        public void Render()
+        {
+            TextWriter writer = this.builder.ViewContext.Writer;
+            using (HtmlTextWriter htmlTextWriter = new HtmlTextWriter(writer))
+            {
+                this.WriteHtml(htmlTextWriter);
+            }
+        }
+
+        public string ToHtmlString()
+        {
+            string result;
+            using (StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture))
+            {
+                this.WriteHtml(new HtmlTextWriter(stringWriter));
+                result = stringWriter.ToString();
+            }
+
+            return result;
+        }
+
         protected internal virtual void WriteInitializationScript(TextWriter writer)
         {
             var currentCulture = Thread.CurrentThread.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
-            var objectWriter = new ClientSideObjectWriter(Id, "GoogleMap", writer);
+            var objectWriter = new ClientSideObjectWriter(this.Id, "GoogleMap", writer);
 
             objectWriter.Start();
 
-            objectWriter.Append("clientId", Id);
-            objectWriter.Append("disableDoubleClickZoom", DisableDoubleClickZoom, false);
-            objectWriter.Append("draggable", Draggable, true);
-            objectWriter.Append("enableMarkersClustering", EnableMarkersClustering, false);
-            objectWriter.Append("markersFromAddress", MarkersGeocoding, false);
-            objectWriter.Append("fitToMarkersBounds", FitToMarkersBounds, false);
+            objectWriter.Append("clientId", this.Id);
+            objectWriter.Append("disableDoubleClickZoom", this.DisableDoubleClickZoom, false);
+            objectWriter.Append("draggable", this.Draggable, true);
+            objectWriter.Append("enableMarkersClustering", this.EnableMarkersClustering, false);
+            objectWriter.Append("markersFromAddress", this.MarkersGeocoding, false);
+            objectWriter.Append("fitToMarkersBounds", this.FitToMarkersBounds, false);
 
-            if (Address.HasValue())
+            if (this.Address.HasValue())
             {
-                objectWriter.AppendObject("center", new { Address });    
+                objectWriter.AppendObject("center", new { this.Address });
             }
             else
             {
-                objectWriter.AppendObject("center", new { Latitude, Longitude, UseCurrentPosition });    
+                objectWriter.AppendObject("center", new { this.Latitude, this.Longitude, this.UseCurrentPosition });
             }
-            
-            objectWriter.Append("mapTypeId", MapTypeId);
-            objectWriter.Append("mapTypeControlPosition", MapTypeControlPosition, ControlPosition.TopRight);
-            objectWriter.Append("mapTypeControlVisible", MapTypeControlVisible, true);
-            objectWriter.Append("mapTypeControlStyle", MapTypeControlStyle, MapTypeControlStyle.Default);
-            objectWriter.Append("panControlPosition", PanControlPosition, ControlPosition.TopLeft);
-            objectWriter.Append("panControlVisible", PanControlVisible, true);
-            objectWriter.Append("overviewMapControlVisible", OverviewMapControlVisible, false);
-            objectWriter.Append("overviewMapControlOpened", OverviewMapControlOpened, false);
-            objectWriter.Append("streetViewControlVisible", StreetViewControlVisible, true);
-            objectWriter.Append("streetViewControlPosition", StreetViewControlPosition, ControlPosition.TopLeft);
-            objectWriter.Append("zoomControlVisible", ZoomControlVisible, true);
-            objectWriter.Append("zoomControlPosition", ZoomControlPosition, ControlPosition.TopLeft);
-            objectWriter.Append("zoomControlStyle", ZoomControlStyle, ZoomControlStyle.Default);
-            objectWriter.Append("scaleControlVisible", ScaleControlVisible, false);
-            objectWriter.Append("zoom", (Zoom == 0) ? 6 : Zoom, 6);
-            objectWriter.Append("minZoom", MinZoom, 0);
-            objectWriter.Append("maxZoom", MaxZoom, 0);
 
-            SerializeLyers(objectWriter);
-            SerializeMapTypes(objectWriter);
-            SerializeMarkers(objectWriter);
-            SerializeShapes(objectWriter);
+            objectWriter.Append("mapTypeId", this.MapTypeId);
+            objectWriter.Append("mapTypeControlPosition", this.MapTypeControlPosition, ControlPosition.TopRight);
+            objectWriter.Append("mapTypeControlVisible", this.MapTypeControlVisible, true);
+            objectWriter.Append("mapTypeControlStyle", this.MapTypeControlStyle, MapTypeControlStyle.Default);
+            objectWriter.Append("panControlPosition", this.PanControlPosition, ControlPosition.TopLeft);
+            objectWriter.Append("panControlVisible", this.PanControlVisible, true);
+            objectWriter.Append("overviewMapControlVisible", this.OverviewMapControlVisible, false);
+            objectWriter.Append("overviewMapControlOpened", this.OverviewMapControlOpened, false);
+            objectWriter.Append("streetViewControlVisible", this.StreetViewControlVisible, true);
+            objectWriter.Append("streetViewControlPosition", this.StreetViewControlPosition, ControlPosition.TopLeft);
+            objectWriter.Append("zoomControlVisible", this.ZoomControlVisible, true);
+            objectWriter.Append("zoomControlPosition", this.ZoomControlPosition, ControlPosition.TopLeft);
+            objectWriter.Append("zoomControlStyle", this.ZoomControlStyle, ZoomControlStyle.Default);
+            objectWriter.Append("scaleControlVisible", this.ScaleControlVisible, false);
+            objectWriter.Append("zoom", (this.Zoom == 0) ? 6 : this.Zoom, 6);
+            objectWriter.Append("minZoom", this.MinZoom, 0);
+            objectWriter.Append("maxZoom", this.MaxZoom, 0);
 
-            ClientEvents.SerializeTo(objectWriter);
+            this.SerializeLyers(objectWriter);
+            this.SerializeMapTypes(objectWriter);
+            this.SerializeMarkers(objectWriter);
+            this.SerializeShapes(objectWriter);
 
-            //TODO: Call a virtual method OnCompleting to allow derived class to inject its own json objects
+            this.ClientEvents.SerializeTo(objectWriter);
 
+            // TODO: Call a virtual method OnCompleting to allow derived class to inject its own json objects
             objectWriter.Complete();
 
             Thread.CurrentThread.CurrentCulture = currentCulture;
@@ -252,24 +232,27 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         protected virtual void WriteHtml(HtmlTextWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException("writer");
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
 
-            IHtmlNode rootTag = builder.Build();
+            IHtmlNode rootTag = this.builder.Build();
             rootTag.WriteTo(writer);
 
-            PrepareScripts();
+            this.PrepareScripts();
 
-            if (Markers.Any(m => m.Window != null))
+            if (this.Markers.Any(m => m.Window != null))
             {
-                //Build Container for InfoWindows
+                // Build Container for InfoWindows
                 IHtmlNode infoWindowsRootTag = new HtmlElement("div")
-                    .Attribute("id", String.Format(CultureInfo.InvariantCulture, "{0}-InfoWindowsHolder", Id))
+                    .Attribute("id", string.Format(CultureInfo.InvariantCulture, "{0}-InfoWindowsHolder", this.Id))
                     .Attribute("style", "display: none");
 
-                Markers.Where(m => m.Window != null).Each(m =>
+                this.Markers.Where(m => m.Window != null).Each(m =>
                 {
                     IHtmlNode markerInfoWindows = new HtmlElement("div")
-                        .Attribute("id", String.Format(CultureInfo.InvariantCulture, "{0}Marker{1}", Id, m.Index))
+                        .Attribute("id", string.Format(CultureInfo.InvariantCulture, "{0}Marker{1}", this.Id, m.Index))
                         .AddClass("content");
 
                     m.Window.Template.Apply(markerInfoWindows);
@@ -282,38 +265,46 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         private void PrepareScripts()
         {
-            var request = builder.ViewContext.HttpContext.Request;
-            var languaje = (Culture != null) ? "&language=" + Culture.TwoLetterISOLanguageName : String.Empty;
-            var key = (ApiKey.HasValue()) ? "&key=" + ApiKey : String.Empty;
-            var visualization = Layers.Any(l => l.GetType() == typeof (HeatmapLayer)) ? "&libraries=visualization" : "";
-            var isAjax = request.IsAjaxRequest() ? "&callback=executeAsync" : "";
-            var version = (String.IsNullOrWhiteSpace(Version)) ? "" : ("v=" + Version);
-            var mainJs = String.Format(CultureInfo.InvariantCulture, "https://maps.googleapis.com/maps/api/js?{0}{1}{2}{3}{4}",
-                version, key, languaje, visualization, isAjax);
-            this.LoadScripts = ShouldLoadGoogleScript();
-            if (LoadScripts)
+            var request = this.builder.ViewContext.HttpContext.Request;
+            var languaje = (this.Culture != null) ? "&language=" + this.Culture.TwoLetterISOLanguageName : string.Empty;
+            var key = this.ApiKey.HasValue() ? "&key=" + this.ApiKey : string.Empty;
+            var visualization = this.Layers.Any(l => l.GetType() == typeof(HeatmapLayer)) ? "&libraries=visualization" : string.Empty;
+            var isAjax = request.IsAjaxRequest() ? "&callback=executeAsync" : string.Empty;
+            var version = string.IsNullOrWhiteSpace(this.Version) ? string.Empty : ("v=" + this.Version);
+            var mainJs = string.Format(
+                CultureInfo.InvariantCulture,
+                "https://maps.googleapis.com/maps/api/js?{0}{1}{2}{3}{4}",
+                version,
+                key,
+                languaje,
+                visualization,
+                isAjax);
+            this.LoadScripts = this.ShouldLoadGoogleScript();
+            if (this.LoadScripts)
             {
-                ScriptFileNames.Add(mainJs);
+                this.ScriptFileNames.Add(mainJs);
             }
 
             if (!request.IsAjaxRequest())
             {
-                ScriptFileNames.Add("jmelosegui.googlemap.js");
+                this.ScriptFileNames.Add("jmelosegui.googlemap.js");
 
-                if (EnableMarkersClustering)
-                    ScriptFileNames.Add("markerclusterer.js");
+                if (this.EnableMarkersClustering)
+                {
+                    this.ScriptFileNames.Add("markerclusterer.js");
+                }
             }
         }
 
         private bool ShouldLoadGoogleScript()
         {
-            var request = builder.ViewContext.HttpContext.Request;
+            var request = this.builder.ViewContext.HttpContext.Request;
             if (!request.IsAjaxRequest())
             {
                 return true;
             }
 
-            if ((new []{ "GET", "POST" }).All(method => method != request.HttpMethod.ToUpper(CultureInfo.InvariantCulture)))
+            if (new[] { "GET", "POST" }.All(method => method != request.HttpMethod.ToUpper(CultureInfo.InvariantCulture)))
             {
                 return true;
             }
@@ -321,7 +312,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             if (request.HttpMethod.ToUpper(CultureInfo.InvariantCulture) == "GET")
             {
                 bool result;
-                if (Boolean.TryParse(request.QueryString.Get("__LoadGoogleMapScript__"), out result))
+                if (bool.TryParse(request.QueryString.Get("__LoadGoogleMapScript__"), out result))
                 {
                     return result;
                 }
@@ -330,7 +321,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             if (request.HttpMethod.ToUpper(CultureInfo.InvariantCulture) == "POST")
             {
                 bool result;
-                if (Boolean.TryParse(request.Form.Get("__LoadGoogleMapScript__"), out result))
+                if (bool.TryParse(request.Form.Get("__LoadGoogleMapScript__"), out result))
                 {
                     return result;
                 }
@@ -339,37 +330,13 @@ namespace Jmelosegui.Mvc.GoogleMap
             return true;
         }
 
-        #endregion
-
-        public void Render()
-        {
-            TextWriter writer = builder.ViewContext.Writer;
-            using (HtmlTextWriter htmlTextWriter = new HtmlTextWriter(writer))
-            {
-                WriteHtml(htmlTextWriter);
-            }
-        }
-
-        public string ToHtmlString()
-        {
-            string result;
-            using (StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture))
-            {
-                WriteHtml(new HtmlTextWriter(stringWriter));
-                result = stringWriter.ToString();
-            }
-            return result;
-        }
-
-        #region Private Methods
-
         private void SerializeLyers(ClientSideObjectWriter objectWriter)
         {
-            if (Layers.Any())
+            if (this.Layers.Any())
             {
                 var layers = new List<IDictionary<string, object>>();
 
-                Layers.Each(l => layers.Add(l.CreateSerializer().Serialize()));
+                this.Layers.Each(l => layers.Add(l.CreateSerializer().Serialize()));
 
                 if (layers.Any())
                 {
@@ -380,18 +347,18 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         private void SerializeMarkers(ClientSideObjectWriter objectWriter)
         {
-            if (EnableMarkersClustering)
+            if (this.EnableMarkersClustering)
             {
-                objectWriter.AppendObject("markerClusteringOptions", MarkerClusteringOptions.Serialize());
+                objectWriter.AppendObject("markerClusteringOptions", this.MarkerClusteringOptions.Serialize());
             }
 
-            if (Markers.Any())
+            if (this.Markers.Any())
             {
                 var markers = new List<IDictionary<string, object>>();
                 int i = 0;
-                Markers.Each(m =>
+                this.Markers.Each(m =>
                 {
-                    if (String.IsNullOrWhiteSpace(m.Id))
+                    if (string.IsNullOrWhiteSpace(m.Id))
                     {
                         m.Id = i.ToString(CultureInfo.InvariantCulture);
                     }
@@ -404,22 +371,22 @@ namespace Jmelosegui.Mvc.GoogleMap
                     objectWriter.AppendCollection("markers", markers);
                 }
 
-                objectWriter.AppendClientEventObject("markerEvents", MarkerClientEvents);
+                objectWriter.AppendClientEventObject("markerEvents", this.MarkerClientEvents);
             }
         }
 
         private void SerializeMapTypes(ClientSideObjectWriter objectWriter)
         {
-            if (ImageMapTypes.Any())
+            if (this.ImageMapTypes.Any())
             {
-                if (!ImageMapTypes.Select(mt => mt.MapTypeName).Contains(MapTypeId))
+                if (!this.ImageMapTypes.Select(mt => mt.MapTypeName).Contains(this.MapTypeId))
                 {
                     throw new InvalidOperationException("Cannot find the MapTypeId in the ImageMapTypes collection");
                 }
 
                 var mapTypes = new List<IDictionary<string, object>>();
 
-                ImageMapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
+                this.ImageMapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
 
                 if (mapTypes.Any())
                 {
@@ -427,11 +394,11 @@ namespace Jmelosegui.Mvc.GoogleMap
                 }
             }
 
-            if (StyledMapTypes.Any())
+            if (this.StyledMapTypes.Any())
             {
                 var mapTypes = new List<IDictionary<string, object>>();
 
-                StyledMapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
+                this.StyledMapTypes.Each(m => mapTypes.Add(m.CreateSerializer().Serialize()));
 
                 if (mapTypes.Any())
                 {
@@ -442,11 +409,11 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         private void SerializeShapes(ClientSideObjectWriter objectWriter)
         {
-            if (Polylines.Any())
+            if (this.Polylines.Any())
             {
                 var polylines = new List<IDictionary<string, object>>();
 
-                Polylines.Each(p => polylines.Add(p.CreateSerializer().Serialize()));
+                this.Polylines.Each(p => polylines.Add(p.CreateSerializer().Serialize()));
 
                 if (polylines.Any())
                 {
@@ -454,11 +421,11 @@ namespace Jmelosegui.Mvc.GoogleMap
                 }
             }
 
-            if (Polygons.Any())
+            if (this.Polygons.Any())
             {
                 var polygons = new List<IDictionary<string, object>>();
 
-                Polygons.Each(p => polygons.Add(p.CreateSerializer().Serialize()));
+                this.Polygons.Each(p => polygons.Add(p.CreateSerializer().Serialize()));
 
                 if (polygons.Any())
                 {
@@ -466,11 +433,11 @@ namespace Jmelosegui.Mvc.GoogleMap
                 }
             }
 
-            if (Circles.Any())
+            if (this.Circles.Any())
             {
                 var circles = new List<IDictionary<string, object>>();
 
-                Circles.Each(c => circles.Add(c.CreateSerializer().Serialize()));
+                this.Circles.Each(c => circles.Add(c.CreateSerializer().Serialize()));
 
                 if (circles.Any())
                 {
@@ -479,6 +446,40 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
         }
 
-        #endregion
+        private void Initialize()
+        {
+            this.Id = "map";
+            this.ClientEvents = new MapClientEvents();
+            this.MarkerClientEvents = new MarkerClientEvents();
+            this.DisableDoubleClickZoom = false;
+            this.Draggable = true;
+            this.EnableMarkersClustering = false;
+            this.Latitude = 23;
+            this.Longitude = -82;
+            this.Layers = new List<Layer>();
+            this.MapTypeId = MapType.Roadmap.ToClientSideString();
+            this.MapTypeControlPosition = ControlPosition.TopRight;
+            this.MapTypeControlVisible = true;
+            this.ImageMapTypes = new List<ImageMapType>();
+            this.StyledMapTypes = new List<StyledMapType>();
+            this.Markers = new List<Marker>();
+            this.MarkerClusteringOptions = new MarkerClusteringOptions();
+            this.Polygons = new List<Polygon>();
+            this.Polylines = new List<Polyline>();
+            this.Circles = new List<Circle>();
+            this.PanControlPosition = ControlPosition.TopLeft;
+            this.PanControlVisible = true;
+            this.OverviewMapControlVisible = false;
+            this.OverviewMapControlOpened = false;
+            this.StreetViewControlVisible = true;
+            this.StreetViewControlPosition = ControlPosition.TopLeft;
+            this.ZoomControlVisible = true;
+            this.ZoomControlPosition = ControlPosition.TopLeft;
+            this.ZoomControlStyle = ZoomControlStyle.Default;
+            this.ScaleControlVisible = false;
+            this.Height = 0;
+            this.Width = 0;
+            this.UseCurrentPosition = false;
+        }
     }
 }

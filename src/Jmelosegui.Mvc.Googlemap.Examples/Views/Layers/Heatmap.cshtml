@@ -25,12 +25,7 @@
                                         (
                                             (heatmap, myLocationObject) =>
                                             {
-                                                heatmap.AddPoint(
-                                                    new Location
-                                                    {
-                                                        Latitude = myLocationObject.Latitude,
-                                                        Longitude = myLocationObject.Longitude
-                                                    });
+                                                heatmap.AddPoint(new Location(myLocationObject.Latitude,myLocationObject.Longitude));
                                             }
                                         )
                                 )

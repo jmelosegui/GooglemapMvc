@@ -1,21 +1,24 @@
-﻿using System;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class MapObjectBindingBuilder<TMapObject, TDataItem> where TMapObject : MapObject
+    using System;
+
+    public class MapObjectBindingBuilder<TMapObject, TDataItem>
+        where TMapObject : MapObject
     {
-        readonly MapObjectBinding<TMapObject, TDataItem> bindingComponent;
+        private readonly MapObjectBinding<TMapObject, TDataItem> bindingComponent;
 
         public MapObjectBindingBuilder(MapObjectBinding<TMapObject, TDataItem> mapObjectBinding)
         {
-            bindingComponent = mapObjectBinding;
+            this.bindingComponent = mapObjectBinding;
         }
 
         public MapObjectBindingBuilder<TMapObject, TDataItem> ItemDataBound(Action<TMapObject, TDataItem> action)
         {
-            bindingComponent.ItemDataBound = action;
+            this.bindingComponent.ItemDataBound = action;
             return this;
         }
     }
-
 }

@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+
     public class MarkerClusteringOptions : ISerializer
     {
-        private readonly Collection<MarkerClusteringStyles> customStyles;
-
         public MarkerClusteringOptions()
         {
-            MaxZoom = 12;
-            GridSize = 60;
-            HideSingleGroupMarker = true;
-            ZoomOnClick = true;
-            customStyles = new Collection<MarkerClusteringStyles>();
+            this.MaxZoom = 12;
+            this.GridSize = 60;
+            this.HideSingleGroupMarker = true;
+            this.ZoomOnClick = true;
+            this.CustomStyles = new Collection<MarkerClusteringStyles>();
         }
 
         public int MaxZoom { get; set; }
@@ -27,29 +28,25 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public bool HideSingleGroupMarker { get; set; }
 
-        public Collection<MarkerClusteringStyles> CustomStyles
-        {
-            get { return customStyles; }
-
-        }
+        public Collection<MarkerClusteringStyles> CustomStyles { get; }
 
         public IDictionary<string, object> Serialize()
         {
             var customStyles = new List<IDictionary<string, object>>();
 
-            if (CustomStyles.Any())
+            if (this.CustomStyles.Any())
             {
-                CustomStyles.Each(cs => customStyles.Add(cs.CreateSerializer().Serialize()));
+                this.CustomStyles.Each(cs => customStyles.Add(cs.CreateSerializer().Serialize()));
             }
 
             IDictionary<string, object> result = new Dictionary<string, object>();
             FluentDictionary.For(result)
-                .Add("MaxZoom", MaxZoom)
-                .Add("GridSize", GridSize)
-                .Add("AverageCenter", AverageCenter)
-                .Add("ZoomOnClick", ZoomOnClick, true)
-                .Add("HideSingleGroupMarker", HideSingleGroupMarker)
-                .Add("CustomStyles", customStyles, () => CustomStyles.Any());
+                .Add("MaxZoom", this.MaxZoom)
+                .Add("GridSize", this.GridSize)
+                .Add("AverageCenter", this.AverageCenter)
+                .Add("ZoomOnClick", this.ZoomOnClick, true)
+                .Add("HideSingleGroupMarker", this.HideSingleGroupMarker)
+                .Add("CustomStyles", customStyles, () => this.CustomStyles.Any());
 
             return result;
         }

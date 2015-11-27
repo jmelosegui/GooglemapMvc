@@ -1,4 +1,7 @@
-﻿namespace Jmelosegui.Mvc.GoogleMap
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class CircleFactory : IHideObjectMembers
     {
@@ -11,9 +14,9 @@
 
         public CircleBuilder Add()
         {
-            var circle = new Circle(Map);
+            var circle = new Circle(this.Map);
 
-            Map.Circles.Add(circle);
+            this.Map.Circles.Add(circle);
 
             return new CircleBuilder(circle);
         }

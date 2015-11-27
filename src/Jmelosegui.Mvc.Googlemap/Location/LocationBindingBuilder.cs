@@ -1,10 +1,14 @@
-﻿using System;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class LocationBindingBuilder<TLocationContainer, TDataItem> where TLocationContainer : ILocationContainer
+    using System;
+
+    public class LocationBindingBuilder<TLocationContainer, TDataItem>
+        where TLocationContainer : ILocationContainer
     {
-        readonly LocationBinding<TLocationContainer, TDataItem> locationBinding;
+        private readonly LocationBinding<TLocationContainer, TDataItem> locationBinding;
 
         public LocationBindingBuilder(LocationBinding<TLocationContainer, TDataItem> locationBinding)
         {
@@ -13,7 +17,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public LocationBindingBuilder<TLocationContainer, TDataItem> ItemDataBound(Action<TLocationContainer, TDataItem> action)
         {
-            locationBinding.ItemDataBound = action;
+            this.locationBinding.ItemDataBound = action;
             return this;
         }
     }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 {
+    using System;
+    using System.Collections.Generic;
+
     internal class RealDataEmulator
     {
         private readonly RangeList rangeList = new RangeList();
@@ -15,36 +15,40 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
         private double min;
         private double value;
 
-        #region Constructors
-
-        public RealDataEmulator(double minValue, double maxValue,
+        public RealDataEmulator(
+            double minValue,
+            double maxValue,
             double currentValue,
-            double maxIncrement, double maxDecrement)
+            double maxIncrement,
+            double maxDecrement)
         {
-            Initialzation(minValue, maxValue,
+            this.Initialzation(
+                minValue,
+                maxValue,
                 currentValue,
-                maxIncrement, maxDecrement);
+                maxIncrement,
+                maxDecrement);
         }
 
         public RealDataEmulator(double minValue, double maxValue, double currentValue)
         {
-            double increment = (maxValue - minValue)/10d;
-            Initialzation(minValue, maxValue, currentValue, increment, increment);
+            double increment = (maxValue - minValue) / 10d;
+            this.Initialzation(minValue, maxValue, currentValue, increment, increment);
         }
 
         public RealDataEmulator(double minValue, double maxValue)
         {
-            Initialzation(minValue, maxValue, minValue,
-                (maxValue - minValue)/10d,
-                (maxValue - minValue)/10d);
+            this.Initialzation(minValue, maxValue, minValue, (maxValue - minValue) / 10d, (maxValue - minValue) / 10d);
         }
 
         public RealDataEmulator()
         {
-            Initialzation(0d, 100d, 0d, 10d, 10d);
+            this.Initialzation(0d, 100d, 0d, 10d, 10d);
         }
 
-        private void Initialzation(double minValue, double maxValue,
+        private void Initialzation(
+            double minValue,
+            double maxValue,
             double currentValue,
             double maxIncrement,
             double maxDecrement)
@@ -59,8 +63,6 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
             direction = 1d;
         }
 
-        #endregion
-
         public double Value
         {
             get { return value; }
@@ -71,10 +73,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
         {
             double range = rangeList.GetDirectionPriorityValue(value);
             double directionValue = rndDirection.NextDouble();
-            direction = 1d;
+            this.direction = 1d;
 
-            if (directionValue > 0.5 - range/2
-                && directionValue < 0.5 + range/2)
+            if (directionValue > 0.5 - range / 2
+                && directionValue < 0.5 + range / 2)
                 direction = -direction;
         }
 

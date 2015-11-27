@@ -1,17 +1,20 @@
-﻿using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System.Drawing;
+
     public class MarkerImage
     {
         private string path;
 
         public MarkerImage(string path, Size size, Point point, Point anchor)
         {
-            Path = path.ToAbsoluteUrl();
-            Size = size;
-            Point = point;
-            Anchor = anchor;
+            this.Path = path.ToAbsoluteUrl();
+            this.Size = size;
+            this.Point = point;
+            this.Anchor = anchor;
         }
 
         public Point Anchor { get; set; }
@@ -20,11 +23,12 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             get
             {
-                return path;
+                return this.path;
             }
+
             set
             {
-                path = value.ToAbsoluteUrl();
+                this.path = value.ToAbsoluteUrl();
             }
         }
 

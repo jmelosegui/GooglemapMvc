@@ -6,7 +6,8 @@
     "Nerdbank.GitVersioning": "1.1.52-rc",
     "Newtonsoft.Json": "7.0.1",
     "NuProj": "0.10.4-beta-gf7fc34e7d8",
-    "NuProj.Common": "0.10.4-beta"
+    "NuProj.Common": "0.10.4-beta",
+    "StyleCop.Analyzers": "1.0.0-beta017"
   },
   "frameworks": {
     "net45": {}

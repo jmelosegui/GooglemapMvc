@@ -1,34 +1,40 @@
-﻿using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
+using System;
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System.Drawing;
+
     public class ImageMapTypeBuilder : MapTypeBuilder<ImageMapType>
     {
-        public ImageMapTypeBuilder(ImageMapType mapType) : base(mapType)
+        public ImageMapTypeBuilder(ImageMapType mapType)
+            : base(mapType)
         {
         }
 
         public ImageMapTypeBuilder TileSize(Size value)
         {
-            base.MapType.TileSize = value;
+            this.MapType.TileSize = value;
             return this;
         }
 
         public ImageMapTypeBuilder RepeatHorizontally(bool value)
         {
-           base.MapType.RepeatHorizontally = value;
+            this.MapType.RepeatHorizontally = value;
             return this;
         }
 
         public ImageMapTypeBuilder RepeatVertically(bool value)
         {
-            base.MapType.RepeatVertically = value;
+            this.MapType.RepeatVertically = value;
             return this;
         }
 
         public ImageMapTypeBuilder TileUrlPattern(string value)
         {
-            base.MapType.TileUrlPattern = value.ToAbsoluteUrl();
+            this.MapType.TileUrlPattern = new Uri(value.ToAbsoluteUrl());
             return this;
         }
     }
