@@ -42,8 +42,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -67,17 +70,21 @@
     <Compile Include="Helpers\Serialization\PointJsonConverter.cs" />
     <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
     <Compile Include="HtmlTemplate`1.cs" />
+    <Compile Include="Location\ILocationBinding`1.cs" />
+    <Compile Include="Location\LocationBindingBuilder`2.cs" />
+    <Compile Include="Location\LocationBindingFactory`1.cs" />
+    <Compile Include="Location\LocationBinding`2.cs" />
+    <Compile Include="Location\LocationFactory`1.cs" />
+    <Compile Include="MapType\MapTypeBuilder`1.cs" />
+    <Compile Include="Objects\IMapObjectBinding`1.cs" />
     <Compile Include="Objects\Layers\Heat\HeatmapGradientFactory.cs" />
     <Compile Include="Objects\Layers\Heat\HeatmapLayerSerializer.cs" />
-    <Compile Include="Location\ILocationBinding.cs" />
-    <Compile Include="Location\LocationBinding.cs" />
-    <Compile Include="Location\LocationBindingBuilder.cs" />
-    <Compile Include="Location\LocationBindingFactory.cs" />
     <Compile Include="Objects\Layers\Kml\KmlLayer.cs" />
     <Compile Include="Objects\Layers\Kml\KmlLayerBuilder.cs" />
     <Compile Include="Objects\Layers\Kml\KmlLayerSerializer.cs" />
     <Compile Include="Objects\Layers\Layer.cs" />
     <Compile Include="Objects\Layers\Heat\HeatLayerBuilder.cs" />
+    <Compile Include="Objects\Layers\LayerBuilder`1.cs" />
     <Compile Include="Objects\Layers\LayerFactory.cs" />
     <Compile Include="Objects\Layers\Heat\HeatmapLayer.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
@@ -85,7 +92,6 @@
     <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapTypeSerializer.cs" />
     <Compile Include="MapType\MapTypeBase.cs" />
-    <Compile Include="MapType\MapTypeBuilder.cs" />
     <Compile Include="MapType\MapTypeControlStyle.cs" />
     <Compile Include="MapType\MapType.cs" />
     <Compile Include="MapType\MapTypeSerializer.cs" />
@@ -112,19 +118,22 @@
     <Compile Include="Objects\Layers\LayerSerializer`1.cs" />
     <Compile Include="Objects\Layers\LayerSerializer.cs" />
     <Compile Include="Objects\Layers\LayerType.cs" />
-    <Compile Include="Objects\Layers\LayerBuilder.cs" />
+    <Compile Include="Objects\MapObjectBindingBuilder`2.cs" />
+    <Compile Include="Objects\MapObjectBindingFactory`1.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesFactory.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesBuilder.cs" />
     <Compile Include="Objects\Overlay.cs" />
     <Compile Include="Objects\Markers\Events\MarkerEventsBuilder.cs" />
     <Compile Include="Objects\Markers\Events\MarkerClientEvents.cs" />
     <Compile Include="Location\ILocationContainer.cs" />
-    <Compile Include="Objects\Shapes\Shape2DBuilder.cs" />
     <Compile Include="Objects\Shapes\Polyline\PolylineBuilder.cs" />
     <Compile Include="Objects\Shapes\Polyline\PolylineFactory.cs" />
     <Compile Include="Objects\Shapes\Polyline\Polyline.cs" />
     <Compile Include="Objects\Shapes\Polyline\PolylineSerializer.cs" />
     <Compile Include="Objects\Shapes\Shape2D.cs" />
+    <Compile Include="Objects\Shapes\Shape2DBuilder`1.cs" />
+    <Compile Include="Objects\Shapes\ShapeBuilder`1.cs" />
+    <Compile Include="Objects\Shapes\ShapeSerializer`1.cs" />
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -150,16 +159,12 @@
     <Compile Include="Objects\InfoWindow\InfoWindowFactory.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="Location\Location.cs" />
-    <Compile Include="Location\LocationFactory.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
     <Compile Include="Objects\Markers\MarkerImage.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Objects\Markers\MarkerSerializer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Objects\MapObjectBindingBuilder.cs" />
-    <Compile Include="Objects\MapObjectBindingFactory.cs" />
-    <Compile Include="Objects\IMapObjectBinding.cs" />
     <Compile Include="Objects\Markers\Marker.cs" />
     <Compile Include="Objects\Markers\MarkerBuilder.cs" />
     <Compile Include="Objects\Markers\MarkerFactory.cs" />
@@ -173,9 +178,7 @@
     <Compile Include="Objects\Shapes\Polygons\Polygon.cs" />
     <Compile Include="Objects\Shapes\Polygons\PolygonFactory.cs" />
     <Compile Include="Objects\Shapes\Polygons\PolygonSerializer.cs" />
-    <Compile Include="Objects\Shapes\ShapeSerializer.cs" />
     <Compile Include="Objects\Shapes\Shape.cs" />
-    <Compile Include="Objects\Shapes\ShapeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptRegistrar.cs" />
     <Compile Include="ScriptRegistrarBuilder.cs" />

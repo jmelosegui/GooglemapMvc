@@ -33,6 +33,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>SA1633</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,7 +44,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>SA1633</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +65,7 @@
   <ItemGroup>
     <Compile Include="App_Data\DataContext.cs" />
     <Compile Include="App_Data\RealDataEmulator.cs" />
+    <Compile Include="App_Data\RegionInfo.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -98,6 +105,7 @@
     <Compile Include="Controllers\Shapes\PolylineBasicController.cs" />
     <Compile Include="Extensions\AutoPopulateSourceCodeAttribute.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\ExampleConfigurator.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,6 +216,9 @@
     <Content Include="Scripts\google-code-prettify\prettify.css" />
     <Content Include="Scripts\google-code-prettify\prettify.js" />
     <Content Include="Scripts\google-code-prettify\run_prettify.js" />
+    <Content Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

@@ -1,14 +1,14 @@
-﻿using System.Web.Mvc;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
+    using System.Web.Mvc;
+
     public partial class MarkerController
     {
         public ActionResult ClientEvents(bool? clickable, bool? draggable)
         {
-            ViewData["clickable"] = clickable ?? true;
-            ViewData["draggable"] = draggable ?? true;
-            return View();
+            this.ViewData["clickable"] = clickable ?? true;
+            this.ViewData["draggable"] = draggable ?? true;
+            return this.View();
         }
     }
 }

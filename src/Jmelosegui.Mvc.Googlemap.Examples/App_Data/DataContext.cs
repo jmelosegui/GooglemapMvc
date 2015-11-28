@@ -1,23 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 {
-    public class RegionInfo
-    {
-        public int Id { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
-        public string Title { get; set; }
-        public int zIndex { get; set; }
-        public string ImagePath { get; set; }
-        public string InfoWindowContent { get; set; }
-        public double population { get; set; }
-        public string Address
-        {
-            get { return Title + ", Spain"; }
-        }
-    }
+    using System;
+    using System.Collections.Generic;
 
     public class DataContext
     {
@@ -31,10 +15,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -4.57595074388866,
                     Latitude = 37.4627044984297,
                     Title = "Andalucia",
-                    zIndex = 15,
+                    ZIndex = 15,
                     ImagePath = "Andalucia.jpg",
                     InfoWindowContent = @"<h2>Andalucia</h2>",
-                    population = 8370975
+                    Population = 8370975
                 },
                 new RegionInfo
                 {
@@ -42,10 +26,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -0.660086412088428,
                     Latitude = 41.5197712294221,
                     Title = "Aragón",
-                    zIndex = 2,
+                    ZIndex = 2,
                     ImagePath = "Aragon.jpg",
                     InfoWindowContent = @"<h2>Aragón</h2>",
-                    population = 1277471
+                    Population = 1277471
                 },
                 new RegionInfo
                 {
@@ -53,10 +37,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -5.99303425068051,
                     Latitude = 43.2926485100667,
                     Title = "Asturias",
-                    zIndex = 4,
+                    ZIndex = 4,
                     ImagePath = "Asturias.jpg",
                     InfoWindowContent = @"<h2>Asturias</h2>",
-                    population = 1076896
+                    Population = 1076896
                 },
                 new RegionInfo
                 {
@@ -64,10 +48,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -4.02842943995642,
                     Latitude = 43.1985460400007,
                     Title = "Cantabria",
-                    zIndex = 5,
+                    ZIndex = 5,
                     ImagePath = "Cantabria.jpg",
                     InfoWindowContent = @"<h2>Cantabria</h2>",
-                    population = 591886
+                    Population = 591886
                 },
                 new RegionInfo
                 {
@@ -75,10 +59,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -4.78304592487708,
                     Latitude = 41.7558243397703,
                     Title = "Castilla y León",
-                    zIndex = 6,
+                    ZIndex = 6,
                     ImagePath = "CastillayLeon.jpg",
                     InfoWindowContent = @"<h2>Castilla y León</h2>",
-                    population = 2510849
+                    Population = 2510849
                 },
                 new RegionInfo
                 {
@@ -86,10 +70,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -3.00561142377074,
                     Latitude = 39.5823898383649,
                     Title = "Castilla La Mancha",
-                    zIndex = 7,
+                    ZIndex = 7,
                     ImagePath = "CastillaLaMancha.jpg",
                     InfoWindowContent = @"<h2>Castilla La Mancha</h2>",
-                    population = 2095855
+                    Population = 2095855
                 },
                 new RegionInfo
                 {
@@ -97,10 +81,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = 1.52942440762057,
                     Latitude = 41.7984066910626,
                     Title = "Cataluña",
-                    zIndex = 8,
+                    ZIndex = 8,
                     ImagePath = "Cataluña.jpg",
                     InfoWindowContent = @"<h2>Cataluña</h2>",
-                    population = 7535251
+                    Population = 7535251
                 },
                 new RegionInfo
                 {
@@ -108,10 +92,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -0.553479226106214,
                     Latitude = 39.402980001699,
                     Title = "Comunidad Valenciana",
-                    zIndex = 9,
+                    ZIndex = 9,
                     ImagePath = "ComunidadValenciana.jpg",
                     InfoWindowContent = @"<h2>Comunidad Valenciana</h2>",
-                    population = 5111706
+                    Population = 5111706
                 },
                 new RegionInfo
                 {
@@ -119,10 +103,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -6.14989834853003,
                     Latitude = 39.1910300444204,
                     Title = "Extremadura",
-                    zIndex = 10,
+                    ZIndex = 10,
                     ImagePath = "Extremadura.jpg",
                     InfoWindowContent = @"<h2>Extremadura</h2>",
-                    population = 1097744
+                    Population = 1097744
                 },
                 new RegionInfo
                 {
@@ -130,10 +114,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -7.91067418759005,
                     Latitude = 42.7573334990542,
                     Title = "Galicia",
-                    zIndex = 11,
+                    ZIndex = 11,
                     ImagePath = "Galicia.jpg",
                     InfoWindowContent = @"<h2>Galicia</h2>",
-                    population = 2796089
+                    Population = 2796089
                 },
                 new RegionInfo
                 {
@@ -141,10 +125,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = 2.91228480711994,
                     Latitude = 39.5743872767774,
                     Title = "Islas Baleares",
-                    zIndex = 12,
+                    ZIndex = 12,
                     ImagePath = "baleares.jpg",
                     InfoWindowContent = @"<h2>Islas Baleares</h2>",
-                    population = 1106049
+                    Population = 1106049
                 },
                 new RegionInfo
                 {
@@ -152,10 +136,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -15.6695166804329,
                     Latitude = 28.3414539671822,
                     Title = "Islas Canarias",
-                    zIndex = 13,
+                    ZIndex = 13,
                     ImagePath = "Canarias.jpg",
                     InfoWindowContent = @"<h2>Islas Canarias</h2>",
-                    population = 2098593
+                    Population = 2098593
                 },
                 new RegionInfo
                 {
@@ -163,10 +147,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -2.51709503790131,
                     Latitude = 42.2744050690317,
                     Title = "La Rioja",
-                    zIndex = 14,
+                    ZIndex = 14,
                     ImagePath = "LaRioja.jpg",
                     InfoWindowContent = @"<h2>La Rioja</h2>",
-                    population = 308968
+                    Population = 308968
                 },
                 new RegionInfo
                 {
@@ -174,10 +158,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -3.71723975865936,
                     Latitude = 40.4943292450304,
                     Title = "Madrid",
-                    zIndex = 1,
+                    ZIndex = 1,
                     ImagePath = "Madrid.jpg",
                     InfoWindowContent = @"<h2>Madrid</h2>",
-                    population = 6445499
+                    Population = 6445499
                 },
                 new RegionInfo
                 {
@@ -185,10 +169,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -1.48298815055981,
                     Latitude = 38.0016088590782,
                     Title = "Murcia",
-                    zIndex = 15,
+                    ZIndex = 15,
                     ImagePath = "Murcia.jpg",
                     InfoWindowContent = @"<h2>Murcia</h2>",
-                    population = 1424063
+                    Population = 1424063
                 },
                 new RegionInfo
                 {
@@ -196,10 +180,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -1.64758357483914,
                     Latitude = 42.6673876299784,
                     Title = "Navarra",
-                    zIndex = 14,
+                    ZIndex = 14,
                     ImagePath = "Navarra.jpg",
                     InfoWindowContent = @"<h2>Navarra</h2>",
-                    population = 620337
+                    Population = 620337
                 },
                 new RegionInfo
                 {
@@ -207,10 +191,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Longitude = -2.61621650797752,
                     Latitude = 43.0434435645489,
                     Title = "País Vasco",
-                    zIndex = 14,
+                    ZIndex = 14,
                     ImagePath = "PaisVasco.jpg",
                     InfoWindowContent = @"<h2>País Vasco</h2>",
-                    population = 2155546
+                    Population = 2155546
                 }
             };
         }
@@ -244,10 +228,10 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                         lng = lngData.GetNextValue();
                     }
 
-
                     result.Add(new RegionInfo { Latitude = lat, Longitude = lng });
                 }
             }
+
             return result;
         }
     }

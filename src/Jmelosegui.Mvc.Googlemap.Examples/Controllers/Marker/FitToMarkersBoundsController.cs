@@ -1,14 +1,14 @@
-﻿using System.Web.Mvc;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
+    using System.Web.Mvc;
+
     public partial class MarkerController
     {
         // GET: MapFir
         public ActionResult FitToMarkersBounds(bool? fitToMarkersBounds)
         {
-            ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
-            return View();
+            this.ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
+            return this.View();
         }
     }
 }

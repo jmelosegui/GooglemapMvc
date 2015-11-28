@@ -1,12 +1,12 @@
-﻿using System.Web.Mvc;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
-    public partial class ShapesController 
+    using System.Web.Mvc;
+
+    public partial class ShapesController
     {
         public ActionResult CircleBasic()
         {
-            return View();
+            return this.View();
         }
     }
 }

@@ -3,7 +3,6 @@
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    using System;
     using System.Collections.Generic;
 
     public class MapTypeSerializer : ISerializer

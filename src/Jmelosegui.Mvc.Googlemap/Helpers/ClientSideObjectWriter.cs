@@ -250,7 +250,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             var valueAttribute = value.GetType().GetField(value.ToString())
                                                 .GetCustomAttributes(true)
                                                 .OfType<ClientSideEnumValueAttribute>()
-                                                .FirstOrDefault<ClientSideEnumValueAttribute>();
+                                                .FirstOrDefault();
 
             if (valueAttribute != null)
             {

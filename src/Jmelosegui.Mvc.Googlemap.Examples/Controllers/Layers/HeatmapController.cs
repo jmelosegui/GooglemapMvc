@@ -12,6 +12,7 @@
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single class", Justification = "This allows to see the model type in the sample view")]
     public class HeatMapModel
     {
         public HeatMapModel()
@@ -542,6 +543,7 @@
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single class", Justification = "This allows to see the model type in the sample view")]
     public class MyLocationObject
     {
         public double Latitude { get; set; }

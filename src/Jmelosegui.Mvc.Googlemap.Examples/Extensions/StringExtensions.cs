@@ -1,17 +1,17 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
+    using System;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     public static class StringExtensions
     {
         private const int IndentSize = 4;
 
+        private const int WrapThreshold = 120;
+
         private static readonly string NewLine = Environment.NewLine;
         private static readonly int NewLineLength = NewLine.Length;
-
-        private const int WrapThreshold = 120;
 
         public static string WordWrap(this string html)
         {
@@ -21,7 +21,9 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
             for (var i = 0; i < lines.Length; i++)
             {
                 if (lines[i].Length <= WrapThreshold)
+                {
                     continue;
+                }
 
                 var result = new StringBuilder();
 
@@ -34,7 +36,9 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
                     int splitPoint = currentLine.Substring(0, WrapThreshold - IndentSize).LastIndexOf(' ');
 
                     if (splitPoint < 0)
+                    {
                         splitPoint = WrapThreshold; // cuts though code, though
+                    }
 
                     result.Append(currentLine.Substring(0, splitPoint))
                           .Append(NewLine.PadRight(NewLineLength + currentLineIndentSize + IndentSize));
@@ -47,7 +51,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
                 lines[i] = result.ToString();
             }
 
-            return String.Join(NewLine, lines);
+            return string.Join(NewLine, lines);
         }
     }
 }

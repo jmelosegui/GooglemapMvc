@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)

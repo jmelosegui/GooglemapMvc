@@ -44,19 +44,18 @@ namespace Jmelosegui.Mvc.GoogleMap
         public IList<IHtmlNode> Children
         {
             get;
-            private set;
         }
 
         public string InnerHtml
         {
             get
             {
-                if (this.Children.Any<IHtmlNode>())
+                if (this.Children.Any())
                 {
                     StringBuilder innerHtml = new StringBuilder();
                     this.Children.Each(delegate(IHtmlNode child)
                     {
-                        innerHtml.Append(child.ToString());
+                        innerHtml.Append(child);
                     });
                     return innerHtml.ToString();
                 }
@@ -169,7 +168,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public IHtmlNode PrependClass(string[] classes)
         {
-            foreach (string @class in classes.Reverse<string>())
+            foreach (string @class in classes.Reverse())
             {
                 this.tagBuilder.AddCssClass(@class);
             }
@@ -197,7 +196,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> values, bool replaceExisting)
         {
-            this.tagBuilder.MergeAttributes<TKey, TValue>(values, replaceExisting);
+            this.tagBuilder.MergeAttributes(values, replaceExisting);
             return this;
         }
 
@@ -269,7 +268,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                 }
                 else
                 {
-                    if (this.Children.Any<IHtmlNode>())
+                    if (this.Children.Any())
                     {
                         this.Children.Each(delegate(IHtmlNode child)
                         {
