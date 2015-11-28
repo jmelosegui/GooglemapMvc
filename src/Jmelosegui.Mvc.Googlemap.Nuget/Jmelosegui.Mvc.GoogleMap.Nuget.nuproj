@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)\NuProj.Extra.props" Condition="Exists('$(SolutionDir)\NuProj.Extra.props')"/>
+  <Import Project="$(SolutionDir)\NuProj.Extra.props" Condition="Exists('$(SolutionDir)\NuProj.Extra.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|AnyCPU">
       <Configuration>Debug</Configuration>
@@ -29,7 +29,7 @@
     <ReleaseNotes>
     </ReleaseNotes>
     <ProjectUrl>https://github.com/jmelosegui/GooglemapMvc</ProjectUrl>
-    <LicenseUrl>https://github.com/jmelosegui/GooglemapMvc/blob/master/LICENSE</LicenseUrl>
+    <LicenseUrl>https://github.com/jmelosegui/GooglemapMvc/blob/master/LICENSE.txt</LicenseUrl>
     <Copyright>Copyright © Juan M. Elosegui</Copyright>
     <Tags>Google maps GoogleMap AspNet Mvc AspNetMvc</Tags>
   </PropertyGroup>

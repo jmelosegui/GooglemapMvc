@@ -81,5 +81,5 @@ Now hit F5 and you should see the map rendering on the page
 
 ## License
 
-Googlemap control for Asp.Net MVC is released under the [GNU GENERAL PUBLIC LICENSE](https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE) Version 2.
+Googlemap control for Asp.Net MVC is released under the [GNU GENERAL PUBLIC LICENSE](https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE.txt) Version 2.
 
