@@ -1,27 +1,31 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+
     public class Marker : Overlay
     {
-        private readonly int index;
-        public Marker(Map map) : base(map)
+        public Marker(Map map)
+            : base(map)
         {
-            if (map == null) throw new ArgumentNullException("map");
-            Clickable = true;
-            Draggable = false;
-            index = map.Markers.Count;
+            if (map == null)
+            {
+                throw new ArgumentNullException(nameof(map));
+            }
+
+            this.Clickable = true;
+            this.Draggable = false;
+            this.Index = map.Markers.Count;
         }
 
         public string Address { get; set; }
 
         public string Id { get; set; }
 
-        public int Index
-        {
-            get { return index; }
-        }
+        public int Index { get; }
 
         public bool Clickable { get; set; }
 

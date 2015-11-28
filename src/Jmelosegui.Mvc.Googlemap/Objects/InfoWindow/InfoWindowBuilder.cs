@@ -1,72 +1,79 @@
-﻿using System;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+
     public class InfoWindowBuilder
     {
-        protected InfoWindowBuilder(InfoWindowBuilder builder) : this(PassThroughNonNull(builder).Window)
-        {
-        }
-
         public InfoWindowBuilder(InfoWindow window)
         {
             this.Window = window;
+        }
+
+        protected InfoWindowBuilder(InfoWindowBuilder builder)
+            : this(PassThroughNonNull(builder).Window)
+        {
         }
 
         protected InfoWindow Window { get; private set; }
 
         public InfoWindowBuilder Content(Action action)
         {
-            Window.Template.Content = action;
+            this.Window.Template.Content = action;
             return this;
         }
 
         public InfoWindowBuilder Content(Func<object, object> function)
         {
-            Window.Template.InlineTemplate = function;
+            this.Window.Template.InlineTemplate = function;
             return this;
         }
 
         public InfoWindowBuilder DisableAutoPan(bool disable)
         {
-            Window.DisableAutoPan = disable;
+            this.Window.DisableAutoPan = disable;
             return this;
         }
 
        public InfoWindowBuilder OpenOnRightClick(bool value)
         {
-            Window.OpenOnRightClick = value;
+            this.Window.OpenOnRightClick = value;
             return this;
         }
 
         public InfoWindowBuilder Latitude(double value)
         {
-            Window.Latitude = value;
+            this.Window.Latitude = value;
             return this;
         }
 
         public InfoWindowBuilder Longitude(double value)
         {
-            Window.Longitude = value;
+            this.Window.Longitude = value;
             return this;
         }
 
         public InfoWindowBuilder MaxWidth(int value)
         {
-            Window.MaxWidth = value;
+            this.Window.MaxWidth = value;
             return this;
         }
 
         public InfoWindowBuilder ZIndex(int value)
         {
-            Window.ZIndex = value;
+            this.Window.ZIndex = value;
             return this;
         }
 
         private static InfoWindowBuilder PassThroughNonNull(InfoWindowBuilder builder)
         {
             if (builder == null)
-                throw new ArgumentNullException("builder");
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             return builder;
         }
     }

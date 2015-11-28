@@ -18,7 +18,6 @@
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,10 +28,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,8 +42,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -51,58 +55,10 @@
     <AssemblyOriginatorKeyFile>Jmelosegui.Mvc.Googlemap.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="WebGrease">
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CenterFactory.cs" />
@@ -110,18 +66,25 @@
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
     <Compile Include="ControlPosition.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Helpers\Serialization\PointJsonConverter.cs" />
     <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
+    <Compile Include="HtmlTemplate`1.cs" />
+    <Compile Include="Location\ILocationBinding`1.cs" />
+    <Compile Include="Location\LocationBindingBuilder`2.cs" />
+    <Compile Include="Location\LocationBindingFactory`1.cs" />
+    <Compile Include="Location\LocationBinding`2.cs" />
+    <Compile Include="Location\LocationFactory`1.cs" />
+    <Compile Include="MapType\MapTypeBuilder`1.cs" />
+    <Compile Include="Objects\IMapObjectBinding`1.cs" />
+    <Compile Include="Objects\Layers\Heat\HeatmapGradientFactory.cs" />
     <Compile Include="Objects\Layers\Heat\HeatmapLayerSerializer.cs" />
-    <Compile Include="Location\ILocationBinding.cs" />
-    <Compile Include="Location\LocationBinding.cs" />
-    <Compile Include="Location\LocationBindingBuilder.cs" />
-    <Compile Include="Location\LocationBindingFactory.cs" />
     <Compile Include="Objects\Layers\Kml\KmlLayer.cs" />
     <Compile Include="Objects\Layers\Kml\KmlLayerBuilder.cs" />
     <Compile Include="Objects\Layers\Kml\KmlLayerSerializer.cs" />
     <Compile Include="Objects\Layers\Layer.cs" />
     <Compile Include="Objects\Layers\Heat\HeatLayerBuilder.cs" />
+    <Compile Include="Objects\Layers\LayerBuilder`1.cs" />
     <Compile Include="Objects\Layers\LayerFactory.cs" />
     <Compile Include="Objects\Layers\Heat\HeatmapLayer.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
@@ -129,7 +92,6 @@
     <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs" />
     <Compile Include="MapType\ImageMapType\ImageMapTypeSerializer.cs" />
     <Compile Include="MapType\MapTypeBase.cs" />
-    <Compile Include="MapType\MapTypeBuilder.cs" />
     <Compile Include="MapType\MapTypeControlStyle.cs" />
     <Compile Include="MapType\MapType.cs" />
     <Compile Include="MapType\MapTypeSerializer.cs" />
@@ -153,9 +115,11 @@
     </Compile>
     <Compile Include="Events\IClientEventObject.cs" />
     <Compile Include="Helpers\Serialization\LocationJsonConverter.cs" />
+    <Compile Include="Objects\Layers\LayerSerializer`1.cs" />
     <Compile Include="Objects\Layers\LayerSerializer.cs" />
     <Compile Include="Objects\Layers\LayerType.cs" />
-    <Compile Include="Objects\Layers\LayerBuilder.cs" />
+    <Compile Include="Objects\MapObjectBindingBuilder`2.cs" />
+    <Compile Include="Objects\MapObjectBindingFactory`1.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesFactory.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesBuilder.cs" />
     <Compile Include="Objects\Overlay.cs" />
@@ -166,12 +130,15 @@
     <Compile Include="Objects\Shapes\Polyline\PolylineFactory.cs" />
     <Compile Include="Objects\Shapes\Polyline\Polyline.cs" />
     <Compile Include="Objects\Shapes\Polyline\PolylineSerializer.cs" />
+    <Compile Include="Objects\Shapes\Shape2D.cs" />
+    <Compile Include="Objects\Shapes\Shape2DBuilder`1.cs" />
+    <Compile Include="Objects\Shapes\ShapeBuilder`1.cs" />
+    <Compile Include="Objects\Shapes\ShapeSerializer`1.cs" />
     <Compile Include="ZoomControlStyle.cs" />
     <Compile Include="Events\ClientEvent.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="ViewComponentFactoryExtension.cs" />
+    <Compile Include="HtmlHelperExtension.cs" />
     <Compile Include="MapBuilder.cs" />
     <Compile Include="Events\MapClientEventsBuilder.cs" />
     <Compile Include="Events\MapClientEvents.cs" />
@@ -182,7 +149,7 @@
     <Compile Include="Helpers\HtmlElement.cs" />
     <Compile Include="Helpers\IHtmlNode.cs" />
     <Compile Include="Helpers\IHideObjectMembers.cs" />
-    <Compile Include="Helpers\UrlHelperExtension.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="HtmlTemplate.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringStyles.cs" />
@@ -192,16 +159,12 @@
     <Compile Include="Objects\InfoWindow\InfoWindowFactory.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="Location\Location.cs" />
-    <Compile Include="Location\LocationFactory.cs" />
     <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
     <Compile Include="Objects\Markers\MarkerImage.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Objects\Markers\MarkerSerializer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Objects\MapObjectBindingBuilder.cs" />
-    <Compile Include="Objects\MapObjectBindingFactory.cs" />
-    <Compile Include="Objects\IMapObjectBinding.cs" />
     <Compile Include="Objects\Markers\Marker.cs" />
     <Compile Include="Objects\Markers\MarkerBuilder.cs" />
     <Compile Include="Objects\Markers\MarkerFactory.cs" />
@@ -215,9 +178,7 @@
     <Compile Include="Objects\Shapes\Polygons\Polygon.cs" />
     <Compile Include="Objects\Shapes\Polygons\PolygonFactory.cs" />
     <Compile Include="Objects\Shapes\Polygons\PolygonSerializer.cs" />
-    <Compile Include="Objects\Shapes\ShapeSerializer.cs" />
     <Compile Include="Objects\Shapes\Shape.cs" />
-    <Compile Include="Objects\Shapes\ShapeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptRegistrar.cs" />
     <Compile Include="ScriptRegistrarBuilder.cs" />
@@ -227,15 +188,15 @@
     <Content Include="Scripts\jmelosegui.googlemap.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Jmelosegui.Mvc.Googlemap.nuspec" />
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="Jmelosegui.Mvc.Googlemap.snk" />
     <None Include="Objects\MapObjectClassDiagram.cd" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -259,11 +220,4 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
 </Project>

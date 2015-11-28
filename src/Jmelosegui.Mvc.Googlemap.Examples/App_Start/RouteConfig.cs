@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples
 {
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
@@ -12,8 +12,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "FirstLook", id = UrlParameter.Optional }
-            );
+                defaults: new { controller = "Home", action = "FirstLook", id = UrlParameter.Optional });
         }
     }
 }

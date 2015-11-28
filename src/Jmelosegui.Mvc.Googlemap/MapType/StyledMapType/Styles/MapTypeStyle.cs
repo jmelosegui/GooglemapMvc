@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+
     public class MapTypeStyle : ISerializer
     {
         public MapTypeStyle()
         {
-            Stylers = new Collection<object>();
+            this.Stylers = new Collection<object>();
         }
 
         public ElementType? ElementType { get; set; }
@@ -22,9 +25,9 @@ namespace Jmelosegui.Mvc.GoogleMap
             IDictionary<string, object> result = new Dictionary<string, object>();
 
             FluentDictionary.For(result)
-                .Add("elementType", ElementType != null ? ElementType.ToClientSideString() : null, () => ElementType != null)
-                .Add("featureType", FeatureType != null ? FeatureType.ToClientSideString() : null, () => FeatureType != null)
-                .Add("stylers", Stylers, () => Stylers.Any());
+                .Add("elementType", this.ElementType?.ToClientSideString(), () => this.ElementType != null)
+                .Add("featureType", this.FeatureType?.ToClientSideString(), () => this.FeatureType != null)
+                .Add("stylers", this.Stylers, () => this.Stylers.Any());
 
             return result;
         }

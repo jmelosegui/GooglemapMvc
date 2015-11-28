@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Drawing;
+
     public class HeatmapLayer : Layer, ILocationContainer
     {
         private readonly List<Location> data;
 
-        public HeatmapLayer(Map map) : base("heatmap", map)
+        public HeatmapLayer(Map map)
+            : base("heatmap", map)
         {
-            Gradient = new Collection<Color>();
-            data = new List<Location>();
+            this.Gradient = new Collection<Color>();
+            this.data = new List<Location>();
         }
 
         public ReadOnlyCollection<Location> Data
         {
             get
             {
-                return new ReadOnlyCollection<Location>(data);
+                return new ReadOnlyCollection<Location>(this.data);
             }
         }
 
@@ -30,7 +33,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public int MaxIntensity { get; set; }
 
-        [Range(0, 1)]
         public decimal Opacity { get; set; }
 
         public int Radius { get; set; }
@@ -42,14 +44,26 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public void AddPoint(Location point)
         {
-            if (point == null) throw new ArgumentNullException("point");
-            data.Add(point);
+            if (point == null)
+            {
+                throw new ArgumentNullException(nameof(point));
+            }
+
+            this.data.Add(point);
         }
 
-        internal void BindTo<TLocationContainer, TDataItem>(IEnumerable<TDataItem> dataSource, Action<LocationBindingFactory<TLocationContainer>> action) where TLocationContainer : class, ILocationContainer
+        internal void BindTo<TLocationContainer, TDataItem>(IEnumerable<TDataItem> dataSource, Action<LocationBindingFactory<TLocationContainer>> action)
+            where TLocationContainer : class, ILocationContainer
         {
-            if (action == null) throw new ArgumentNullException("action");
-            if (dataSource == null) throw new ArgumentNullException("dataSource");
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            if (dataSource == null)
+            {
+                throw new ArgumentNullException(nameof(dataSource));
+            }
 
             var factory = new LocationBindingFactory<TLocationContainer>();
 
@@ -60,7 +74,5 @@ namespace Jmelosegui.Mvc.GoogleMap
                 factory.Binder.ItemDataBound(this as TLocationContainer, dataItem);
             }
         }
-
-        
     }
 }

@@ -1,8 +1,12 @@
-﻿namespace Jmelosegui.Mvc.GoogleMap
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public class MarkerClusteringStylesFactory : MapObject
     {
-        public MarkerClusteringStylesFactory(Map map) : base(map)
+        public MarkerClusteringStylesFactory(Map map)
+            : base(map)
         {
         }
 
@@ -10,7 +14,7 @@
         {
             var clusteringStyle = new MarkerClusteringStyles();
 
-            Map.MarkerClusteringOptions.CustomStyles.Add(clusteringStyle);
+            this.Map.MarkerClusteringOptions.CustomStyles.Add(clusteringStyle);
 
             return new MarkerClusteringStylesBuilder(clusteringStyle);
         }

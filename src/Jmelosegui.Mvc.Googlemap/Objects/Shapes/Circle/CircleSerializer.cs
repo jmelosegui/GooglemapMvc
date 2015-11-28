@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System.Collections.Generic;
+
     public class CircleSerializer : ShapeSerializer<Circle>
     {
         private readonly Circle circle;
 
-        public CircleSerializer(Circle circle) : base(circle)
+        public CircleSerializer(Circle circle)
+            : base(circle)
         {
             this.circle = circle;
         }
@@ -15,8 +19,8 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             IDictionary<string, object> result = base.Serialize();
 
-            result["Center"] = circle.Center;
-            result["Radius"] = circle.Radius;
+            result["Center"] = this.circle.Center;
+            result["Radius"] = this.circle.Radius;
 
             return result;
         }

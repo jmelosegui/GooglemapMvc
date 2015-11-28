@@ -1,12 +1,12 @@
-﻿using System.Web.Mvc;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
+    using System.Web.Mvc;
+
     public partial class ServicesController
     {
         public ActionResult Geocoding(string address)
         {
-            return View((object)(address ?? "Madrid, Spain"));
+            return this.View((object)(address ?? "Madrid, Spain"));
         }
     }
 }

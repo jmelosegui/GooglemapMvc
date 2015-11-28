@@ -1,6 +1,9 @@
+// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
 namespace Jmelosegui.Mvc.GoogleMap
 {
-    public class MapTypeStyleFactory : IHideObjectMembers 
+    public class MapTypeStyleFactory : IHideObjectMembers
     {
         private readonly StyledMapType mapType;
 
@@ -13,7 +16,7 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             var style = new MapTypeStyle();
 
-            mapType.Styles.Add(style);
+            this.mapType.Styles.Add(style);
 
             return new MapTypeStyleBuilder(style);
         }

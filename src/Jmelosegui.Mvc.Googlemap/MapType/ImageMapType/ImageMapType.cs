@@ -1,20 +1,23 @@
-﻿using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Drawing;
+
     public class ImageMapType : MapTypeBase
     {
         public ImageMapType()
         {
-            TileSize = new Size(256, 256);
-            RepeatHorizontally = true;
-            RepeatVertically = false;
+            this.TileSize = new Size(256, 256);
+            this.RepeatHorizontally = true;
+            this.RepeatVertically = false;
         }
 
         public Size TileSize { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
-        public string TileUrlPattern { get; set; }
+         public Uri TileUrlPattern { get; set; }
 
         public bool RepeatHorizontally { get; set; }
 

@@ -1,16 +1,19 @@
-﻿namespace Jmelosegui.Mvc.GoogleMap
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
+namespace Jmelosegui.Mvc.GoogleMap
 {
     public enum FeatureType
     {
         [ClientSideEnumValue("'administrative'")]
         Administrative,
-        
+
         [ClientSideEnumValue("'administrative.country'")]
         AdministrativeCountry,
-        
+
         [ClientSideEnumValue("'administrative.land_parcel'")]
         AdministrativeLandParcel,
-        
+
         [ClientSideEnumValue("'administrative.locality'")]
         AdministrativeLocality,
 

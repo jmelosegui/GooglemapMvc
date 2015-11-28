@@ -1,97 +1,103 @@
-﻿using System;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+
     public class MarkerClientEvents : IClientEventObject
     {
         public MarkerClientEvents()
         {
-            OnMarkerAnimationChanged = new ClientEvent();
-            OnMarkerClick = new ClientEvent();
-            OnMarkerClickableChanged = new ClientEvent();
-            OnMarkerCursorChanged = new ClientEvent();
-            OnMarkerDoubleClick = new ClientEvent();
-            OnMarkerDragStart = new ClientEvent();
-            OnMarkerDrag = new ClientEvent();
-            OnMarkerDragEnd = new ClientEvent();
-            OnMarkerFlatChanged = new ClientEvent();
-            OnMarkerIconChanged = new ClientEvent();
-            OnMarkerMouseDown = new ClientEvent();
-            OnMarkerMouseOut = new ClientEvent();
-            OnMarkerMouseOver = new ClientEvent();
-            OnMarkerMouseUp = new ClientEvent();
-            OnMarkerPositionChanged = new ClientEvent();
-            OnMarkerRightClick = new ClientEvent();
-            OnMarkerShapeChanged = new ClientEvent();
-            OnMarkerTitleChanged = new ClientEvent();
-            OnMarkerVisibleChanged = new ClientEvent();
-            OnMarkerZIndexChanged = new ClientEvent();
+            this.OnMarkerAnimationChanged = new ClientEvent();
+            this.OnMarkerClick = new ClientEvent();
+            this.OnMarkerClickableChanged = new ClientEvent();
+            this.OnMarkerCursorChanged = new ClientEvent();
+            this.OnMarkerDoubleClick = new ClientEvent();
+            this.OnMarkerDragStart = new ClientEvent();
+            this.OnMarkerDrag = new ClientEvent();
+            this.OnMarkerDragEnd = new ClientEvent();
+            this.OnMarkerFlatChanged = new ClientEvent();
+            this.OnMarkerIconChanged = new ClientEvent();
+            this.OnMarkerMouseDown = new ClientEvent();
+            this.OnMarkerMouseOut = new ClientEvent();
+            this.OnMarkerMouseOver = new ClientEvent();
+            this.OnMarkerMouseUp = new ClientEvent();
+            this.OnMarkerPositionChanged = new ClientEvent();
+            this.OnMarkerRightClick = new ClientEvent();
+            this.OnMarkerShapeChanged = new ClientEvent();
+            this.OnMarkerTitleChanged = new ClientEvent();
+            this.OnMarkerVisibleChanged = new ClientEvent();
+            this.OnMarkerZIndexChanged = new ClientEvent();
         }
 
-        public ClientEvent OnMarkerAnimationChanged { get; private set; }
+        public ClientEvent OnMarkerAnimationChanged { get; }
 
-        public ClientEvent OnMarkerClick { get; private set; }
+        public ClientEvent OnMarkerClick { get; }
 
-        public ClientEvent OnMarkerClickableChanged { get; private set; }
+        public ClientEvent OnMarkerClickableChanged { get; }
 
-        public ClientEvent OnMarkerCursorChanged { get; private set; }
+        public ClientEvent OnMarkerCursorChanged { get; }
 
-        public ClientEvent OnMarkerDoubleClick { get; private set; }
+        public ClientEvent OnMarkerDoubleClick { get; }
 
-        public ClientEvent OnMarkerDragStart { get; private set; }
+        public ClientEvent OnMarkerDragStart { get; }
 
-        public ClientEvent OnMarkerDrag { get; private set; }
+        public ClientEvent OnMarkerDrag { get; }
 
-        public ClientEvent OnMarkerDragEnd { get; private set; }
+        public ClientEvent OnMarkerDragEnd { get; }
 
-        public ClientEvent OnMarkerFlatChanged { get; private set; }
+        public ClientEvent OnMarkerFlatChanged { get; }
 
-        public ClientEvent OnMarkerIconChanged { get; private set; }
+        public ClientEvent OnMarkerIconChanged { get; }
 
-        public ClientEvent OnMarkerMouseDown { get; private set; }
+        public ClientEvent OnMarkerMouseDown { get; }
 
-        public ClientEvent OnMarkerMouseOut { get; private set; }
+        public ClientEvent OnMarkerMouseOut { get; }
 
-        public ClientEvent OnMarkerMouseOver { get; private set; }
+        public ClientEvent OnMarkerMouseOver { get; }
 
-        public ClientEvent OnMarkerMouseUp { get; private set; }
+        public ClientEvent OnMarkerMouseUp { get; }
 
-        public ClientEvent OnMarkerPositionChanged { get; private set; }
+        public ClientEvent OnMarkerPositionChanged { get; }
 
-        public ClientEvent OnMarkerRightClick { get; private set; }
+        public ClientEvent OnMarkerRightClick { get; }
 
-        public ClientEvent OnMarkerShapeChanged { get; private set; }
+        public ClientEvent OnMarkerShapeChanged { get; }
 
-        public ClientEvent OnMarkerTitleChanged { get; private set; }
+        public ClientEvent OnMarkerTitleChanged { get; }
 
-        public ClientEvent OnMarkerVisibleChanged { get; private set; }
+        public ClientEvent OnMarkerVisibleChanged { get; }
 
         public ClientEvent OnMarkerZIndexChanged { get; private set; }
 
         public void SerializeTo(ClientSideObjectWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException("writer");
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
 
-            writer.AppendClientEvent("animation_changed", OnMarkerAnimationChanged);
-            writer.AppendClientEvent("click", OnMarkerClick);
-            writer.AppendClientEvent("clickable_changed", OnMarkerClickableChanged);
-            writer.AppendClientEvent("cursor_changed", OnMarkerCursorChanged);
-            writer.AppendClientEvent("dblclick", OnMarkerDoubleClick);
-            writer.AppendClientEvent("dragstart", OnMarkerDragStart);
-            writer.AppendClientEvent("drag", OnMarkerDrag);
-            writer.AppendClientEvent("dragend", OnMarkerDragEnd);
-            writer.AppendClientEvent("flat_changed", OnMarkerFlatChanged);
-            writer.AppendClientEvent("icon_changed", OnMarkerIconChanged);
-            writer.AppendClientEvent("mousedown", OnMarkerMouseDown);
-            writer.AppendClientEvent("mouseout", OnMarkerMouseOut);
-            writer.AppendClientEvent("mouseover", OnMarkerMouseOver);
-            writer.AppendClientEvent("mouseup", OnMarkerMouseUp);
-            writer.AppendClientEvent("position_changed", OnMarkerPositionChanged);
-            writer.AppendClientEvent("rightclick", OnMarkerRightClick);
-            writer.AppendClientEvent("shape_changed", OnMarkerShapeChanged);
-            writer.AppendClientEvent("title_changed", OnMarkerTitleChanged);
-            writer.AppendClientEvent("visible_changed", OnMarkerVisibleChanged);
-            writer.AppendClientEvent("zindex_changed", OnMarkerZIndexChanged);
+            writer.AppendClientEvent("animation_changed", this.OnMarkerAnimationChanged);
+            writer.AppendClientEvent("click", this.OnMarkerClick);
+            writer.AppendClientEvent("clickable_changed", this.OnMarkerClickableChanged);
+            writer.AppendClientEvent("cursor_changed", this.OnMarkerCursorChanged);
+            writer.AppendClientEvent("dblclick", this.OnMarkerDoubleClick);
+            writer.AppendClientEvent("dragstart", this.OnMarkerDragStart);
+            writer.AppendClientEvent("drag", this.OnMarkerDrag);
+            writer.AppendClientEvent("dragend", this.OnMarkerDragEnd);
+            writer.AppendClientEvent("flat_changed", this.OnMarkerFlatChanged);
+            writer.AppendClientEvent("icon_changed", this.OnMarkerIconChanged);
+            writer.AppendClientEvent("mousedown", this.OnMarkerMouseDown);
+            writer.AppendClientEvent("mouseout", this.OnMarkerMouseOut);
+            writer.AppendClientEvent("mouseover", this.OnMarkerMouseOver);
+            writer.AppendClientEvent("mouseup", this.OnMarkerMouseUp);
+            writer.AppendClientEvent("position_changed", this.OnMarkerPositionChanged);
+            writer.AppendClientEvent("rightclick", this.OnMarkerRightClick);
+            writer.AppendClientEvent("shape_changed", this.OnMarkerShapeChanged);
+            writer.AppendClientEvent("title_changed", this.OnMarkerTitleChanged);
+            writer.AppendClientEvent("visible_changed", this.OnMarkerVisibleChanged);
+            writer.AppendClientEvent("zindex_changed", this.OnMarkerZIndexChanged);
         }
     }
 }

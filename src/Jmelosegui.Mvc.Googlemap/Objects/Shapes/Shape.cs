@@ -1,48 +1,44 @@
-﻿using System;
-using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Drawing;
+
     public abstract class Shape : MapObject
     {
-        protected Shape(Map map) : base(map)
+        private double strokeOpacity;
+
+        protected Shape(Map map)
+            : base(map)
         {
-            fillOpacity = 0.5D;
-            strokeOpacity = 0.8D;
-            StrokeWeight = 2;
-            FillColor = Color.Red;
-            StrokeColor = Color.DarkRed;
-            ZIndex = 1;
-            Clickable = true;
+            this.strokeOpacity = 0.8D;
+            this.StrokeWeight = 2;
+            this.StrokeColor = Color.DarkRed;
+            this.ZIndex = 1;
+            this.Clickable = true;
         }
 
         public bool Clickable { get; set; }
 
-        public Color FillColor { get; set; }
-
-        private double fillOpacity;
-        public double FillOpacity
-        {
-            get { return fillOpacity; }
-
-            set
-            {
-                if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value", "The fill opacity between 0.0 and 1.0");
-                fillOpacity = value;
-            }
-        }
-
         public Color StrokeColor { get; set; }
 
-        private double strokeOpacity;
         public double StrokeOpacity
         {
-            get { return strokeOpacity; }
+            get
+            {
+                return this.strokeOpacity;
+            }
 
             set
             {
-                if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value", "The stroke opacity between 0.0 and 1.0");
-                strokeOpacity = value;
+                if (value < 0 || value > 1)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), "The stroke opacity between 0.0 and 1.0");
+                }
+
+                this.strokeOpacity = value;
             }
         }
 

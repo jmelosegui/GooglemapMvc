@@ -10,6 +10,12 @@
 *.user
 *.sln.docstates
 
+# NuGet
+/packages/
+project.lock.json
+*.nuget.targets
+*.nuget.props
+
 # Build results
 
 [Dd]ebug/
@@ -75,10 +81,6 @@ publish/
 *.pubxml
 *.publishproj
 
-# NuGet Packages Directory
-packages/
-nuget.exe
-
 # Windows Azure Build Output
 csx
 *.build.csdef
@@ -90,7 +92,6 @@ AppPackages/
 sql/
 *.Cache
 ClientBin/
-[Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
@@ -125,6 +126,8 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+
+#Others
 src/Jmelosegui.Mvc.Googlemap.Examples/Scripts/markerclusterer.js
 src/Jmelosegui.Mvc.Googlemap.Examples/Scripts/jmelosegui.googlemap.js
 /src/.vs/config/applicationhost.config

@@ -1,17 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Web.Mvc;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
+    using System;
+    using System.IO;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
+
     public class HomeController : Controller
     {
         private static readonly Regex ForbiddenExtensions = new Regex("dll|config", RegexOptions.IgnoreCase);
 
         public ActionResult FirstLook()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult CodeFile(string file)
@@ -21,7 +21,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
                 return new EmptyResult();
             }
 
-            file = Server.MapPath(file);
+            file = this.Server.MapPath(file);
             string extension = Path.GetExtension(file);
 
             if (!System.IO.File.Exists(file) || ForbiddenExtensions.IsMatch(extension))
@@ -29,7 +29,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
                 return new EmptyResult();
             }
 
-            return PartialView((object)System.IO.File.ReadAllText(file));
+            return this.PartialView((object)System.IO.File.ReadAllText(file));
         }
     }
 }

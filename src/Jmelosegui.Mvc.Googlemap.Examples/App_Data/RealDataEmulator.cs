@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 {
+    using System;
+    using System.Collections.Generic;
+
     internal class RealDataEmulator
     {
         private readonly RangeList rangeList = new RangeList();
@@ -15,138 +15,151 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
         private double min;
         private double value;
 
-        #region Constructors
-
-        public RealDataEmulator(double minValue, double maxValue,
-            double currentValue,
-            double maxIncrement, double maxDecrement)
-        {
-            Initialzation(minValue, maxValue,
-                currentValue,
-                maxIncrement, maxDecrement);
-        }
-
-        public RealDataEmulator(double minValue, double maxValue, double currentValue)
-        {
-            double increment = (maxValue - minValue)/10d;
-            Initialzation(minValue, maxValue, currentValue, increment, increment);
-        }
-
-        public RealDataEmulator(double minValue, double maxValue)
-        {
-            Initialzation(minValue, maxValue, minValue,
-                (maxValue - minValue)/10d,
-                (maxValue - minValue)/10d);
-        }
-
-        public RealDataEmulator()
-        {
-            Initialzation(0d, 100d, 0d, 10d, 10d);
-        }
-
-        private void Initialzation(double minValue, double maxValue,
+        public RealDataEmulator(
+            double minValue,
+            double maxValue,
             double currentValue,
             double maxIncrement,
             double maxDecrement)
         {
-            min = minValue;
-            max = maxValue;
-
-            value = currentValue;
-            this.maxIncrement = maxIncrement;
-            this.maxDecrement = maxDecrement;
-
-            direction = 1d;
+            this.Initialzation(
+                minValue,
+                maxValue,
+                currentValue,
+                maxIncrement,
+                maxDecrement);
         }
 
-        #endregion
+        public RealDataEmulator(double minValue, double maxValue, double currentValue)
+        {
+            double increment = (maxValue - minValue) / 10d;
+            this.Initialzation(minValue, maxValue, currentValue, increment, increment);
+        }
+
+        public RealDataEmulator(double minValue, double maxValue)
+        {
+            this.Initialzation(minValue, maxValue, minValue, (maxValue - minValue) / 10d, (maxValue - minValue) / 10d);
+        }
+
+        public RealDataEmulator()
+        {
+            this.Initialzation(0d, 100d, 0d, 10d, 10d);
+        }
 
         public double Value
         {
-            get { return value; }
+            get { return this.value; }
             set { this.value = value; }
-        }
-
-        private void SetDirection()
-        {
-            double range = rangeList.GetDirectionPriorityValue(value);
-            double directionValue = rndDirection.NextDouble();
-            direction = 1d;
-
-            if (directionValue > 0.5 - range/2
-                && directionValue < 0.5 + range/2)
-                direction = -direction;
-        }
-
-        private double GetNormalizedValue()
-        {
-            double nextValue = rnd.NextDouble();
-            if (direction > 0)
-            {
-                nextValue *= rangeList.MaxIncrement < 0 ? maxIncrement : rangeList.MaxIncrement;
-            }
-            else
-            {
-                nextValue *= rangeList.MaxDecrement < 0 ? maxDecrement : rangeList.MaxDecrement;
-            }
-
-            return direction*nextValue;
         }
 
         public double GetNextValue()
         {
-            SetDirection();
-            double stepValue = GetNormalizedValue();
+            this.SetDirection();
+            double stepValue = this.GetNormalizedValue();
 
-            double nextValue = value + stepValue;
+            double nextValue = this.value + stepValue;
 
-            if (nextValue > max)
-                nextValue = max - Math.Abs(stepValue);
+            if (nextValue > this.max)
+            {
+                nextValue = this.max - Math.Abs(stepValue);
+            }
 
-            if (nextValue < min)
-                nextValue = min + Math.Abs(stepValue);
+            if (nextValue < this.min)
+            {
+                nextValue = this.min + Math.Abs(stepValue);
+            }
 
-            value = nextValue;
+            this.value = nextValue;
 
-            if (value > max)
-                value = max;
+            if (this.value > this.max)
+            {
+                this.value = this.max;
+            }
 
-            if (value < min)
-                value = min;
+            if (this.value < this.min)
+            {
+                this.value = this.min;
+            }
 
-            return value;
+            return this.value;
         }
 
-        public void AddRange(double min, double max, double directionPriority,
-            double maxIncrement, double maxDecrement)
+        public void AddRange(double min, double max, double directionPriority, double maxIncrement, double maxDecrement)
         {
-            rangeList.AddRange(min, max, directionPriority, maxIncrement, maxDecrement);
+            this.rangeList.AddRange(min, max, directionPriority, maxIncrement, maxDecrement);
         }
 
         public void AddRange(double min, double max, double directionPriority)
         {
-            AddRange(min, max, directionPriority, -1, -1);
+            this.AddRange(min, max, directionPriority, -1, -1);
+        }
+
+        private void Initialzation(
+            double minValue,
+            double maxValue,
+            double currentValue,
+            double maxIncrement,
+            double maxDecrement)
+        {
+            this.min = minValue;
+            this.max = maxValue;
+
+            this.value = currentValue;
+            this.maxIncrement = maxIncrement;
+            this.maxDecrement = maxDecrement;
+
+            this.direction = 1d;
+        }
+
+        private void SetDirection()
+        {
+            double range = this.rangeList.GetDirectionPriorityValue(this.value);
+            double directionValue = this.rndDirection.NextDouble();
+            this.direction = 1d;
+
+            if (directionValue > 0.5 - (range / 2)
+                && directionValue < 0.5 + (range / 2))
+            {
+                this.direction = -this.direction;
+            }
+        }
+
+        private double GetNormalizedValue()
+        {
+            double nextValue = this.rnd.NextDouble();
+            if (this.direction > 0)
+            {
+                nextValue *= this.rangeList.MaxIncrement < 0 ? this.maxIncrement : this.rangeList.MaxIncrement;
+            }
+            else
+            {
+                nextValue *= this.rangeList.MaxDecrement < 0 ? this.maxDecrement : this.rangeList.MaxDecrement;
+            }
+
+            return this.direction * nextValue;
         }
 
         private class RangeList
         {
-            private readonly List<Range> _rangeList = new List<Range>();
-            public double MaxDecrement;
-            public double MaxIncrement;
+            private readonly List<Range> rangeList = new List<Range>();
+
+            public double MaxDecrement { get; private set; }
+
+            public double MaxIncrement { get; private set; }
 
             public double GetDirectionPriorityValue(double value)
             {
                 const double directionPriority = 0.5;
-                MaxIncrement = -1;
-                MaxDecrement = -1;
+                this.MaxIncrement = -1;
+                this.MaxDecrement = -1;
 
-                foreach (Range range in _rangeList)
+                foreach (Range range in this.rangeList)
                 {
                     double newPriority = range.GetDirectionPriorityValue(value);
                     if (newPriority != 0)
                     {
-                        MaxIncrement = range.MaxIncrement;
-                        MaxDecrement = range.MaxDecrement;
+                        this.MaxIncrement = range.MaxIncrement;
+                        this.MaxDecrement = range.MaxDecrement;
                         return newPriority;
                     }
                 }
@@ -154,39 +167,39 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                 return directionPriority;
             }
 
-            public void AddRange(double min, double max, double directionPriority,
-                double maxIncrement, double maxDecrement)
+            public void AddRange(double min, double max, double directionPriority, double maxIncrement, double maxDecrement)
             {
-                _rangeList.Add(new Range(min, max, directionPriority, maxIncrement, maxDecrement));
+                this.rangeList.Add(new Range(min, max, directionPriority, maxIncrement, maxDecrement));
             }
 
             private class Range
             {
-                public readonly double MaxDecrement;
-                public readonly double MaxIncrement;
-                private readonly double _directionPriority;
-                private readonly double _max;
-                private readonly double _min;
+                private readonly double directionPriority;
+                private readonly double max;
+                private readonly double min;
 
-                public Range(double min, double max, double directionPriority,
-                    double maxIncrement, double maxDecrement)
+                public Range(double min, double max, double directionPriority, double maxIncrement, double maxDecrement)
                 {
-                    _min = min;
-                    _max = max;
-                    _directionPriority = directionPriority;
+                    this.min = min;
+                    this.max = max;
+                    this.directionPriority = directionPriority;
 
-                    MaxIncrement = maxIncrement;
-                    MaxDecrement = maxDecrement;
+                    this.MaxIncrement = maxIncrement;
+                    this.MaxDecrement = maxDecrement;
                 }
+
+                public double MaxIncrement { get; }
+
+                public double MaxDecrement { get; }
 
                 public double GetDirectionPriorityValue(double value)
                 {
-                    return !IsInRange(value) ? 0d : _directionPriority;
+                    return !this.IsInRange(value) ? 0d : this.directionPriority;
                 }
 
                 private bool IsInRange(double value)
                 {
-                    return value >= _min && value <= _max;
+                    return value >= this.min && value <= this.max;
                 }
             }
         }

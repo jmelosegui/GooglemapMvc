@@ -1,8 +1,11 @@
-﻿using System;
-using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Drawing;
+
     public class MarkerClusteringStylesBuilder
     {
         private readonly MarkerClusteringStyles clusteringStyle;
@@ -15,31 +18,31 @@ namespace Jmelosegui.Mvc.GoogleMap
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#")]
         public MarkerClusteringStylesBuilder ImageUrl(string url)
         {
-            clusteringStyle.Url = new Uri(url.ToAbsoluteUrl());
+            this.clusteringStyle.Url = new Uri(url.ToAbsoluteUrl());
             return this;
         }
 
         public MarkerClusteringStylesBuilder Height(int value)
         {
-            clusteringStyle.Height = value;
+            this.clusteringStyle.Height = value;
             return this;
         }
 
         public MarkerClusteringStylesBuilder Width(int value)
         {
-            clusteringStyle.Width = value;
+            this.clusteringStyle.Width = value;
             return this;
         }
 
         public MarkerClusteringStylesBuilder FontSize(int value)
         {
-            clusteringStyle.FontSize = value;
+            this.clusteringStyle.FontSize = value;
             return this;
         }
 
         public MarkerClusteringStylesBuilder FontColor(Color value)
         {
-            clusteringStyle.FontColor = value;
+            this.clusteringStyle.FontColor = value;
             return this;
         }
     }

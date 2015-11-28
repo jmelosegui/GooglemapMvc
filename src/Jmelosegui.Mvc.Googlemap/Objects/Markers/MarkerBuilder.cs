@@ -1,103 +1,112 @@
-﻿using System;
-using System.Drawing;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Drawing;
+
     public class MarkerBuilder
     {
-        protected MarkerBuilder(MarkerBuilder builder)  : this(PassThroughNonNull(builder).Marker)
-        {
-            
-        }
-
         public MarkerBuilder(Marker marker)
         {
             this.Marker = marker;
+        }
+
+        protected MarkerBuilder(MarkerBuilder builder)
+            : this(PassThroughNonNull(builder).Marker)
+        {
         }
 
         protected Marker Marker { get; private set; }
 
         public MarkerBuilder Address(string value)
         {
-            Marker.Address = value;
+            this.Marker.Address = value;
             return this;
         }
 
         public MarkerBuilder Id(string markerId)
         {
-            Marker.Id = markerId;
+            this.Marker.Id = markerId;
             return this;
         }
 
         public MarkerBuilder Clickable(bool enabled)
         {
-            Marker.Clickable = enabled;
+            this.Marker.Clickable = enabled;
             return this;
         }
 
         public MarkerBuilder Draggable(bool enabled)
         {
-            Marker.Draggable = enabled;
+            this.Marker.Draggable = enabled;
             return this;
         }
 
         public MarkerBuilder Icon(string path)
         {
             Size size = new Size(32, 32);
-            return Icon(path, size);
+            return this.Icon(path, size);
         }
 
         public MarkerBuilder Icon(string path, Size size)
         {
-            Point point = new Point(0,0);
-            Point anchor = new Point(size.Width/2, size.Height);
-            
-            return Icon(path, size, point, anchor);
+            Point point = new Point(0, 0);
+            Point anchor = new Point(size.Width / 2, size.Height);
+
+            return this.Icon(path, size, point, anchor);
         }
 
         public MarkerBuilder Icon(string path, Size size, Point point, Point anchor)
         {
-            Marker.Icon = new MarkerImage(path, size, point, anchor); 
+            this.Marker.Icon = new MarkerImage(path, size, point, anchor);
             return this;
         }
 
         public MarkerBuilder Latitude(double value)
         {
-            Marker.Latitude = value;
+            this.Marker.Latitude = value;
             return this;
         }
 
         public MarkerBuilder Longitude(double value)
         {
-            Marker.Longitude = value;
+            this.Marker.Longitude = value;
             return this;
         }
 
         public MarkerBuilder Title(string value)
         {
-            Marker.Title = value;
+            this.Marker.Title = value;
             return this;
         }
 
         public MarkerBuilder Window(Action<InfoWindowFactory> action)
         {
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
 
-            var factory = new InfoWindowFactory(Marker);
+            var factory = new InfoWindowFactory(this.Marker);
             action(factory);
             return this;
         }
 
         public MarkerBuilder ZIndex(int value)
         {
-            Marker.ZIndex = value;
+            this.Marker.ZIndex = value;
             return this;
         }
 
         private static MarkerBuilder PassThroughNonNull(MarkerBuilder builder)
         {
             if (builder == null)
-                throw new ArgumentNullException("builder");
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             return builder;
         }
     }

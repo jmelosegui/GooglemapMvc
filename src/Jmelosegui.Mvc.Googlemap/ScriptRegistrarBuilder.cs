@@ -1,53 +1,67 @@
-﻿using System;
-using System.Web;
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
+    using System.Web;
+
     public class ScriptRegistrarBuilder : IHtmlString
     {
-        protected ScriptRegistrarBuilder(ScriptRegistrarBuilder builder) : this(PassThroughNonNull(builder).ScriptRegistrar)
-        {
-        }
-
         public ScriptRegistrarBuilder(ScriptRegistrar scriptRegistrar)
         {
-            if (scriptRegistrar == null) throw new ArgumentNullException("scriptRegistrar");
+            if (scriptRegistrar == null)
+            {
+                throw new ArgumentNullException(nameof(scriptRegistrar));
+            }
 
             this.ScriptRegistrar = scriptRegistrar;
         }
 
-        protected ScriptRegistrar ScriptRegistrar { get; private set; }
+        protected ScriptRegistrarBuilder(ScriptRegistrarBuilder builder)
+            : this(PassThroughNonNull(builder).ScriptRegistrar)
+        {
+        }
+
+        protected ScriptRegistrar ScriptRegistrar { get; }
 
         public override string ToString()
         {
-            return ToHtmlString();
+            return this.ToHtmlString();
         }
 
         public string ToHtmlString()
         {
-            return ScriptRegistrar.ToHtmlString();
+            return this.ScriptRegistrar.ToHtmlString();
         }
 
         public ScriptRegistrarBuilder ScriptsBasePath(string basePath)
         {
-            UrlHelper.AssertVirtualPath(basePath, "basePath");
+            UrlHelper.AssertVirtualPath(basePath, nameof(basePath));
 
-            ScriptRegistrar.BasePath = basePath;
+            this.ScriptRegistrar.BasePath = basePath;
+            return this;
+        }
+
+        public ScriptRegistrarBuilder Add(string scriptFileName)
+        {
+            if (string.IsNullOrWhiteSpace(scriptFileName))
+            {
+                throw new ArgumentNullException(nameof(scriptFileName));
+            }
+
+            this.ScriptRegistrar.FixedScriptCollection.Add(scriptFileName);
             return this;
         }
 
         private static ScriptRegistrarBuilder PassThroughNonNull(ScriptRegistrarBuilder builder)
         {
             if (builder == null)
-                throw new ArgumentNullException("builder");
-            return builder;
-        }
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
-        public ScriptRegistrarBuilder Add(string scriptFileName)
-        {
-            if (String.IsNullOrWhiteSpace(scriptFileName)) throw new ArgumentNullException("scriptFileName");
-            ScriptRegistrar.FixedScriptCollection.Add(scriptFileName);
-            return this;
+            return builder;
         }
     }
 }

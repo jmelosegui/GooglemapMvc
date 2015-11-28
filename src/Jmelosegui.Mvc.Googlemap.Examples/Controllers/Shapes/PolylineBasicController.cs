@@ -1,13 +1,13 @@
-﻿using System.Web.Mvc;
-
-namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
+﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
+    using System.Web.Mvc;
+
     public partial class ShapesController : Controller
     {
         // GET: PolylineBasic
         public ActionResult PolylineBasic()
         {
-            return View();
+            return this.View();
         }
     }
 }
