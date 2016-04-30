@@ -446,6 +446,7 @@
         this.navigationControlVisible = (options.navigationControlVisible !== undefined) ? options.navigationControlVisible : true;
 
         this.scaleControlVisible = (options.scaleControlVisible !== undefined) ? options.scaleControlVisible : false;
+        this.scrollweel = (options.scrollweel !== undefined) ? options.scrollweel : true;
         this.GMap = null;
 
         this.markers = eval(options.markers);
@@ -662,7 +663,8 @@
                 streetViewControlOptions: {
                     position: this.getControlPosition(this.streetViewControlPosition)
                 },
-                scaleControl: this.scaleControlVisible
+                scaleControl: this.scaleControlVisible,
+                scrollwheel: this.scrollwheel
             };
             var i;
             if (this.imageMapTypes) {

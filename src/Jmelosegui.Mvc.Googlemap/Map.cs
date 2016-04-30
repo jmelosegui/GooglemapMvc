@@ -90,6 +90,8 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public bool ScaleControlVisible { get; set; }
 
+        public bool ScrollWheel { get; set; }
+
         public Collection<string> ScriptFileNames { get; private set; }
 
         public bool StreetViewControlVisible { get; set; }
@@ -208,6 +210,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             objectWriter.Append("overviewMapControlVisible", this.OverviewMapControlVisible, false);
             objectWriter.Append("overviewMapControlOpened", this.OverviewMapControlOpened, false);
             objectWriter.Append("streetViewControlVisible", this.StreetViewControlVisible, true);
+            objectWriter.Append("scrollwheel", this.ScrollWheel, true);
             objectWriter.Append("streetViewControlPosition", this.StreetViewControlPosition, ControlPosition.TopLeft);
             objectWriter.Append("zoomControlVisible", this.ZoomControlVisible, true);
             objectWriter.Append("zoomControlPosition", this.ZoomControlPosition, ControlPosition.TopLeft);
@@ -477,6 +480,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.ZoomControlPosition = ControlPosition.TopLeft;
             this.ZoomControlStyle = ZoomControlStyle.Default;
             this.ScaleControlVisible = false;
+            this.ScrollWheel = true;
             this.Height = 0;
             this.Width = 0;
             this.UseCurrentPosition = false;

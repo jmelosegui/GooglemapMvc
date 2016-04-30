@@ -4,13 +4,12 @@
     "Antlr": "3.5.0.2",
     "Microsoft.AspNet.Mvc": "5.2.3",
     "Microsoft.AspNet.Web.Optimization": "1.1.3",
-    "StyleCop.Analyzers": "1.0.0-beta017",
     "WebGrease": "1.6.0"
   },
   "frameworks": {
     "net451": {}
   },
   "runtimes": {
-    "win-anycpu": {}
+    "win": {}
   }
 }
