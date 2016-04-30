@@ -23,6 +23,7 @@
             this.ShowZoomControl = true;
             this.ZoomControlPosition = ControlPosition.TopLeft;
             this.ZoomControlStyle = ZoomControlStyle.Default;
+            this.ScrollWheel = true;
 
             this.ShowStreetViewControl = true;
             this.StreetViewControlPosition = ControlPosition.TopLeft;
@@ -63,5 +64,7 @@
         public bool OverviewMapControlOpened { get; set; }
 
         public bool ShowOverviewMapControl { get; set; }
+
+        public bool ScrollWheel { get; set; }
     }
 }

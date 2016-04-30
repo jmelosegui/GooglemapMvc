@@ -306,6 +306,12 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
+        public MapBuilder ScrollWheel(bool enabled)
+        {
+            this.Component.ScrollWheel = enabled;
+            return this;
+        }
+
         public MapBuilder StreetViewControlVisible(bool visible)
         {
             this.Component.StreetViewControlVisible = visible;
