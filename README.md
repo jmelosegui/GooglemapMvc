@@ -79,6 +79,32 @@ Now hit F5 and you should see the map rendering on the page
 [Nuget Package](https://www.nuget.org/packages/Jmelosegui.Mvc.Googlemap/)<br/>
 [Online Demo](http://www.jmelosegui.com/map/)<br/>
 
+## Self-service releases
+
+As soon as a new change is pushed to this repo, a build is executed and updated NuGet packages
+are published to this Package Feed:
+
+    https://ci.appveyor.com/nuget/googlemapmvc
+
+By adding this URL to your package sources you can immediately install the latest version
+of the NuGet packages to your project without wating for your feature to be "officially" publish to https://www.nuget.org/.
+This can be done by adding a nuget.config file with the following content to the root of your project's repo:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <packageSources>
+        <add key="Googlemap Mvc CI" value="https://ci.appveyor.com/nuget/googlemapmvc" />
+    </packageSources>
+</configuration>
+```
+
+You can then install the package while you have your new "Googlemap Mvc CI" package source selected:
+
+```powershell
+Install-Package Jmelosegui.Mvc.Googlemap -Pre
+```
+
 ## License
 
 Googlemap control for Asp.Net MVC is released under the [GNU GENERAL PUBLIC LICENSE](https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE.txt) Version 2.
