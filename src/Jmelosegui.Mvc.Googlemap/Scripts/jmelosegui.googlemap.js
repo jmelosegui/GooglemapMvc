@@ -849,7 +849,7 @@
 
                     }, function () {
                         console.log("Error: The Geolocation service failed.");
-                        self.load(new google.maps.LatLng(this.latitude, this.longitude));
+                        self.load(new google.maps.LatLng(self.latitude, self.longitude));
                     });
                 } else if (this.address) {
 
