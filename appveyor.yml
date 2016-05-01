@@ -9,7 +9,7 @@ build:
   project: src\Jmelosegui.Mvc.Googlemap.sln
   verbosity: minimal
 artifacts:
-- path: src\**\*.nupkg
+- path: bin\**\*.nupkg
   name: NuGet Package
 notifications:
 - provider: Webhook
