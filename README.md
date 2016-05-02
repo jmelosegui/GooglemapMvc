@@ -45,7 +45,9 @@ Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of 
 
 Inside Visual Studio create a new AspNet Mvc Application. Open the package manager console and install the Googlemap Mvc nuget package by typing the following command.
 
-##### PM> Install-Package Jmelosegui.Mvc.Googlemap
+```powershell
+PM> Install-Package Jmelosegui.Mvc.Googlemap
+```
 
 Once you have it go to the Views->Home->Index.cshtml and include the following
 ```html
@@ -102,7 +104,7 @@ This can be done by adding a nuget.config file with the following content to the
 You can then install the package while you have your new "Googlemap Mvc CI" package source selected:
 
 ```powershell
-Install-Package Jmelosegui.Mvc.Googlemap -Pre
+PM> Install-Package Jmelosegui.Mvc.Googlemap -Pre
 ```
 
 ## License
