@@ -1,0 +1,76 @@
+﻿@using Jmelosegui.Mvc.GoogleMap
+
+@{
+    ViewBag.Title = "Drawing tools";
+    string[] libraries = { "drawing" };
+
+}
+
+<div style="height: 500px; border: solid 1px #cccccc">
+    @(Html.GoogleMap()
+        .Name("map")
+        .Height(500)
+        .Libraries(libraries)
+        .ClientEvents(events => events.OnMapLoaded("mapEvent"))
+    )
+</div>
+
+<br />
+
+@section scripts{
+    @(Html.GoogleMap().ScriptRegistrar())
+    <script type="text/javascript">
+        var map = null;
+        var markers = [];
+
+        function mapEvent(args) {
+            console.log('>> map event.');
+
+            map = args.map;
+            markers = args.markers;
+
+            var drawingManager = new google.maps.drawing.DrawingManager({
+                drawingMode: google.maps.drawing.OverlayType.MARKER,
+                drawingControl: true,
+                drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                    drawingModes: [
+                      google.maps.drawing.OverlayType.MARKER,
+                      google.maps.drawing.OverlayType.CIRCLE,
+                      google.maps.drawing.OverlayType.POLYGON,
+                      google.maps.drawing.OverlayType.POLYLINE,
+                      google.maps.drawing.OverlayType.RECTANGLE
+                    ]
+                },
+                markerOptions: { icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' },
+                circleOptions: {
+                    fillColor: '#ff0000',
+                    fillOpacity: .3,
+                    strokeWeight: 1,
+                    clickable: false,
+                    editable: true,
+                    zIndex: 1
+                },
+                polygonOptions: {
+                    fillColor: '#00ff00',
+                    fillOpacity: .3,
+                    strokeWeight: 1,
+                    clickable: false,
+                    editable: true,
+                    zIndex: 2
+                },
+                rectangleOptions: {
+                    fillColor: '#0000ff',
+                    fillOpacity: .3,
+                    strokeWeight: 1,
+                    clickable: false,
+                    editable: true,
+                    zIndex: 3
+                }
+            });
+            drawingManager.setMap(map);
+
+        }
+
+    </script>
+}

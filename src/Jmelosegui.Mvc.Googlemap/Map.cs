@@ -112,6 +112,8 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public ZoomControlStyle ZoomControlStyle { get; set; }
 
+        public string[] Libraries { get; set; }
+
         internal bool LoadScripts { get; private set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
@@ -268,20 +270,54 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         private void PrepareScripts()
         {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            List<string> libraries = new List<string>();
+
             var request = this.builder.ViewContext.HttpContext.Request;
-            var languaje = (this.Culture != null) ? "&language=" + this.Culture.TwoLetterISOLanguageName : string.Empty;
-            var key = this.ApiKey.HasValue() ? "&key=" + this.ApiKey : string.Empty;
-            var visualization = this.Layers.Any(l => l.GetType() == typeof(HeatmapLayer)) ? "&libraries=visualization" : string.Empty;
-            var isAjax = request.IsAjaxRequest() ? "&callback=executeAsync" : string.Empty;
-            var version = string.IsNullOrWhiteSpace(this.Version) ? string.Empty : ("v=" + this.Version);
-            var mainJs = string.Format(
-                CultureInfo.InvariantCulture,
-                "https://maps.googleapis.com/maps/api/js?{0}{1}{2}{3}{4}",
-                version,
-                key,
-                languaje,
-                visualization,
-                isAjax);
+
+            if (this.Culture != null)
+            {
+                parameters.Add("language", this.Culture.TwoLetterISOLanguageName);
+            }
+
+            if (this.ApiKey.HasValue())
+            {
+                parameters.Add("key", this.ApiKey);
+            }
+
+            if (this.Layers.Any(l => l.GetType() == typeof(HeatmapLayer)))
+            {
+                libraries.Add("visualization");
+            }
+
+            if (request.IsAjaxRequest())
+            {
+                parameters.Add("callback", "executeAsync");
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.Version))
+            {
+                parameters.Add("v", this.Version);
+            }
+
+            /* Here starts the url composition */
+
+            if (this.Libraries != null)
+            {
+                libraries.AddRange(this.Libraries);
+            }
+
+            string librariesParameterValue = string.Join(",", libraries.Select(l => l.ToLower()).Distinct().ToArray());
+            if (!string.IsNullOrEmpty(librariesParameterValue))
+            {
+                parameters.Add("libraries", librariesParameterValue);
+            }
+
+            string queryString = string.Join("&", parameters.Select(dictionaryItem => string.Format("{0}={1}", dictionaryItem.Key, dictionaryItem.Value)));
+            var mainJs = string.Format(CultureInfo.InvariantCulture, "https://maps.googleapis.com/maps/api/js?{0}", queryString);
+
+            /* Here ends the url composition */
+
             this.LoadScripts = this.ShouldLoadGoogleScript();
             if (this.LoadScripts)
             {

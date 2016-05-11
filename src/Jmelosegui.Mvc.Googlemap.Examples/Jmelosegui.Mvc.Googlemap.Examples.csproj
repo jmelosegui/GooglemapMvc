@@ -72,8 +72,10 @@
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\Basic\AjaxPartialViewController.cs" />
     <Compile Include="Controllers\Basic\ClientEventsController.cs" />
+    <Compile Include="Controllers\Basic\DrawingController.cs" />
     <Compile Include="Controllers\Basic\MultimapController.cs" />
     <Compile Include="Controllers\Basic\LanguageController.cs" />
+    <Compile Include="Controllers\Basic\SearchBoxController.cs" />
     <Compile Include="Controllers\Basic\UIControlsController.cs" />
     <Compile Include="Controllers\Basic\FirstLookController.cs" />
     <Compile Include="Controllers\Basic\VersionController.cs" />
@@ -116,9 +118,11 @@
   <ItemGroup>
     <Content Include="Content\Basic\Descriptions\AjaxPartialView.html" />
     <Content Include="Content\Basic\Descriptions\ClientEvents.html" />
+    <Content Include="Content\Basic\Descriptions\Drawing.html" />
     <Content Include="Content\Basic\Descriptions\FirstLook.html" />
     <Content Include="Content\Basic\Descriptions\Language.html" />
     <Content Include="Content\Basic\Descriptions\Multimap.html" />
+    <Content Include="Content\Basic\Descriptions\SearchBox.html" />
     <Content Include="Content\Basic\Descriptions\UIControls.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -278,6 +282,8 @@
     <Content Include="Views\Basic\Version.cshtml" />
     <Content Include="Views\Shapes\PolylineBasic.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\Basic\Drawing.cshtml" />
+    <Content Include="Views\Basic\SearchBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
