@@ -15,12 +15,27 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public static string ToAbsoluteUrl(this string url)
         {
-            if (url.StartsWith("~", StringComparison.Ordinal))
+            if (url == null)
             {
-                return VirtualPathUtility.ToAbsolute(url);
+                throw new ArgumentNullException(nameof(url));
             }
 
-            return url;
+            if (url.IndexOf("://", StringComparison.Ordinal) > -1)
+            {
+                return url;
+            }
+
+            string newUrl = string.Empty;
+
+            if (url.StartsWith("~"))
+            {
+                newUrl = VirtualPathUtility.ToAbsolute(url);
+            }
+
+            Uri originalUri = HttpContext.Current.Request.Url;
+            var result = $"{originalUri.Scheme}://{originalUri.Authority}{newUrl}";
+
+            return result;
         }
     }
 }
