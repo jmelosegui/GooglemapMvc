@@ -2,7 +2,7 @@
 @using Jmelosegui.Mvc.GoogleMap
 @using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 @model IEnumerable<Jmelosegui.Mvc.GoogleMap.Examples.App_Data.RegionInfo>
-           
+
 @{
     ViewBag.Title = "Markers Clustering";
 }
@@ -48,58 +48,55 @@
     ).Render();
 }
 <br />
-<div class="container">
-    <div class="row">
-        <form class="form-horizontal" role="form">
-            <h4> Google Map Settings</h4>
-            
-            <div class="form-group">
-                <div class="col-md-4">
-                    <div class="checkbox">
-                        <label style="display:inline;">
-                            @Html.CheckBox("AverageCenter", new { id = "mapAverageCenter" })
-                            Average center
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox">
-                        <label style="display:inline;">
-                            @Html.CheckBox("ZoomOnClick", new { id = "mapZoomOnClick" })
-                            Zoom on click
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox">
-                        <label style="display:inline;">
-                            @Html.CheckBox("HideSingleGroupMarker", new { id = "mapHideSingleGroupMarker" })
-                            Hide single group marker 
-                        </label>
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="mapMaxZoom" class="control-label" style="white-space: nowrap;">Max Zoom </label>
-                    @Html.DropDownList("MaxZoom", new SelectList(new[] { 7, 8, 9, 10, 11, 12 }), new { @class = "form-control", id = "mapMaxZoom" })
-                </div>
-                <div class="col-md-4">
-                    <label for="mapGridSize" class="control-label" style="white-space: nowrap;">Grid Size</label>
-                    @Html.DropDownList("GridSize", new SelectList(new[] { 5, 10, 20, 30, 40, 50, 60, 70, 80 }), new { @class = "form-control", id = "mapGridSize" })
-                </div>
-                <div class="col-md-4">
-                    <label for="mapCustomStyles" class="control-label" style="white-space: nowrap;">Custom Styles</label>
-                    @Html.DropDownList("CustomStyles", new SelectList(new[] { "Default", "StackOverflow" }), new { @class = "form-control", id = "mapCustomStyles" })
-                </div>
-            </div>
+<form class="form-horizontal" role="form">
+    <h4> Google Map Settings</h4>
 
-            <div class="form-group">
-                <div class="col-md-10">
-                    <button type="submit" class="btn btn-default">Apply</button>
-                </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label style="display: inline;">
+                    @Html.CheckBox("AverageCenter", new {id = "mapAverageCenter"})
+                    Average center
+                </label>
             </div>
-        </form>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label style="display:inline;">
+                    @Html.CheckBox("ZoomOnClick", new { id = "mapZoomOnClick" })
+                    Zoom on click
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label style="display:inline;">
+                    @Html.CheckBox("HideSingleGroupMarker", new { id = "mapHideSingleGroupMarker" })
+                    Hide single group marker
+                </label>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <div class="col-md-4">
+            <label for="mapMaxZoom" class="control-label" style="white-space: nowrap;">Max Zoom </label>
+            @Html.DropDownList("MaxZoom", new SelectList(new[] { 7, 8, 9, 10, 11, 12 }), new { @class = "form-control", id = "mapMaxZoom" })
+        </div>
+        <div class="col-md-4">
+            <label for="mapGridSize" class="control-label" style="white-space: nowrap;">Grid Size</label>
+            @Html.DropDownList("GridSize", new SelectList(new[] { 5, 10, 20, 30, 40, 50, 60, 70, 80 }), new { @class = "form-control", id = "mapGridSize" })
+        </div>
+        <div class="col-md-4">
+            <label for="mapCustomStyles" class="control-label" style="white-space: nowrap;">Custom Styles</label>
+            @Html.DropDownList("CustomStyles", new SelectList(new[] { "Default", "StackOverflow" }), new { @class = "form-control", id = "mapCustomStyles" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>
