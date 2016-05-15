@@ -25,15 +25,10 @@ namespace Jmelosegui.Mvc.GoogleMap
                 return url;
             }
 
-            string newUrl = string.Empty;
-
-            if (url.StartsWith("~"))
-            {
-                newUrl = VirtualPathUtility.ToAbsolute(url);
-            }
+            string pathWithoutHostName = VirtualPathUtility.ToAbsolute(url);
 
             Uri originalUri = HttpContext.Current.Request.Url;
-            var result = $"{originalUri.Scheme}://{originalUri.Authority}{newUrl}";
+            var result = $"{originalUri.Scheme}://{originalUri.Authority}{pathWithoutHostName}";
 
             return result;
         }
