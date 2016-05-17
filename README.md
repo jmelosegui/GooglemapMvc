@@ -40,6 +40,9 @@ Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of 
   - Traffic
   - Transit
   - Bicycling
+- Libraries
+  - Places (Non mvc yet)
+  - Drawing (Non mvc yet)
 
 ## Install
 
