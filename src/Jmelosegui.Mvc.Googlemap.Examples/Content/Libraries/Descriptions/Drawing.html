@@ -1,0 +1,25 @@
+﻿<p>
+    This sample shows how to use googlemap api libraries features througt this control even when they are not totally supported by the control in a "pure mvc way".</p>
+
+<p>
+    You just need to add the library you want to use
+</p>
+
+<pre class="prettyprint">
+    @(Html.GoogleMap()
+        .Name("map")
+        .Height(500)
+        .Libraries(new [] {"drawing"})
+        .ClientEvents(events => events.OnMapLoaded("mapEvent"))
+    )
+</pre>
+
+<p>
+    And then using the map event <b>OnMapLoaded</b> you can get a reference to the map and accomplish your task using javascript.
+    See the view tab for more details
+</p>
+
+<p>
+    Drawing tools provides a graphical interface for users to draw polygons, rectangles, polylines, circles, and markers on the map.
+</p>
+<p>See <a href="https://developers.google.com/maps/documentation/javascript/examples/drawing-tools" target="_blank">Drawing tools</a> in Google for more options.</p>

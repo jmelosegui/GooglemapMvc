@@ -72,8 +72,10 @@
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\Basic\AjaxPartialViewController.cs" />
     <Compile Include="Controllers\Basic\ClientEventsController.cs" />
+    <Compile Include="Controllers\Libraries\DrawingController.cs" />
     <Compile Include="Controllers\Basic\MultimapController.cs" />
     <Compile Include="Controllers\Basic\LanguageController.cs" />
+    <Compile Include="Controllers\Libraries\SearchBoxController.cs" />
     <Compile Include="Controllers\Basic\UIControlsController.cs" />
     <Compile Include="Controllers\Basic\FirstLookController.cs" />
     <Compile Include="Controllers\Basic\VersionController.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Controllers\Layers\HeatmapController.cs" />
     <Compile Include="Controllers\Layers\KmlController.cs" />
     <Compile Include="Controllers\Layers\TrafficTransitBikeController.cs" />
+    <Compile Include="Controllers\LibrariesController.cs" />
     <Compile Include="Controllers\MapTypeController.cs" />
     <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
     <Compile Include="Controllers\MapType\StyledMapTypeController.cs" />
@@ -116,9 +119,11 @@
   <ItemGroup>
     <Content Include="Content\Basic\Descriptions\AjaxPartialView.html" />
     <Content Include="Content\Basic\Descriptions\ClientEvents.html" />
+    <Content Include="Content\Libraries\Descriptions\Drawing.html" />
     <Content Include="Content\Basic\Descriptions\FirstLook.html" />
     <Content Include="Content\Basic\Descriptions\Language.html" />
     <Content Include="Content\Basic\Descriptions\Multimap.html" />
+    <Content Include="Content\Libraries\Descriptions\SearchBox.html" />
     <Content Include="Content\Basic\Descriptions\UIControls.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -278,6 +283,8 @@
     <Content Include="Views\Basic\Version.cshtml" />
     <Content Include="Views\Shapes\PolylineBasic.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\Libraries\Drawing.cshtml" />
+    <Content Include="Views\Libraries\SearchBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -372,6 +372,18 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
+        public MapBuilder Libraries(string[] value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            this.Component.Libraries = value;
+            return this;
+        }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public MapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound)
             where TMapObject : MapObject
