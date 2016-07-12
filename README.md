@@ -86,8 +86,8 @@ Now hit F5 and you should see the map rendering on the page
 
 ## Self-service releases
 
-As soon as a new change is pushed to this repo, a build is executed and updated NuGet packages
-are published to this Package Feed:
+As soon as a new change is pushed to this repo, a build is executed and an updated NuGet package
+is published to this Package Feed:
 
     https://ci.appveyor.com/nuget/googlemapmvc
 
