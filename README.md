@@ -59,6 +59,7 @@ Once you have it go to the Views->Home->Index.cshtml and include the following
         @(Html.GoogleMap()
               .Name("map")
               .Height(500)
+              .ApiKey("YourApiKeyHere")
           )
     </div>
 </div>
