@@ -85,6 +85,17 @@ Now hit F5 and you should see the map rendering on the page
 [Nuget Package](https://www.nuget.org/packages/Jmelosegui.Mvc.Googlemap/)<br/>
 [Online Demo](http://www.jmelosegui.com/map/)<br/>
 
+## Contributing Prerequisites
+
+#### Required
+
+* [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159) (automatically installed with Visual Studio 2015)
+
+#### Better with
+
+* [Visual Studio 2015](https://www.visualstudio.com/en-us)
+* [NuProj](http://nuproj.net) extension for Visual Studio
+
 ## Self-service releases
 
 As soon as a new change is pushed to this repo, a build is executed and an updated NuGet package
