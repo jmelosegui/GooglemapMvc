@@ -7,7 +7,7 @@
     "WebGrease": "1.6.0"
   },
   "frameworks": {
-    "net451": {}
+    "net48": {}
   },
   "runtimes": {
     "win": {}

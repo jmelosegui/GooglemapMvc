@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Jmelosegui.Mvc.GoogleMap</RootNamespace>
     <AssemblyName>Jmelosegui.Mvc.GoogleMap</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -194,6 +194,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Jmelosegui.Mvc.Googlemap.nuspec" />
     <None Include="Jmelosegui.Mvc.Googlemap.snk" />
     <None Include="Objects\MapObjectClassDiagram.cd" />
     <None Include="project.json" />

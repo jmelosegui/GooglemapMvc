@@ -1,18 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32210.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmelosegui.Mvc.GoogleMap", "Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.GoogleMap.csproj", "{5476DBD6-F0EC-4B7A-A616-DB42A7EF7E1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmelosegui.Mvc.GoogleMap.Examples", "Jmelosegui.Mvc.Googlemap.Examples\Jmelosegui.Mvc.GoogleMap.Examples.csproj", "{56333CC5-E61B-4299-A5F3-6D8D53B5C736}"
 EndProject
-Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "Jmelosegui.Mvc.GoogleMap.Nuget", "Jmelosegui.Mvc.Googlemap.Nuget\Jmelosegui.Mvc.GoogleMap.Nuget.nuproj", "{9511DD52-2EF4-436E-9140-B5F5A5E47C94}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5E62D527-DF60-41ED-837F-C28EC0EB5DA2}"
 	ProjectSection(SolutionItems) = preProject
-		NuProj.Extra.props = NuProj.Extra.props
-		NuProj.Extra.targets = NuProj.Extra.targets
 		version.json = version.json
 	EndProjectSection
 EndProject
@@ -42,13 +38,12 @@ Global
 		{56333CC5-E61B-4299-A5F3-6D8D53B5C736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56333CC5-E61B-4299-A5F3-6D8D53B5C736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56333CC5-E61B-4299-A5F3-6D8D53B5C736}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9511DD52-2EF4-436E-9140-B5F5A5E47C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9511DD52-2EF4-436E-9140-B5F5A5E47C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9511DD52-2EF4-436E-9140-B5F5A5E47C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9511DD52-2EF4-436E-9140-B5F5A5E47C94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DF056E9-A417-456C-802A-A20DDCE540D9}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Mvc.Googlemap.Examples.vsmdi
