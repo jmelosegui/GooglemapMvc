@@ -10,6 +10,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         [ClientSideEnumValue("'Transit'")]
         Transit,
         [ClientSideEnumValue("'Bicycling'")]
-        Bicycling
+        Bicycling,
     }
 }

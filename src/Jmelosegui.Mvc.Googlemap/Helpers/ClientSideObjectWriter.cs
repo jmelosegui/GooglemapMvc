@@ -536,7 +536,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             {
                 // TODO: camelCase for javascript serialization
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
             settings.Converters.Add(new SizeJsonConverter());

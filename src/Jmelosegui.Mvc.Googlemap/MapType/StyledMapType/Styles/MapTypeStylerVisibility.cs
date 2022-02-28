@@ -10,6 +10,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         [ClientSideEnumValue("'off'")]
         Off,
         [ClientSideEnumValue("'simplified'")]
-        Simplified
+        Simplified,
     }
 }

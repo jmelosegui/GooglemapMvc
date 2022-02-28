@@ -15,6 +15,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         Satellite,
 
         [ClientSideEnumValue("'TERRAIN'")]
-        Terrain
+        Terrain,
     }
 }

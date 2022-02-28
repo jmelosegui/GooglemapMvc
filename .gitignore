@@ -132,3 +132,4 @@ src/Jmelosegui.Mvc.Googlemap.Examples/Scripts/markerclusterer.js
 src/Jmelosegui.Mvc.Googlemap.Examples/Scripts/jmelosegui.googlemap.js
 /src/.vs/config/applicationhost.config
 .vs/
+packages/

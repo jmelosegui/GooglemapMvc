@@ -6,7 +6,7 @@
     {
         public ActionResult Drawing()
         {
-            return View();
+            return this.View();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-       public InfoWindowBuilder OpenOnRightClick(bool value)
+        public InfoWindowBuilder OpenOnRightClick(bool value)
         {
             this.Window.OpenOnRightClick = value;
             return this;

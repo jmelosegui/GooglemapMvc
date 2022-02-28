@@ -17,7 +17,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public Size TileSize { get; set; }
 
-         public Uri TileUrlPattern { get; set; }
+        public Uri TileUrlPattern { get; set; }
 
         public bool RepeatHorizontally { get; set; }
 

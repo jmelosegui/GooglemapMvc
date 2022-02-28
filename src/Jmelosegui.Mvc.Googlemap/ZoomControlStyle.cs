@@ -10,6 +10,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         [ClientSideEnumValue("'LARGE'")]
         Large,
         [ClientSideEnumValue("'SMALL'")]
-        Small
+        Small,
     }
 }

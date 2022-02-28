@@ -28,6 +28,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         [ClientSideEnumValue("'LEFT_TOP'")]
         LeftTop,
         [ClientSideEnumValue("'RIGHT_TOP'")]
-        RightTop
+        RightTop,
     }
 }

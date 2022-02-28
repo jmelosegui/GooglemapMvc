@@ -68,13 +68,13 @@ namespace Jmelosegui.Mvc.GoogleMap
                 {
                     var result = this.InlineTemplate(dataItem);
 
-                        var helperResult = result as HelperResult;
+                    var helperResult = result as HelperResult;
 
-                        if (helperResult != null)
-                        {
-                            helperResult.WriteTo(writer);
-                            return;
-                        }
+                    if (helperResult != null)
+                    {
+                        helperResult.WriteTo(writer);
+                        return;
+                    }
 
                     if (result != null)
                     {

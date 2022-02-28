@@ -401,6 +401,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                     {
                         m.Id = i.ToString(CultureInfo.InvariantCulture);
                     }
+
                     markers.Add(m.CreateSerializer().Serialize());
                     i++;
                 });

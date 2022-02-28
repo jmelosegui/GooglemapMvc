@@ -383,7 +383,6 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public MapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound)
             where TMapObject : MapObject

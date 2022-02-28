@@ -144,7 +144,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                         ";",
                         key,
                         ":",
-                        value
+                        value,
                     });
                 }
             }
@@ -182,7 +182,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             {
                 this.AddClass(new string[]
                 {
-                    cssClass
+                    cssClass,
                 });
             }
 
