@@ -3,9 +3,10 @@
 @{
     Html.GoogleMap()
         .Name("map")
+        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
         .Markers(marker => marker.Add()
             .Window(w => w.Add()
-                .Content((o) => String.Format("Hello PartialView {0}", Model))))
+                .Content((d) => $"Hello PartialView {Model}")))
         .Render();
 }
 

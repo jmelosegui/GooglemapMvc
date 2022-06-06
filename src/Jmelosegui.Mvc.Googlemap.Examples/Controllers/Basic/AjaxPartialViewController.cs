@@ -1,6 +1,6 @@
 ﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
-    using System.Web.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     public partial class BasicController
     {
@@ -10,8 +10,9 @@
             return this.View();
         }
 
-        public ActionResult GooglemapPartialView(string payload)
+        public ActionResult GooglemapPartialView([FromBody] string payload)
         {
+            var aaa = ControllerContext;
             object model = payload;
             return this.PartialView("_GooglemapPartialView", model);
         }

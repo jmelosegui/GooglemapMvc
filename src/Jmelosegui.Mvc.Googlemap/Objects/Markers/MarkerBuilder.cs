@@ -44,23 +44,23 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        public MarkerBuilder Icon(string path)
+        public MarkerBuilder Icon(Uri absoluteUrl)
         {
             Size size = new Size(32, 32);
-            return this.Icon(path, size);
+            return this.Icon(absoluteUrl, size);
         }
 
-        public MarkerBuilder Icon(string path, Size size)
+        public MarkerBuilder Icon(Uri absoluteUrl, Size size)
         {
             Point point = new Point(0, 0);
             Point anchor = new Point(size.Width / 2, size.Height);
 
-            return this.Icon(path, size, point, anchor);
+            return this.Icon(absoluteUrl, size, point, anchor);
         }
 
-        public MarkerBuilder Icon(string path, Size size, Point point, Point anchor)
+        public MarkerBuilder Icon(Uri absoluteUrl, Size size, Point point, Point anchor)
         {
-            this.Marker.Icon = new MarkerImage(path, size, point, anchor);
+            this.Marker.Icon = new MarkerImage(absoluteUrl, size, point, anchor);
             return this;
         }
 

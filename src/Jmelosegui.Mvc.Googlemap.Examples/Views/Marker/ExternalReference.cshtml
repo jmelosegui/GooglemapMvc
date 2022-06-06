@@ -19,6 +19,7 @@
         @{
             Html.GoogleMap()
                 .Name("map")
+                .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
                 .Height(600)
                 .Center(c => c.Latitude(40)
                     .Longitude(-3))
@@ -34,7 +35,11 @@
                                     marker.Longitude = regionInfo.Longitude;
                                     marker.Title = regionInfo.Title;
                                     marker.ZIndex = regionInfo.ZIndex;
-                                    marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}", regionInfo.ImagePath)
+
+                                    var imageUrl = new Uri($"{Context.Request.GetPathBase()}Images/flags/{regionInfo.ImagePath}");
+
+                                    marker.Icon = new MarkerImage(
+                                        imageUrl
                                         , new Size(18, 12)
                                         , new Point(0, 0)
                                         , new Point(0, 12));
@@ -43,7 +48,7 @@
                                     {
                                         Template =
                                         {
-                                            Content = () => ViewContext.Writer.Write(regionInfo.InfoWindowContent)
+                                            Html = regionInfo.InfoWindowContent
                                         }
                                     };
                                 }
@@ -58,7 +63,7 @@
         <ul class="marker-list">
             @foreach (RegionInfo info in Model)
             {
-                <li data-id="@info.Id"><img src="@(String.Format("../Images/flags/{0}", info.ImagePath))"/> @info.Title</li>
+                <li data-id="@info.Id"><img src="@($"../Images/flags/{info.ImagePath}")"/> @info.Title</li>
             }
         </ul>
     </div>
@@ -74,9 +79,13 @@
             markers = args.markers;
         }
 
-        $(".marker-list li").click(function () {
-            var id = $(this).attr('data-id');
-            google.maps.event.trigger(markers[id], 'click');
+         const makerlist = document.querySelectorAll(".marker-list li");
+        
+        Array.prototype.forEach.call(makerlist, function (el, i) {
+            el.addEventListener('click', function (e) {
+                var id = e.currentTarget.dataset.id; //attr('data-id');
+                google.maps.event.trigger(markers[id], 'click');
+            }, false);
         });
 
     </script>

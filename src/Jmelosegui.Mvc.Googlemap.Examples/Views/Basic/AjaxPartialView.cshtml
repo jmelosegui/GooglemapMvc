@@ -13,34 +13,39 @@
 <form class="form-horizontal" role="form">
     <h4> Google Map Settings</h4>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-offset-1 col-sm-10">
-            <button type="button" id="myButton" class="btn btn-default">Load Googlemap Partial View with Ajax</button>
+            <button type="button" id="myButton" class="btn btn-primary">Load Googlemap Partial View with Ajax</button>
         </div>
     </div>
 </form>
 
 @section scripts
 {
-    @(Html.GoogleMap()
-          .ScriptRegistrar(scripts => scripts.Add("jmelosegui.googlemap.js"))
+    @(Html.GoogleMap()          
+          .ScriptRegistrar(scripts => scripts.Add("jmelosegui.googlemap-nojquery.js"))
      )
 
     <script type='text/javascript'>
 
-        $('#myButton').click(function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+        var button = document.getElementById('myButton');
+        button.addEventListener('click', function() {
 
-            new $.jmelosegui.GoogleMap('#mapContainer').ajax({
-                url: '@Url.Action("GooglemapPartialView", "Basic")',
-                type: "Get",
-                data: { payload: 'from ajax call'},
-                success: function(data) {
-                    //alert('succeded');
-                }
-            });
-        });
+            const request = new XMLHttpRequest();
+            request.open('Post', '@Url.Action("GooglemapPartialView", "Basic")');
+            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+            request.onload = function() {
+              if (this.status >= 200 && this.status < 400) {
+                  const mapcontainer = document.getElementById('mapContainer');
+                  mapcontainer.innerHTML = this.response;
+              } 
+            };
+
+            const payload = { "payload": "from ajax call" };
+
+            request.send(JSON.stringify(payload));
+        }, false);
 
     </script>
 }

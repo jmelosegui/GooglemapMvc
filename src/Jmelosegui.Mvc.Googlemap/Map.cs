@@ -9,9 +9,10 @@ namespace Jmelosegui.Mvc.GoogleMap
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Text.Encodings.Web;
     using System.Threading;
-    using System.Web.Mvc;
-    using System.Web.UI;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class Map
     {
@@ -114,6 +115,11 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public string[] Libraries { get; set; }
 
+        internal ViewContext ViewContext
+        {
+            get { return this.builder.ViewContext; }
+        }
+
         internal bool LoadScripts { get; private set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
@@ -159,23 +165,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public void Render()
         {
-            TextWriter writer = this.builder.ViewContext.Writer;
-            using (HtmlTextWriter htmlTextWriter = new HtmlTextWriter(writer))
-            {
-                this.WriteHtml(htmlTextWriter);
-            }
-        }
-
-        public string ToHtmlString()
-        {
-            string result;
-            using (StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture))
-            {
-                this.WriteHtml(new HtmlTextWriter(stringWriter));
-                result = stringWriter.ToString();
-            }
-
-            return result;
+            this.WriteHtml(this.builder.ViewContext.Writer);
         }
 
         protected internal virtual void WriteInitializationScript(TextWriter writer)
@@ -235,36 +225,36 @@ namespace Jmelosegui.Mvc.GoogleMap
             Thread.CurrentThread.CurrentCulture = currentCulture;
         }
 
-        protected virtual void WriteHtml(HtmlTextWriter writer)
+        protected internal virtual void WriteHtml(TextWriter writer)
         {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            IHtmlNode rootTag = this.builder.Build();
-            rootTag.WriteTo(writer);
+            IHtmlContent rootTag = this.builder.Build();
+            rootTag.WriteTo(writer, HtmlEncoder.Default);
 
             this.PrepareScripts();
 
             if (this.Markers.Any(m => m.Window != null))
             {
                 // Build Container for InfoWindows
-                IHtmlNode infoWindowsRootTag = new HtmlElement("div")
-                    .Attribute("id", string.Format(CultureInfo.InvariantCulture, "{0}-InfoWindowsHolder", this.Id))
-                    .Attribute("style", "display: none");
+                var infoWindowsRootTag = new TagBuilder("div");
+                infoWindowsRootTag.Attributes["id"] = string.Format(CultureInfo.InvariantCulture, "{0}-InfoWindowsHolder", this.Id);
+                infoWindowsRootTag.Attributes["style"] = "display: none";
 
                 this.Markers.Where(m => m.Window != null).Each(m =>
                 {
-                    IHtmlNode markerInfoWindows = new HtmlElement("div")
-                        .Attribute("id", string.Format(CultureInfo.InvariantCulture, "{0}Marker{1}", this.Id, m.Index))
-                        .AddClass("content");
+                    var markerInfoWindows = new TagBuilder("div");
+                    markerInfoWindows.Attributes["id"] = string.Format(CultureInfo.InvariantCulture, "{0}Marker{1}", this.Id, m.Index);
+                    markerInfoWindows.AddCssClass("content");
 
-                    m.Window.Template.Apply(markerInfoWindows);
-                    infoWindowsRootTag.Children.Add(markerInfoWindows);
+                    m.Window.Template.Apply(null, markerInfoWindows);
+                    infoWindowsRootTag.InnerHtml.AppendHtml(markerInfoWindows);
                 });
 
-                infoWindowsRootTag.WriteTo(writer);
+                infoWindowsRootTag.WriteTo(writer, HtmlEncoder.Default);
             }
         }
 
@@ -326,7 +316,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             if (!request.IsAjaxRequest())
             {
-                this.ScriptFileNames.Add("jmelosegui.googlemap.js");
+                this.ScriptFileNames.Add("jmelosegui.googlemap-nojquery.js");
 
                 if (this.EnableMarkersClustering)
                 {
@@ -343,24 +333,24 @@ namespace Jmelosegui.Mvc.GoogleMap
                 return true;
             }
 
-            if (new[] { "GET", "POST" }.All(method => method != request.HttpMethod.ToUpper(CultureInfo.InvariantCulture)))
+            if (new[] { "GET", "POST" }.All(method => method != request.Method.ToUpper(CultureInfo.InvariantCulture)))
             {
                 return true;
             }
 
-            if (request.HttpMethod.ToUpper(CultureInfo.InvariantCulture) == "GET")
+            if (request.Method.ToUpper(CultureInfo.InvariantCulture) == "GET")
             {
                 bool result;
-                if (bool.TryParse(request.QueryString.Get("__LoadGoogleMapScript__"), out result))
+                if (bool.TryParse(request.Query["__LoadGoogleMapScript__"], out result))
                 {
                     return result;
                 }
             }
 
-            if (request.HttpMethod.ToUpper(CultureInfo.InvariantCulture) == "POST")
+            if (request.Method.ToUpper(CultureInfo.InvariantCulture) == "POST")
             {
                 bool result;
-                if (bool.TryParse(request.Form.Get("__LoadGoogleMapScript__"), out result))
+                if (bool.TryParse(request.Form["__LoadGoogleMapScript__"], out result))
                 {
                     return result;
                 }

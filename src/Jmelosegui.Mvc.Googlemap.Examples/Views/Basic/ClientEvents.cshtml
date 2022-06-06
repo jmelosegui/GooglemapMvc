@@ -24,6 +24,7 @@
     <div class="col-md-10">
         @(Html.GoogleMap()
             .Name("map")
+            .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
             .Height(420)
             .ClientEvents(events => events
                 .OnMapBoundChanged("highlightEvent")
@@ -56,7 +57,7 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        function main() {
 
             var events = [
                 'bounds_changed', 'center_changed', 'click',
@@ -79,8 +80,7 @@
             }
 
             populateTable();
-        });
-
+        }
 
         function highlightEvent(args) {
             var timeout;
@@ -115,6 +115,16 @@
 
             new google.maps.InfoWindow(options);
         }
+
+        function onLoad(fn) {
+          if (document.readyState != 'loading'){
+            fn();
+          } else {
+            document.addEventListener('DOMContentLoaded', fn);
+          }
+        }
+
+        onLoad(main);
 
     </script>
 }

@@ -4,11 +4,11 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
-    using System.Web.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public static class HtmlHelperExtension
     {
-        public static MapBuilder GoogleMap(this HtmlHelper helper)
+        public static MapBuilder GoogleMap(this IHtmlHelper helper)
         {
             if (helper == null)
             {

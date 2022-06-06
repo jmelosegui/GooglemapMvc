@@ -8,7 +8,7 @@
     <owners>jmelosegui</owners>
     <projectUrl>https://github.com/jmelosegui/GooglemapMvc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying the use of Google Maps in ASP.NET MVC applications.</description>
+    <description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</description>
     <tags>Google maps GoogleMap AspNet Mvc AspNetMvc</tags>
     <dependencies>
         <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />

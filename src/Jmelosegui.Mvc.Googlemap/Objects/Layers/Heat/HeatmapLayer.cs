@@ -44,11 +44,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public void AddPoint(Location point)
         {
-            if (point == null)
-            {
-                throw new ArgumentNullException(nameof(point));
-            }
-
             this.data.Add(point);
         }
 

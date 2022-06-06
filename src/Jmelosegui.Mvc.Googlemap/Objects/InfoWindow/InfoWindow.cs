@@ -22,11 +22,11 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.marker = marker;
             this.Content = string.Format(CultureInfo.InvariantCulture, "{0}Marker{1}", marker.Map.Id, marker.Index);
 
-            this.Template = new HtmlTemplate();
+            this.Template = new HtmlTemplate<object>(this.Map.ViewContext);
         }
 
         [JsonIgnore]
-        public HtmlTemplate Template
+        public HtmlTemplate<object> Template
         {
             get;
             private set;

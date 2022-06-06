@@ -52,7 +52,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(this.id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
 
-            this.writer.Write("jQuery('#{0}').{1}(", selector, this.type);
+            this.writer.Write("jmelosegui('#{0}').{1}(", selector, this.type);
             this.hasStarted = true;
 
             return this;
@@ -385,7 +385,8 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        public virtual ClientSideObjectWriter Append(string name, HtmlTemplate htmlTemplate)
+        // TODO: Fix
+        public virtual ClientSideObjectWriter Append(string name, HtmlTemplate<object> htmlTemplate)
         {
             if (name == null)
             {
@@ -399,12 +400,13 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             if (htmlTemplate.HasValue())
             {
-                if (htmlTemplate.Content != null)
+                if (htmlTemplate.Html.HasValue())
                 {
                     this.EnsureStart();
                     this.writer.Write(this.appended ? ", " : "{");
                     this.writer.Write("{0}:'", name);
-                    htmlTemplate.Content();
+                    // TODO: Fix
+                    //htmlTemplate.Content();
                     this.writer.Write("'");
                     return this;
                 }

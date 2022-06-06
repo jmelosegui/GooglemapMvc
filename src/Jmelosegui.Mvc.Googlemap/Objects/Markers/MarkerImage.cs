@@ -3,34 +3,24 @@
 
 namespace Jmelosegui.Mvc.GoogleMap
 {
+    using System;
     using System.Drawing;
 
     public class MarkerImage
     {
-        private string path;
+        private Uri path;
 
-        public MarkerImage(string path, Size size, Point point, Point anchor)
+        public MarkerImage(Uri absoluteUrl, Size size, Point point, Point anchor)
         {
-            this.Path = path.ToAbsoluteUrl();
+            this.AbsoluteUrl = absoluteUrl;
             this.Size = size;
             this.Point = point;
             this.Anchor = anchor;
         }
 
-        public Point Anchor { get; set; }
+        public Uri AbsoluteUrl { get; set; }
 
-        public string Path
-        {
-            get
-            {
-                return this.path;
-            }
-
-            set
-            {
-                this.path = value.ToAbsoluteUrl();
-            }
-        }
+        public Point Anchor { get; set; }        
 
         public Point Point { get; set; }
 

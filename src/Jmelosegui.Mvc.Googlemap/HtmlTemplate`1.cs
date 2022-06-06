@@ -4,16 +4,25 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
-    using System.Web.WebPages;
+    using System.Text.Encodings.Web;
+    using Jmelosegui.Mvc.GoogleMap.Extensions;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Newtonsoft.Json;
 
     public class HtmlTemplate<T>
         where T : class
     {
+        private readonly ViewContext viewContext;
         private string html;
-        private Action<T> codeBlockTemplate;
         private Func<T, object> inlineTemplate;
-        private Action<T, IHtmlNode> binder;
+        private Action<T, TagBuilder> binder;
+
+        public HtmlTemplate(ViewContext viewContext)
+        {
+            this.viewContext = viewContext ?? throw new ArgumentNullException(nameof(viewContext));
+        }
 
         public string Html
         {
@@ -26,28 +35,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             {
                 this.html = value;
 
-                this.binder = (dataItem, node) => node.Html(this.html);
-
-                this.codeBlockTemplate = null;
-                this.inlineTemplate = null;
-            }
-        }
-
-        [JsonIgnore]
-        public Action<T> CodeBlockTemplate
-        {
-            get
-            {
-                return this.codeBlockTemplate;
-            }
-
-            set
-            {
-                this.codeBlockTemplate = value;
-
-                this.binder = (dataItem, node) => node.Template((writer) => this.CodeBlockTemplate(dataItem));
-
-                this.html = null;
+                this.binder = (dataItem, node) => node.InnerHtml.AppendHtml(this.html);
                 this.inlineTemplate = null;
             }
         }
@@ -63,31 +51,22 @@ namespace Jmelosegui.Mvc.GoogleMap
             set
             {
                 this.inlineTemplate = value;
-
-                this.binder = (dataItem, node) => node.Template((writer) =>
+                this.binder = (dataItem, node) =>
                 {
                     var result = this.InlineTemplate(dataItem);
-
-                    var helperResult = result as HelperResult;
-
+                    var helperResult = result as IHtmlContent;
                     if (helperResult != null)
                     {
-                        helperResult.WriteTo(writer);
+                        node.InnerHtml.AppendHtml(helperResult);
                         return;
                     }
+                };
 
-                    if (result != null)
-                    {
-                        writer.Write(result.ToString());
-                    }
-                });
-
-                this.codeBlockTemplate = null;
                 this.html = null;
             }
         }
 
-        public void Apply(T dataItem, IHtmlNode node)
+        public void Apply(T dataItem, TagBuilder node)
         {
             if (this.HasValue())
             {
@@ -97,7 +76,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public bool HasValue()
         {
-            return this.Html.HasValue() || this.InlineTemplate != null || this.CodeBlockTemplate != null;
+            return this.Html.HasValue() || this.InlineTemplate != null;
         }
     }
 }

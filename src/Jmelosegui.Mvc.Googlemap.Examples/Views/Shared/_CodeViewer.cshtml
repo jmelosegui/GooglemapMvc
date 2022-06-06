@@ -1,28 +1,30 @@
 ﻿
-<h4>About this example</h4>    
+<h4>About this example</h4>
 
 <div id="about-example">
+
     <ul id="myTab" class="nav nav-tabs" role="tablist">
-        <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
-        <li><a href="#view" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new {file = ((Dictionary<string, string>) ViewData["codeFiles"])["View"]})">View</a></li>
+        <li class="nav-item"><a class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="true">Description</a></li>
+        <li class="nav-item"><a class="nav-link"        id="view-tab"        data-bs-toggle="tab" data-bs-target="#view"        role="tab" aria-controls="view"        aria-selected="false" data-url="@Url.Action("CodeFile", "Home", new {file = ((Dictionary<string, string>) ViewData["codeFiles"])["View"]})">View</a></li>
         @foreach (var aditionalFile in (Dictionary<string, String>)ViewData["aditionalFiles"])
         {
-            <li><a href="#@aditionalFile.Key.Trim('_').Replace(".", "")" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = aditionalFile.Value})">@aditionalFile.Key</a></li>
+            var id = aditionalFile.Key.Trim('_').Replace(".", "");
+            <li class="nav-item"><a class="nav-link" id="@id-tab" data-bs-toggle="tab" data-bs-target="#@id" role="tab" aria-controls="view" aria-selected="false" data-url="@Url.Action("CodeFile", "Home", new { file = aditionalFile.Value})">@aditionalFile.Key</a></li>
         }
-        <li><a href="#controller" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["Controller"] })">Controller</a></li>
-        <li><a href="#layoutExamples" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["_LayoutExamples.cshtml"] })">_LayoutExamples.cshtml</a></li>
-        <li><a href="#layout" role="tab" data-toggle="tab" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["_Layout.cshtml"] })">_Layout.cshtml</a></li>
+        <li class="nav-item"><a class="nav-link" id="controller-tab"     data-bs-toggle="tab" data-bs-target="#controller"   role="tab"      aria-controls="view" aria-selected="false" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["Controller"] })">Controller</a></li>
+        <li class="nav-item"><a class="nav-link" id="layoutExamples-tab" data-bs-toggle="tab" data-bs-target="#layoutExamples" role="tab"    aria-controls="view" aria-selected="false" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["_LayoutExamples.cshtml"] })">_LayoutExamples.cshtml</a></li>
+        <li class="nav-item"><a class="nav-link" id="layout-tab"         data-bs-toggle="tab" data-bs-target="#layout"       role="tab"      aria-controls="view" aria-selected="false" data-url="@Url.Action("CodeFile", "Home", new { file = ((Dictionary<string, string>)ViewData["codeFiles"])["_Layout.cshtml"] })">_Layout.cshtml</a></li>
     </ul>
     <!-- Tab panes -->
     <div id="myTabContent" class="tab-content" style="padding: 20px">
-        <div class="tab-pane active" id="description">@ViewData["Description"]</div>
-        <div class="tab-pane" id="view"></div>
+        <div class="tab-pane fade show active" id="description">@ViewData["Description"]</div>
+        <div class="tab-pane fade" id="view"></div>
         @foreach (var aditionalFile in (Dictionary<string, String>)ViewData["aditionalFiles"])
         {
             <div class="tab-pane" id="@aditionalFile.Key.Trim('_').Replace(".", "")"></div>
         }
-        <div class="tab-pane" id="controller"></div>
-        <div class="tab-pane" id="layout"></div>
-        <div class="tab-pane" id="layoutExamples"></div>
+        <div class="tab-pane fade" id="controller"></div>
+        <div class="tab-pane fade" id="layout"></div>
+        <div class="tab-pane fade" id="layoutExamples"></div>
     </div>
 </div>

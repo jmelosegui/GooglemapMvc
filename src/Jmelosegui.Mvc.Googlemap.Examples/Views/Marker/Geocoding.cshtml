@@ -12,6 +12,7 @@
 @{
     Html.GoogleMap()
         .Name("map")
+        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
         .Height(600)
         .Center(c => c.Latitude(40)
                       .Longitude(-3))
@@ -35,7 +36,7 @@
                             {
                                 Template =
                                 {
-                                    Content = () => ViewContext.Writer.Write(regionInfo.InfoWindowContent)
+                                    Html = regionInfo.InfoWindowContent
                                 }
                             };
                         }
@@ -50,14 +51,17 @@
 
     <script type="text/javascript">
 
+        const messageElement = document.getElementById('message');
+        const progressBar = document.getElementById('progressBar');
+
         function MarkerFromAddressCompleted(args) {
-            $('#message').show();
+            messageElement.style.display = 'block';
         }
 
         function OnProgress(args) {
-            var strValue = args.value + '%';
-            $('#progressBar').css({ width: strValue });
-            $('#progressBar').text(strValue);
+            var strValue = args.value + '%';            
+            progressBar.style.width = strValue;
+            progressBar.textContent = strValue;
             if (args.status !== google.maps.GeocoderStatus.OK) {
                 alert("Error loading address " + args.address + ". Reason: " + args.status);
             }

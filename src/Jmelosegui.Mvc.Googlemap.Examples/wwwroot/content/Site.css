@@ -3,11 +3,13 @@
     margin: 20px -15px;
     list-style: none;
     padding-left: 0;
-}
+}   
 
     .social-button > li {
         float: left;
-         margin-left: 5px;
+        margin-left: 5px;
+        height: 21px;
+        width: 100px;
     }
 
 @media (max-width: 767px) {
@@ -18,10 +20,12 @@
     .social-button {
         float: none;
         margin: 15px -15px;
+        text-align: center;                
     }
 
         .social-button > li {
             float: none;
+            display: inline-flex;
             text-align: center;
         }
 }
@@ -39,12 +43,10 @@
 .nuget {
     background-color: #202020;
     border: 4px solid #c0c0c0;
-    -ms-border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -webkit-box-shadow: 2px 2px 3px #6e6e6e;
-    -ms-box-shadow: 2px 2px 3px #6e6e6e;
     box-shadow: 2px 2px 3px #6e6e6e;
     color: #e2e2e2;
     display: block;
@@ -69,10 +71,8 @@ form {
     background-color: #f8f8f8;
     border: 1px solid #e7e7e7;
     border-width: 1px;
-    -ms-border-radius: 4px;
     border-radius: 4px;
     -webkit-box-shadow: none;
-    -ms-box-shadow: none;
     box-shadow: none;
 }
 
@@ -95,30 +95,29 @@ form {
  * --------------------------------------------------
  */
 @media screen and (max-width: 768px) {
-  .row-offcanvas {
-      position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-      -ms-transition: all 0.25s ease-out;
-      -o-transition: all 0.25s ease-out;
-      transition: all 0.25s ease-out;
-  }
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all 0.25s ease-out;
+        -moz-transition: all 0.25s ease-out;
+        -o-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+    }
 
     .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -50%;
-  }
+    .sidebar-offcanvas {
+        left: -50%;
+    }
 
-  .row-offcanvas-left.active {
-    left: 50%;
-  }
+    .row-offcanvas-left.active {
+        left: 50%;
+    }
 
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    margin-left: 12px;
-  }
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        margin-left: 12px;
+    }
 }
 
 
@@ -167,7 +166,6 @@ pre.prettyprint {
 
 pre {
     background-color: #f8f8f8;
-    -ms-border-radius: 2px;
     border-radius: 2px;
 }
 

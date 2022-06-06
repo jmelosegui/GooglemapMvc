@@ -6,6 +6,7 @@
 
 @(Html.GoogleMap()
         .Name("map")
+        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
         .Zoom(1)
         .Height(520)
         .Center(c => c.Latitude(0)
@@ -16,7 +17,7 @@
         .ImageMapTypes(map =>
         {
             map.Add()
-                .TileUrlPattern("http://inmediati.blob.core.windows.net/map/speculative/{2}/tile_{2}_{0}-{1}.png")
+                .TileUrlPattern(new Uri("http://inmediati.blob.core.windows.net/map/speculative/{2}/tile_{2}_{0}-{1}.png"))
                 .TileSize(new Size(256, 256))
                 .RepeatHorizontally(false)
                 .RepeatVertically(false)
@@ -27,7 +28,7 @@
 
 
             map.Add()
-                .TileUrlPattern("http://inmediati.blob.core.windows.net/map/natural/{2}/tile_{2}_{0}-{1}.png")
+                .TileUrlPattern(new Uri("http://inmediati.blob.core.windows.net/map/natural/{2}/tile_{2}_{0}-{1}.png"))
                 .TileSize(new Size(256, 256))
                 .RepeatHorizontally(false)
                 .RepeatVertically(false)

@@ -4,9 +4,11 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
-    using System.Web;
+    using System.IO;
+    using System.Text.Encodings.Web;
+    using Microsoft.AspNetCore.Html;
 
-    public class ScriptRegistrarBuilder : IHtmlString
+    public class ScriptRegistrarBuilder : IHtmlContent
     {
         public ScriptRegistrarBuilder(ScriptRegistrar scriptRegistrar)
         {
@@ -24,16 +26,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         }
 
         protected ScriptRegistrar ScriptRegistrar { get; }
-
-        public override string ToString()
-        {
-            return this.ToHtmlString();
-        }
-
-        public string ToHtmlString()
-        {
-            return this.ScriptRegistrar.ToHtmlString();
-        }
 
         public ScriptRegistrarBuilder ScriptsBasePath(string basePath)
         {
@@ -62,6 +54,11 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
 
             return builder;
+        }
+
+        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
+        {
+            this.ScriptRegistrar.WriteHtml(writer);
         }
     }
 }

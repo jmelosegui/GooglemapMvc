@@ -1,5 +1,4 @@
 ﻿@using Jmelosegui.Mvc.Googlemap
-@using Jmelosegui.Mvc.GoogleMap
 @{
     ViewBag.PageTitle = ViewContext.RouteData.Values["controller"] + ": " + @ViewBag.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,32 +11,36 @@
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/prettyprint")
+    
 
     @(Html.GoogleMap().ScriptRegistrar())
 
     <script type='text/javascript'>
 
-        $('#myTab a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
+        const elements = document.querySelectorAll('#myTab a');
+        
+        Array.prototype.forEach.call(elements, function(el, i){
+            el.addEventListener('shown.bs.tab', function (e) {
+                if (e.target.dataset.bsTarget !== '#description') {
+                    var request = new XMLHttpRequest();
+                    request.open('GET', e.target.dataset.url, true);
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            if (e.target.hash !== '#description') {
-                $.ajax({
-                    url: e.target.dataset.url,
-                    type: "Get",
-                    datatype: "html",
-                    success: function (data) {
-                        $(e.target.hash).html(data);
-                        prettyPrint();
-                    }
-                });
-            }
+                    request.onload = function() {
+                      if (this.status >= 200 && this.status < 400) {                          
+                          const target = document.getElementById(e.target.dataset.bsTarget.substring(1));
+                          target.innerHTML = this.response
+
+                          prettyPrint();
+                      } 
+                    };
+
+                    request.send();
+                }
+            });
         });
 
         prettyPrint();
+
     </script>
     
     @RenderSection("scripts", required: false)
