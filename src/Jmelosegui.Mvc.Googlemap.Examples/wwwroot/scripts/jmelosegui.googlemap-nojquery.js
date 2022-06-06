@@ -246,7 +246,7 @@
     };
 
     var infowindow;
-    var markersCluster = {};
+    var markersCluster = [];
     jmelosegui.GoogleMarker.prototype = {
 
         isLoaded: function () {
@@ -665,6 +665,7 @@
     var markerIndex = 0;
     var loadGoogleMapScript = true;
     jmelosegui.GoogleMap.prototype = {
+
         ajax: function (options) {
             var self = this;
             var request = new XMLHttpRequest();
@@ -852,7 +853,7 @@
                 hideSingleGroupMarker: this.markerClusteringOptions.hideSingleGroupMarker,
                 styles: this.markerClusteringOptions.customStyles
             };
-            var markerArray = $.map(markersCluster, function (v) { return v; });
+            var markerArray = markersCluster.map(function (v) { return v; });
             new MarkerClusterer(this.GMap, markerArray, options);
         },
         renderCircle: function (c) {
