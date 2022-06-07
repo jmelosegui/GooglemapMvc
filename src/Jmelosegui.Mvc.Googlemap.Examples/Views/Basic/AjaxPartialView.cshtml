@@ -5,7 +5,6 @@
 }
 
 <div style="height: 500px; border: solid 1px #cccccc" id="mapContainer">
-
 </div>
 
 <br />
@@ -21,30 +20,24 @@
 </form>
 
 @section scripts
-{
-    @(Html.GoogleMap()          
+    {
+    @(Html.GoogleMap()
           .ScriptRegistrar(scripts => scripts.Add("jmelosegui.googlemap-nojquery.js"))
      )
 
     <script type='text/javascript'>
 
         var button = document.getElementById('myButton');
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
 
-            const request = new XMLHttpRequest();
-            request.open('Post', '@Url.Action("GooglemapPartialView", "Basic")');
-            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-            request.onload = function() {
-              if (this.status >= 200 && this.status < 400) {
-                  const mapcontainer = document.getElementById('mapContainer');
-                  mapcontainer.innerHTML = this.response;
-              } 
-            };
-
-            const payload = { "payload": "from ajax call" };
-
-            request.send(JSON.stringify(payload));
+            new jmelosegui.instance.GoogleMap('#mapContainer').ajax({
+                url: '@Url.Action("GooglemapPartialView", "Basic")',
+                type: "Get",
+                data: { payload: 'from ajax call' },
+                success: function (data) {
+                    alert('succeded');
+                }
+            });
         }, false);
 
     </script>

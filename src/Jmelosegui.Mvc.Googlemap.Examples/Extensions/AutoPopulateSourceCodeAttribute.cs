@@ -64,7 +64,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
                 switch (viewName)
                 {
                     case "AjaxPartialView":
-                        additionalFiles["_GooglemapPartialView.cshtml"] = baseViewPath + "Basic" + Path.AltDirectorySeparatorChar + "_GooglemapPartialView" + viewExtension;
+                        additionalFiles["_GooglemapPartialView.cshtml"] = baseViewPath + Path.AltDirectorySeparatorChar + "Basic" + Path.AltDirectorySeparatorChar + "_GooglemapPartialView" + viewExtension;
                         break;
                 }
 

@@ -10,10 +10,9 @@
             return this.View();
         }
 
-        public ActionResult GooglemapPartialView([FromBody] string payload)
+        public ActionResult GooglemapPartialView(string payload)
         {
-            var aaa = ControllerContext;
-            object model = payload;
+            string model = payload;
             return this.PartialView("_GooglemapPartialView", model);
         }
     }

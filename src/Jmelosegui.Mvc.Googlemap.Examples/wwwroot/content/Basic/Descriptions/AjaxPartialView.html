@@ -10,7 +10,7 @@
 <p>and then pass the map container id and the ajax funtion to make the ajax call</p>
 
 <pre class="prettyprint">
-    new $.jmelosegui.GoogleMap(&#39;#mapContainer&#39;).ajax({
+    new jmelosegui.instance.GoogleMap(&#39;#mapContainer&#39;).ajax({
                 url: &#39;@Url.Action(&quot;GooglemapPartialView&quot;, &quot;Basic&quot;)&#39;,
                 type: &quot;Get&quot;,
                 data: { payload: &#39;from ajax call&#39;},

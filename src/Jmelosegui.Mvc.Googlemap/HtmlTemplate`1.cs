@@ -60,6 +60,12 @@ namespace Jmelosegui.Mvc.GoogleMap
                         node.InnerHtml.AppendHtml(helperResult);
                         return;
                     }
+
+                    if (result != null)
+                    {
+                        node.InnerHtml.AppendHtml(result.ToString());
+                        return;
+                    }
                 };
 
                 this.html = null;

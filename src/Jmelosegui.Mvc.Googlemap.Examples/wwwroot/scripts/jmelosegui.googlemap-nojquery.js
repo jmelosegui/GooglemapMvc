@@ -40,6 +40,16 @@
             }
             return true;
         },
+        setInnerHtml: function (elm, html) {
+            elm.innerHTML = html;
+            Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
+                const newScript = document.createElement("script");
+                Array.from(oldScript.attributes)
+                    .forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+        }
     });
 
     var
@@ -66,7 +76,7 @@
 
     init.prototype = jmelosegui.fn;
 
-    var $jmelosegui = {
+    var $jmelosegui = jmelosegui.instance = {
 
         create: function (query, settings) {
 
@@ -93,12 +103,11 @@
         },
     };
 
-    // jQuery extender
     jmelosegui.fn.GoogleMap = function (options) {
         return $jmelosegui.create(this, {
             name: 'GoogleMap',
             init: function (element, options) {
-                return new jmelosegui.GoogleMap(element, options);
+                return new $jmelosegui.GoogleMap(element, options);
             },
             options: options,
             success: function (map) {
@@ -108,7 +117,7 @@
     };
 
     //Polyline
-    jmelosegui.GooglePolyline = function (map, config) {
+    $jmelosegui.GooglePolyline = function (map, config) {
         //init
         this.Map = map;
         this.gPolyline = null;
@@ -127,7 +136,7 @@
         }
     };
 
-    jmelosegui.GooglePolyline.prototype = {
+    $jmelosegui.GooglePolyline.prototype = {
         isLoaded: function () {
             return this.gPolyline !== null;
         },
@@ -145,7 +154,7 @@
     };
 
     //Polygons
-    jmelosegui.GooglePolygon = function (map, config) {
+    $jmelosegui.GooglePolygon = function (map, config) {
         //init
         this.Map = map;
         this.gPolygon = null;
@@ -167,7 +176,7 @@
 
     };
 
-    jmelosegui.GooglePolygon.prototype = {
+    $jmelosegui.GooglePolygon.prototype = {
         isLoaded: function () {
             return this.gPolygon !== null;
         },
@@ -187,7 +196,7 @@
     };
 
     // Circles
-    jmelosegui.GoogleCircle = function (map, config) {
+    $jmelosegui.GoogleCircle = function (map, config) {
         //init
         this.Map = map;
         this.gCircle = null;
@@ -203,7 +212,7 @@
         this.radius = config.radius;
     };
 
-    jmelosegui.GoogleCircle.prototype = {
+    $jmelosegui.GoogleCircle.prototype = {
         isLoaded: function () {
             return this.GCircle !== null;
         },
@@ -224,7 +233,7 @@
     };
 
     //Markers
-    jmelosegui.GoogleMarker = function (map, index, config) {
+    $jmelosegui.GoogleMarker = function (map, index, config) {
         // init
         this.gMarker = null;
         this.Map = map.GMap;
@@ -247,7 +256,7 @@
 
     var infowindow;
     var markersCluster = [];
-    jmelosegui.GoogleMarker.prototype = {
+    $jmelosegui.GoogleMarker.prototype = {
 
         isLoaded: function () {
             return (this.gMarker !== null);
@@ -332,7 +341,7 @@
     };
 
     //Image Map Types
-    jmelosegui.ImageMapType = function (map, config) {
+    $jmelosegui.ImageMapType = function (map, config) {
 
         this.map = map;
         this.name = config.name;
@@ -348,7 +357,7 @@
         this.tileUrlPattern = config.tileUrlPattern;
     }
 
-    jmelosegui.ImageMapType.prototype = {
+    $jmelosegui.ImageMapType.prototype = {
         getTileUrl: function (coord, zoom) {
             var normalizedCoord = this.getNormalizedCoord(coord, zoom);
 
@@ -393,15 +402,15 @@
             var args = Array.prototype.slice.call(arguments, 1);
             return value.replace(/{(\d+)}/g, function (match, number) {
                 return typeof args[number] != 'undefined'
-                  ? args[number]
-                  : match
-                ;
+                    ? args[number]
+                    : match
+                    ;
             });
         }
     }
 
     // Styled Map Types
-    jmelosegui.StyledMapType = function (map, config) {
+    $jmelosegui.StyledMapType = function (map, config) {
 
         this.map = map;
         this.name = config.name;
@@ -414,11 +423,11 @@
         this.styles = config.styles;
     }
 
-    jmelosegui.StyledMapType.prototype = {}
+    $jmelosegui.StyledMapType.prototype = {}
 
     // Layers
     // HeatMapLayer
-    jmelosegui.HeatMapLayer = function (map, config) {
+    $jmelosegui.HeatMapLayer = function (map, config) {
 
         this.map = map;
         this.dissipating = (config.dissipating !== undefined) ? config.clickable : true;
@@ -429,10 +438,10 @@
         this.data = config.data;
     }
 
-    jmelosegui.HeatMapLayer.prototype = {}
+    $jmelosegui.HeatMapLayer.prototype = {}
 
     // KmlLayer
-    jmelosegui.KmlLayer = function (map, config) {
+    $jmelosegui.KmlLayer = function (map, config) {
 
         this.map = map;
         this.clickable = config.clickable;
@@ -443,9 +452,9 @@
         this.url = config.url;
     }
 
-    jmelosegui.KmlLayer.prototype = {}
+    $jmelosegui.KmlLayer.prototype = {}
 
-    jmelosegui.GoogleMap = function (element, options) {
+    $jmelosegui.GoogleMap = function (element, options) {
 
         this.element = element;
 
@@ -664,37 +673,34 @@
     var delay = 100;
     var markerIndex = 0;
     var loadGoogleMapScript = true;
-    jmelosegui.GoogleMap.prototype = {
+    $jmelosegui.GoogleMap.prototype = {
 
         ajax: function (options) {
             var self = this;
+            var payload = param(jmelosegui.extend((options.data || {}), { __LoadGoogleMapScript__: loadGoogleMapScript }));
+
+            var url = options.url
+            if (options.type === 'Get') {
+                url += `?${payload}`
+            }
+
             var request = new XMLHttpRequest();
-            request.open('GET', options.url, true);
-            /*request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');*/
+            request.open(options.type, url, false);                        
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
             request.onload = function () {
-                if (this.status >= 200 && this.status < 400) {
-                    var data = JSON.parse(this.response);
-                    self.innerHTML = data;
+                if (this.status === 200) {
+                    var el = document.getElementById(self.element.substring(1))
+                    jmelosegui.setInnerHtml(el, this.response)                    
                     loadGoogleMapScript = false;
-                    options.success(data);
+                    if (typeof options.success === "function") {
+                        options.success(this.response);
+                    }
                 }
             };
-
-            request.send(jmelosegui.extend(options.data, { __LoadGoogleMapScript__: loadGoogleMapScript }));
-
-
-            //$.ajax({
-            //    url: options.url,
-            //    type: options.type,
-            //    datatype: "html",
-            //    data: jmelosegui.extend(options.data, { __LoadGoogleMapScript__: loadGoogleMapScript }),
-            //    success: function (data) {
-            //        $(self.element).html(data);
-            //        loadGoogleMapScript = false;
-            //        options.success(data);
-            //    }
-            //});
+            
+            request.send(payload);
         },
         initialize: function () {
 
@@ -829,7 +835,7 @@
                         var p = results[0].geometry.location;
                         config.lat = p.lat();
                         config.lng = p.lng();
-                        var marker = new jmelosegui.GoogleMarker(map, markerIndex, config);
+                        var marker = new $jmelosegui.GoogleMarker(map, markerIndex, config);
                         map.renderMarker(marker);
 
                     } else {
@@ -865,7 +871,7 @@
                 markerCenter = new google.maps.LatLng(m.latitude, m.longitude);
             }
             //try {
-                m.load(markerCenter, false);
+            m.load(markerCenter, false);
             //}
             //catch (ex) { }
         },
@@ -968,7 +974,7 @@
 
                         config.enableMarkersClustering = this.enableMarkersClustering;
                         config.markerEvents = this.markerEvents;
-                        var marker = new jmelosegui.GoogleMarker(this, i, config);
+                        var marker = new $jmelosegui.GoogleMarker(this, i, config);
                         this.renderMarker(marker);
                     };
                     if (this.enableMarkersClustering === true) {
@@ -982,21 +988,21 @@
             // polylines
             if (this.polylines) {
                 for (i = 0; i < this.polylines.length; i++) {
-                    var polyline = new jmelosegui.GooglePolyline(this.GMap, this.polylines[i]);
+                    var polyline = new $jmelosegui.GooglePolyline(this.GMap, this.polylines[i]);
                     this.renderShape(polyline);
                 }
             }
             // polygons
             if (this.polygons) {
                 for (i = 0; i < this.polygons.length; i++) {
-                    var polygon = new jmelosegui.GooglePolygon(this.GMap, this.polygons[i]);
+                    var polygon = new $jmelosegui.GooglePolygon(this.GMap, this.polygons[i]);
                     this.renderShape(polygon);
                 }
             }
             // circles
             if (this.circles) {
                 for (i = 0; i < this.circles.length; i++) {
-                    var circle = new jmelosegui.GoogleCircle(this.GMap, this.circles[i]);
+                    var circle = new $jmelosegui.GoogleCircle(this.GMap, this.circles[i]);
                     this.renderShape(circle);
                 }
             }
@@ -1004,14 +1010,14 @@
             var mapType;
             if (this.imageMapTypes) {
                 for (i = 0; i < this.imageMapTypes.length; i++) {
-                    mapType = new jmelosegui.ImageMapType(this.GMap, this.imageMapTypes[i]);
+                    mapType = new $jmelosegui.ImageMapType(this.GMap, this.imageMapTypes[i]);
                     this.addImageMapType(this.GMap, mapType);
                 }
             }
 
             if (this.styledMapTypes) {
                 for (i = 0; i < this.styledMapTypes.length; i++) {
-                    mapType = new jmelosegui.StyledMapType(this.GMap, this.styledMapTypes[i]);
+                    mapType = new $jmelosegui.StyledMapType(this.GMap, this.styledMapTypes[i]);
                     this.addStyledMapType(this.GMap, mapType);
                 }
             }
@@ -1020,11 +1026,11 @@
                 for (i = 0; i < this.layers.length; i++) {
                     var layer = this.layers[i];
                     if (layer.name === 'heatmap') {
-                        var heatmapLayer = new jmelosegui.HeatMapLayer(this.GMap, layer.options);
+                        var heatmapLayer = new $jmelosegui.HeatMapLayer(this.GMap, layer.options);
                         this.addHeatMapLayer(this.GMap, heatmapLayer);
                     }
                     if (layer.name === 'kml') {
-                        var kmlLayer = new jmelosegui.KmlLayer(this.GMap, layer.options);
+                        var kmlLayer = new $jmelosegui.KmlLayer(this.GMap, layer.options);
                         this.addKmlLayer(this.GMap, kmlLayer);
                     }
                     if (layer.name === 'traffic') {
@@ -1090,6 +1096,77 @@
             var transitLayer = new google.maps.TransitLayer();
             transitLayer.setMap(map);
         }
+    };
+
+    function buildParams(prefix, obj, traditional, add) {
+        var name,
+            rbracket = /\[\]$/;
+
+        if (Array.isArray(obj)) {
+
+            // Serialize array item.
+            Array.prototype.forEach.call(obj, function (v, i) {
+
+                if (traditional || rbracket.test(prefix)) {
+
+                    // Treat each array item as a scalar.
+                    add(prefix, v);
+
+                } else {
+
+                    // Item is non-scalar (array or object), encode its numeric index.
+                    buildParams(
+                        prefix + "[" + (typeof v === "object" && v != null ? i : "") + "]",
+                        v,
+                        traditional,
+                        add
+                    );
+                }
+            });
+
+        } else if (!traditional && typeof obj === "object") {
+
+            // Serialize object item.
+            for (name in obj) {
+                buildParams(prefix + "[" + name + "]", obj[name], traditional, add);
+            }
+
+        } else {
+
+            // Serialize scalar item.
+            add(prefix, obj);
+        }
+    }
+
+    function param(a, traditional) {
+        var r20 = /%20/g;
+        var prefix,
+            s = [],
+            add = function (key, value) {
+
+                // If value is a function, invoke it and return its value
+                value = typeof value === "function" ? value() : (value == null ? "" : value);
+                s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value);
+            };
+        // If an array was passed in, assume that it is an array of form elements.
+        if (Array.isArray(a) || (typeof a !== "object")) {
+
+            // Serialize the form elements
+            Array.prototype.forEach.call(a, function (v, i) {
+                add(this.name, this.value);
+            });
+
+        } else {
+
+            // If traditional, encode the "old" way (the way 1.3.2 or older
+            // did it), otherwise encode params recursively.
+            for (prefix in a) {
+                buildParams(prefix, a[prefix], traditional, add);
+            }
+        }
+
+        // Return the resulting serialization
+        return s.join("&").replace(r20, "+");
     };
 
     window.jmelosegui = jmelosegui;
