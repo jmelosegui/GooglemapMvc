@@ -8,8 +8,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
     public class MarkerImage
     {
-        private Uri path;
-
         public MarkerImage(Uri absoluteUrl, Size size, Point point, Point anchor)
         {
             this.AbsoluteUrl = absoluteUrl;
@@ -20,7 +18,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public Uri AbsoluteUrl { get; set; }
 
-        public Point Anchor { get; set; }        
+        public Point Anchor { get; set; }
 
         public Point Point { get; set; }
 

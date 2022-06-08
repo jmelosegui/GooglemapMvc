@@ -20,10 +20,9 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         protected InfoWindow Window { get; private set; }
 
-        // TODO: Fix
-        public InfoWindowBuilder Content(Func<object, object> function)
+        public InfoWindowBuilder Content(Func<string, object> function)
         {
-            this.Window.Template.InlineTemplate = function;
+            this.Window.Template.InlineTemplate = () => function(null);
             return this;
         }
 

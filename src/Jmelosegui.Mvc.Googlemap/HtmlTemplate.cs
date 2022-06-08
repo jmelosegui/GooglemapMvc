@@ -5,23 +5,19 @@ namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
     using System.Text.Encodings.Web;
-    using Jmelosegui.Mvc.GoogleMap.Extensions;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Newtonsoft.Json;
 
-    public class HtmlTemplate<T>
-        where T : class
+    public class HtmlTemplate
     {
-        private readonly ViewContext viewContext;
         private string html;
-        private Func<T, object> inlineTemplate;
-        private Action<T, TagBuilder> binder;
+        private Func<object> inlineTemplate;
+        private Action<TagBuilder> binder;
 
-        public HtmlTemplate(ViewContext viewContext)
+        public HtmlTemplate()
         {
-            this.viewContext = viewContext ?? throw new ArgumentNullException(nameof(viewContext));
         }
 
         public string Html
@@ -35,13 +31,13 @@ namespace Jmelosegui.Mvc.GoogleMap
             {
                 this.html = value;
 
-                this.binder = (dataItem, node) => node.InnerHtml.AppendHtml(this.html);
+                this.binder = (node) => node.InnerHtml.AppendHtml(this.html);
                 this.inlineTemplate = null;
             }
         }
 
         [JsonIgnore]
-        public Func<T, object> InlineTemplate
+        public Func<object> InlineTemplate
         {
             get
             {
@@ -51,9 +47,9 @@ namespace Jmelosegui.Mvc.GoogleMap
             set
             {
                 this.inlineTemplate = value;
-                this.binder = (dataItem, node) =>
+                this.binder = (node) =>
                 {
-                    var result = this.InlineTemplate(dataItem);
+                    var result = this.InlineTemplate();
                     var helperResult = result as IHtmlContent;
                     if (helperResult != null)
                     {
@@ -72,11 +68,11 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
         }
 
-        public void Apply(T dataItem, TagBuilder node)
+        public void Apply(TagBuilder node)
         {
             if (this.HasValue())
             {
-                this.binder(dataItem, node);
+                this.binder(node);
             }
         }
 

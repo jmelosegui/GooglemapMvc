@@ -9,6 +9,8 @@ namespace Jmelosegui.Mvc.GoogleMap
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Text.Encodings.Web;
+    using Microsoft.AspNetCore.Html;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
@@ -385,8 +387,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        // TODO: Fix
-        public virtual ClientSideObjectWriter Append(string name, HtmlTemplate<object> htmlTemplate)
+        public virtual ClientSideObjectWriter Append(string name, HtmlTemplate htmlTemplate)
         {
             if (name == null)
             {
@@ -402,17 +403,6 @@ namespace Jmelosegui.Mvc.GoogleMap
             {
                 if (htmlTemplate.Html.HasValue())
                 {
-                    this.EnsureStart();
-                    this.writer.Write(this.appended ? ", " : "{");
-                    this.writer.Write("{0}:'", name);
-                    // TODO: Fix
-                    //htmlTemplate.Content();
-                    this.writer.Write("'");
-                    return this;
-                }
-
-                if (htmlTemplate.Html.HasValue())
-                {
                     string formattedValue = QuoteString(htmlTemplate.Html);
                     this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue));
                     return this;
@@ -420,8 +410,20 @@ namespace Jmelosegui.Mvc.GoogleMap
 
                 if (htmlTemplate.InlineTemplate != null)
                 {
-                    object inlineTemplate = htmlTemplate.InlineTemplate(null);
+                    var result = htmlTemplate.InlineTemplate();
+
+                    var inlineTemplate = result as IHtmlContent;
+
                     if (inlineTemplate != null)
+                    {
+                        this.EnsureStart();
+                        this.writer.Write(this.appended ? ", " : "{");
+                        this.writer.Write("{0}:'", name);
+                        inlineTemplate.WriteTo(this.writer, HtmlEncoder.Default);
+                        this.writer.Write("'");
+                    }
+
+                    if (result != null)
                     {
                         string formattedValue2 = QuoteString(inlineTemplate.ToString());
                         this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue2));

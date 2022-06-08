@@ -250,7 +250,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                     markerInfoWindows.Attributes["id"] = string.Format(CultureInfo.InvariantCulture, "{0}Marker{1}", this.Id, m.Index);
                     markerInfoWindows.AddCssClass("content");
 
-                    m.Window.Template.Apply(null, markerInfoWindows);
+                    m.Window.Template.Apply(markerInfoWindows);
                     infoWindowsRootTag.InnerHtml.AppendHtml(markerInfoWindows);
                 });
 

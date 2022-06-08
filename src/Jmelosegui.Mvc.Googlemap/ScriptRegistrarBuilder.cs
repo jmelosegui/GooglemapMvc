@@ -29,8 +29,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public ScriptRegistrarBuilder ScriptsBasePath(string basePath)
         {
-            UrlHelper.AssertVirtualPath(basePath, nameof(basePath));
-
             this.ScriptRegistrar.BasePath = basePath;
             return this;
         }
@@ -46,6 +44,11 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
+        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
+        {
+            this.ScriptRegistrar.WriteHtml(writer);
+        }
+
         private static ScriptRegistrarBuilder PassThroughNonNull(ScriptRegistrarBuilder builder)
         {
             if (builder == null)
@@ -54,11 +57,6 @@ namespace Jmelosegui.Mvc.GoogleMap
             }
 
             return builder;
-        }
-
-        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-        {
-            this.ScriptRegistrar.WriteHtml(writer);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+		<TargetFramework>net6.0</TargetFramework>		
 		<AssemblyTitle>Jmelosegui.Mvc.GoogleMap</AssemblyTitle>
 		<Product>Jmelosegui.Mvc.GoogleMap</Product>
 		<Description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</Description>

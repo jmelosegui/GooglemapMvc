@@ -6,7 +6,9 @@
         .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
         .Markers(marker => marker.Add()
             .Window(w => w.Add()
-                .Content((d) => $"Hello PartialView {Model}")))
+                .Content(                    
+                    @<text>"Hello PartialView" @Model</text>
+            )))
         .Render();
 }
 

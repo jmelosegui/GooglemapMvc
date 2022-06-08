@@ -20,9 +20,6 @@
 	  <None Remove="Views\PolylineBasic\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Remove="wwwroot\scripts\jmelosegui.googlemap-nojquery.js" />
-	</ItemGroup>
-	<ItemGroup>
 		<Content Include="..\stylecop.json">
 			<Link>stylecop.json</Link>
 		</Content>
