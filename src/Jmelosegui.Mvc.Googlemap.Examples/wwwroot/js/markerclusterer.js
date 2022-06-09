@@ -7,7 +7,7 @@
  * clusters for large amounts of markers (hundreds or thousands).
  * <br/>
  * This is a v3 implementation of the
- * <a href="http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/"
+ * <a href="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/"
  * >v2 MarkerClusterer</a>.
  */
 

@@ -32,7 +32,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.Components = new Collection<Map>();
             this.FixedScriptCollection = new List<string>();
             viewContext.HttpContext.Items[Key] = this;
-            this.BasePath = "/scripts";
+            this.BasePath = "/js";
             this.ViewContext = viewContext;
         }
 

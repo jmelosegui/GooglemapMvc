@@ -1,21 +1,86 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project>  
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>		
+		<TargetFramework>net6.0</TargetFramework>
 		<AssemblyTitle>Jmelosegui.Mvc.GoogleMap</AssemblyTitle>
 		<Product>Jmelosegui.Mvc.GoogleMap</Product>
 		<Description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</Description>
 		<CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
 		<OutputPath>bin\$(Configuration)\</OutputPath>		
-		<BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
-	</PropertyGroup>
-	<PropertyGroup>
 		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>Jmelosegui.Mvc.Googlemap.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>Jmelosegui.Mvc.Googlemap.snk</AssemblyOriginatorKeyFile>		
 	</PropertyGroup>
-	<Target Name="AfterBuildMigrated">
+
+	<!--Nuget Configuration-->
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<NuSpecFile>Jmelosegui.Mvc.Googlemap.nuspec</NuSpecFile>
+		<!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Scripts\jmelosegui.googlemap.js" />
+	  <None Remove="Scripts\markerclusterer.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<CodeAnalysisDictionary Include="CodeAnalysisDictionary.xml">
+			<SubType>Designer</SubType>
+		</CodeAnalysisDictionary>
+		<AdditionalFiles Include="..\stylecop.json">
+			<Link>stylecop.json</Link>
+		</AdditionalFiles>
+		<Content Include="build\**">
+			<Pack>true</Pack>			
+			<PackagePath>build\</PackagePath>
+		</Content>
+		<Content Include="Scripts\**">
+		  <Pack>true</Pack>
+		  <PackagePath>Scripts\</PackagePath>
+		</Content>
+		<None Include="Jmelosegui.Mvc.Googlemap.snk" />
+		<None Include="Objects\MapObjectClassDiagram.cd" />
+	</ItemGroup>
+
+	<!-- Dependencies -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+	<PropertyGroup>
+		<BuildDependsOn>
+			$(BuildDependsOn);
+			AfterBuild
+		</BuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
+		<PropertyGroup>
+			<NuspecProperties>$(NuspecProperties);Version=$(Version);CommitId=$(GitCommitId);ProjectDir=$(MSBuildProjectDirectory);Output=$(Outdir)</NuspecProperties>
+		</PropertyGroup>
+	</Target>
+
+	<Target Name="AfterBuild">
 		<Message Importance="high" Text="Configuration $(Configuration)|$(Platform)" />
-		<Message Importance="high" Text="Copying JavaScript files to $(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\Scripts\..." />
-		<Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\Scripts\" Condition="'%(Extension)'=='.js'">
+		<Message Importance="high" Text="Copying JavaScript files to $(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\wwwroot\js\..." />
+		<Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\wwwroot\js\" Condition="'%(Extension)'=='.js'">
 			<Output TaskParameter="DestinationFiles" ItemName="Resources" />
 		</Copy>
 		<ItemGroup>
@@ -23,30 +88,5 @@
 			<FileWrites Include="@(Resources)" />
 		</ItemGroup>
 	</Target>
-	<ItemGroup>
-		<CodeAnalysisDictionary Include="CodeAnalysisDictionary.xml">
-			<SubType>Designer</SubType>
-		</CodeAnalysisDictionary>
-	</ItemGroup>
-	<ItemGroup>
-		<AdditionalFiles Include="..\stylecop.json">
-			<Link>stylecop.json</Link>
-		</AdditionalFiles>
-		<None Include="Jmelosegui.Mvc.Googlemap.snk" />
-		<None Include="Objects\MapObjectClassDiagram.cd" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
+
 </Project>

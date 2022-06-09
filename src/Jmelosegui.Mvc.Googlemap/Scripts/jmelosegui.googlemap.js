@@ -1,33 +1,90 @@
-﻿(function ($) {
+﻿(function () {
     "use strict";
 
-    var $jmelosegui = $.jmelosegui = {
+    var
+        document = window.document,
+        jmelosegui = function (selector) {
+            return new jmelosegui.fn.init(selector);
+        };
+
+    jmelosegui.fn = jmelosegui.prototype = {
+
+        constructor: jmelosegui,
+
+        selector: "",
+
+        element: null,
+    };
+
+    jmelosegui.extend = function () {
+        var out = arguments[0] || {};
+
+        for (var i = 1; i < arguments.length; i++) {
+            if (!arguments[i])
+                continue;
+
+            for (var key in arguments[i]) {
+                if (arguments[i].hasOwnProperty(key))
+                    out[key] = arguments[i][key];
+            }
+        }
+
+        return out;
+    }
+
+    jmelosegui.extend(jmelosegui, {
+        isEmptyObject: function (obj) {
+            var name;
+            for (name in obj) {
+                return false;
+            }
+            return true;
+        },
+        setInnerHtml: function (elm, html) {
+            elm.innerHTML = html;
+            Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
+                const newScript = document.createElement("script");
+                Array.from(oldScript.attributes)
+                    .forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+        }
+    });
+
+    var
+        rquickExpr = /^(?:#([\w-]*))$/,
+        init = jmelosegui.fn.init = function (selector) {
+
+            // We assume the selector is a string and the value of the id attribute
+            var match, elem;
+
+            match = rquickExpr.exec(selector);
+
+            if (match && match[1]) {
+                elem = document.getElementById(match[1]);
+
+                if (elem && elem.parentNode) {
+                    this.length = 1;
+                    this.element = elem;
+                }
+            }
+
+            this.selector = selector;
+            return this;
+        };
+
+    init.prototype = jmelosegui.fn;
+
+    var $jmelosegui = jmelosegui.instance = {
 
         create: function (query, settings) {
-            var name = settings.name;
-            var options = $.extend({}, $.fn[name].defaults, settings.options);
 
-            return query.each(function () {
-                var $$ = $(this);
-                options = $.meta ? $.extend({}, options, $$.data()) : options;
+            var component = settings.init(query, settings.options);
 
-                if (!$$.data(name)) {
-                    var component = settings.init(this, options);
-
-                    $$.data(name, component);
-
-                    $jmelosegui.trigger(this, 'load');
-
-                    if (settings.success && !$.isEmptyObject(options)) settings.success(component);
-                }
-            });
-        },
-
-        bind: function (context, events) {
-            var $element = $(context.element ? context.element : context);
-            $.each(events, function (eventName) {
-                if ($.isFunction(this)) $element.bind(eventName, this);
-            });
+            if (settings.success && !jmelosegui.isEmptyObject(settings.options)) {
+                settings.success(component);
+            }
         },
 
         delegate: function (context, handler) {
@@ -36,17 +93,17 @@
             };
         },
 
-        trigger: function (element, eventName, e) {
-            e = $.extend(e || {}, new $.Event(eventName));
-            e.stopPropagation();
-            $(element).trigger(e);
-            return e.isDefaultPrevented();
+        on: function (context, events) {
+            var $element = context.element ? context.element : context;
+            Object.entries(events).forEach(function ([eventName, handler]) {
+                if (typeof handler === "function") {
+                    $element.addEventListener(eventName, handler);
+                }
+            });
         },
-
     };
 
-    // jQuery extender
-    $.fn.GoogleMap = function (options) {
+    jmelosegui.fn.GoogleMap = function (options) {
         return $jmelosegui.create(this, {
             name: 'GoogleMap',
             init: function (element, options) {
@@ -198,7 +255,7 @@
     };
 
     var infowindow;
-    var markersCluster = {};
+    var markersCluster = [];
     $jmelosegui.GoogleMarker.prototype = {
 
         isLoaded: function () {
@@ -234,7 +291,7 @@
             });
         },
         createImage: function (options) {
-            var image = new google.maps.MarkerImage(options.path,
+            var image = new google.maps.MarkerImage(options.absoluteUrl,
                 new google.maps.Size(options.size.width, options.size.height),
                 new google.maps.Point(options.point.x, options.point.y),
                 new google.maps.Point(options.anchor.x, options.anchor.y));
@@ -254,7 +311,7 @@
             };
             // create
             this.gMarker = new google.maps.Marker(markerOptions);
-            $.extend(this.gMarker, { address: this.address });
+            jmelosegui.extend(this.gMarker, { address: this.address });
             if (this.parent.fitToMarkersBounds) {
                 this.parent.bounds.extend(this.gMarker.position);
             }
@@ -345,9 +402,9 @@
             var args = Array.prototype.slice.call(arguments, 1);
             return value.replace(/{(\d+)}/g, function (match, number) {
                 return typeof args[number] != 'undefined'
-                  ? args[number]
-                  : match
-                ;
+                    ? args[number]
+                    : match
+                    ;
             });
         }
     }
@@ -401,11 +458,11 @@
 
         this.element = element;
 
-        if ($.isEmptyObject(options)) {
+        if (jmelosegui.isEmptyObject(options)) {
             return;
         }
 
-        $.extend(this, options);
+        jmelosegui.extend(this, options);
 
         this.clientId = options.clientId;
         this.disableDoubleClickZoom = options.disableDoubleClickZoom;
@@ -609,7 +666,7 @@
             }
         }
 
-        $jmelosegui.bind(this, {
+        jmelosegui.bind(this, {
             load: this.onLoad
         });
     };
@@ -617,19 +674,33 @@
     var markerIndex = 0;
     var loadGoogleMapScript = true;
     $jmelosegui.GoogleMap.prototype = {
+
         ajax: function (options) {
             var self = this;
-            $.ajax({
-                url: options.url,
-                type: options.type,
-                datatype: "html",
-                data: $.extend(options.data, { __LoadGoogleMapScript__: loadGoogleMapScript }),
-                success: function (data) {
-                    $(self.element).html(data);
+            var payload = param(jmelosegui.extend((options.data || {}), { __LoadGoogleMapScript__: loadGoogleMapScript }));
+
+            var url = options.url
+            if (options.type === 'Get') {
+                url += `?${payload}`
+            }
+
+            var request = new XMLHttpRequest();
+            request.open(options.type, url, false);                        
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            request.onload = function () {
+                if (this.status === 200) {
+                    var el = document.getElementById(self.element.substring(1))
+                    jmelosegui.setInnerHtml(el, this.response)                    
                     loadGoogleMapScript = false;
-                    options.success(data);
+                    if (typeof options.success === "function") {
+                        options.success(this.response);
+                    }
                 }
-            });
+            };
+            
+            request.send(payload);
         },
         initialize: function () {
 
@@ -788,7 +859,7 @@
                 hideSingleGroupMarker: this.markerClusteringOptions.hideSingleGroupMarker,
                 styles: this.markerClusteringOptions.customStyles
             };
-            var markerArray = $.map(markersCluster, function (v) { return v; });
+            var markerArray = markersCluster.map(function (v) { return v; });
             new MarkerClusterer(this.GMap, markerArray, options);
         },
         renderCircle: function (c) {
@@ -799,10 +870,10 @@
             if ((m.latitude) && (m.longitude)) {
                 markerCenter = new google.maps.LatLng(m.latitude, m.longitude);
             }
-            try {
-                m.load(markerCenter, false);
-            }
-            catch (ex) { }
+            //try {
+            m.load(markerCenter, false);
+            //}
+            //catch (ex) { }
         },
         renderMarkers: function (map) {
             if (markerIndex < map.markers.length) {
@@ -1027,4 +1098,76 @@
         }
     };
 
-})(jQuery);
+    function buildParams(prefix, obj, traditional, add) {
+        var name,
+            rbracket = /\[\]$/;
+
+        if (Array.isArray(obj)) {
+
+            // Serialize array item.
+            Array.prototype.forEach.call(obj, function (v, i) {
+
+                if (traditional || rbracket.test(prefix)) {
+
+                    // Treat each array item as a scalar.
+                    add(prefix, v);
+
+                } else {
+
+                    // Item is non-scalar (array or object), encode its numeric index.
+                    buildParams(
+                        prefix + "[" + (typeof v === "object" && v != null ? i : "") + "]",
+                        v,
+                        traditional,
+                        add
+                    );
+                }
+            });
+
+        } else if (!traditional && typeof obj === "object") {
+
+            // Serialize object item.
+            for (name in obj) {
+                buildParams(prefix + "[" + name + "]", obj[name], traditional, add);
+            }
+
+        } else {
+
+            // Serialize scalar item.
+            add(prefix, obj);
+        }
+    }
+
+    function param(a, traditional) {
+        var r20 = /%20/g;
+        var prefix,
+            s = [],
+            add = function (key, value) {
+
+                // If value is a function, invoke it and return its value
+                value = typeof value === "function" ? value() : (value == null ? "" : value);
+                s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value);
+            };
+        // If an array was passed in, assume that it is an array of form elements.
+        if (Array.isArray(a) || (typeof a !== "object")) {
+
+            // Serialize the form elements
+            Array.prototype.forEach.call(a, function (v, i) {
+                add(this.name, this.value);
+            });
+
+        } else {
+
+            // If traditional, encode the "old" way (the way 1.3.2 or older
+            // did it), otherwise encode params recursively.
+            for (prefix in a) {
+                buildParams(prefix, a[prefix], traditional, add);
+            }
+        }
+
+        // Return the resulting serialization
+        return s.join("&").replace(r20, "+");
+    };
+
+    window.jmelosegui = jmelosegui;
+})();

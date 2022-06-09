@@ -1,10 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-		<CopyNuGetImplementations>true</CopyNuGetImplementations>
-	</PropertyGroup>
-	<PropertyGroup>
+		<OutputType>Exe</OutputType>		
 		<TargetFramework>net6.0</TargetFramework>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<OutputPath>bin\</OutputPath>
@@ -39,119 +35,18 @@
 			<SubType>Designer</SubType>
 		</Content>
 	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Infrastructure\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Include="wwwroot\content\Basic\Descriptions\AjaxPartialView.html" />
-	  <None Include="wwwroot\content\Basic\Descriptions\ClientEvents.html" />
-	  <None Include="wwwroot\content\Basic\Descriptions\FirstLook.html" />
-	  <None Include="wwwroot\content\Basic\Descriptions\Language.html" />
-	  <None Include="wwwroot\content\Basic\Descriptions\Multimap.html" />
-	  <None Include="wwwroot\content\Basic\Descriptions\UIControls.html" />
-	  <None Include="wwwroot\content\Basic\Descriptions\version.html" />
-	  <None Include="wwwroot\content\fonts\fontawesome-webfont.eot" />
-	  <None Include="wwwroot\content\fonts\fontawesome-webfont.svg" />
-	  <None Include="wwwroot\content\fonts\fontawesome-webfont.ttf" />
-	  <None Include="wwwroot\content\fonts\fontawesome-webfont.woff" />
-	  <None Include="wwwroot\content\fonts\fontawesome-webfont.woff2" />
-	  <None Include="wwwroot\content\fonts\FontAwesome.otf" />
-	  <None Include="wwwroot\content\Layers\Descriptions\Heatmap.html" />
-	  <None Include="wwwroot\content\Layers\Descriptions\Kml.html" />
-	  <None Include="wwwroot\content\Layers\Descriptions\TrafficTransitBike.html" />
-	  <None Include="wwwroot\content\Libraries\Descriptions\Drawing.html" />
-	  <None Include="wwwroot\content\Libraries\Descriptions\SearchBox.html" />
-	  <None Include="wwwroot\content\MapType\Descriptions\ImageMapType.html" />
-	  <None Include="wwwroot\content\MapType\Descriptions\StyledMapType.html" />
-	  <None Include="wwwroot\content\MapType\map_natural.jpg" />
-	  <None Include="wwwroot\content\MapType\speculative_map.jpg" />
-	  <None Include="wwwroot\content\Marker\Descriptions\ClientEvents.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\CustomIcons.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\DataBindingToModel.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\ExternalReference.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\FitToMarkersBounds.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\Geocoding.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\InfoWindow.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\MarkerClustering.html" />
-	  <None Include="wwwroot\content\Marker\Descriptions\SimpleMarker.html" />
-	  <None Include="wwwroot\content\Services\Descriptions\Geocoding.html" />
-	  <None Include="wwwroot\content\Services\Descriptions\Geolocation.html" />
-	  <None Include="wwwroot\content\Shapes\Descriptions\CircleBasic.html" />
-	  <None Include="wwwroot\content\Shapes\Descriptions\DataBindingToModel.html" />
-	  <None Include="wwwroot\content\Shapes\Descriptions\PolygonBasic.html" />
-	  <None Include="wwwroot\content\Shapes\Descriptions\PolylineBasic.html" />
-	  <None Include="wwwroot\content\Site.css" />
-	  <None Include="wwwroot\fonts\fontawesome-webfont.eot" />
-	  <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
-	  <None Include="wwwroot\fonts\fontawesome-webfont.ttf" />
-	  <None Include="wwwroot\fonts\fontawesome-webfont.woff" />
-	  <None Include="wwwroot\fonts\FontAwesome.otf" />
-	  <None Include="wwwroot\fonts\glyphicons-halflings-regular.eot" />
-	  <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-	  <None Include="wwwroot\fonts\glyphicons-halflings-regular.ttf" />
-	  <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff" />
-	  <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
-	  <None Include="wwwroot\Images\beachflag.png" />
-	  <None Include="wwwroot\Images\cluster1.png" />
-	  <None Include="wwwroot\Images\cluster2.png" />
-	  <None Include="wwwroot\Images\cluster3.png" />
-	  <None Include="wwwroot\Images\flags\Andalucia.jpg" />
-	  <None Include="wwwroot\Images\flags\Aragon.jpg" />
-	  <None Include="wwwroot\Images\flags\Asturias.jpg" />
-	  <None Include="wwwroot\Images\flags\baleares.jpg" />
-	  <None Include="wwwroot\Images\flags\Canarias.jpg" />
-	  <None Include="wwwroot\Images\flags\Cantabria.jpg" />
-	  <None Include="wwwroot\Images\flags\CastillaLaMancha.jpg" />
-	  <None Include="wwwroot\Images\flags\CastillayLeon.jpg" />
-	  <None Include="wwwroot\Images\flags\Cataluña.jpg" />
-	  <None Include="wwwroot\Images\flags\Ceuta.jpg" />
-	  <None Include="wwwroot\Images\flags\ComunidadValenciana.jpg" />
-	  <None Include="wwwroot\Images\flags\España.jpg" />
-	  <None Include="wwwroot\Images\flags\Extremadura.jpg" />
-	  <None Include="wwwroot\Images\flags\Galicia.jpg" />
-	  <None Include="wwwroot\Images\flags\LaRioja.jpg" />
-	  <None Include="wwwroot\Images\flags\Madrid.jpg" />
-	  <None Include="wwwroot\Images\flags\Melilla.jpg" />
-	  <None Include="wwwroot\Images\flags\Murcia.jpg" />
-	  <None Include="wwwroot\Images\flags\Navarra.jpg" />
-	  <None Include="wwwroot\Images\flags\PaisVasco.jpg" />
-	  <None Include="wwwroot\Images\logo.jpg" />
-	  <None Include="wwwroot\Images\sprites.png" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-apollo.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-basic.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-clj.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-css.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-dart.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-erlang.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-go.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-hs.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-lisp.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-llvm.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-lua.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-matlab.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-ml.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-mumps.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-n.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-pascal.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-proto.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-r.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-rd.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-scala.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-sql.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-tcl.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-tex.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-vb.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-vhdl.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-wiki.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-xq.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\lang-yaml.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\prettify.css" />
-	  <None Include="wwwroot\scripts\google-code-prettify\prettify.js" />
-	  <None Include="wwwroot\scripts\google-code-prettify\run_prettify.js" />
-	  <None Include="wwwroot\scripts\jmelosegui.googlemap-nojquery.js" />
-	  <None Include="wwwroot\scripts\jmelosegui.googlemap.js" />
-	  <None Include="wwwroot\scripts\markerclusterer.js" />
-	</ItemGroup>
+
+	<!--
+	<PropertyGroup>
+		<CopyGoogleMapScripts>false</CopyGoogleMapScripts>
+	</PropertyGroup>
+	
+	<Target Name="SetGoogleMapScriptDir" BeforeTargets="CopyGoogleMapContenFiles">
+		<PropertyGroup>
+			<JavaScriptDir>\webroot\scripts</JavaScriptDir>
+		</PropertyGroup>
+	</Target>-->
+
 	<ItemGroup>
 		<ProjectReference Include="..\Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.GoogleMap.csproj" />
 	</ItemGroup>

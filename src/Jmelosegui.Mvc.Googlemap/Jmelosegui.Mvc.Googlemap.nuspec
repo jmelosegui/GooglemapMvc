@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
-  <metadata>
-    <id>Jmelosegui.Mvc.Googlemap</id>
-    <version>$version$</version>
-    <title>GoogleMap Control for AspNet.Mvc</title>
-    <authors>Juan M. Elosegui</authors>
-    <owners>jmelosegui</owners>
-    <projectUrl>https://github.com/jmelosegui/GooglemapMvc</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</description>
-    <tags>Google maps GoogleMap AspNet Mvc AspNetMvc</tags>
-    <dependencies>
-        <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
-        <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.3" />
-        <dependency id="jQuery" version="2.1.4" />
-        <dependency id="Newtonsoft.Json" version="7.0.1" />
-    </dependencies>
-  </metadata>
+	<metadata>
+		<id>Jmelosegui.Mvc.Googlemap</id>
+		<version>$version$</version>
+		<title>GoogleMap Control for AspNet.Mvc</title>
+		<authors>Juan M. Elosegui</authors>
+		<owners>jmelosegui</owners>
+		<projectUrl>https://github.com/jmelosegui/GooglemapMvc</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>		
+		<license type="expression">MIT</license>
+		<description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</description>
+		<tags>Google maps GoogleMap AspNet Mvc AspNetMvc</tags>
+		<repository type="git" url="https://github.com/jmelosegui/GooglemapMvc" commit="$commit$" />
+		<dependencies>
+			<group targetFramework="net6.0">
+				<dependency id="Newtonsoft.Json" version="13.0.1" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="$Output$Jmelosegui.Mvc.GoogleMap.dll" target="lib\net6.0" />
+		<file src="$Output$Jmelosegui.Mvc.GoogleMap.pdb" target="lib\net6.0" />
+		<file src="$ProjectDir$\Scripts\jmelosegui.googlemap.js" target="content\js" />
+		<file src="$ProjectDir$\Scripts\markerclusterer.js" target="content\js" />
+		<file src="$ProjectDir$\build\Jmelosegui.Mvc.Googlemap.targets" target="build" />
+	</files>
 </package>

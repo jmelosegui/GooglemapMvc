@@ -316,7 +316,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             if (!request.IsAjaxRequest())
             {
-                this.ScriptFileNames.Add("jmelosegui.googlemap-nojquery.js");
+                this.ScriptFileNames.Add("jmelosegui.googlemap.js");
 
                 if (this.EnableMarkersClustering)
                 {
