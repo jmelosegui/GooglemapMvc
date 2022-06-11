@@ -538,7 +538,7 @@
               new MyLocationObject { Latitude = 37.754665, Longitude = -122.403242 },
               new MyLocationObject { Latitude = 37.753837, Longitude = -122.403172 },
               new MyLocationObject { Latitude = 37.752986, Longitude = -122.403112 },
-              new MyLocationObject { Latitude = 37.751266, Longitude = -122.403355 }
+              new MyLocationObject { Latitude = 37.751266, Longitude = -122.403355 },
             };
         }
     }

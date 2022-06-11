@@ -1,4 +1,7 @@
-﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+﻿// Copyright (c) Juan M. Elosegui. All rights reserved.
+// Licensed under the GPL v2 license. See LICENSE.txt file in the project root for full license information.
+
+namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +21,7 @@
                     ZIndex = 15,
                     ImagePath = "Andalucia.jpg",
                     InfoWindowContent = @"<h2>Andalucia</h2>",
-                    Population = 8370975
+                    Population = 8370975,
                 },
                 new RegionInfo
                 {
@@ -29,7 +32,7 @@
                     ZIndex = 2,
                     ImagePath = "Aragon.jpg",
                     InfoWindowContent = @"<h2>Aragón</h2>",
-                    Population = 1277471
+                    Population = 1277471,
                 },
                 new RegionInfo
                 {
@@ -40,7 +43,7 @@
                     ZIndex = 4,
                     ImagePath = "Asturias.jpg",
                     InfoWindowContent = @"<h2>Asturias</h2>",
-                    Population = 1076896
+                    Population = 1076896,
                 },
                 new RegionInfo
                 {
@@ -51,7 +54,7 @@
                     ZIndex = 5,
                     ImagePath = "Cantabria.jpg",
                     InfoWindowContent = @"<h2>Cantabria</h2>",
-                    Population = 591886
+                    Population = 591886,
                 },
                 new RegionInfo
                 {
@@ -62,7 +65,7 @@
                     ZIndex = 6,
                     ImagePath = "CastillayLeon.jpg",
                     InfoWindowContent = @"<h2>Castilla y León</h2>",
-                    Population = 2510849
+                    Population = 2510849,
                 },
                 new RegionInfo
                 {
@@ -73,7 +76,7 @@
                     ZIndex = 7,
                     ImagePath = "CastillaLaMancha.jpg",
                     InfoWindowContent = @"<h2>Castilla La Mancha</h2>",
-                    Population = 2095855
+                    Population = 2095855,
                 },
                 new RegionInfo
                 {
@@ -84,7 +87,7 @@
                     ZIndex = 8,
                     ImagePath = "Cataluña.jpg",
                     InfoWindowContent = @"<h2>Cataluña</h2>",
-                    Population = 7535251
+                    Population = 7535251,
                 },
                 new RegionInfo
                 {
@@ -95,7 +98,7 @@
                     ZIndex = 9,
                     ImagePath = "ComunidadValenciana.jpg",
                     InfoWindowContent = @"<h2>Comunidad Valenciana</h2>",
-                    Population = 5111706
+                    Population = 5111706,
                 },
                 new RegionInfo
                 {
@@ -106,7 +109,7 @@
                     ZIndex = 10,
                     ImagePath = "Extremadura.jpg",
                     InfoWindowContent = @"<h2>Extremadura</h2>",
-                    Population = 1097744
+                    Population = 1097744,
                 },
                 new RegionInfo
                 {
@@ -117,7 +120,7 @@
                     ZIndex = 11,
                     ImagePath = "Galicia.jpg",
                     InfoWindowContent = @"<h2>Galicia</h2>",
-                    Population = 2796089
+                    Population = 2796089,
                 },
                 new RegionInfo
                 {
@@ -128,7 +131,7 @@
                     ZIndex = 12,
                     ImagePath = "baleares.jpg",
                     InfoWindowContent = @"<h2>Islas Baleares</h2>",
-                    Population = 1106049
+                    Population = 1106049,
                 },
                 new RegionInfo
                 {
@@ -139,7 +142,7 @@
                     ZIndex = 13,
                     ImagePath = "Canarias.jpg",
                     InfoWindowContent = @"<h2>Islas Canarias</h2>",
-                    Population = 2098593
+                    Population = 2098593,
                 },
                 new RegionInfo
                 {
@@ -150,7 +153,7 @@
                     ZIndex = 14,
                     ImagePath = "LaRioja.jpg",
                     InfoWindowContent = @"<h2>La Rioja</h2>",
-                    Population = 308968
+                    Population = 308968,
                 },
                 new RegionInfo
                 {
@@ -161,7 +164,7 @@
                     ZIndex = 1,
                     ImagePath = "Madrid.jpg",
                     InfoWindowContent = @"<h2>Madrid</h2>",
-                    Population = 6445499
+                    Population = 6445499,
                 },
                 new RegionInfo
                 {
@@ -172,7 +175,7 @@
                     ZIndex = 15,
                     ImagePath = "Murcia.jpg",
                     InfoWindowContent = @"<h2>Murcia</h2>",
-                    Population = 1424063
+                    Population = 1424063,
                 },
                 new RegionInfo
                 {
@@ -183,7 +186,7 @@
                     ZIndex = 14,
                     ImagePath = "Navarra.jpg",
                     InfoWindowContent = @"<h2>Navarra</h2>",
-                    Population = 620337
+                    Population = 620337,
                 },
                 new RegionInfo
                 {
@@ -195,7 +198,7 @@
                     ImagePath = "PaisVasco.jpg",
                     InfoWindowContent = @"<h2>País Vasco</h2>",
                     Population = 2155546
-                }
+                },
             };
         }
 

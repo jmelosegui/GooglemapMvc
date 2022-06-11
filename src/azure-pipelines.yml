@@ -39,3 +39,30 @@ stages:
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
+
+- stage: Deploy
+  displayName: Deploy
+  dependsOn: [Build]
+  jobs:
+
+    - job: Deploy
+      displayName: Deploy Azure App Service
+      steps:
+
+      - checkout: none
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.ArtifactsDirectory)'
+
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Inmediati (GoogleMap.MVC)'
+          appType: 'webApp'
+          WebAppName: 'jmelosegui-com'
+          VirtualApplication: 'map'
+          packageForLinux: '$(System.ArtifactsDirectory)/drop/GoogleMapMvcSamples.zip'
