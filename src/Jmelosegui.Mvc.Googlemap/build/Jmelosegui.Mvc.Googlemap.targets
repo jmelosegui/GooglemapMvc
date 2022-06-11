@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<BuildDependsOn>
+			$(BuildDependsOn);
+			CopyGoogleMapScripts
+		</BuildDependsOn>
+		<JavaScriptDir Condition=" '$(GenerateAssemblyVersionInfo)' == '' ">\wwwroot\js</JavaScriptDir>
+		<CopyGoogleMapScripts Condition=" '$(CopyGoogleMapScripts)' == '' ">true</CopyGoogleMapScripts>
+	</PropertyGroup>
+
+	<Target Name="CopyGoogleMapScripts" Condition=" '$(CopyGoogleMapScripts)' == 'true' ">
+		<Message Importance="high" Text="Copying JavaScript files to $(MSBuildProjectDirectory)$(JavaScriptDir)..." />
+		<ItemGroup>
+			<JavascriptFiles Include="$(MSBuildThisFileDirectory)..\content\js\*.js" />
+		</ItemGroup>
+		<Copy SourceFiles="@(JavascriptFiles)" DestinationFolder="$(MSBuildProjectDirectory)$(JavaScriptDir)" />
+	</Target>
+</Project>

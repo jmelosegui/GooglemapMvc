@@ -1,0 +1,41 @@
+pool:
+  name: Default
+  demands:
+  - msbuild
+  - visualstudio
+
+variables:
+  BuildPlatform: 'any cpu'
+  BuildConfiguration: 'release'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Build Solution
+    steps:
+
+    - task: VSBuild@1
+      displayName: 'Build solution'
+      inputs:
+        msbuildArgs: '/t:restore,build /p:PublishUrl="$(build.artifactstagingdirectory)\GoogleMapMvcSamples"'
+        platform: '$(BuildPlatform)'
+        configuration: '$(BuildConfiguration)'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive $(build.artifactstagingdirectory)\GoogleMapMvcSamples'
+      inputs:
+        rootFolderOrFile: '$(build.artifactstagingdirectory)\GoogleMapMvcSamples'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/GoogleMapMvcSamples.zip'
+
+    - task: DeleteFiles@1
+      displayName: 'Delete files from $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(build.artifactstagingdirectory)'
+        Contents: |
+         GoogleMapMvcSamples
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
