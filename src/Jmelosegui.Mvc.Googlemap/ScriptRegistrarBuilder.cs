@@ -29,6 +29,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public ScriptRegistrarBuilder ScriptsBasePath(string basePath)
         {
+            UrlVirtualPathHelper.AssertVirtualPath(basePath, nameof(basePath));
             this.ScriptRegistrar.BasePath = basePath;
             return this;
         }

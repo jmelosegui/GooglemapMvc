@@ -10,6 +10,7 @@ namespace Jmelosegui.Mvc.GoogleMap
     using System.IO;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class ScriptRegistrar
     {
@@ -32,7 +33,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.Components = new Collection<Map>();
             this.FixedScriptCollection = new List<string>();
             viewContext.HttpContext.Items[Key] = this;
-            this.BasePath = "/js";
+            this.BasePath = "~/js";
             this.ViewContext = viewContext;
         }
 
@@ -81,14 +82,17 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.WriteScriptStatements(writer);
         }
 
-        private static string CombinePath(string directory, string fileName)
+        private string CombinePath(string directory, string fileName)
         {
             const string slash = "/";
 
             string path = (directory.EndsWith(slash, StringComparison.Ordinal) ? directory : directory + slash) +
                           (fileName.StartsWith(slash, StringComparison.Ordinal) ? fileName.Substring(1) : fileName);
 
-            return path;
+            var urlHelper = new UrlHelper(this.ViewContext);
+            var result = urlHelper.Content(path);
+
+            return result;
         }
 
         private void WriteScriptSources(TextWriter writer)

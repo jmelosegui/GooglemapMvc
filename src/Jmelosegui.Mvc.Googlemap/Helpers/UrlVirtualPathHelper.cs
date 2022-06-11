@@ -5,7 +5,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
 
-    internal static class UrlHelper
+    internal static class UrlVirtualPathHelper
     {
         public static void AssertVirtualPath(string parameter, string parameterName)
         {
