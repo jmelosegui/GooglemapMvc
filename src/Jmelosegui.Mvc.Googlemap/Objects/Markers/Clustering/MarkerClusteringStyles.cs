@@ -5,10 +5,30 @@ namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
     using System.Drawing;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class MarkerClusteringStyles
     {
-        public Uri Url { get; set; }
+        private readonly Map map;
+        private string url;
+
+        public MarkerClusteringStyles(Map map)
+        {
+            this.map = map ?? throw new ArgumentNullException(nameof(map));
+        }
+
+        public string Url
+        {
+            get
+            {
+                return this.url;
+            }
+
+            set
+            {
+                this.url = new UrlHelper(this.map.ViewContext).Content(value);
+            }
+        }
 
         public int Height { get; set; }
 

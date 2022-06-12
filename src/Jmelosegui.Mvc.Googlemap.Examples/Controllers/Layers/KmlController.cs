@@ -19,7 +19,7 @@
         {
             this.Clickable = true;
             this.ScreenOverlays = true;
-            this.Url = new Uri("https://googlearchive.github.io/js-v2-samples/ggeoxml/cta.kml");
+            this.Url = "https://googlearchive.github.io/js-v2-samples/ggeoxml/cta.kml";
         }
 
         public bool Clickable { get; set; }
@@ -30,7 +30,7 @@
 
         public bool SuppressInfoWindows { get; set; }
 
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         public int ZIndex { get; set; }
     }

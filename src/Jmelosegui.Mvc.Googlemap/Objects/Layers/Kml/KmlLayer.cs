@@ -4,9 +4,12 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class KmlLayer : Layer
     {
+        private string url;
+
         public KmlLayer(Map map)
             : base("kml", map)
         {
@@ -22,7 +25,18 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public bool SuppressInfoWindows { get; set; }
 
-        public Uri Url { get; set; }
+        public string Url
+        {
+            get
+            {
+                return this.url;
+            }
+
+            set
+            {
+                this.url = new UrlHelper(this.Map.ViewContext).Content(value);
+            }
+        }
 
         public int ZIndex { get; set; }
 

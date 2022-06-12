@@ -38,8 +38,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Could be a virtual Url")]
-        public KmlLayerBuilder Url(Uri absoluteUrl)
+        public KmlLayerBuilder Url(string absoluteUrl)
         {
             this.Layer.Url = absoluteUrl;
 

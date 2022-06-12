@@ -107,7 +107,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                 string scriptPath = null;
                 if (scriptFileName.IndexOf("://", StringComparison.Ordinal) == -1)
                 {
-                    scriptPath = CombinePath(this.BasePath, scriptFileName);
+                    scriptPath = this.CombinePath(this.BasePath, scriptFileName);
                 }
                 else
                 {

@@ -18,7 +18,7 @@ namespace Jmelosegui.Mvc.GoogleMap
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
 
-            result["url"] = this.style.Url.AbsoluteUri;
+            result["url"] = this.style.Url;
             result["height"] = this.style.Height;
             result["width"] = this.style.Width;
             result["textSize"] = this.style.FontSize;

@@ -33,17 +33,5 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             return false;
         }
-
-        public static Uri GetPathBase(this HttpRequest request)
-        {
-            var uriBuilder = new UriBuilder
-            {
-                Scheme = request.Scheme,
-                Host = request.Host.Host,
-                Port = request.Host.Port.GetValueOrDefault(80),
-            };
-
-            return uriBuilder.Uri;
-        }
     }
 }

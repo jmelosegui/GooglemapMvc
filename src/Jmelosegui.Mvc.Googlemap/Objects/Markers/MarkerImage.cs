@@ -5,18 +5,30 @@ namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
     using System.Drawing;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class MarkerImage
     {
-        public MarkerImage(Uri absoluteUrl, Size size, Point point, Point anchor)
+        private readonly Marker marker;
+        private string absoluteUrl;
+
+        public MarkerImage(Marker marker)
         {
-            this.AbsoluteUrl = absoluteUrl;
-            this.Size = size;
-            this.Point = point;
-            this.Anchor = anchor;
+            this.marker = marker ?? throw new ArgumentNullException(nameof(marker));
         }
 
-        public Uri AbsoluteUrl { get; set; }
+        public string AbsoluteUrl
+        {
+            get
+            {
+                return this.absoluteUrl;
+            }
+
+            set
+            {
+                this.absoluteUrl = new UrlHelper(this.marker.Map.ViewContext).Content(value);
+            }
+        }
 
         public Point Anchor { get; set; }
 

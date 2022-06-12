@@ -15,10 +15,9 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.clusteringStyle = clusteringStyle;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#")]
-        public MarkerClusteringStylesBuilder ImageUrl(Uri absoluteUrl)
+        public MarkerClusteringStylesBuilder ImageUrl(string imageUrl)
         {
-            this.clusteringStyle.Url = absoluteUrl;
+            this.clusteringStyle.Url = imageUrl;
             return this;
         }
 

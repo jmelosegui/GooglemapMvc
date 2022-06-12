@@ -29,7 +29,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public bool Clickable { get; set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Draggable")]
         public bool Draggable { get; set; }
 
         public MarkerImage Icon { get; set; }

@@ -18,7 +18,7 @@
                 .Latitude(23.140971656573335)
                 .Longitude(-82.39435493946075)
                 .Title("Hello World!")
-                .Icon(new Uri($"{Context.Request.GetPathBase()}Images/beachflag.png"), new Size(20, 32), new Point(0, 0), new Point(0, 32))
+                .Icon("~/Images/beachflag.png", new Size(20, 32), new Point(0, 0), new Point(0, 32))
                 .Draggable(true);
         })
         .Render();

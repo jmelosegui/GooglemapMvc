@@ -1,5 +1,4 @@
 ﻿@using System.Drawing
-@using Jmelosegui.Mvc.GoogleMap
 @using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 @model IEnumerable<Jmelosegui.Mvc.GoogleMap.Examples.App_Data.RegionInfo>
 
@@ -21,17 +20,16 @@
         options.ZoomOnClick = (bool)ViewData["ZoomOnClick"];
         options.HideSingleGroupMarker = (bool)ViewData["HideSingleGroupMarker"];
         if ((string)ViewData["CustomStyles"] == "StackOverflow")
-        {
-            var baseUrl = Context.Request.GetPathBase();
-            options.CustomStyles(style => style.Add().ImageUrl(new Uri($"{baseUrl}/Images/cluster1.png"))
+        {   
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster1.png")
                                     .Height(35).Width(35).FontSize(12).FontColor(Color.White));
-            options.CustomStyles(style => style.Add().ImageUrl(new Uri($"{baseUrl}/Images/cluster2.png"))
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster2.png")
                                     .Height(45).Width(45).FontSize(12).FontColor(Color.White));
-            options.CustomStyles(style => style.Add().ImageUrl(new Uri($"{baseUrl}/Images/cluster3.png"))
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster3.png")
                                     .Height(60).Width(60).FontSize(12).FontColor(Color.White));
-            options.CustomStyles(style => style.Add().ImageUrl(new Uri($"{baseUrl}/Images/cluster3.png"))
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster3.png")
                                     .Height(60).Width(60).FontSize(12).FontColor(Color.White));
-            options.CustomStyles(style => style.Add().ImageUrl(new Uri($"{baseUrl}/Images/cluster3.png"))
+            options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster3.png")
                                     .Height(60).Width(60).FontSize(12).FontColor(Color.White));
         }
     })

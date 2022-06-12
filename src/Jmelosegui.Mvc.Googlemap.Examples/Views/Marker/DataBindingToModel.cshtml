@@ -26,21 +26,21 @@
                             marker.Title = regionInfo.Title;
                             marker.ZIndex = regionInfo.ZIndex;
 
-                            var imageUrl = new Uri($"{Context.Request.GetPathBase()}Images/flags/{regionInfo.ImagePath}");
-
-                            marker.Icon = new MarkerImage(
-                                imageUrl
-                                , new Size(18, 12)
-                                , new Point(0, 0)
-                                , new Point(0, 12));
+                            marker.Icon = new MarkerImage(marker)
+                            {
+                                AbsoluteUrl = $"~/Images/flags/{regionInfo.ImagePath}",
+                                Size = new Size(18, 12),
+                                Point = new Point(0, 0),
+                                Anchor = new Point(0, 12)
+                            };
 
                             marker.Window = new InfoWindow(marker)
-                            {
-                                Template =
-                                {
+                                    {
+                                        Template =
+                                        {
                                     Html = regionInfo.InfoWindowContent,
-                                }
-                            };
+                                        }
+                                    };
                         }
                     )
             )

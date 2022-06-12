@@ -11,25 +11,25 @@
     <link href="~/js/google-code-prettify/prettify.css" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar">
+            <div class="container pl-4 ml-5 flex-row-reverse">
+                <ul class="nav justify-content-end">
+                    <li><a class="text-decoration-none" href="~/"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a class="text-decoration-none" href="https://github.com/jmelosegui/GooglemapMvc" target="_blank"><i class="bi bi-github"></i> Project on GitHub</a></li>
+                    <li><a class="text-decoration-none" href="https://github.com/jmelosegui/GooglemapMvc/issues" target="_blank"><i class="bi bi-heart-fill"></i> Report a bug</a></li>
+                </ul>
+            </div>
+    </nav>
     <div class="container">
         <div class="row">
             <div id="title" class="col-xs-6 col-sm-6"><h2>Googlemap control for Asp.Net MVC</h2></div>
-            <div class="col-xs-6 col-sm-6">
-                <ul class="nav justify-content-end">
-                    <li><a class="text-decoration-none" href="~/"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a class="text-decoration-none" href="https://github.com/jmelosegui/GooglemapMvc"><i class="bi bi-github"></i> Project on GitHub</a></li>
-                    <li><a class="text-decoration-none" href="https://github.com/jmelosegui/GooglemapMvc/issues"><i class="bi bi-heart-fill"></i> Report a bug</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 justify-content-end">
+            <div class="col-xs-6 col-sm-6 justify-content-end">
                 <ul class="social-button">
                     <li><iframe src="https://ghbtns.com/github-btn.html?user=jmelosegui&repo=googlemapmvc&type=star&count=true&size=small" frameborder="0" scrolling="no"></iframe></li>
                     <li> @Html.Partial("_TwitterButton")</li>
                 </ul>
             </div>
-        </div>
+        </div>        
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-sm-4 col-md-3 sidebar-offcanvas" id="sidebar" role="navigation">
                 <p class="d-block d-sm-none">
@@ -45,8 +45,7 @@
                 @RenderBody()
             </div>
         </div>
-    </div>
-    <hr />
+    </div>    
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -62,6 +61,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="~/js/google-code-prettify/prettify.js"></script>
-                @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>
