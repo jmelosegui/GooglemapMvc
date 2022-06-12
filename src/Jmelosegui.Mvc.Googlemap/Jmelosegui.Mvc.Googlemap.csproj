@@ -66,6 +66,10 @@
 		</BuildDependsOn>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">		
+		<PackageOutputPath>$(PublishUrl)\..</PackageOutputPath>
+	</PropertyGroup>
+	
 	<Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
 		<PropertyGroup>
 			<NuspecProperties>$(NuspecProperties);Version=$(Version);CommitId=$(GitCommitId);ProjectDir=$(MSBuildProjectDirectory);Output=$(Outdir)</NuspecProperties>

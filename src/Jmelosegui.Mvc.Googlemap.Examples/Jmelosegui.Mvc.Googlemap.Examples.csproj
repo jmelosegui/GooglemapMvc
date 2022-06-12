@@ -27,39 +27,13 @@
 	<!-- References -->
 	<ItemGroup>
 		<ProjectReference Include="..\Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.GoogleMap.csproj" />		
-	</ItemGroup>
-	<ItemGroup>
-		<Content Update="Views\Basic\AjaxPartialView.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\ClientEvents.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\FirstLook.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\Language.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\Multimap.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\UIControls.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\Version.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Update="Views\Basic\_GooglemapPartialView.cshtml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+	</ItemGroup>	
 
 	<!-- Publish -->
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
 		<WebPublishMethod>FileSystem</WebPublishMethod>
 		<DeployTarget>WebPublish</DeployTarget>
-		<DeployOnBuild>true</DeployOnBuild>
+		<DeployOnBuild>true</DeployOnBuild>		
 	</PropertyGroup>
 
 	<Target Name="AddExtraPublishContent" AfterTargets="_IncludePrePublishGeneratedContent">

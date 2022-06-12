@@ -40,11 +40,45 @@ stages:
          GoogleMapMvcSamples
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+      displayName: 'Publish Website Artifact: drop'
+
+
+- stage: PublishNuget
+  displayName: Publish Nuget Package
+  dependsOn: [Build]
+  jobs:
+
+    - job: Deploy
+      displayName: Publish Nuget Package
+      steps:
+      - checkout: none
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.ArtifactsDirectory)'
+      - ${{ if ne( variables['Build.SourceBranchName'], 'master' ) }}: 
+        - task: NuGetCommand@2
+          displayName: 'Push Nuget to Feedz'
+          inputs:
+            command: 'push'
+            packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+            nuGetFeedType: 'external'
+            publishFeedCredentials: 'feedz'
+      - ${{ else }}:
+        - task: NuGetCommand@2
+          displayName: 'Push Nuget to nuget.org'
+          inputs:
+            command: 'push'
+            packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+            nuGetFeedType: 'external'
+            publishFeedCredentials: 'nuget.org'
 
 - stage: Deploy
   displayName: Deploy
-  #condition: eq( variables['Build.SourceBranchName'], 'master' )
+  condition: eq( variables['Build.SourceBranchName'], 'master' )
   dependsOn: [Build]
   jobs:
 
