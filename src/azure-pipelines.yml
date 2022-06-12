@@ -77,7 +77,7 @@ stages:
             publishFeedCredentials: 'nuget.org'
 
 - stage: Deploy
-  displayName: Deploy
+  displayName: Deploy Example Website
   condition: eq( variables['Build.SourceBranchName'], 'master' )
   dependsOn: [Build]
   jobs:

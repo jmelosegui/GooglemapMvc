@@ -6,7 +6,7 @@
 		<title>GoogleMap Control for AspNet.Mvc</title>
 		<authors>Juan M. Elosegui</authors>
 		<owners>jmelosegui</owners>
-		<projectUrl>https://github.com/jmelosegui/GooglemapMvc</projectUrl>
+		<projectUrl>https://jmelosegui.com/map</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>		
 		<license type="expression">MIT</license>
 		<description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</description>
