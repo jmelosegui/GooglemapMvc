@@ -31,7 +31,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        public ImageMapTypeBuilder TileUrlPattern(Uri value)
+        public ImageMapTypeBuilder TileUrlPattern(string value)
         {
             this.MapType.TileUrlPattern = value;
             return this;

@@ -1,7 +1,9 @@
+trigger:
+- master
+
 pool:
   name: Default
   demands:
-  - msbuild
   - visualstudio
 
 variables:
@@ -42,6 +44,7 @@ stages:
 
 - stage: Deploy
   displayName: Deploy
+  #condition: eq( variables['Build.SourceBranchName'], 'master' )
   dependsOn: [Build]
   jobs:
 

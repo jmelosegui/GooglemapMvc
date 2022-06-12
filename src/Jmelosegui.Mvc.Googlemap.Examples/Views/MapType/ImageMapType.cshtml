@@ -17,7 +17,7 @@
         .ImageMapTypes(map =>
         {
             map.Add()
-                .TileUrlPattern(new Uri("http://inmediati.blob.core.windows.net/map/speculative/{2}/tile_{2}_{0}-{1}.png"))
+                .TileUrlPattern("http://inmediati.blob.core.windows.net/map/speculative/{2}/tile_{2}_{0}-{1}.png")
                 .TileSize(new Size(256, 256))
                 .RepeatHorizontally(false)
                 .RepeatVertically(false)
@@ -28,7 +28,7 @@
 
 
             map.Add()
-                .TileUrlPattern(new Uri("http://inmediati.blob.core.windows.net/map/natural/{2}/tile_{2}_{0}-{1}.png"))
+                .TileUrlPattern("http://inmediati.blob.core.windows.net/map/natural/{2}/tile_{2}_{0}-{1}.png")
                 .TileSize(new Size(256, 256))
                 .RepeatHorizontally(false)
                 .RepeatVertically(false)
