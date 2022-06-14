@@ -8,7 +8,7 @@
     <div class="col-md-12">
         @(Html.GoogleMap()
                 .Name("map")
-                .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+                .ApiKey((string)ViewData["GoogleMapApiKey"])
                 .Center(c => c.Latitude(40)
                                 .Longitude(-3))
                 .Height(420)

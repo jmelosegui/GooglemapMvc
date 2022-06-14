@@ -3,7 +3,7 @@
 @{
     Html.GoogleMap()
         .Name("map")
-        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Markers(marker => marker.Add()
             .Window(w => w.Add()
                 .Content(                    

@@ -24,7 +24,7 @@
     <div class="col-md-10">
         @(Html.GoogleMap()
             .Name("map")
-            .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+            .ApiKey((string)ViewData["GoogleMapApiKey"])
             .Height(420)
             .ClientEvents(events => events
                 .OnMapBoundChanged("highlightEvent")

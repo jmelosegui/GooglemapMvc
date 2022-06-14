@@ -10,7 +10,7 @@
 @{
     Html.GoogleMap()
         .Name("map")
-        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(600)
         .Center(c => c.Latitude(40)
             .Longitude(-3))

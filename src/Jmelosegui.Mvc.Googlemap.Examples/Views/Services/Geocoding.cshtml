@@ -8,7 +8,7 @@
 @(
     Html.GoogleMap()
         .Name("map")
-        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(300)
         .Center(c => c.Address(Model))
         .Markers(m => m.Add())

@@ -7,6 +7,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using Microsoft.Extensions.Configuration;
 
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class AutoPopulateSourceCodeAttribute : Attribute, IResultFilter
@@ -17,10 +18,14 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
         private const string LayoutPagePath = ViewPath + @"\Shared\_Layout.cshtml";
         private const string LayoutExamplesPagePath = ViewPath + @"\Shared\_LayoutExamples.cshtml";
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly IConfiguration configuration;
 
-        public AutoPopulateSourceCodeAttribute(IWebHostEnvironment webHostEnvironment)
+        public AutoPopulateSourceCodeAttribute(
+            IWebHostEnvironment webHostEnvironment, 
+            IConfiguration configuration)
         {
             this.webHostEnvironment = webHostEnvironment;
+            this.configuration = configuration;
         }
         
         public void OnResultExecuting(ResultExecutingContext filterContext)
@@ -69,6 +74,8 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
                 }
 
                 viewData["aditionalFiles"] = additionalFiles;
+
+                viewData["GoogleMapApiKey"] = configuration.GetValue<string>("GoogleMapApiKey");
             }
         }
 

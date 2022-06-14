@@ -9,7 +9,7 @@
 <div style="height: 500px; border: solid 1px #cccccc">
     @(Html.GoogleMap()
         .Name("map")
-        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(500)
         .Libraries(libraries)
         .ClientEvents(events => events.OnMapLoaded("mapEvent"))

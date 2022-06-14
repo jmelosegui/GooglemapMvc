@@ -7,8 +7,7 @@
     <div class="col-md-12 thumbnail">
         <img src="~/Images/logo.jpg" alt="Googlemap Logo" class="pull-left hidden-xs" sizes="200" style="margin-right: 30px; width: 200px" />
         <h4 style="margin-top: 30px;">
-            Googlemap control for Asp.Net MVC wraps Google maps API simplifying its use in ASP.NET
-            MVC applications.<br />
+            Googlemap control for Asp.Net MVC wraps Google maps API simplifying its use in ASP.NET Core Web applications.<br />
         </h4>
     </div>
 </div>
@@ -16,7 +15,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Install</h2>
-        <p>Inside Visual Studio create a new AspNet Mvc Application.</p>
+        <p>Inside Visual Studio create a new ASP.NET Core Web Application.</p>
         <p> Open the package manager console and install the Googlemap Mvc nuget package by typing the following command.</p>
 
         <div class="col-lg-9 col-xs-12 nuget">
@@ -27,7 +26,7 @@
     <br />
     <div class="col-sm-12">
 
-        <p>Once you have it go to the Views-&gt;Home-&gt;Index.cshtml and include the following</p>
+        <p>Once you have it go to the Pages-&gt;Index.cshtml and include the following</p>
         <pre class="prettyprint">
     @@(
         Html.GoogleMap()
@@ -46,7 +45,7 @@
     }
         </pre>
 
-        <p>Don't forget to add the namespace to the very top of your page</p>
+        <p>Don't forget to add the namespace to the very top of your page or in the _ViewImports.cshtml file.</p>
 
         <pre class="prettyprint">
     @@using Jmelosegui.Mvc.GoogleMap

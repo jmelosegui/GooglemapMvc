@@ -8,7 +8,7 @@
 <div style="height: 500px; border: solid 1px #cccccc">
     @(Html.GoogleMap()
           .Name("map")
-          .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+          .ApiKey((string)ViewData["GoogleMapApiKey"])
           .Version(ViewData["version"] as string)
           .Height(500))
 </div>

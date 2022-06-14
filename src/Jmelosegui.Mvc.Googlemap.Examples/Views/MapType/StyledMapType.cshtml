@@ -6,7 +6,7 @@
 
 @(Html.GoogleMap()
         .Name("map")
-        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Center(c=> c.Latitude(40.6743890)
                      .Longitude(-73.9455))
         .Zoom(12)

@@ -43,13 +43,13 @@ stages:
       displayName: 'Publish Website Artifact: drop'
 
 
-- stage: PublishNuget
-  displayName: Publish Nuget Package
+- stage: PublishNugetCI
+  displayName: Publish CI Nuget Package 
   dependsOn: [Build]
   jobs:
 
     - job: Deploy
-      displayName: Publish Nuget Package
+      displayName: Publish CI Nuget Package
       steps:
       - checkout: none
 
@@ -59,33 +59,24 @@ stages:
           downloadType: 'single'
           artifactName: 'drop'
           downloadPath: '$(System.ArtifactsDirectory)'
-      - ${{ if ne( variables['Build.SourceBranchName'], 'master' ) }}: 
-        - task: NuGetCommand@2
-          displayName: 'Push Nuget to Feedz'
-          inputs:
-            command: 'push'
-            packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
-            nuGetFeedType: 'external'
-            publishFeedCredentials: 'feedz'
-      - ${{ else }}:
-        - task: NuGetCommand@2
-          displayName: 'Push Nuget to nuget.org'
-          inputs:
-            command: 'push'
-            packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
-            nuGetFeedType: 'external'
-            publishFeedCredentials: 'nuget.org'
+      
+      - task: NuGetCommand@2
+        displayName: 'Push Nuget to Feedz'
+        inputs:
+          command: 'push'
+          packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: 'feedz'      
 
-- stage: Deploy
-  displayName: Deploy Example Website
+- stage: PublishNugetCI
+  displayName: Publish Nuget Package
   condition: eq( variables['Build.SourceBranchName'], 'master' )
-  dependsOn: [Build]
+  dependsOn: [PublishNugetCI]
   jobs:
 
-    - job: Deploy
-      displayName: Deploy Azure App Service
+  - job: Deploy
+      displayName: Publish Nuget and Deploy Web Site
       steps:
-
       - checkout: none
 
       - task: DownloadBuildArtifacts@0
@@ -96,6 +87,7 @@ stages:
           downloadPath: '$(System.ArtifactsDirectory)'
 
       - task: AzureRmWebAppDeployment@4
+        displayName: 'Deploy sample website'
         inputs:
           ConnectionType: 'AzureRM'
           azureSubscription: 'Inmediati (GoogleMap.MVC)'
@@ -103,3 +95,11 @@ stages:
           WebAppName: 'jmelosegui-com'
           VirtualApplication: 'map'
           packageForLinux: '$(System.ArtifactsDirectory)/drop/GoogleMapMvcSamples.zip'
+
+      - task: NuGetCommand@2
+        displayName: 'Push Nuget to nuget.org'
+        inputs:
+          command: 'push'
+          packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: 'nuget.org'   

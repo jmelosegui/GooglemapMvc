@@ -9,7 +9,7 @@
     <div class="col-md-6" style="height: 300px">
         @(
             Html.GoogleMap()
-                .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+                .ApiKey((string)ViewData["GoogleMapApiKey"])
                 .Name("map")
          )
     </div>
@@ -17,7 +17,7 @@
         @(
             Html.GoogleMap()
                 .Name("map1")
-                .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+                .ApiKey((string)ViewData["GoogleMapApiKey"])
                 .Center(c => c.Address("Madrid, Spain"))
         )
     </div>

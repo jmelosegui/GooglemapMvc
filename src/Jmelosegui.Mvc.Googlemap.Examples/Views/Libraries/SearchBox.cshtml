@@ -39,7 +39,7 @@
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     @(Html.GoogleMap()
         .Name("map")
-        .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(500)
         .Libraries(libraries)
         .ClientEvents(events => events.OnMapLoaded("mapEvent"))

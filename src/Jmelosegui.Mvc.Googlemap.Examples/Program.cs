@@ -1,15 +1,18 @@
 ﻿using Jmelosegui.Mvc.GoogleMap.Examples;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddEnvironmentVariables();
+
 // Add services to the container.
 
 builder.Services.AddMvc(options => 
 {
-    options.Filters.Add(new AutoPopulateSourceCodeAttribute(builder.Environment));
+    options.Filters.Add(new AutoPopulateSourceCodeAttribute(builder.Environment, builder.Configuration));
 });
 
 var app = builder.Build();

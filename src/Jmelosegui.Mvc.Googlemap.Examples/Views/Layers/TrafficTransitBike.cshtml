@@ -7,7 +7,7 @@
 
 @(Html.GoogleMap()
     .Name("map")
-    .ApiKey("AIzaSyC9ac-PvvyRhW-dUx0tSM-RFT9H-dNqtdU")
+    .ApiKey((string)ViewData["GoogleMapApiKey"])
     .Height(450)
     .Center(c => c.Address("Madrid"))
     .Zoom(14)
