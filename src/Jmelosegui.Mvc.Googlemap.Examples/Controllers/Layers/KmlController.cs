@@ -1,6 +1,7 @@
 ﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
-    using System.Web.Mvc;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
 
     public partial class LayersController
     {
@@ -18,7 +19,7 @@
         {
             this.Clickable = true;
             this.ScreenOverlays = true;
-            this.Url = "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml";
+            this.Url = "https://googlearchive.github.io/js-v2-samples/ggeoxml/cta.kml";
         }
 
         public bool Clickable { get; set; }

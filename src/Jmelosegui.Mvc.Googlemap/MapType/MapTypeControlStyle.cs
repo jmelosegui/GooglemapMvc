@@ -10,6 +10,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         [ClientSideEnumValue("'DROPDOWN_MENU'")]
         DropDownMenu,
         [ClientSideEnumValue("'HORIZONTAL_BAR'")]
-        HorizontalBar
+        HorizontalBar,
     }
 }

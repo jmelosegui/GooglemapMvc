@@ -1,0 +1,68 @@
+﻿<p>This example shows how to load markers using the Google Geocoding Services and Googlemap control for Asp.Net MVC.</p>
+<p>
+    To enabled the use of the Geocoding Serviece you will need to explicitly set the MarkersGeocoding to true.
+</p>
+<p>
+    <b><i>You cannot mix markers using geocoding and markers using Latitude and Logitude in the same map.</i></b>
+</p>
+<p>
+    Notice that the Googlemap control for Asp.Net MVC will rise an event when the Markers Geocoding is completed.
+    You can subscribe to that event using the Map Client Event "OnMarkersGeocodingCompleted"
+</p>
+<p>
+    Googlemap control for Asp.Net MVC will also rise an event ("OnMarkersGeocodingProgress") you can subcribe to, in order to show progress on loading markers from Geocoding.
+</p>
+<p>
+    Be aware of the Google Geocoding Services API <a href="https://developers.google.com/maps/documentation/geocoding/#Limits">limits</a>
+</p>
+<pre class="prettyprint">
+    @{
+    Html.GoogleMap()
+        .Name(&quot;map&quot;)
+        .Height(600)
+        .Center(c =&gt; c.Latitude(40)
+                      .Longitude(-3))
+        .ClientEvents(e =&gt;
+            e.OnMarkersGeocodingCompleted(&quot;MarkerFromAddressCompleted&quot;)
+             .OnMarkersGeocodingProgress(&quot;OnProgress&quot;)
+        )
+        .MarkersGeocoding(true)                      
+        .BindTo&lt;RegionInfo, Marker&gt;
+        (Model, mappings =&gt; mappings.For&lt;RegionInfo&gt;
+            (
+                binding =&gt; binding.ItemDataBound
+                    (
+                        (marker, regionInfo) =&gt;
+                        {
+                            marker.Address = regionInfo.Address;
+                            marker.Title = regionInfo.Title;
+                            marker.zIndex = regionInfo.zIndex;
+                            marker.Window = new InfoWindow(marker)
+                            {
+                                Template =
+                                {
+                                    Html = regionInfo.InfoWindowContent
+                                }
+                            };
+                        }
+                    )
+            )
+        )
+        .Render();
+}
+
+@section Scripts{
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        function MarkerFromAddressCompleted(args) {
+            alert(&quot;Load markers using Geocoding completed !!!&quot;);
+        }
+        function OnProgress(args) {
+            alert(&quot;Progress Percentage = &quot; + args.value);
+
+            if (args.status !== google.maps.GeocoderStatus.OK) {
+                alert(&quot;Error loading address &quot; + args.address + &quot;. Reason: &quot; + args.status);
+            }
+        }
+    &lt;/script&gt;
+}
+</pre>

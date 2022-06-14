@@ -1,5 +1,4 @@
-﻿@using Jmelosegui.Mvc.GoogleMap
-@using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+﻿@using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 @model IEnumerable<Jmelosegui.Mvc.GoogleMap.Examples.App_Data.RegionInfo>
 
 @{
@@ -19,6 +18,7 @@
         @{
             Html.GoogleMap()
                 .Name("map")
+                .ApiKey((string)ViewData["GoogleMapApiKey"])
                 .Height(600)
                 .Center(c => c.Latitude(40)
                     .Longitude(-3))
@@ -34,16 +34,20 @@
                                     marker.Longitude = regionInfo.Longitude;
                                     marker.Title = regionInfo.Title;
                                     marker.ZIndex = regionInfo.ZIndex;
-                                    marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}", regionInfo.ImagePath)
-                                        , new Size(18, 12)
-                                        , new Point(0, 0)
-                                        , new Point(0, 12));
+
+                                    marker.Icon = new MarkerImage(marker)
+                                    {
+                                        AbsoluteUrl = $"~/Images/flags/{regionInfo.ImagePath}",
+                                        Size = new Size(18, 12),
+                                        Point = new Point(0, 0),
+                                        Anchor = new Point(0, 12)
+                                    };
 
                                     marker.Window = new InfoWindow(marker)
                                     {
                                         Template =
                                         {
-                                            Content = () => ViewContext.Writer.Write(regionInfo.InfoWindowContent)
+                                            Html = regionInfo.InfoWindowContent
                                         }
                                     };
                                 }
@@ -58,7 +62,7 @@
         <ul class="marker-list">
             @foreach (RegionInfo info in Model)
             {
-                <li data-id="@info.Id"><img src="@(String.Format("../Images/flags/{0}", info.ImagePath))"/> @info.Title</li>
+                <li data-id="@info.Id"><img src="@($"../Images/flags/{info.ImagePath}")"/> @info.Title</li>
             }
         </ul>
     </div>
@@ -74,9 +78,13 @@
             markers = args.markers;
         }
 
-        $(".marker-list li").click(function () {
-            var id = $(this).attr('data-id');
-            google.maps.event.trigger(markers[id], 'click');
+         const makerlist = document.querySelectorAll(".marker-list li");
+        
+        Array.prototype.forEach.call(makerlist, function (el, i) {
+            el.addEventListener('click', function (e) {
+                var id = e.currentTarget.dataset.id; //attr('data-id');
+                google.maps.event.trigger(markers[id], 'click');
+            }, false);
         });
 
     </script>

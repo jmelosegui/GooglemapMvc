@@ -8,7 +8,8 @@
 @(
     Html.GoogleMap()
         .Name("map")
-        .Height(300)        
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
+        .Height(300)
         .Center(c => c.Address(Model))
         .Markers(m => m.Add())
 )
@@ -16,15 +17,15 @@
 
 <form class="form-horizontal" role="form">
     <h4> Google Map Settings</h4>
-    <div class="form-group">
+    <div class="form-group row">
         <label for="address" class="col-sm-2 control-label" style="white-space: nowrap;">Address: </label>
         <div class="col-sm-5">
             @Html.TextBox("address", Model, new { @class = "form-control", id = "address" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </div>
 </form>

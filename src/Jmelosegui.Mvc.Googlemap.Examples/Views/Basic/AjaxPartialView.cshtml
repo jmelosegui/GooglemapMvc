@@ -5,7 +5,6 @@
 }
 
 <div style="height: 500px; border: solid 1px #cccccc" id="mapContainer">
-
 </div>
 
 <br />
@@ -13,34 +12,33 @@
 <form class="form-horizontal" role="form">
     <h4> Google Map Settings</h4>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-offset-1 col-sm-10">
-            <button type="button" id="myButton" class="btn btn-default">Load Googlemap Partial View with Ajax</button>
+            <button type="button" id="myButton" class="btn btn-primary">Load Googlemap Partial View with Ajax</button>
         </div>
     </div>
 </form>
 
 @section scripts
-{
+    {
     @(Html.GoogleMap()
           .ScriptRegistrar(scripts => scripts.Add("jmelosegui.googlemap.js"))
      )
 
     <script type='text/javascript'>
 
-        $('#myButton').click(function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+        var button = document.getElementById('myButton');
+        button.addEventListener('click', function () {
 
-            new $.jmelosegui.GoogleMap('#mapContainer').ajax({
+            new jmelosegui.instance.GoogleMap('#mapContainer').ajax({
                 url: '@Url.Action("GooglemapPartialView", "Basic")',
                 type: "Get",
-                data: { payload: 'from ajax call'},
-                success: function(data) {
-                    //alert('succeded');
+                data: { payload: 'from ajax call' },
+                success: function (data) {
+                    alert('succeded');
                 }
             });
-        });
+        }, false);
 
     </script>
 }

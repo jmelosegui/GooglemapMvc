@@ -4,37 +4,81 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
+    using System.Text.Encodings.Web;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Newtonsoft.Json;
 
-    public class HtmlTemplate : HtmlTemplate<object>
+    public class HtmlTemplate
     {
-        private Action content;
+        private string html;
+        private Func<object> inlineTemplate;
+        private Action<TagBuilder> binder;
 
-        [JsonIgnore]
-        public Action Content
+        public HtmlTemplate()
+        {
+        }
+
+        public string Html
         {
             get
             {
-                return this.content;
+                return this.html;
             }
 
             set
             {
-                this.content = value;
-                if (value != null)
-                {
-                    this.CodeBlockTemplate = obj => this.content();
-                }
-                else
-                {
-                    this.CodeBlockTemplate = null;
-                }
+                this.html = value;
+
+                this.binder = (node) => node.InnerHtml.AppendHtml(this.html);
+                this.inlineTemplate = null;
             }
         }
 
-        public void Apply(IHtmlNode node)
+        [JsonIgnore]
+        public Func<object> InlineTemplate
         {
-            this.Apply(null, node);
+            get
+            {
+                return this.inlineTemplate;
+            }
+
+            set
+            {
+                this.inlineTemplate = value;
+                this.binder = (node) =>
+                {
+                    var result = this.InlineTemplate();
+                    var helperResult = result as IHtmlContent;
+                    if (helperResult != null)
+                    {
+                        node.InnerHtml.AppendHtml(helperResult);
+                        return;
+                    }
+
+                    if (result != null)
+                    {
+                        node.InnerHtml.AppendHtml(result.ToString());
+                        return;
+                    }
+                };
+
+                this.html = null;
+            }
+        }
+
+        public void Apply(TagBuilder node)
+        {
+            if (this.HasValue())
+            {
+                this.binder(node);
+            }
+        }
+
+        public bool HasValue()
+        {
+            return this.Html.HasValue() || this.InlineTemplate != null;
         }
     }
 }

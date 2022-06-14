@@ -1,4 +1,6 @@
 ﻿@using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions;
 @model IEnumerable<RegionInfo>
 
 @{
@@ -8,6 +10,7 @@
 @{
     Html.GoogleMap()
         .Name("map")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(600)
         .Center(c => c.Latitude(40)
             .Longitude(-3))
@@ -22,18 +25,22 @@
                             marker.Longitude = regionInfo.Longitude;
                             marker.Title = regionInfo.Title;
                             marker.ZIndex = regionInfo.ZIndex;
-                            marker.Icon = new MarkerImage(String.Format("~/Images/flags/{0}", regionInfo.ImagePath)
-                                , new Size(18, 12)
-                                , new Point(0, 0)
-                                , new Point(0, 12));
+
+                            marker.Icon = new MarkerImage(marker)
+                            {
+                                AbsoluteUrl = $"~/Images/flags/{regionInfo.ImagePath}",
+                                Size = new Size(18, 12),
+                                Point = new Point(0, 0),
+                                Anchor = new Point(0, 12)
+                            };
 
                             marker.Window = new InfoWindow(marker)
                             {
                                 Template =
                                 {
-                                    Content = () => ViewContext.Writer.Write(regionInfo.InfoWindowContent)
-                                }
-                            };
+                                    Html = regionInfo.InfoWindowContent,
+                                    }
+                                };
                         }
                     )
             )

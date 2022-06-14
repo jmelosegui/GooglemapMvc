@@ -1,12 +1,12 @@
 ﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
-    using System.Web.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     public partial class LibrariesController
     {
         public ActionResult Drawing()
         {
-            return View();
+            return this.View();
         }
     }
 }

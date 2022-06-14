@@ -22,6 +22,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         [ClientSideEnumValue("'labels.text.fill'")]
         LabelsTextFill,
         [ClientSideEnumValue("'labels.text.stroke'")]
-        LabelsTextStroke
+        LabelsTextStroke,
     }
 }

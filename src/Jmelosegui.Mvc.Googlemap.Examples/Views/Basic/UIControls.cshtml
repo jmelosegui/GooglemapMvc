@@ -6,6 +6,7 @@
 
 @(Html.GoogleMap()
                   .Name("map")
+                  .ApiKey((string)ViewData["GoogleMapApiKey"])
                   .Height(500)
                   .ScaleControlVisible(Model.ShowScaleControl)
 
@@ -32,15 +33,13 @@
 
 <br />
 
-
-<form class="form-horizontal" method="POST" role="form">
+<form method="POST">
     <h4> Google Map Settings</h4>
-
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-3">
             <div class="checkbox">
                 <label>
-                    @Html.CheckBox("ShowScaleControl", new { id = "mapShowScale" })
+                    @Html.CheckBox("ShowScaleControl", new { id = "mapShowScale", @class = "form-check-input"})
                     Show scale control
                 </label>
             </div>
@@ -49,11 +48,11 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-3">
             <div class="checkbox">
                 <label style="display:inline;">
-                    @Html.CheckBox("ShowOverviewMapControl", new { id = "mapShowOverviewMapControl" })
+                    @Html.CheckBox("ShowOverviewMapControl", new { id = "mapShowOverviewMapControl", @class = "form-check-input" })
                     Show overviewMap control
                 </label>
             </div>
@@ -61,7 +60,7 @@
         <div class="col-md-3">
             <div class="checkbox">
                 <label style="display:inline;">
-                    @Html.CheckBox("OverviewMapControlOpened", new { id = "mapOverviewMapControlOpened" })
+                    @Html.CheckBox("OverviewMapControlOpened", new { id = "mapOverviewMapControlOpened", @class = "form-check-input" })
                     Open overviewMap control
                 </label>
             </div>
@@ -69,13 +68,11 @@
         <div class="col-md-6"></div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-3">
-            <div class="checkbox">
-                <label style="display:inline;">
-                    @Html.CheckBox("ShowPanControl", new { id = "mapShowPanControl" })
-                    Show pan control
-                </label>
+            <div class="form-check form-check-inline">
+                @Html.CheckBox("ShowPanControl", new { id = "mapShowPanControl", @class = "form-check-input" })
+                <label class="form-check-label" for="mapShowPanControl">Show pan control</label>
             </div>
         </div>
         <div class="col-md-3">
@@ -85,11 +82,11 @@
         <div class="col-md-6"></div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-3">
             <div class="checkbox">
                 <label style="display:inline;">
-                    @Html.CheckBox("ShowStreetViewControl", new { id = "mapShowStreetViewControl" })
+                    @Html.CheckBox("ShowStreetViewControl", new { id = "mapShowStreetViewControl", @class = "form-check-input" })
                     Show street view control
                 </label>
             </div>
@@ -101,11 +98,11 @@
         <div class="col-md-6"></div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-3">
             <div class="checkbox">
                 <label style="display:inline;">
-                    @Html.CheckBox("ShowZoomControl", new { id = "mapShowZoomControl" })
+                    @Html.CheckBox("ShowZoomControl", new { id = "mapShowZoomControl", @class = "form-check-input" })
                     Show zoom control
                 </label>
             </div>
@@ -121,18 +118,18 @@
         <div class="col-md-3">
             <div class="checkbox">
                 <label style="display:inline;">
-                    @Html.CheckBox("ScrollWheel", new { id = "mapScrollWheel" })
+                    @Html.CheckBox("ScrollWheel", new { id = "mapScrollWheel", @class = "form-check-input" })
                     Scroll Wheel
                 </label>
             </div>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-3">
             <div class="checkbox">
                 <label style="display:inline;">
-                    @Html.CheckBox("ShowMapType", new { id = "mapShowMapTypeControl" })
+                    @Html.CheckBox("ShowMapType", new { id = "mapShowMapTypeControl", @class = "form-check-input" })
                     Show map type control
                 </label>
             </div>
@@ -153,9 +150,9 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-default">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </div>
 </form>

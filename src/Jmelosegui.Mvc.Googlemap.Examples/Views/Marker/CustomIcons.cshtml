@@ -8,6 +8,7 @@
 @{
     Html.GoogleMap()
         .Name("map")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(300)        
         .Center(c => c.Latitude(23.140971656573335)
                       .Longitude(-82.39435493946075))

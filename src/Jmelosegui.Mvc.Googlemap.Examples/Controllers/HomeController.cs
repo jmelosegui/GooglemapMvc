@@ -1,30 +1,31 @@
 ﻿namespace Jmelosegui.Mvc.GoogleMap.Examples.Controllers
 {
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.IO;
     using System.Text.RegularExpressions;
-    using System.Web.Mvc;
 
     public class HomeController : Controller
     {
         private static readonly Regex ForbiddenExtensions = new Regex("dll|config", RegexOptions.IgnoreCase);
-
+        private readonly IWebHostEnvironment webHostEnvironment;
+        
+        public HomeController(IWebHostEnvironment webHostEnvironment)
+        {
+            this.webHostEnvironment = webHostEnvironment;
+        }
+        
         public ActionResult FirstLook()
         {
             return this.View();
         }
 
         public ActionResult CodeFile(string file)
-        {
-            if (!file.StartsWith("~", StringComparison.OrdinalIgnoreCase))
-            {
-                return new EmptyResult();
-            }
+        {   
+            string filePath = Path.Combine(this.webHostEnvironment.ContentRootPath, file);
 
-            file = this.Server.MapPath(file);
-            string extension = Path.GetExtension(file);
-
-            if (!System.IO.File.Exists(file) || ForbiddenExtensions.IsMatch(extension))
+            if (!System.IO.File.Exists(filePath) || ForbiddenExtensions.IsMatch(filePath))
             {
                 return new EmptyResult();
             }

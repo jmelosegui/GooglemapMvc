@@ -102,6 +102,6 @@ namespace Jmelosegui.Mvc.GoogleMap
         TransitStationRail,
 
         [ClientSideEnumValue("'water'")]
-        Water
+        Water,
     }
 }

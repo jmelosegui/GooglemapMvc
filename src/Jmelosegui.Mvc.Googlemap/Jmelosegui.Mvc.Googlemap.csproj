@@ -1,223 +1,91 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5476DBD6-F0EC-4B7A-A616-DB42A7EF7E1B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jmelosegui.Mvc.GoogleMap</RootNamespace>
-    <AssemblyName>Jmelosegui.Mvc.GoogleMap</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-    <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <NoWarn>
-    </NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-    <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Jmelosegui.Mvc.Googlemap.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CenterFactory.cs" />
-    <CodeAnalysisDictionary Include="CodeAnalysisDictionary.xml">
-      <SubType>Designer</SubType>
-    </CodeAnalysisDictionary>
-    <Compile Include="ControlPosition.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Helpers\Serialization\PointJsonConverter.cs" />
-    <Compile Include="Helpers\Serialization\SizeJsonConverter.cs" />
-    <Compile Include="HtmlTemplate`1.cs" />
-    <Compile Include="Location\ILocationBinding`1.cs" />
-    <Compile Include="Location\LocationBindingBuilder`2.cs" />
-    <Compile Include="Location\LocationBindingFactory`1.cs" />
-    <Compile Include="Location\LocationBinding`2.cs" />
-    <Compile Include="Location\LocationFactory`1.cs" />
-    <Compile Include="MapType\MapTypeBuilder`1.cs" />
-    <Compile Include="Objects\IMapObjectBinding`1.cs" />
-    <Compile Include="Objects\Layers\Heat\HeatmapGradientFactory.cs" />
-    <Compile Include="Objects\Layers\Heat\HeatmapLayerSerializer.cs" />
-    <Compile Include="Objects\Layers\Kml\KmlLayer.cs" />
-    <Compile Include="Objects\Layers\Kml\KmlLayerBuilder.cs" />
-    <Compile Include="Objects\Layers\Kml\KmlLayerSerializer.cs" />
-    <Compile Include="Objects\Layers\Layer.cs" />
-    <Compile Include="Objects\Layers\Heat\HeatLayerBuilder.cs" />
-    <Compile Include="Objects\Layers\LayerBuilder`1.cs" />
-    <Compile Include="Objects\Layers\LayerFactory.cs" />
-    <Compile Include="Objects\Layers\Heat\HeatmapLayer.cs" />
-    <Compile Include="MapType\ImageMapType\ImageMapType.cs" />
-    <Compile Include="MapType\ImageMapType\ImageMapTypeBuilder.cs" />
-    <Compile Include="MapType\ImageMapType\ImageMapTypeFactory.cs" />
-    <Compile Include="MapType\ImageMapType\ImageMapTypeSerializer.cs" />
-    <Compile Include="MapType\MapTypeBase.cs" />
-    <Compile Include="MapType\MapTypeControlStyle.cs" />
-    <Compile Include="MapType\MapType.cs" />
-    <Compile Include="MapType\MapTypeSerializer.cs" />
-    <Compile Include="MapType\StyledMapType\Styles\ElementType.cs" />
-    <Compile Include="MapType\StyledMapType\Styles\FeatureType.cs" />
-    <Compile Include="MapType\StyledMapType\Styles\MapTypeStyle.cs" />
-    <Compile Include="MapType\StyledMapType\Styles\MapTypeStyleBuilder.cs" />
-    <Compile Include="MapType\StyledMapType\Styles\MapTypeStyleFactory.cs" />
-    <Compile Include="MapType\StyledMapType\Styles\MapTypeStylerVisibility.cs" />
-    <Compile Include="MapType\StyledMapType\StyledMapType.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MapType\StyledMapType\StyledMapTypeBuilder.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MapType\StyledMapType\StyledMapTypeFactory.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MapType\StyledMapType\StyledMapTypeSerializer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Events\IClientEventObject.cs" />
-    <Compile Include="Helpers\Serialization\LocationJsonConverter.cs" />
-    <Compile Include="Objects\Layers\LayerSerializer`1.cs" />
-    <Compile Include="Objects\Layers\LayerSerializer.cs" />
-    <Compile Include="Objects\Layers\LayerType.cs" />
-    <Compile Include="Objects\MapObjectBindingBuilder`2.cs" />
-    <Compile Include="Objects\MapObjectBindingFactory`1.cs" />
-    <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesFactory.cs" />
-    <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesBuilder.cs" />
-    <Compile Include="Objects\Overlay.cs" />
-    <Compile Include="Objects\Markers\Events\MarkerEventsBuilder.cs" />
-    <Compile Include="Objects\Markers\Events\MarkerClientEvents.cs" />
-    <Compile Include="Location\ILocationContainer.cs" />
-    <Compile Include="Objects\Shapes\Polyline\PolylineBuilder.cs" />
-    <Compile Include="Objects\Shapes\Polyline\PolylineFactory.cs" />
-    <Compile Include="Objects\Shapes\Polyline\Polyline.cs" />
-    <Compile Include="Objects\Shapes\Polyline\PolylineSerializer.cs" />
-    <Compile Include="Objects\Shapes\Shape2D.cs" />
-    <Compile Include="Objects\Shapes\Shape2DBuilder`1.cs" />
-    <Compile Include="Objects\Shapes\ShapeBuilder`1.cs" />
-    <Compile Include="Objects\Shapes\ShapeSerializer`1.cs" />
-    <Compile Include="ZoomControlStyle.cs" />
-    <Compile Include="Events\ClientEvent.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="HtmlHelperExtension.cs" />
-    <Compile Include="MapBuilder.cs" />
-    <Compile Include="Events\MapClientEventsBuilder.cs" />
-    <Compile Include="Events\MapClientEvents.cs" />
-    <Compile Include="Helpers\ClientSideObjectWriter.cs" />
-    <Compile Include="Helpers\FluentDictionary.cs" />
-    <Compile Include="Helpers\ClientSideEnumValueAttribute.cs" />
-    <Compile Include="Helpers\LiteralNode.cs" />
-    <Compile Include="Helpers\HtmlElement.cs" />
-    <Compile Include="Helpers\IHtmlNode.cs" />
-    <Compile Include="Helpers\IHideObjectMembers.cs" />
-    <Compile Include="Helpers\UrlHelper.cs" />
-    <Compile Include="HtmlTemplate.cs" />
-    <Compile Include="Objects\Markers\Clustering\MarkerClusteringStylesSerializer.cs" />
-    <Compile Include="Objects\Markers\Clustering\MarkerClusteringStyles.cs" />
-    <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptions.cs" />
-    <Compile Include="Objects\InfoWindow\InfoWindow.cs" />
-    <Compile Include="Objects\InfoWindow\InfoWindowBuilder.cs" />
-    <Compile Include="Objects\InfoWindow\InfoWindowFactory.cs" />
-    <Compile Include="ISerializer.cs" />
-    <Compile Include="Location\Location.cs" />
-    <Compile Include="Objects\Markers\Clustering\MarkerClusteringOptionsFactory.cs" />
-    <Compile Include="Objects\Markers\MarkerImage.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="Objects\Markers\MarkerSerializer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Objects\Markers\Marker.cs" />
-    <Compile Include="Objects\Markers\MarkerBuilder.cs" />
-    <Compile Include="Objects\Markers\MarkerFactory.cs" />
-    <Compile Include="Objects\MapObject.cs" />
-    <Compile Include="Objects\Shapes\Circle\Circle.cs" />
-    <Compile Include="Objects\Shapes\Circle\CircleBuilder.cs" />
-    <Compile Include="Objects\Shapes\Circle\CircleFactory.cs" />
-    <Compile Include="Extensions\ColorExtension.cs" />
-    <Compile Include="Objects\Shapes\Circle\CircleSerializer.cs" />
-    <Compile Include="Objects\Shapes\Polygons\PolygonBuilder.cs" />
-    <Compile Include="Objects\Shapes\Polygons\Polygon.cs" />
-    <Compile Include="Objects\Shapes\Polygons\PolygonFactory.cs" />
-    <Compile Include="Objects\Shapes\Polygons\PolygonSerializer.cs" />
-    <Compile Include="Objects\Shapes\Shape.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptRegistrar.cs" />
-    <Compile Include="ScriptRegistrarBuilder.cs" />
-    <Content Include="Scripts\markerclusterer.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jmelosegui.googlemap.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Jmelosegui.Mvc.Googlemap.snk" />
-    <None Include="Objects\MapObjectClassDiagram.cd" />
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>  
-  -->
-  <Target Name="AfterBuild">
-    <Message Importance="high" Text="Configuration $(Configuration)|$(Platform)" />
-    <Message Importance="high" Text="Copying JavaScript files to $(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\Scripts\..." />
-    <Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\Scripts\" Condition="'%(Extension)'=='.js'">
-      <Output TaskParameter="DestinationFiles" ItemName="Resources" />
-    </Copy>
-    <ItemGroup>
-      <!-- FileWrites is the list of files to delete when performing a Clean -->
-      <FileWrites Include="@(Resources)" />
-    </ItemGroup>
-  </Target>
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
+﻿<Project>  
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyTitle>Jmelosegui.Mvc.GoogleMap</AssemblyTitle>
+		<Product>Jmelosegui.Mvc.GoogleMap</Product>
+		<Description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</Description>
+		<CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
+		<OutputPath>bin\$(Configuration)\</OutputPath>		
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>Jmelosegui.Mvc.Googlemap.snk</AssemblyOriginatorKeyFile>		
+	</PropertyGroup>
+
+	<!--Nuget Configuration-->
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<NuSpecFile>Jmelosegui.Mvc.Googlemap.nuspec</NuSpecFile>
+		<!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Scripts\jmelosegui.googlemap.js" />
+	  <None Remove="Scripts\markerclusterer.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<CodeAnalysisDictionary Include="CodeAnalysisDictionary.xml">
+			<SubType>Designer</SubType>
+		</CodeAnalysisDictionary>
+		<AdditionalFiles Include="..\stylecop.json">
+			<Link>stylecop.json</Link>
+		</AdditionalFiles>
+		<Content Include="build\**">
+			<Pack>true</Pack>			
+			<PackagePath>build\</PackagePath>
+		</Content>
+		<Content Include="Scripts\**">
+		  <Pack>true</Pack>
+		  <PackagePath>Scripts\</PackagePath>
+		</Content>
+		<None Include="Jmelosegui.Mvc.Googlemap.snk" />
+		<None Include="Objects\MapObjectClassDiagram.cd" />
+	</ItemGroup>
+
+	<!-- Dependencies -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />				
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+	<PropertyGroup>
+		<BuildDependsOn>
+			$(BuildDependsOn);
+			AfterBuild
+		</BuildDependsOn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">		
+		<PackageOutputPath>$(PublishUrl)\..</PackageOutputPath>
+	</PropertyGroup>
+	
+	<Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
+		<PropertyGroup>
+			<NuspecProperties>$(NuspecProperties);Version=$(Version);CommitId=$(GitCommitId);ProjectDir=$(MSBuildProjectDirectory);Output=$(Outdir)</NuspecProperties>
+		</PropertyGroup>
+	</Target>
+
+	<Target Name="AfterBuild">
+		<Message Importance="high" Text="Configuration $(Configuration)|$(Platform)" />
+		<Message Importance="high" Text="Copying JavaScript files to $(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\wwwroot\js\..." />
+		<Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)Jmelosegui.Mvc.Googlemap.Examples\wwwroot\js\" Condition="'%(Extension)'=='.js'">
+			<Output TaskParameter="DestinationFiles" ItemName="Resources" />
+		</Copy>
+		<ItemGroup>
+			<!-- FileWrites is the list of files to delete when performing a Clean -->
+			<FileWrites Include="@(Resources)" />
+		</ItemGroup>
+	</Target>
+
 </Project>

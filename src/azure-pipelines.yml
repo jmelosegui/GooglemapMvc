@@ -1,0 +1,105 @@
+trigger:
+- master
+
+pool:
+  name: Default
+  demands:
+  - visualstudio
+
+variables:
+  BuildPlatform: 'any cpu'
+  BuildConfiguration: 'release'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Build Solution
+    steps:
+
+    - task: VSBuild@1
+      displayName: 'Build solution'
+      inputs:
+        msbuildArgs: '/t:restore,build /p:PublishUrl="$(build.artifactstagingdirectory)\GoogleMapMvcSamples"'
+        platform: '$(BuildPlatform)'
+        configuration: '$(BuildConfiguration)'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive $(build.artifactstagingdirectory)\GoogleMapMvcSamples'
+      inputs:
+        rootFolderOrFile: '$(build.artifactstagingdirectory)\GoogleMapMvcSamples'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/GoogleMapMvcSamples.zip'
+
+    - task: DeleteFiles@1
+      displayName: 'Delete files from $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(build.artifactstagingdirectory)'
+        Contents: |
+         GoogleMapMvcSamples
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Website Artifact: drop'
+
+
+- stage: PublishNugetCI
+  displayName: Publish CI Nuget Package 
+  dependsOn: [Build]
+  jobs:
+
+    - job: Deploy
+      displayName: Publish CI Nuget Package
+      steps:
+      - checkout: none
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.ArtifactsDirectory)'
+      
+      - task: NuGetCommand@2
+        displayName: 'Push Nuget to Feedz'
+        inputs:
+          command: 'push'
+          packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: 'feedz'      
+
+- stage: PublishNugetCI
+  displayName: Publish Nuget Package
+  condition: eq( variables['Build.SourceBranchName'], 'master' )
+  dependsOn: [PublishNugetCI]
+  jobs:
+
+  - job: Deploy
+      displayName: Publish Nuget and Deploy Web Site
+      steps:
+      - checkout: none
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.ArtifactsDirectory)'
+
+      - task: AzureRmWebAppDeployment@4
+        displayName: 'Deploy sample website'
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Inmediati (GoogleMap.MVC)'
+          appType: 'webApp'
+          WebAppName: 'jmelosegui-com'
+          VirtualApplication: 'map'
+          packageForLinux: '$(System.ArtifactsDirectory)/drop/GoogleMapMvcSamples.zip'
+
+      - task: NuGetCommand@2
+        displayName: 'Push Nuget to nuget.org'
+        inputs:
+          command: 'push'
+          packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: 'nuget.org'   

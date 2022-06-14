@@ -6,10 +6,12 @@ namespace Jmelosegui.Mvc.GoogleMap
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Web;
-    using System.Web.Mvc;
+    using System.IO;
+    using System.Text.Encodings.Web;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class MapBuilder : IHtmlString
+    public class MapBuilder : IHtmlContent
     {
         public static readonly string Key = typeof(ScriptRegistrar).AssemblyQualifiedName;
         private readonly ScriptRegistrar scriptRegistrar;
@@ -48,25 +50,31 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        public IHtmlNode Build()
+        public IHtmlContent Build()
         {
-            // TODO: Implement .Attributes(Component.HtmlAttributes);
-            var content = new HtmlElement("div")
-                .AddClass("googlemap")
-                .Attribute("id", this.Component.Id);
+            var content = new TagBuilder("div");
+            content.AddCssClass("googlemap");
+            content.Attributes["id"] = this.Component.Id;
+
+            string style = string.Empty;
 
             if (this.Component.Width != 0)
             {
-                content.Css("width", this.Component.Width + "px");
+                style += $"width: {this.Component.Width + "px"};";
             }
 
             if (this.Component.Height != 0)
             {
-                content.Css("height", this.Component.Height + "px");
+                style += $"height: {this.Component.Height + "px"};";
             }
             else
             {
-                content.Css("height", "100%");
+                style += $"height:100%;";
+            }
+
+            if (!string.IsNullOrEmpty(style))
+            {
+                content.Attributes["style"] = style;
             }
 
             return content;
@@ -383,7 +391,6 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public MapBuilder BindTo<T, TMapObject>(IEnumerable<T> dataSource, Action<MapObjectBindingFactory<TMapObject>> itemDataBound)
             where TMapObject : MapObject
@@ -438,14 +445,9 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.Component.Render();
         }
 
-        public string ToHtmlString()
+        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
-            return this.Component.ToHtmlString();
-        }
-
-        public override string ToString()
-        {
-            return this.ToHtmlString();
+            this.Component.WriteHtml(writer);
         }
     }
 }

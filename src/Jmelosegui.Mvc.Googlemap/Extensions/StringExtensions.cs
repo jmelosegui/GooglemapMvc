@@ -4,33 +4,14 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
-    using System.Web;
+    using Jmelosegui.Mvc.GoogleMap;
+    using Microsoft.AspNetCore.Http.Extensions;
 
     internal static class StringExtensions
     {
         public static bool HasValue(this string source)
         {
             return !string.IsNullOrWhiteSpace(source);
-        }
-
-        public static string ToAbsoluteUrl(this string url)
-        {
-            if (url == null)
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
-
-            if (url.IndexOf("://", StringComparison.Ordinal) > -1)
-            {
-                return url;
-            }
-
-            string pathWithoutHostName = VirtualPathUtility.ToAbsolute(url);
-
-            Uri originalUri = HttpContext.Current.Request.Url;
-            var result = $"{originalUri.Scheme}://{originalUri.Authority}{pathWithoutHostName}";
-
-            return result;
         }
     }
 }

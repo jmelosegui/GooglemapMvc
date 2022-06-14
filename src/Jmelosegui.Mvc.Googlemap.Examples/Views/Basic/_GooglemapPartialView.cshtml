@@ -3,9 +3,12 @@
 @{
     Html.GoogleMap()
         .Name("map")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Markers(marker => marker.Add()
             .Window(w => w.Add()
-                .Content((o) => String.Format("Hello PartialView {0}", Model))))
+                .Content(                    
+                    @<text>"Hello PartialView" @Model</text>
+            )))
         .Render();
 }
 

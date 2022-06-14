@@ -4,6 +4,7 @@
 namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class InfoWindowBuilder
     {
@@ -19,15 +20,9 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         protected InfoWindow Window { get; private set; }
 
-        public InfoWindowBuilder Content(Action action)
+        public InfoWindowBuilder Content(Func<string, object> function)
         {
-            this.Window.Template.Content = action;
-            return this;
-        }
-
-        public InfoWindowBuilder Content(Func<object, object> function)
-        {
-            this.Window.Template.InlineTemplate = function;
+            this.Window.Template.InlineTemplate = () => function(null);
             return this;
         }
 
@@ -37,7 +32,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-       public InfoWindowBuilder OpenOnRightClick(bool value)
+        public InfoWindowBuilder OpenOnRightClick(bool value)
         {
             this.Window.OpenOnRightClick = value;
             return this;

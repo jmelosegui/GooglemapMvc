@@ -5,19 +5,36 @@ namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
     using System.Drawing;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class ImageMapType : MapTypeBase
     {
-        public ImageMapType()
+        private readonly Map map;
+        private string tileUrlPatter;
+
+        public ImageMapType(Map map)
         {
             this.TileSize = new Size(256, 256);
             this.RepeatHorizontally = true;
             this.RepeatVertically = false;
+
+            this.map = map ?? throw new ArgumentNullException(nameof(map));
         }
 
         public Size TileSize { get; set; }
 
-         public Uri TileUrlPattern { get; set; }
+        public string TileUrlPattern
+        {
+            get
+            {
+                return this.tileUrlPatter;
+            }
+
+            set
+            {
+                this.tileUrlPatter = new UrlHelper(this.map.ViewContext).Content(value);
+            }
+        }
 
         public bool RepeatHorizontally { get; set; }
 

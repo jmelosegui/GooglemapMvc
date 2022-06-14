@@ -1,346 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{56333CC5-E61B-4299-A5F3-6D8D53B5C736}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jmelosegui.Mvc.GoogleMap.Examples</RootNamespace>
-    <AssemblyName>Jmelosegui.Mvc.GoogleMap.Examples</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44300</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <UseGlobalApplicationHostFile />
-    <CopyNuGetImplementations>true</CopyNuGetImplementations>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
-    <NoWarn>SA1633</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\Jmelosegui.Mvc.GoogleMap.ruleset</CodeAnalysisRuleSet>
-    <NoWarn>SA1633</NoWarn>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Data\DataContext.cs" />
-    <Compile Include="App_Data\RealDataEmulator.cs" />
-    <Compile Include="App_Data\RegionInfo.cs" />
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BasicController.cs" />
-    <Compile Include="Controllers\Basic\AjaxPartialViewController.cs" />
-    <Compile Include="Controllers\Basic\ClientEventsController.cs" />
-    <Compile Include="Controllers\Libraries\DrawingController.cs" />
-    <Compile Include="Controllers\Basic\MultimapController.cs" />
-    <Compile Include="Controllers\Basic\LanguageController.cs" />
-    <Compile Include="Controllers\Libraries\SearchBoxController.cs" />
-    <Compile Include="Controllers\Basic\UIControlsController.cs" />
-    <Compile Include="Controllers\Basic\FirstLookController.cs" />
-    <Compile Include="Controllers\Basic\VersionController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LayersController.cs" />
-    <Compile Include="Controllers\Layers\HeatmapController.cs" />
-    <Compile Include="Controllers\Layers\KmlController.cs" />
-    <Compile Include="Controllers\Layers\TrafficTransitBikeController.cs" />
-    <Compile Include="Controllers\LibrariesController.cs" />
-    <Compile Include="Controllers\MapTypeController.cs" />
-    <Compile Include="Controllers\MapType\ImageMapTypeController.cs" />
-    <Compile Include="Controllers\MapType\StyledMapTypeController.cs" />
-    <Compile Include="Controllers\MarkerController.cs" />
-    <Compile Include="Controllers\Marker\GeocodingController.cs" />
-    <Compile Include="Controllers\Marker\ClientEventsController.cs" />
-    <Compile Include="Controllers\Marker\CustomIconsController.cs" />
-    <Compile Include="Controllers\Marker\DataBindingToModelController.cs" />
-    <Compile Include="Controllers\Marker\InfoWindowController.cs" />
-    <Compile Include="Controllers\Marker\FitToMarkersBoundsController.cs" />
-    <Compile Include="Controllers\Marker\MarkerClusteringController.cs" />
-    <Compile Include="Controllers\Marker\ExternalReferenceController.cs" />
-    <Compile Include="Controllers\Marker\SimpleMarkerController.cs" />
-    <Compile Include="Controllers\ServicesController.cs" />
-    <Compile Include="Controllers\Services\GeocodingController.cs" />
-    <Compile Include="Controllers\Services\GeolocationController.cs" />
-    <Compile Include="Controllers\ShapesController.cs" />
-    <Compile Include="Controllers\Shapes\CircleBasicController.cs" />
-    <Compile Include="Controllers\Shapes\DataBindingToModelController.cs" />
-    <Compile Include="Controllers\Shapes\PolygonBasicController.cs" />
-    <Compile Include="Controllers\Shapes\PolylineBasicController.cs" />
-    <Compile Include="Extensions\AutoPopulateSourceCodeAttribute.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\ExampleConfigurator.cs" />
-    <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Basic\Descriptions\AjaxPartialView.html" />
-    <Content Include="Content\Basic\Descriptions\ClientEvents.html" />
-    <Content Include="Content\Libraries\Descriptions\Drawing.html" />
-    <Content Include="Content\Basic\Descriptions\FirstLook.html" />
-    <Content Include="Content\Basic\Descriptions\Language.html" />
-    <Content Include="Content\Basic\Descriptions\Multimap.html" />
-    <Content Include="Content\Libraries\Descriptions\SearchBox.html" />
-    <Content Include="Content\Basic\Descriptions\UIControls.html" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\Layers\Descriptions\Heatmap.html" />
-    <Content Include="Content\Layers\Descriptions\Kml.html" />
-    <Content Include="Content\Layers\Descriptions\TrafficTransitBike.html" />
-    <Content Include="Content\MapType\Descriptions\ImageMapType.html" />
-    <Content Include="Content\MapType\Descriptions\StyledMapType.html" />
-    <Content Include="Content\MapType\map_natural.jpg" />
-    <Content Include="Content\MapType\speculative_map.jpg" />
-    <Content Include="Content\Marker\Descriptions\ExternalReference.html" />
-    <Content Include="Content\Marker\Descriptions\FitToMarkersBounds.html" />
-    <Content Include="Content\Marker\Descriptions\Geocoding.html" />
-    <Content Include="Content\Marker\Descriptions\ClientEvents.html" />
-    <Content Include="Content\Services\Descriptions\Geocoding.html" />
-    <Content Include="Content\Services\Descriptions\Geolocation.html" />
-    <Content Include="Content\Shapes\Descriptions\PolylineBasic.html" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\Marker\Descriptions\CustomIcons.html" />
-    <Content Include="Content\Marker\Descriptions\DataBindingToModel.html" />
-    <Content Include="Content\Marker\Descriptions\InfoWindow.html" />
-    <Content Include="Content\Marker\Descriptions\MarkerClustering.html" />
-    <Content Include="Content\Marker\Descriptions\SimpleMarker.html" />
-    <Content Include="Content\Shapes\Descriptions\CircleBasic.html" />
-    <Content Include="Content\Shapes\Descriptions\DataBindingToModel.html" />
-    <Content Include="Content\Shapes\Descriptions\PolygonBasic.html" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Images\flags\Andalucia.jpg" />
-    <Content Include="Images\flags\Aragon.jpg" />
-    <Content Include="Images\flags\Asturias.jpg" />
-    <Content Include="Images\flags\baleares.jpg" />
-    <Content Include="Images\flags\Canarias.jpg" />
-    <Content Include="Images\flags\Cantabria.jpg" />
-    <Content Include="Images\flags\CastillaLaMancha.jpg" />
-    <Content Include="Images\flags\CastillayLeon.jpg" />
-    <Content Include="Images\flags\Cataluña.jpg" />
-    <Content Include="Images\flags\Ceuta.jpg" />
-    <Content Include="Images\flags\ComunidadValenciana.jpg" />
-    <Content Include="Images\flags\España.jpg" />
-    <Content Include="Images\flags\Extremadura.jpg" />
-    <Content Include="Images\flags\Galicia.jpg" />
-    <Content Include="Images\flags\LaRioja.jpg" />
-    <Content Include="Images\flags\Madrid.jpg" />
-    <Content Include="Images\flags\Melilla.jpg" />
-    <Content Include="Images\flags\Murcia.jpg" />
-    <Content Include="Images\flags\Navarra.jpg" />
-    <Content Include="Images\flags\PaisVasco.jpg" />
-    <Content Include="Images\beachflag.png" />
-    <Content Include="Images\cluster1.png" />
-    <Content Include="Images\cluster2.png" />
-    <Content Include="Images\cluster3.png" />
-    <Content Include="Images\logo.jpg" />
-    <Content Include="Images\sprites.png" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\google-code-prettify\lang-apollo.js" />
-    <Content Include="Scripts\google-code-prettify\lang-basic.js" />
-    <Content Include="Scripts\google-code-prettify\lang-clj.js" />
-    <Content Include="Scripts\google-code-prettify\lang-css.js" />
-    <Content Include="Scripts\google-code-prettify\lang-dart.js" />
-    <Content Include="Scripts\google-code-prettify\lang-erlang.js" />
-    <Content Include="Scripts\google-code-prettify\lang-go.js" />
-    <Content Include="Scripts\google-code-prettify\lang-hs.js" />
-    <Content Include="Scripts\google-code-prettify\lang-lisp.js" />
-    <Content Include="Scripts\google-code-prettify\lang-llvm.js" />
-    <Content Include="Scripts\google-code-prettify\lang-lua.js" />
-    <Content Include="Scripts\google-code-prettify\lang-matlab.js" />
-    <Content Include="Scripts\google-code-prettify\lang-ml.js" />
-    <Content Include="Scripts\google-code-prettify\lang-mumps.js" />
-    <Content Include="Scripts\google-code-prettify\lang-n.js" />
-    <Content Include="Scripts\google-code-prettify\lang-pascal.js" />
-    <Content Include="Scripts\google-code-prettify\lang-proto.js" />
-    <Content Include="Scripts\google-code-prettify\lang-r.js" />
-    <Content Include="Scripts\google-code-prettify\lang-rd.js" />
-    <Content Include="Scripts\google-code-prettify\lang-scala.js" />
-    <Content Include="Scripts\google-code-prettify\lang-sql.js" />
-    <Content Include="Scripts\google-code-prettify\lang-tcl.js" />
-    <Content Include="Scripts\google-code-prettify\lang-tex.js" />
-    <Content Include="Scripts\google-code-prettify\lang-vb.js" />
-    <Content Include="Scripts\google-code-prettify\lang-vhdl.js" />
-    <Content Include="Scripts\google-code-prettify\lang-wiki.js" />
-    <Content Include="Scripts\google-code-prettify\lang-xq.js" />
-    <Content Include="Scripts\google-code-prettify\lang-yaml.js" />
-    <Content Include="Scripts\google-code-prettify\prettify.css" />
-    <Content Include="Scripts\google-code-prettify\prettify.js" />
-    <Content Include="Scripts\google-code-prettify\run_prettify.js" />
-    <Content Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </Content>
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\_references.js" />
-    <Content Include="Content\Basic\Descriptions\Version.html" />
-    <Content Include="Views\Home\FirstLook.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_TwitterButton.cshtml" />
-    <Content Include="Views\Shared\_Navigation.cshtml" />
-    <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
-    <Content Include="Views\Basic\FirstLook.cshtml" />
-    <Content Include="Views\Shared\_LayoutExamples.cshtml" />
-    <Content Include="Views\Shared\_CodeViewer.cshtml" />
-    <Content Include="Views\Shared\CodeFile.cshtml" />
-    <Content Include="Views\Basic\UIControls.cshtml" />
-    <Content Include="Views\Basic\Language.cshtml" />
-    <Content Include="Views\Marker\CustomIcons.cshtml" />
-    <Content Include="Views\Marker\DataBindingToModel.cshtml" />
-    <Content Include="Views\Marker\InfoWindow.cshtml" />
-    <Content Include="Views\Marker\MarkerClustering.cshtml" />
-    <Content Include="Views\Marker\SimpleMarker.cshtml" />
-    <Content Include="Views\Shapes\CircleBasic.cshtml" />
-    <Content Include="Views\Shapes\DataBindingToModel.cshtml" />
-    <Content Include="Views\Shapes\PolygonBasic.cshtml" />
-    <Content Include="Views\Basic\ClientEvents.cshtml" />
-    <Content Include="Views\MapType\ImageMapType.cshtml" />
-    <Content Include="Views\MapType\StyledMapType.cshtml" />
-    <Content Include="Views\Services\Geolocation.cshtml" />
-    <Content Include="Views\Services\Geocoding.cshtml" />
-    <Content Include="Views\Marker\ClientEvents.cshtml" />
-    <Content Include="Views\Marker\Geocoding.cshtml" />
-    <Content Include="Views\Marker\FitToMarkersBounds.cshtml" />
-    <Content Include="Views\Basic\Multimap.cshtml" />
-    <Content Include="Views\Layers\Heatmap.cshtml" />
-    <Content Include="Views\Basic\AjaxPartialView.cshtml" />
-    <Content Include="Views\Basic\_GooglemapPartialView.cshtml" />
-    <Content Include="Views\Marker\ExternalReference.cshtml" />
-    <Content Include="Views\Layers\Kml.cshtml" />
-    <Content Include="Views\Layers\TrafficTransitBike.cshtml" />
-    <Content Include="Views\Basic\Version.cshtml" />
-    <Content Include="Views\Shapes\PolylineBasic.cshtml" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Views\Libraries\Drawing.cshtml" />
-    <Content Include="Views\Libraries\SearchBox.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Views\PolylineBasic\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.GoogleMap.csproj">
-      <Project>{5476dbd6-f0ec-4b7a-a616-db42a7ef7e1b}</Project>
-      <Name>Jmelosegui.Mvc.GoogleMap</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-  </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
-  </Target>
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>24576</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:24576/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>http://localhost/Jmelosegui.Mvc.Googlemap.Examples</CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">	
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<OutputPath>bin\</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="..\stylecop.json">
+			<Link>stylecop.json</Link>
+		</Content>
+	</ItemGroup>
+
+	<!-- To control whether to copy Jmelosegui.GoogleMap scripts and if so whether to change the default target directory -->
+	<!--
+	<PropertyGroup>
+		<CopyGoogleMapScripts>false</CopyGoogleMapScripts>
+	</PropertyGroup>
+	
+	<Target Name="SetGoogleMapScriptDir" BeforeTargets="CopyGoogleMapContenFiles">
+		<PropertyGroup>
+			<JavaScriptDir>\webroot\scripts</JavaScriptDir>
+		</PropertyGroup>
+	</Target>-->
+
+	<!-- References -->
+	<ItemGroup>
+		<ProjectReference Include="..\Jmelosegui.Mvc.Googlemap\Jmelosegui.Mvc.GoogleMap.csproj" />		
+	</ItemGroup>	
+
+	<!-- Publish -->
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<WebPublishMethod>FileSystem</WebPublishMethod>
+		<DeployTarget>WebPublish</DeployTarget>
+		<DeployOnBuild>true</DeployOnBuild>		
+	</PropertyGroup>
+
+	<Target Name="AddExtraPublishContent" AfterTargets="_IncludePrePublishGeneratedContent">
+		<ItemGroup>
+			<ContentWithTargetPath Remove="@(ContentWithTargetPath)" Condition="!Exists('%(Identity)')" />
+			<_ControllersToCopy Include="Controllers\**" />
+			<_ViewsToCopy Include="Views\**" />
+			<ContentWithTargetPath Include="@(_ControllersToCopy);@(_ViewsToCopy)" TargetPath="%(Identity)" CopyToPublishDirectory="PreserveNewest" />
+		</ItemGroup>
+	</Target>
 </Project>

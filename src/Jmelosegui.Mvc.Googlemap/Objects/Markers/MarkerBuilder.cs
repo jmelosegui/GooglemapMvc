@@ -5,6 +5,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 {
     using System;
     using System.Drawing;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class MarkerBuilder
     {
@@ -44,23 +45,29 @@ namespace Jmelosegui.Mvc.GoogleMap
             return this;
         }
 
-        public MarkerBuilder Icon(string path)
+        public MarkerBuilder Icon(string absoluteUrl)
         {
             Size size = new Size(32, 32);
-            return this.Icon(path, size);
+            return this.Icon(absoluteUrl, size);
         }
 
-        public MarkerBuilder Icon(string path, Size size)
+        public MarkerBuilder Icon(string absoluteUrl, Size size)
         {
             Point point = new Point(0, 0);
             Point anchor = new Point(size.Width / 2, size.Height);
 
-            return this.Icon(path, size, point, anchor);
+            return this.Icon(absoluteUrl, size, point, anchor);
         }
 
-        public MarkerBuilder Icon(string path, Size size, Point point, Point anchor)
+        public MarkerBuilder Icon(string absoluteUrl, Size size, Point point, Point anchor)
         {
-            this.Marker.Icon = new MarkerImage(path, size, point, anchor);
+            this.Marker.Icon = new MarkerImage(this.Marker)
+            {
+                AbsoluteUrl = absoluteUrl,
+                Size = size,
+                Point = point,
+                Anchor = anchor,
+            };
             return this;
         }
 

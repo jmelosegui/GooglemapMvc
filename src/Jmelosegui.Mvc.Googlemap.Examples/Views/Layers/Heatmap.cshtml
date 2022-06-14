@@ -8,6 +8,7 @@
 
 @(Html.GoogleMap()
       .Name("map")
+      .ApiKey((string)ViewData["GoogleMapApiKey"])
       .Height(350)
       .Center(c => c.Latitude(37.774546)
                 .Longitude(-122.433523))
@@ -37,7 +38,7 @@
 <form class="form-horizontal" role="form">
     <h4> Heatmap Layer Settings</h4>
 
-    <div class="form-group">
+    <div class="form-group row">
         <label for="width" class="col-sm-2 control-label">Max Intensity</label>
         <div class="col-sm-4">
             @Html.TextBox("MaxIntensity", null, new {@class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number"})
@@ -47,7 +48,7 @@
             @Html.TextBox("Radius", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter an integer value", @type = "number" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <label for="height" class="col-sm-2 control-label">Opacity</label>
         <div class="col-sm-4">
             @Html.TextBox("Opacity", null, new { @class = "form-control", id = "mapHeight", placeholder = "Enter a decimal value", @type = "number", step = "0.01" })
@@ -64,9 +65,9 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-offset-1 col-sm-10">
-            <button type="submit" class="btn btn-default">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </div>
 </form>

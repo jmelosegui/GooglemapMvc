@@ -9,6 +9,8 @@ namespace Jmelosegui.Mvc.GoogleMap
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Text.Encodings.Web;
+    using Microsoft.AspNetCore.Html;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
@@ -52,7 +54,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(this.id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
 
-            this.writer.Write("jQuery('#{0}').{1}(", selector, this.type);
+            this.writer.Write("jmelosegui('#{0}').{1}(", selector, this.type);
             this.hasStarted = true;
 
             return this;
@@ -399,16 +401,6 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             if (htmlTemplate.HasValue())
             {
-                if (htmlTemplate.Content != null)
-                {
-                    this.EnsureStart();
-                    this.writer.Write(this.appended ? ", " : "{");
-                    this.writer.Write("{0}:'", name);
-                    htmlTemplate.Content();
-                    this.writer.Write("'");
-                    return this;
-                }
-
                 if (htmlTemplate.Html.HasValue())
                 {
                     string formattedValue = QuoteString(htmlTemplate.Html);
@@ -418,8 +410,20 @@ namespace Jmelosegui.Mvc.GoogleMap
 
                 if (htmlTemplate.InlineTemplate != null)
                 {
-                    object inlineTemplate = htmlTemplate.InlineTemplate(null);
+                    var result = htmlTemplate.InlineTemplate();
+
+                    var inlineTemplate = result as IHtmlContent;
+
                     if (inlineTemplate != null)
+                    {
+                        this.EnsureStart();
+                        this.writer.Write(this.appended ? ", " : "{");
+                        this.writer.Write("{0}:'", name);
+                        inlineTemplate.WriteTo(this.writer, HtmlEncoder.Default);
+                        this.writer.Write("'");
+                    }
+
+                    if (result != null)
                     {
                         string formattedValue2 = QuoteString(inlineTemplate.ToString());
                         this.Append(string.Format(CultureInfo.InvariantCulture, "{0}:'{1}'", name, formattedValue2));
@@ -536,7 +540,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             {
                 // TODO: camelCase for javascript serialization
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
             settings.Converters.Add(new SizeJsonConverter());

@@ -6,6 +6,7 @@
 @{
     Html.GoogleMap()
         .Name("map")
+        .ApiKey((string)ViewData["GoogleMapApiKey"])
         .Height(300)        
         .Center(c => c.UseCurrentPosition()
                         //this will be the Latitude if your map do not support 
@@ -32,7 +33,7 @@
                                     </div>
                                 </div>
                             </text>
-            )
+                            )
                         )
         )
         .Render();

@@ -14,7 +14,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public ImageMapTypeBuilder Add()
         {
-            var maptype = new ImageMapType();
+            var maptype = new ImageMapType(this.Map);
 
             this.Map.ImageMapTypes.Add(maptype);
 

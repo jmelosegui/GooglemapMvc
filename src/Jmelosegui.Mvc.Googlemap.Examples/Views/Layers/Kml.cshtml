@@ -8,6 +8,8 @@
 
 @(
     Html.GoogleMap()
+    .Name("map")
+    .ApiKey((string)ViewData["GoogleMapApiKey"])
     .Height(400)
     .Center(c => c.Latitude(41.875696)
                    .Longitude(-87.624207))
@@ -26,13 +28,13 @@
 <form class="form-horizontal" method="POST" role="form">
     <h4> Google Map Settings</h4>
 
-    <div class="form-group">
+    <div class="form-group row">
         <label for="Url" class="col-sm-1 control-label">Url</label>
         <div class="col-md-11">
             @Html.TextBox("Url", null, new { @class = "form-control", id = "Url" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-2 col-md-offset-1">
             <div class="checkbox">
                 <label>
@@ -67,9 +69,9 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-11 col-md-offset-1">
-            <button type="submit" class="btn btn-default">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </div>
 </form>

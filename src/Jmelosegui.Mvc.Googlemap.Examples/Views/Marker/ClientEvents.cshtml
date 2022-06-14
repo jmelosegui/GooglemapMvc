@@ -26,6 +26,7 @@
         @{
             Html.GoogleMap()
                 .Name("map")
+                .ApiKey((string)ViewData["GoogleMapApiKey"])
                 .Height(420)
                 .Markers(m =>
                 {
@@ -36,7 +37,7 @@
                         .Clickable((bool)ViewData["clickable"])
                         .Draggable((bool)ViewData["draggable"])
                         .Window(window => window.Add()
-                            .MaxWidth(200)
+                            .MaxWidth(400)
                             .ZIndex(3)
                             .DisableAutoPan(false)
                             .Content(
@@ -73,23 +74,23 @@
 <form class="form-horizontal" role="form">
     <h4> Marker Settings</h4>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-5 col-lg-offset-1">
             <div class="checkbox">
                 <label>@Html.CheckBox("clickable") Clickable</label>
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-5 col-lg-offset-1">
             <div class="checkbox">
                 <label>@Html.CheckBox("draggable") Draggable</label>
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-offset-1 col-sm-10">
-            <button type="submit" class="btn btn-default">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </div>
 </form>
@@ -98,7 +99,7 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        function main() {
 
             var events = [
                 'animation_changed', 'click', 'clickable_changed', 'cursor_changed', 'dblclick', 'dragstart', 'drag', 'dragend', 'flat_changed', 'icon_changed', 'mousedown', 'mouseout', 'mouseover', 'mouseup', 'position_changed', 'rightclick', 'shape_changed', 'title_changed', 'visible_changed', 'zindex_changed'
@@ -115,7 +116,7 @@
             }
 
             populateTable();
-        });
+        };
 
 
         function highlightEvent(args) {
@@ -136,6 +137,16 @@
                 }, 1000);
             }
         }
+
+        function onLoad(fn) {
+          if (document.readyState != 'loading'){
+            fn();
+          } else {
+            document.addEventListener('DOMContentLoaded', fn);
+          }
+        }
+
+        onLoad(main);
 
     </script>
 }

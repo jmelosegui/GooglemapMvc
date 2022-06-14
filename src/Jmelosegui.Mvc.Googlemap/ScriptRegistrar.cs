@@ -9,9 +9,8 @@ namespace Jmelosegui.Mvc.GoogleMap
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Web.Mvc;
-    using System.Web.Optimization;
-    using System.Web.UI;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class ScriptRegistrar
     {
@@ -34,7 +33,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.Components = new Collection<Map>();
             this.FixedScriptCollection = new List<string>();
             viewContext.HttpContext.Items[Key] = this;
-            this.BasePath = "~/Scripts";
+            this.BasePath = "~/js";
             this.ViewContext = viewContext;
         }
 
@@ -62,24 +61,9 @@ namespace Jmelosegui.Mvc.GoogleMap
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            using (new HtmlTextWriter(writer))
-            {
-                this.Write(writer);
-            }
+            this.WriteHtml(writer);
 
             this.hasRendered = true;
-        }
-
-        public string ToHtmlString()
-        {
-            string result;
-            using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
-            {
-                this.Write(stringWriter);
-                result = stringWriter.ToString();
-            }
-
-            return result;
         }
 
         internal void AddComponent(Map component)
@@ -92,27 +76,27 @@ namespace Jmelosegui.Mvc.GoogleMap
             this.Components.Add(component);
         }
 
-        protected virtual void Write(TextWriter writer)
+        protected internal virtual void WriteHtml(TextWriter writer)
         {
             this.WriteScriptSources(writer);
             this.WriteScriptStatements(writer);
         }
 
-        private static string CombinePath(string directory, string fileName)
+        private string CombinePath(string directory, string fileName)
         {
             const string slash = "/";
 
             string path = (directory.EndsWith(slash, StringComparison.Ordinal) ? directory : directory + slash) +
                           (fileName.StartsWith(slash, StringComparison.Ordinal) ? fileName.Substring(1) : fileName);
 
-            return path;
+            var urlHelper = new UrlHelper(this.ViewContext);
+            var result = urlHelper.Content(path);
+
+            return result;
         }
 
         private void WriteScriptSources(TextWriter writer)
         {
-            const string bundlePath = "~/jmelosegui/googlemap";
-            var bundle = new ScriptBundle(bundlePath);
-
             var scripts = this.Components.SelectMany(c => c.ScriptFileNames)
                               .Union(this.FixedScriptCollection)
                               .Distinct()
@@ -120,22 +104,19 @@ namespace Jmelosegui.Mvc.GoogleMap
 
             foreach (var scriptFileName in scripts)
             {
-                var localScriptFileName = scriptFileName;
-
+                string scriptPath = null;
                 if (scriptFileName.IndexOf("://", StringComparison.Ordinal) == -1)
                 {
-                    localScriptFileName = CombinePath(this.BasePath, scriptFileName);
-                    bundle.Include(localScriptFileName);
+                    scriptPath = this.CombinePath(this.BasePath, scriptFileName);
                 }
                 else
                 {
-                   writer.WriteLine(Scripts.Render(localScriptFileName).ToHtmlString());
+                    scriptPath = scriptFileName;
                 }
+
+                var scriptTag = @$"<script src=""{scriptPath}""></script>";
+                writer.WriteLine(scriptTag);
             }
-
-            BundleTable.Bundles.Add(bundle);
-
-            writer.WriteLine(Scripts.Render(bundlePath).ToHtmlString());
         }
 
         private void WriteScriptStatements(TextWriter writer)
@@ -148,7 +129,7 @@ namespace Jmelosegui.Mvc.GoogleMap
             writer.WriteLine("<script type=\"text/javascript\">{0}//<![CDATA[", Environment.NewLine);
             writer.WriteLine(this.ViewContext.HttpContext.Request.IsAjaxRequest()
                 ? this.GetAjaxScriptStart()
-                : "jQuery(document).ready(function(){");
+                : "document.addEventListener('DOMContentLoaded', function(event) {");
 
             foreach (var component in this.Components)
             {

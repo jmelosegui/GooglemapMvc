@@ -12,7 +12,7 @@ namespace Jmelosegui.Mvc.GoogleMap
 
         public MarkerClusteringStylesBuilder Add()
         {
-            var clusteringStyle = new MarkerClusteringStyles();
+            var clusteringStyle = new MarkerClusteringStyles(this.Map);
 
             this.Map.MarkerClusteringOptions.CustomStyles.Add(clusteringStyle);
 

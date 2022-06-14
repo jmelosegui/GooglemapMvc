@@ -1,5 +1,4 @@
 ﻿@using System.Drawing
-@using Jmelosegui.Mvc.GoogleMap
 @using Jmelosegui.Mvc.GoogleMap.Examples.App_Data
 @model IEnumerable<Jmelosegui.Mvc.GoogleMap.Examples.App_Data.RegionInfo>
 
@@ -9,6 +8,7 @@
 
 @{ Html.GoogleMap()
     .Name("map")
+    .ApiKey((string)ViewData["GoogleMapApiKey"])
     .Height(600)
     .Center(c => c.Latitude(40)
                 .Longitude(-3))
@@ -20,7 +20,7 @@
         options.ZoomOnClick = (bool)ViewData["ZoomOnClick"];
         options.HideSingleGroupMarker = (bool)ViewData["HideSingleGroupMarker"];
         if ((string)ViewData["CustomStyles"] == "StackOverflow")
-        {
+        {   
             options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster1.png")
                                     .Height(35).Width(35).FontSize(12).FontColor(Color.White));
             options.CustomStyles(style => style.Add().ImageUrl("~/Images/cluster2.png")
@@ -52,7 +52,7 @@
 <form class="form-horizontal" role="form">
     <h4> Google Map Settings</h4>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-4">
             <div class="checkbox">
                 <label style="display: inline;">
@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-4">
             <label for="mapMaxZoom" class="control-label" style="white-space: nowrap;">Max Zoom </label>
             @Html.DropDownList("MaxZoom", new SelectList(new[] { 7, 8, 9, 10, 11, 12 }), new { @class = "form-control", id = "mapMaxZoom" })
@@ -94,9 +94,9 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-md-10">
-            <button type="submit" class="btn btn-default">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </div>
 </form>

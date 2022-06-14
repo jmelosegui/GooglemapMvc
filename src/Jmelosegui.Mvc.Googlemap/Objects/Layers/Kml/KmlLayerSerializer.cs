@@ -20,7 +20,7 @@ namespace Jmelosegui.Mvc.GoogleMap
                 .Add("preserveViewport", this.Layer.PreserveViewport)
                 .Add("screenOverlays", this.Layer.ScreenOverlays)
                 .Add("suppressInfoWindows", this.Layer.SuppressInfoWindows)
-                .Add("url", this.Layer.Url.AbsoluteUri);
+                .Add("url", this.Layer.Url);
 
             return layerDictionary;
         }
