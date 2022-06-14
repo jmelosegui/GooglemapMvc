@@ -9,7 +9,7 @@
 		<projectUrl>https://jmelosegui.com/map</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>		
 		<license type="expression">MIT</license>
-		<description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET MVC applications.</description>
+		<description>GoogleMap control for AspNet.Mvc wraps Google Maps API simplifying its use in ASP.NET Core Web applications.</description>
 		<tags>Google maps GoogleMap AspNet Mvc AspNetMvc</tags>
 		<repository type="git" url="https://github.com/jmelosegui/GooglemapMvc" commit="$commit$" />
 		<dependencies>

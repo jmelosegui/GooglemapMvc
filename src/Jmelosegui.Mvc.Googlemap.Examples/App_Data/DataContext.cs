@@ -85,7 +85,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples.App_Data
                     Latitude = 41.7984066910626,
                     Title = "Cataluña",
                     ZIndex = 8,
-                    ImagePath = "Cataluña.jpg",
+                    ImagePath = "Cataluna.jpg",
                     InfoWindowContent = @"<h2>Cataluña</h2>",
                     Population = 7535251,
                 },

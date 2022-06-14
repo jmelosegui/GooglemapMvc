@@ -5,7 +5,7 @@
 [![NuGet](https://img.shields.io/nuget/v/Jmelosegui.Mvc.Googlemap.svg)](https://www.nuget.org/packages/Jmelosegui.Mvc.Googlemap/)
 [![Donate](https://img.shields.io/badge/Donate-Paypal-ff69b4.svg)](https://www.paypal.me/jmelosegui)
 
-Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of Google Maps in ASP.NET MVC applications.
+Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of Google Maps in ASP.NET Core Web Applications.
 
 ## Features
 
@@ -47,13 +47,13 @@ Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of 
 
 ## Install
 
-Inside Visual Studio create a new AspNet Mvc Application. Open the package manager console and install the Googlemap Mvc nuget package by typing the following command.
+Inside Visual Studio create a new ASP.Net Core Web Application. Open the package manager console and install the Googlemap Mvc nuget package by typing the following command.
 
 ```powershell
 PM> Install-Package Jmelosegui.Mvc.Googlemap
 ```
 
-Once you have it go to the Views->Home->Index.cshtml and include the following
+Once you have it go to the Pages->Index.cshtml and include the following
 ```html
 <div class="row">
     <div class="col-md-12">
@@ -90,7 +90,7 @@ Now hit F5 and you should see the map rendering on the page
 
 #### Required
 
-* [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159) (automatically installed with Visual Studio 2015)
+* [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022) (automatically installed with Visual Studio 2015)
 
 #### Better with
 
@@ -126,5 +126,5 @@ PM> Install-Package Jmelosegui.Mvc.Googlemap -Pre
 
 ## License
 
-Googlemap control for Asp.Net MVC is released under the [GNU GENERAL PUBLIC LICENSE](https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE.txt) Version 2.
+Googlemap control for Asp.Net MVC is released under the MIT (https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE.txt).
 

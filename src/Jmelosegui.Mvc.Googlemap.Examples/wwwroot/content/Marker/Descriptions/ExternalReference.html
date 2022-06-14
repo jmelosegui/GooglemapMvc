@@ -26,9 +26,13 @@
         function onMapLoadHandler(args) {
             markers = args.markers;
         }
-        $(".marker-list li").click(function () {
-            var id = $(this).attr('data-id');
-            google.maps.event.trigger(<b>markers[id]</b>, 'click');
+         const makerlist = document.querySelectorAll(".marker-list li");
+        
+        Array.prototype.forEach.call(makerlist, function (el, i) {
+            el.addEventListener('click', function (e) {
+                var id = e.currentTarget.dataset.id; //attr('data-id');
+                google.maps.event.trigger(markers[id], 'click');
+            }, false);
         });
 &lt;/script&gt;
 </pre>
