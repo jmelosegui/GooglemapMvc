@@ -126,5 +126,5 @@ PM> Install-Package Jmelosegui.Mvc.Googlemap -Pre
 
 ## License
 
-Googlemap control for Asp.Net MVC is released under the MIT (https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE.txt).
+Googlemap control for Asp.Net MVC is released under the [MIT](https://raw.githubusercontent.com/jmelosegui/GooglemapMvc/master/LICENSE.txt).
 
