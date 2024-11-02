@@ -1,4 +1,4 @@
-[Googlemap control for Asp.Net MVC](http://www.jmelosegui.com/map/)
+[Googlemap control for Asp.Net MVC](http://jmelosegui.com/map/)
 ==============================
 [![Build Status](https://dev.azure.com/elosegui/OSS/_apis/build/status/jmelosegui.GooglemapMvc?branchName=master)](https://dev.azure.com/elosegui/OSS/_build/latest?definitionId=7&branchName=master)
 [![Join the chat at https://gitter.im/jmelosegui/GooglemapMvc](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmelosegui/GooglemapMvc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -17,7 +17,7 @@ Googlemap control for Asp.Net MVC wraps Google Maps APIs simplifying the use of 
 - PartialView with Ajax
 - Map Types
   - Styled Map Type
-  - [Image Map Type (Game of Thrones)](http://www.jmelosegui.com/map/MapType/ImageMapType)
+  - [Image Map Type (Game of Thrones)](http://jmelosegui.com/map/MapType/ImageMapType)
 - Markers
   - Custom Icons
   - Info Windows
@@ -85,16 +85,6 @@ Now hit F5 and you should see the map rendering on the page
 
 [Nuget Package](https://www.nuget.org/packages/Jmelosegui.Mvc.Googlemap/)<br/>
 [Online Demo](http://www.jmelosegui.com/map/)<br/>
-
-## Contributing Prerequisites
-
-#### Required
-
-* [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022) (automatically installed with Visual Studio 2015)
-
-#### Better with
-
-* [Visual Studio 2022](https://www.visualstudio.com/en-us)
 
 ## Self-service releases
 

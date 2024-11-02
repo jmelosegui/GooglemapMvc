@@ -6,6 +6,15 @@ pool:
   demands:
   - visualstudio
 
+parameters:
+  - name: publishNugetPackage
+    displayName: 'Publish Nuget Package'
+    type: boolean
+    default: false 
+    values:
+      - true
+      - false
+
 variables:
   BuildPlatform: 'any cpu'
   BuildConfiguration: 'release'
@@ -44,7 +53,8 @@ stages:
 
 
 - stage: PublishNugetCI
-  displayName: Publish CI Nuget Package 
+  displayName: Publish CI Nuget Package
+  condition: and(succeeded(), eq(${{parameters.publishNugetPackage}}, true ))
   dependsOn: [Build]
   jobs:
 
@@ -68,10 +78,9 @@ stages:
           nuGetFeedType: 'external'
           publishFeedCredentials: 'feedz'
 
-
 - stage: DeployNuget
   displayName: Publish Nuget Package
-  condition: eq( variables['Build.SourceBranchName'], 'master' )
+  condition: and(succeeded(), eq( variables['Build.SourceBranchName'], 'master' ), eq(${{parameters.publishNugetPackage}}, true ))
   dependsOn: [PublishNugetCI]
   jobs:
 

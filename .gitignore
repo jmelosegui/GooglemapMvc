@@ -28,6 +28,9 @@ x64/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# JetBrains Rider
+.idea/
+
 *_i.c
 *_p.c
 *.ilk

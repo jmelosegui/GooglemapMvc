@@ -14,9 +14,9 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
     {
         private const string ViewPath = "Views";
         private const string ControllerPath = "Controllers";
-        private const string DescriptionPath = "Content";
-        private const string LayoutPagePath = ViewPath + @"\Shared\_Layout.cshtml";
-        private const string LayoutExamplesPagePath = ViewPath + @"\Shared\_LayoutExamples.cshtml";
+        private const string DescriptionPath = "content";
+        private const string LayoutPagePath = ViewPath + @"/Shared/_Layout.cshtml";
+        private const string LayoutExamplesPagePath = ViewPath + @"/Shared/_LayoutExamples.cshtml";
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IConfiguration configuration;
 
@@ -48,7 +48,7 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
                 string exampleControllerPath = ControllerPath + Path.AltDirectorySeparatorChar + controllerName + Path.AltDirectorySeparatorChar + viewName + "Controller.cs";
                 string contentRootPath = this.webHostEnvironment.WebRootPath;
                 
-                string descriptionPath = Path.Combine(contentRootPath, DescriptionPath, controllerName, @$"Descriptions\{viewName}.html");
+                string descriptionPath = Path.Combine(contentRootPath, DescriptionPath, controllerName, @$"Descriptions{Path.AltDirectorySeparatorChar}{viewName}.html");
 
                 var viewData = viewResult.ViewData;
 
@@ -58,9 +58,11 @@ namespace Jmelosegui.Mvc.GoogleMap.Examples
                     viewData["Description"] = new HtmlString(descriptionText);
                 }
 
-                var codeFiles = new Dictionary<string, string>();
-                codeFiles["View"] = currentViewPath;
-                codeFiles["Controller"] = exampleControllerPath;
+                var codeFiles = new Dictionary<string, string>
+                {
+                    ["View"] = currentViewPath,
+                    ["Controller"] = exampleControllerPath
+                };
                 this.RegisterLayoutPages(filterContext, codeFiles);
 
                 viewData["codeFiles"] = codeFiles;

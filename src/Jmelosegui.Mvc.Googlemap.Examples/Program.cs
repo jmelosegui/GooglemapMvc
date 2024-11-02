@@ -1,4 +1,5 @@
-﻿using Jmelosegui.Mvc.GoogleMap.Examples;
+﻿using System;
+using Jmelosegui.Mvc.GoogleMap.Examples;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,13 @@ builder.Services.AddMvc(options =>
 });
 
 var app = builder.Build();
+
+// Set the base path if the environment variable is set
+var basePath = Environment.GetEnvironmentVariable("BASE_PATH");
+if (!string.IsNullOrEmpty(basePath))
+{
+    app.UsePathBase(basePath);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
